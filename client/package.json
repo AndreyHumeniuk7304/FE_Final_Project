@@ -45,7 +45,6 @@
     ]
   },
   "devDependencies": {
-    "@material-ui/core": "^4.12.4",
     "eslint": "^8.21.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
