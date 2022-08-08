@@ -1,4 +1,4 @@
-import { createTheme } from "@material-ui/core";
+import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   pallete: {
@@ -16,7 +16,7 @@ const theme = createTheme({
   breakpoints: {
     values: {
       mobile: 0,
-      desktop: 1200,
+      desktop: 720,
     },
   },
   typography: {
