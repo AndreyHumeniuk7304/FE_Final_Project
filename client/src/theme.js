@@ -16,8 +16,8 @@ const theme = createTheme({
   breakpoints: {
     values: {
       mobile: 0,
-      desktop: 1200
-    }
+      desktop: 1200,
+    },
   },
   typography: {
     fontFamily: ["Open Sans", "sans-serif"].join(","),
