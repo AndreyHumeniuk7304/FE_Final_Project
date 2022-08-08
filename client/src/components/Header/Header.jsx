@@ -23,13 +23,13 @@ const Header = () => {
 
       <div className="header__account-container">
         <Link to="/search" className="">
-          <a>Search</a>
+          Search
         </Link>
         <Link to="/my-account" className="">
-          <a>My account</a>
+          My account
         </Link>
         <Link to="/shopping-bag" className="">
-          <a>Shopping bag</a>
+          Shopping bag
         </Link>
       </div>
     </header>
