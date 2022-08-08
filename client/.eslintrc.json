@@ -17,9 +17,9 @@
   },
   "plugins": ["react", "prettier"],
   "rules": {
-    "semi": ["error", "always"],
+    "semi": ["warn", "always"],
     "quotes": [
-      "error",
+      "warn",
       "double",
       {
         "avoidEscape": true
