@@ -1,7 +1,10 @@
 @import "./components/Header/Header.scss";
+@import "./components/ClockSlider/ClockSlider.scss";
+@import "./components/HomeNovelties/HomeNovelties.scss";
+@import "./components/HomeCategory/HomeCategory.scss";
 
 body {
-    width: 100%;
-    max-width: 100%;
-    background-color: #9aacb7;
-  }
+  width: 100%;
+  max-width: 100%;
+  background-color: #000;
+}

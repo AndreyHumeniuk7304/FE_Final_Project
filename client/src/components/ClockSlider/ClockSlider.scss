@@ -1,0 +1,14 @@
+.swiper {
+  &__slider {
+    position: relative;
+  }
+  &__slider img {
+    width: 100%;
+    max-height: 550px;
+  }
+  &__wrapper {
+    position: absolute;
+    top: 20%;
+    right: 20%;
+  }
+}
