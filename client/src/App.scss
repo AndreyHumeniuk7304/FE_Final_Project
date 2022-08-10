@@ -1,7 +1,10 @@
-@import "./components/Header/Header.scss";
+@import "./ulits/styles/mixins";
+@import "./ulits/styles/reset";
+@import "./ulits/styles/variables";
+@import "./components/index.scss";
 
 body {
-    width: 100%;
-    max-width: 100%;
-    background-color: #9aacb7;
-  }
+  width: 100%;
+  max-width: 100%;
+  background-color: #9aacb7;
+}
