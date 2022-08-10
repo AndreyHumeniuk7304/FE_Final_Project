@@ -1,10 +1,14 @@
-@import "./components/Header/Header.scss";
+@import "./ulits/styles/mixins";
+@import "./ulits/styles/reset";
+@import "./ulits/styles/variables";
+@import "./components/index.scss";
 @import "./components/ClockSlider/ClockSlider.scss";
 @import "./components/HomeNovelties/HomeNovelties.scss";
 @import "./components/HomeCategory/HomeCategory.scss";
+@import "./components/Header/Header.scss";
 
 body {
   width: 100%;
   max-width: 100%;
-  background-color: #000;
+  background-color: #9aacb7;
 }

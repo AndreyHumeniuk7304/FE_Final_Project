@@ -1,0 +1,15 @@
+.productlist-wrapper {
+  background-color: rgb(213, 203, 203);
+  width: 100%;
+  text-align: center;
+  height: 1000px;
+  @include grid-container;
+  grid-template-columns: 50% 50%;
+  gap: 3%;
+}
+
+@include desktop {
+  .productlist-wrapper {
+    width: 78%;
+  }
+}
