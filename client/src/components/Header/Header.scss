@@ -1,3 +1,8 @@
+a {
+  text-decoration: none;
+  color: white;
+  display: inline-block;
+}
 .container {
   min-width: 320px;
   max-width: 1295px;
@@ -6,20 +11,18 @@
   box-sizing: border-box;
 }
 
-.header_top-content {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  // align-items: center;
-  padding: 12px 0 9px;
-  // border-bottom: 1px solid rgba(88, 87, 87, 1);
-}
 .header {
-  // display: flex;
   background-color: black;
   color: white;
   width: 100%;
   position: relative;
+
+  &__top-content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 12px 0 9px;
+  }
 
   &::before {
     content: "";
@@ -58,12 +61,17 @@
 
   &__account-container {
     display: flex;
-    padding-top: 14px;
+    // padding-top: 14px;
 
-    &__icon {
+    &__ico {
       width: 14px;
       height: 14px;
+    }
+
+    &__link {
       margin-right: 25px;
+      display: flex;
+      align-items: center;
 
       &:last-child {
         margin-right: 0;
@@ -77,7 +85,64 @@
   }
 }
 
-a {
-  text-decoration: none;
-  color: white;
+.header__account-container__text {
+  display: none;
+}
+
+@media screen and (min-width: 765px) {
+  .header__account-container__link {
+    margin-right: 45px;
+  }
+}
+
+@media screen and (min-width: 1023px) {
+  .container {
+    padding: 0 25px;
+  }
+  .container-header {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    // flex-basis: 100%;
+  }
+
+  .header {
+    &__top-content {
+      flex-basis: 60%;
+    }
+
+    &::before {
+      display: none;
+    }
+
+    &__account-container__link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    &__account-container__ico:last-child {
+      display: none;
+    }
+
+    &__account-container__text {
+      display: block;
+    }
+
+    &__categories-container {
+      flex-basis: 40%;
+      padding: 0;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 38px;
+
+      &__link:hover {
+        border-bottom: 1px solid white;
+      }
+    }
+  }
+
+  .shopping-bag {
+    margin: 0;
+  }
 }
