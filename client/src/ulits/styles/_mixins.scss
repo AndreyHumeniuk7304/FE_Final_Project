@@ -1,0 +1,17 @@
+@mixin flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin grid-container {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width }) {
+    @content;
+  }
+}
+
