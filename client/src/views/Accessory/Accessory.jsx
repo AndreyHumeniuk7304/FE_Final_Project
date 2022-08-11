@@ -1,4 +1,4 @@
 const Accessory = () => {
-  return <div>Accessory</div>
-}
+  return <div>Accessory</div>;
+};
 export default Accessory;
