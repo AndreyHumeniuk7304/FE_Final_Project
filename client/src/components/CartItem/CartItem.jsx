@@ -1,11 +1,22 @@
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  decreaseProductQuantity,
+  increaseProductQuantity,
+} from "../../store/cart/actions";
 
 const CartItem = (props) => {
+  const dispatch = useDispatch();
+  const isLogin = useSelector((state) => state.cart.isLogin);
   const { product, cartQuantity } = props.item;
 
-  const handleDecrease = () => {};
+  const handleDecrease = () => {
+    dispatch(decreaseProductQuantity(product._id, isLogin));
+  };
 
-  const handleIncrease = () => {};
+  const handleIncrease = () => {
+    dispatch(increaseProductQuantity(product._id, isLogin));
+  };
 
   return (
     <div className={"cart__item item"}>
@@ -20,7 +31,7 @@ const CartItem = (props) => {
       <ul className={"item__info"}>
         <li className={"item field"}>
           <span className={"item__text"}>Price</span>
-          <span className={"item__text"}>{product.currentPrice}</span>
+          <span className={"item__text"}>{product.currentPrice} $</span>
         </li>
         <li className={"item field"}>
           <span className={"item__text"}>Color</span>

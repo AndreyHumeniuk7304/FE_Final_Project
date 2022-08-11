@@ -7,7 +7,7 @@ import { getCartItem } from "../../store/cart/actions";
 const Cart = () => {
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.cart.isLogin);
-  const productsInCart = useSelector((state) => state.cart.productsInCart);
+  const cartList = useSelector((state) => state.cart.list);
   // let discount;
 
   useEffect(() => {
@@ -15,16 +15,16 @@ const Cart = () => {
   }, []);
 
   const createCartItemList = () => {
-    return productsInCart.map((item) => (
-      <CartItem key={item._id} item={item} />
-    ));
+    return cartList.map((item) => {
+      return <CartItem key={item.product._id} item={item} />;
+    });
   };
 
   // const handleBlurDiscount = (event) => {};
 
   const getTotalPrice = () => {
-    return productsInCart.length
-      ? productsInCart.reduce(
+    return cartList.length
+      ? cartList.reduce(
           (previousValue, currentValue) =>
             previousValue.product.currentPrice * previousValue.cartQuantity +
             currentValue.product.currentPrice * currentValue.cartQuantity

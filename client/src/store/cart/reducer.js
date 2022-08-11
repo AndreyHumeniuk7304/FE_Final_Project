@@ -1,20 +1,48 @@
 const initialState = {
-  productsInCart: [],
-  isLogin: false,
+  list: [],
+  isLogin: true,
 };
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "SET_LOCAL_CART_ITEM": {
+    case "SET_CART_LIST": {
       return {
         ...state,
-        productsInCart: action.payload,
+        list: action.payload,
       };
     }
-    case "SET_CLOUD_CART_ITEM": {
+    case "DECREASE_PRODUCT_QUANTITY_LOCAL": {
+      const cart = JSON.parse(localStorage.getItem("cart")).map((item) => {
+        if (item.product._id === action.payload) {
+          item.cartQuantity =
+            item.cartQuantity - 1 > 0 ? item.cartQuantity - 1 : 0;
+        }
+        return item;
+      });
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+
       return {
         ...state,
-        productsInCart: action.payload,
+        list: cart,
+      };
+    }
+    case "INCREASE_PRODUCT_QUANTITY_LOCAL": {
+      const cart = JSON.parse(localStorage.getItem("cart")).map((item) => {
+        if (item.product._id === action.payload) {
+          item.cartQuantity =
+            item.cartQuantity + 1 < item.product.quantity
+              ? item.cartQuantity + 1
+              : item.product.quantity;
+        }
+        return item;
+      });
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      return {
+        ...state,
+        list: cart,
       };
     }
     default:

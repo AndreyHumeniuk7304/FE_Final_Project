@@ -1,72 +1,66 @@
-import { getCart } from "../../api/cart";
-
-// export const getCartItem = (isLogin) => {
-//   if (isLogin) {
-//     return async (dispatch) => {
-//       const cartItem = await getCart().products;
-//       if (cartItem instanceof Error) {
-//         dispatch({
-//           type: "SET_CLOUD_CART_ITEM",
-//           payload: [],
-//         });
-//       } else {
-//         dispatch({
-//           type: "SET_CLOUD_CART_ITEM",
-//           payload: cartItem,
-//         });
-//       }
-//     };
-//   } else {
-//     return {
-//       type: "SET_LOCAL_CART_ITEM",
-//       payload: localStorage.getItem("cart")
-//         ? JSON.parse(localStorage.getItem("cart"))
-//         : [],
-//     };
-//   }
-// };
+import { addProductToCart, getCart, decreaseQuantity } from "../../api/cart";
 
 export const getCartItem = (isLogin) =>
   isLogin
     ? async (dispatch) => {
-        const cartItem = await getCart().products;
-        if (cartItem instanceof Error) {
+        const cart = await getCart();
+        if (cart instanceof Error) {
           dispatch({
-            type: "SET_CLOUD_CART_ITEM",
+            type: "SET_CART_LIST",
             payload: [],
           });
         } else {
           dispatch({
-            type: "SET_CLOUD_CART_ITEM",
-            payload: cartItem,
+            type: "SET_CART_LIST",
+            payload: cart.products ? cart.products : [],
           });
         }
       }
     : {
-        type: "SET_LOCAL_CART_ITEM",
+        type: "SET_CART_LIST",
         payload: localStorage.getItem("cart")
           ? JSON.parse(localStorage.getItem("cart"))
           : [],
       };
 
-// export const getLocalCartItem = () => {
-//   return {
-//     type: "SET_LOCAL_CART_ITEM",
-//     payload: localStorage.getItem("cart") ? localStorage.getItem("cart") : []
-//   };
-// };
-//
-// export const getCloudCartItem = () => async (dispatch) => {
-//   const cartItem = await getCart().products;
-//   if (cartItem instanceof Error) {
-//     dispatch({
-//       type: "SET_CLOUD_CART_ITEM",
-//       payload: [],
-//     });
-//   } else {
-//     dispatch({
-//       type: "SET_CLOUD_CART_ITEM",
-//       payload: cartItem,
-//     });
-//   }
-// };
+export const decreaseProductQuantity = (id, isLogin) =>
+  isLogin
+    ? async (dispatch) => {
+        const newCart = await decreaseQuantity(id);
+        if (newCart instanceof Error) {
+          dispatch({
+            type: "SET_CART_LIST",
+            payload: [],
+          });
+        } else {
+          dispatch({
+            type: "SET_CART_LIST",
+            payload: newCart.products ? newCart.products : [],
+          });
+        }
+      }
+    : {
+        type: "DECREASE_PRODUCT_QUANTITY_LOCAL",
+        payload: id,
+      };
+
+export const increaseProductQuantity = (id, isLogin) =>
+  isLogin
+    ? async (dispatch) => {
+        const newCart = await addProductToCart(id);
+        if (newCart instanceof Error) {
+          dispatch({
+            type: "SET_CART_LIST",
+            payload: [],
+          });
+        } else {
+          dispatch({
+            type: "SET_CART_LIST",
+            payload: newCart.products ? newCart.products : [],
+          });
+        }
+      }
+    : {
+        type: "INCREASE_PRODUCT_QUANTITY_LOCAL",
+        payload: id,
+      };

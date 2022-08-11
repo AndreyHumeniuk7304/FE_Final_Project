@@ -1,8 +1,15 @@
-import axios from "axios";
+import axiosDefault from "axios";
+
+const axios = axiosDefault.create({
+  baseURL: "http://localhost:5000/api",
+});
+axios.defaults.headers.common["Authorization"] =
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZWZkNDMzNjExMDllMzU0MDhmNDc3ZCIsImZpcnN0TmFtZSI6ImFkbWluIiwibGFzdE5hbWUiOiJhZG1pbiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2MDIzMTg0NywiZXhwIjoxNjYwMjY3ODQ3fQ.lNjhZzxYKg6j5TZsNigeT_c4EXikbreZ1LwggkO_VEo";
 
 export const createCart = async (products) => {
   try {
-    await axios.post("/cart", { products });
+    const { data } = await axios.post("/cart", { products });
+    return data;
   } catch (err) {
     return err;
   }
@@ -10,7 +17,8 @@ export const createCart = async (products) => {
 
 export const updateCart = async (products) => {
   try {
-    await axios.put("/cart", { products });
+    const { data } = await axios.put("/cart", { products });
+    return data;
   } catch (err) {
     return err;
   }
@@ -18,15 +26,17 @@ export const updateCart = async (products) => {
 
 export const addProductToCart = async (productID) => {
   try {
-    await axios.put(`/cart/${productID}`);
+    const { data } = await axios.put(`/cart/${productID}`);
+    return data;
   } catch (err) {
     return err;
   }
 };
 
-export const decreaseProductQuantity = async (productID) => {
+export const decreaseQuantity = async (productID) => {
   try {
-    await axios.delete(`/cart/product/${productID}`);
+    const { data } = await axios.delete(`/cart/product/${productID}`);
+    return data;
   } catch (err) {
     return err;
   }
@@ -34,7 +44,8 @@ export const decreaseProductQuantity = async (productID) => {
 
 export const deleteProduct = async (productID) => {
   try {
-    await axios.delete(`/cart/${productID}`);
+    const { data } = await axios.delete(`/cart/${productID}`);
+    return data;
   } catch (err) {
     return err;
   }
@@ -42,7 +53,8 @@ export const deleteProduct = async (productID) => {
 
 export const getCart = async () => {
   try {
-    await axios.get("/cart");
+    const { data } = await axios.get("/cart");
+    return data;
   } catch (err) {
     return err;
   }
@@ -50,7 +62,8 @@ export const getCart = async () => {
 
 export const deleteCart = async () => {
   try {
-    await axios.delete("/cart");
+    const { data } = await axios.delete("/cart");
+    return data;
   } catch (err) {
     return err;
   }
