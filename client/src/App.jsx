@@ -1,15 +1,24 @@
-import "./App.scss"
-import Header from "./components/Header/Header"
-import { Route, Routes } from "react-router-dom"
-import Home from "./views/Home/Home"
-import Man from "./views/Man/Man"
-import Woman from "./views/Woman/Woman"
-import Accessory from "./views/Accessory/Accessory"
-import Search from "./views/Search/Search"
-import MyAccount from "./views/MyAccount/MyAccount"
-import ShoppingBag from "./views/ShoppingBag/ShoppingBag"
+import "./App.scss";
+import Header from "./components/Header/Header";
+import { Route, Routes } from "react-router-dom";
+import Home from "./views/Home/Home";
+import Man from "./views/Man/Man";
+import Woman from "./views/Woman/Woman";
+import Accessory from "./views/Accessory/Accessory";
+import Search from "./views/Search/Search";
+import { useDispatch } from "react-redux";
+import MyAccount from "./views/MyAccount/MyAccount";
+import ShoppingBag from "./views/ShoppingBag/ShoppingBag";
+import { useEffect } from "react";
+import { fetchProducts } from "./store/catalog/actions";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
   return (
     <div>
       <Header />
@@ -25,7 +34,7 @@ const App = () => {
         </Routes>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
