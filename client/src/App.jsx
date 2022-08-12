@@ -11,6 +11,7 @@ import MyAccount from "./views/MyAccount/MyAccount";
 import ShoppingBag from "./views/ShoppingBag/ShoppingBag";
 import { useEffect } from "react";
 import { fetchProducts } from "./store/catalog/actions";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/shopping-bag" element={<ShoppingBag />} />
         </Routes>
       </div>
+      <Footer />
     </div>
   );
 };
