@@ -43,6 +43,11 @@ a {
     display: flex;
     justify-content: space-between;
     padding: 22px 0;
+    font-family: "Josefin Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
   }
 
   &__logo-container {
@@ -66,6 +71,10 @@ a {
     &__ico {
       width: 14px;
       height: 14px;
+      &-img {
+        width: 100%;
+        height: 100%;
+      }
     }
 
     &__link {
@@ -75,11 +84,6 @@ a {
 
       &:last-child {
         margin-right: 0;
-      }
-
-      &-img {
-        width: 100%;
-        height: 100%;
       }
     }
   }
@@ -92,6 +96,15 @@ a {
 @media screen and (min-width: 765px) {
   .header__account-container__link {
     margin-right: 45px;
+  }
+
+  .header__categories-container {
+    padding: 25px 0;
+    font-family: "Josefin Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 18px;
   }
 }
 
@@ -135,6 +148,11 @@ a {
       align-items: center;
       justify-content: flex-start;
       gap: 38px;
+
+      &__link {
+        border-bottom: 1px solid transparent;
+        transition: 0.3s;
+      }
 
       &__link:hover {
         border-bottom: 1px solid white;

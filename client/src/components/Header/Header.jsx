@@ -19,7 +19,7 @@ const Header = () => {
               >
                 <div className="header__account-container__ico">
                   <img
-                    className="header__account-container__icon-img"
+                    className="header__account-container__ico-img"
                     src="./images/search-ico.svg"
                     alt="search"
                   />
@@ -32,7 +32,7 @@ const Header = () => {
               >
                 <div className="header__account-container__ico">
                   <img
-                    className="header__account-container__icon-img"
+                    className="header__account-container__ico-img"
                     src="./images/account-ico.svg"
                     alt="my-account"
                   />
@@ -45,7 +45,7 @@ const Header = () => {
               >
                 <div className="header__account-container__ico">
                   <img
-                    className="header__account-container__icon-img"
+                    className="header__account-container__ico-img"
                     src="./images/shopping-bag-ico.svg"
                     alt="my-account"
                   />
@@ -57,7 +57,7 @@ const Header = () => {
               <a href="#!" className="header__account-container__link burger">
                 <div className="header__account-container__ico">
                   <img
-                    className="header__account-container__icon-img"
+                    className="header__account-container__ico-img"
                     src="./images/burger-ico.svg"
                     alt="my-account"
                   />
