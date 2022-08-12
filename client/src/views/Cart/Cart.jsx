@@ -2,6 +2,7 @@ import CartItem from "../../components/CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCartItem } from "../../store/cart/actions";
+import "./cart.scss";
 // import { Link } from "react-router-dom";
 
 const Cart = () => {

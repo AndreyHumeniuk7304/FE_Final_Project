@@ -4,7 +4,7 @@ const axios = axiosDefault.create({
   baseURL: "http://localhost:5000/api",
 });
 axios.defaults.headers.common["Authorization"] =
-  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZWZkNDMzNjExMDllMzU0MDhmNDc3ZCIsImZpcnN0TmFtZSI6ImFkbWluIiwibGFzdE5hbWUiOiJhZG1pbiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2MDIzMTg0NywiZXhwIjoxNjYwMjY3ODQ3fQ.lNjhZzxYKg6j5TZsNigeT_c4EXikbreZ1LwggkO_VEo";
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZWZkNDMzNjExMDllMzU0MDhmNDc3ZCIsImZpcnN0TmFtZSI6ImFkbWluIiwibGFzdE5hbWUiOiJhZG1pbiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2MDMxMDY1MywiZXhwIjoxNjYwMzQ2NjUzfQ.CwKMG2HJ92OKos84TK_jgUhGSGTWvPQzPsAbHAg6O9Y";
 
 export const createCart = async (products) => {
   try {
