@@ -22,8 +22,8 @@ const App = () => {
 
   return (
     <div>
-      {/* <Header /> */}
-      <div className="container main">
+      <Header />
+      <div className="main">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/man" element={<Man />} />
