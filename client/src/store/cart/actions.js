@@ -3,16 +3,16 @@ import { addProductToCart, getCart, decreaseQuantity } from "../../api/cart";
 export const getCartItem = (isLogin) =>
   isLogin
     ? async (dispatch) => {
-        const cart = await getCart();
-        if (cart instanceof Error) {
-          dispatch({
-            type: "SET_CART_LIST",
-            payload: [],
-          });
-        } else {
+        try {
+          const cart = await getCart();
           dispatch({
             type: "SET_CART_LIST",
             payload: cart.products ? cart.products : [],
+          });
+        } catch (err) {
+          dispatch({
+            type: "SET_CART_LIST",
+            payload: [],
           });
         }
       }
@@ -26,16 +26,17 @@ export const getCartItem = (isLogin) =>
 export const decreaseProductQuantity = (id, isLogin) =>
   isLogin
     ? async (dispatch) => {
-        const newCart = await decreaseQuantity(id);
-        if (newCart instanceof Error) {
-          dispatch({
-            type: "SET_CART_LIST",
-            payload: [],
-          });
-        } else {
+        try {
+          const newCart = await decreaseQuantity(id);
+
           dispatch({
             type: "SET_CART_LIST",
             payload: newCart.products ? newCart.products : [],
+          });
+        } catch (err) {
+          dispatch({
+            type: "SET_CART_LIST",
+            payload: [],
           });
         }
       }
