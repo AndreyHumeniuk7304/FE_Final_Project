@@ -1,15 +1,14 @@
-.catalog_container {
+.catalog-container {
   @include flex-container;
   flex-direction: column;
 }
 
 @include desktop {
-  .catalog_container {
+  .catalog-container {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
-    height: 1000px;
   }
 }

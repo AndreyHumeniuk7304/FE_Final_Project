@@ -146,7 +146,7 @@
   {
     "enabled": true,
     "imageUrls": [
-      "hhttps://res.cloudinary.com/fe-advjs-final-project-3/image/upload/v1660056611/ORIS_DIVERS_SIXTY-FIVE_01_733_7720_4057-07_8_21_18-1_stxlqm.jpg",
+      "https://res.cloudinary.com/fe-advjs-final-project-3/image/upload/v1660056611/ORIS_DIVERS_SIXTY-FIVE_01_733_7720_4057-07_8_21_18-1_stxlqm.jpg",
       "https://res.cloudinary.com/fe-advjs-final-project-3/image/upload/v1660056611/ORIS_DIVERS_SIXTY-FIVE_01_733_7720_4057-07_8_21_18-3_qxl4h5.jpg",
       "https://res.cloudinary.com/fe-advjs-final-project-3/image/upload/v1660056611/ORIS_DIVERS_SIXTY-FIVE_01_733_7720_4057-07_8_21_18-2_ygadsg.jpg"
     ],
