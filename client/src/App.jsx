@@ -11,6 +11,7 @@ import MyAccount from "./views/MyAccount/MyAccount";
 import Cart from "./views/Cart";
 import { useEffect } from "react";
 import { fetchProducts } from "./store/catalog/actions";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
         </Routes>
       </div>
+      <Footer />
     </div>
   );
 };
