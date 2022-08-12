@@ -26,25 +26,23 @@ const ClockSlider = () => {
       navigation={true}
       speed={1500}
       pagination={{ clickable: true }}
-      onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
     >
       <SwiperSlide className="swiper__slider">
-        <Link to="/man" className="">
+        <Link to="/" className="">
           <div className="swiper__wrapper"></div>
-          <img src="https://fs6.deka.ua/files/sliders/91/1648206202_623da17ac56c0.jpg" />
+          <img src="https://res.cloudinary.com/fe-advjs-final-project-3/image/upload/v1660230409/Garmin_Sale_Desktop_jd7g1t.webp" />
         </Link>
       </SwiperSlide>
       <SwiperSlide className="swiper__slider">
-        <Link to="/woman" className="">
+        <Link to="/" className="">
           <div className="swiper__wrapper"></div>
-          <img src="https://fs8.deka.ua/files/sliders/57/1653380448_628c9560b08a9.jpg" />
+          <img src="https://res.cloudinary.com/fe-advjs-final-project-3/image/upload/v1660230425/Banner__AWFAO_Hero_Desktop2_xd2mw5.webp" />
         </Link>
       </SwiperSlide>
       <SwiperSlide className="swiper__slider">
-        <Link to="/accessory" className="">
+        <Link to="/" className="">
           <div className="swiper__wrapper"></div>
-          <img src="https://fs1.deka.ua/content/news/n485/920x450.jpg" />
+          <img src="https://res.cloudinary.com/fe-advjs-final-project-3/image/upload/v1660230435/50__Sale_Desktop_scpavm.webp" />
         </Link>
       </SwiperSlide>
     </Swiper>

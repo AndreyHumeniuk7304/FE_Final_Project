@@ -1,24 +1,12 @@
-@mixin line {
-  content: "";
-  width: 100%;
-  height: 1px;
-  background-color: #fff;
-  position: absolute;
-  left: 0;
-  bottom: -5px;
-  transform: scaleX(0);
-  transition: transform 0.25s;
-  transform-origin: left;
-}
-
 .novelties {
   max-width: 1200px;
-  margin: 100px auto 0;
+  margin: 100px auto 100px;
   &__title {
     position: relative;
     display: inline-block;
-    color: #fff;
     margin: 0 0 0px 50px;
+    font-size: 18px;
+    font-weight: bold;
   }
   &__title::before {
     @include line;
@@ -41,11 +29,21 @@
   &__type {
     width: 100%;
     position: relative;
+    height: 300px;
   }
+  &__type:nth-child(1) {
+    width: 100%;
+    position: relative;
+    height: 620px;
+  }
+
   &__type img {
     width: 100%;
-    height: 100%;
+    height: 300px;
     object-fit: cover;
+  }
+  &__type:nth-child(1) img {
+    height: 620px;
   }
   .item-1 {
     grid-area: item-1;
@@ -60,10 +58,13 @@
     position: absolute;
     bottom: 0px;
     left: 0px;
-    padding: 20px 40px 20px;
+    padding: 20px 30px 20px;
     background-color: rgba(0, 0, 0, 0.5);
   }
   &__text {
+    position: relative;
+    font-weight: bold;
+    text-align: center;
     position: relative;
   }
   &__text:hover:before {

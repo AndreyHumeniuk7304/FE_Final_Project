@@ -21,7 +21,7 @@ const App = () => {
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <div className="container main">
         <Routes>
           <Route path="/" element={<Home />} />

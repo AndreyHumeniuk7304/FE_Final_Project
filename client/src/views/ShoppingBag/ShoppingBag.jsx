@@ -1,4 +1,4 @@
 const ShoppingBag = () => {
-  return <div>ShoppingBag</div>
-}
+  return <div>ShoppingBag</div>;
+};
 export default ShoppingBag;

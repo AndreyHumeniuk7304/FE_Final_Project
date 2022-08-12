@@ -17,7 +17,7 @@ const Header = () => {
 
       <div className="header__logo-container">
         <Link to="/" className="">
-        Originalité
+          Originalité
         </Link>
       </div>
 
@@ -33,7 +33,7 @@ const Header = () => {
         </Link>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
