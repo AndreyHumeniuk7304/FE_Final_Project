@@ -12,4 +12,16 @@ const mechanismList = ["Mechanics", "Quartz"];
 
 const materialList = ["Steel", "Nylon", "Polymer", "Leather"];
 
-export { brandsList, mechanismList, materialList };
+const colorList = [
+  "steel",
+  "blue",
+  "grey",
+  "black",
+  "green",
+  "brown",
+  "gold",
+  "white",
+  "red",
+];
+
+export { brandsList, mechanismList, materialList, colorList };

@@ -1,16 +1,34 @@
 .filter-wrapper {
-  background-color: black;
+  background-color: white;
   text-align: center;
-  color: white;
   width: 100%;
-  height: 50px;
+
   .filter {
-    -webkit-appearance: none;
+    //-webkit-appearance: none;
+    &__form {
+      display: none;
+    }
+    &__mob-title {
+      padding: 20px;
+      display: flex;
+      justify-content: space-around;
+
+      p {
+        color: black;
+      }
+      button {
+        background-color: inherit;
+      }
+    }
+    &__btn {
+      color: black;
+    }
+
     &__slider {
       padding: 0 20px;
       .slider {
         &__element {
-          color: white;
+          color: black;
           .MuiSlider-thumb {
             border-radius: 0;
             width: 4px;
@@ -37,16 +55,21 @@
       text-transform: uppercase;
     }
     &__lable {
-      color: white;
+      color: black;
       width: fit-content;
       cursor: pointer;
       &:hover {
         color: gray;
       }
     }
+    &__color {
+      padding: 0px 10px;
+      border: 0.5px solid black;
+      border-radius: 100%;
+      margin-right: 20px;
+    }
   }
 }
-
 @include desktop {
   .filter-wrapper {
     width: 25%;
@@ -56,4 +79,46 @@
   position: absolute;
   z-index: -1;
   opacity: 0;
+}
+
+@media screen and (min-width: 720px) {
+  .filter-wrapper {
+    background-color: black;
+    .filter {
+      &__form {
+        display: block;
+      }
+      &__mob-title {
+        display: none;
+      }
+      &__btn {
+        color: white;
+      }
+    }
+    .checkbox {
+      &__lable,
+      &__title {
+        color: white;
+      }
+      &__color {
+        border-color: white;
+      }
+    }
+    .slider {
+      &__title {
+        color: white;
+      }
+      &__element {
+        color: white;
+        .MuiSlider-thumb,
+        .MuiSlider-track {
+          color: white;
+        }
+
+        .MuiSlider-rail {
+          color: grey;
+        }
+      }
+    }
+  }
 }

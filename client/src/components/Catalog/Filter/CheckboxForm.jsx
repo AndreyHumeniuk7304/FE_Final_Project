@@ -1,4 +1,4 @@
-import { Box, Button, FormLabel, Input, Typography } from "@mui/material";
+import { Box, FormLabel, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import { Field } from "formik";
 import PropTypes from "prop-types";
@@ -24,12 +24,12 @@ const CheckboxForm = ({ title, arr }) => {
               <ol key={Math.random()}>
                 <FormLabel
                   className="checkbox__lable"
-                  onClick={
-                    (e) => console.log(event.currentTarget.style.color)
-                    // event.currentTarget.checked
-                    //   ? (event.currentTarget.style.display = "none")
-                    //   : ""
-                  }
+                  // onClick={
+                  //   (e) => console.log(event.currentTarget.style.color)
+                  //   // event.currentTarget.checked
+                  //   //   ? (event.currentTarget.style.display = "none")
+                  //   //   : ""
+                  // }
                 >
                   <Field
                     type="checkbox"
@@ -37,6 +37,16 @@ const CheckboxForm = ({ title, arr }) => {
                     value={data}
                     className={"custom-checkbox"}
                   />
+                  {title === "color" && (
+                    <>
+                      <span
+                        className="checkbox__color"
+                        style={{
+                          backgroundColor: data === "steel" ? "silver" : data,
+                        }}
+                      ></span>
+                    </>
+                  )}{" "}
                   {data}
                 </FormLabel>
               </ol>
