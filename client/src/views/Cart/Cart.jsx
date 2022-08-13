@@ -93,7 +93,7 @@ const Cart = () => {
                 variant={"body1"}
                 sx={{
                   display: "inline-block",
-                  width: "40%",
+                  width: "50%",
                 }}
               >
                 DELIVERY
@@ -107,7 +107,7 @@ const Cart = () => {
                 variant={"body1"}
                 sx={{
                   display: "inline-block",
-                  width: "40%",
+                  width: "50%",
                   fontWeight: 700,
                 }}
               >

@@ -1,6 +1,6 @@
 const initialState = {
   list: [],
-  isLogin: true,
+  isLogin: false,
 };
 
 const cartReducer = (state = initialState, action) => {

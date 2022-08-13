@@ -6,7 +6,7 @@ import {
   increaseProductQuantity,
 } from "../../store/cart/actions";
 import { Box, Button, IconButton, Typography, Stack } from "@mui/material";
-import { Close } from "@mui/icons-material";
+import { Close, Add, Remove } from "@mui/icons-material";
 
 const CartItem = (props) => {
   const dispatch = useDispatch();
@@ -90,9 +90,21 @@ const CartItem = (props) => {
                 Quantity
               </Typography>
               <Typography variable={"body2"} component={"span"}>
-                <button onClick={handleDecrease}>-</button>
+                <IconButton
+                  onClick={handleDecrease}
+                  sx={{ padding: "5px" }}
+                  color={"secondary"}
+                >
+                  <Remove fontSize="small" />
+                </IconButton>
                 {cartQuantity}
-                <button onClick={handleIncrease}>+</button>
+                <IconButton
+                  onClick={handleIncrease}
+                  sx={{ padding: "5px" }}
+                  color={"secondary"}
+                >
+                  <Add fontSize="small" />
+                </IconButton>
               </Typography>
             </Box>
             <Box sx={{ width: "100%" }}>
