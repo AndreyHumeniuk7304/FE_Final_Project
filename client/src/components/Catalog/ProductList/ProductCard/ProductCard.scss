@@ -1,5 +1,24 @@
 .card-wrapper {
-  width: 60%;
-  height: 430px;
-  background-color: red;
+  width: 35%;
+  //width:60; for grid
+  margin-top: 5%;
+  margin-bottom: 5%;
+  cursor: pointer;
+  height: 10%;
+
+  &__image {
+    max-width: 100%;
+    height: auto;
+  }
+
+  &__name {
+    font-size: 1.6vw;
+    margin-top: 4%;
+  }
+
+  &__price {
+    font-size: 1.7vw;
+    margin-top: 4%;
+    font-weight: bold;
+  }
 }
