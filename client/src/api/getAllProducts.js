@@ -1,6 +1,6 @@
 // import axios from "axios";
 // export default async function getAllProducts() {
-//   const data = await axios.get("http://localhost:6000/api/products");
+//   const { data } = await axios.get("http://localhost:6000/api/products");
 //   return data;
 // }
 

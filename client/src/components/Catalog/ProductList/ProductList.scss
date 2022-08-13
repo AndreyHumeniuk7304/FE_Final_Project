@@ -1,15 +1,17 @@
 .productlist-wrapper {
-  background-color: rgb(213, 203, 203);
-  width: 100%;
+  background-color: white;
   text-align: center;
-  height: 1000px;
-  @include grid-container;
-  grid-template-columns: 50% 50%;
-  gap: 3%;
+  @include flex-container;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  // @include grid-container;
+  // grid-template-columns: 50% 50%;
+  padding: 0 2%;
+  gap: 10%;
 }
 
 @include desktop {
   .productlist-wrapper {
-    width: 78%;
+    width: 75%;
   }
 }

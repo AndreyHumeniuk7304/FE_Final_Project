@@ -1,12 +1,18 @@
 import Filter from "./Filter/Filter";
 import ProductList from "./ProductList/ProductList";
+import PropTypes from "prop-types";
 
-const Catalog = () => {
+const Catalog = ({ category }) => {
   return (
-    <div className="catalog_container">
+    <div className="catalog-container">
       <Filter />
-      <ProductList />
+      <ProductList category={category} />
     </div>
   );
 };
+
+Catalog.propTypes = {
+  category: PropTypes.string,
+};
+
 export default Catalog;
