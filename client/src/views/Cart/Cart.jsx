@@ -2,14 +2,12 @@ import CartItem from "../../components/CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCartItem } from "../../store/cart/actions";
-import "./cart.scss";
-// import { Link } from "react-router-dom";
+import { Box, Container, Stack, Typography } from "@mui/material";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.cart.isLogin);
   const cartList = useSelector((state) => state.cart.list);
-  // let discount;
 
   useEffect(() => {
     dispatch(getCartItem(isLogin));
@@ -21,53 +19,112 @@ const Cart = () => {
     });
   };
 
-  // const handleBlurDiscount = (event) => {};
-
   const getTotalPrice = () => {
     return cartList.length
       ? cartList.reduce(
-          (previousValue, currentValue) =>
-            previousValue.product.currentPrice * previousValue.cartQuantity +
-            currentValue.product.currentPrice * currentValue.cartQuantity
+          (accumulator, currentValue) =>
+            accumulator +
+            currentValue.product.currentPrice * currentValue.cartQuantity,
+          0
         )
       : 0;
   };
 
   return (
-    <div className={"cart"}>
-      <h2 className={"cart__title cart__title--capitalise"}>Shopping bag</h2>
-      <hr className={"cart__hr"} />
-      <ul className={"cart__list"}>{createCartItemList()}</ul>
-      <h3 className={"cart__title cart__title--big cart__title--bold"}>
-        SHOPPING BAG TOTAL
-      </h3>
-      <div className={"cart__info"}>
-        {/*<label*/}
-        {/*  htmlFor={"discount"}*/}
-        {/*  className={"cart__title cart__title--little"}*/}
-        {/*>*/}
-        {/*  ADD A DISCOUNT CODE*/}
-        {/*</label>*/}
-        {/*<input*/}
-        {/*  id={"discount"}*/}
-        {/*  type="text"*/}
-        {/*  className={"cart__input--discount"}*/}
-        {/*  onBlur={handleBlurDiscount}*/}
-        {/*/>*/}
+    <>
+      <Container
+        maxWidth={"desktop"}
+        sx={{ color: "primary.light", marginTop: 3 }}
+      >
+        <Typography
+          variant={"subtitle1"}
+          component={"h2"}
+          sx={{ fontFamily: "Roboto", display: { desktop: "none" } }}
+        >
+          Shopping bag
+        </Typography>
+        <Box
+          sx={{
+            height: "1px",
+            width: "100%",
+            bgcolor: "primary.light",
+            marginBottom: 3,
+            display: { desktop: "none" },
+          }}
+        />
+        <Stack
+          direction={{ mobile: "column", desktop: "row" }}
+          justifyContent={{ desktop: "space-between" }}
+          alignItems={{ desktop: "flex-start" }}
+          spacing={8}
+        >
+          <Stack
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            spacing={2}
+            sx={{ flexGrow: 1 }}
+          >
+            {createCartItemList()}
+          </Stack>
 
-        <div className={"cart__order"}>
-          {/*  <p className={"cart__title"}>DISCOUNT</p>*/}
-          {/*  <p className={"cart__title"}>{discount}</p>*/}
-
-          <p className={"cart__title"}>DELIVERY</p>
-          <p className={"cart__title"}>FREE</p>
-          <p className={"cart__title cart__title--bold"}>TOTAL</p>
-          <p className={"cart__title cart__title--bold"}>{getTotalPrice()} $</p>
-
-          {/*<Link path={"/checkout"} element={<Checkout />}></Link>*/}
-        </div>
-      </div>
-    </div>
+          <Stack
+            spacing={2}
+            sx={{
+              bgcolor: "secondary.main",
+              padding: 2,
+              color: "primary.dark",
+              mt: 2,
+            }}
+          >
+            <Typography
+              variant={"subtitle1"}
+              sx={{
+                textTransform: "uppercase",
+                fontWeight: 700,
+                fontFamily: "secondaryFontFamily",
+                display: "block",
+              }}
+            >
+              SHOPPING BAG TOTAL
+            </Typography>
+            <Box>
+              <Typography
+                variant={"body1"}
+                sx={{
+                  display: "inline-block",
+                  width: "40%",
+                }}
+              >
+                DELIVERY
+              </Typography>
+              <Typography variant={"body1"} component={"span"}>
+                FREE
+              </Typography>
+            </Box>
+            <Box>
+              <Typography
+                variant={"body1"}
+                sx={{
+                  display: "inline-block",
+                  width: "40%",
+                  fontWeight: 700,
+                }}
+              >
+                TOTAL
+              </Typography>
+              <Typography
+                variant={"body1"}
+                component={"span"}
+                sx={{ fontWeight: 700 }}
+              >
+                {getTotalPrice()} $
+              </Typography>
+            </Box>
+          </Stack>
+        </Stack>
+      </Container>
+    </>
   );
 };
 

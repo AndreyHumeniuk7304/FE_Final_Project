@@ -37,9 +37,20 @@ const cartReducer = (state = initialState, action) => {
         }
         return item;
       });
-
+      console.log(cart);
       localStorage.setItem("cart", JSON.stringify(cart));
 
+      return {
+        ...state,
+        list: cart,
+      };
+    }
+    case "DELETE_PRODUCT_LOCAL": {
+      const cart = JSON.parse(localStorage.getItem("cart")).filter(
+        (item) => item.product._id !== action.payload
+      );
+      console.log(cart);
+      localStorage.setItem("cart", JSON.stringify(cart));
       return {
         ...state,
         list: cart,
