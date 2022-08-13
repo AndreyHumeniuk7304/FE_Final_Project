@@ -12,6 +12,7 @@ import ShoppingBag from "./views/ShoppingBag/ShoppingBag";
 import { useEffect } from "react";
 import { fetchProducts } from "./store/catalog/actions";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const App = () => {
   return (
     <div>
       <Header />
-      <div className="container main">
+      <div className="main">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/man" element={<Man />} />
@@ -35,6 +36,7 @@ const App = () => {
           <Route path="/products/:itemNo" element={<ProductDetails />} />
         </Routes>
       </div>
+      <Footer />
     </div>
   );
 };
