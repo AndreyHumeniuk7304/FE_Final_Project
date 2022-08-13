@@ -47,7 +47,6 @@ const CartItem = (props) => {
           <Typography
             variant={"subtitle1"}
             component={"h3"}
-            className={"item__title"}
             sx={{ fontWeight: 700 }}
           >
             {product.name}
@@ -58,31 +57,55 @@ const CartItem = (props) => {
             justifyContent={"space-between"}
             spacing={1}
           >
-            <Box className={"item field"}>
-              <span className={"item__text"}>Price</span>
-              <span className={"item__text"}>{product.currentPrice} $</span>
+            <Box sx={{ width: "100%" }}>
+              <Typography
+                variant={"body2"}
+                component={"span"}
+                sx={{ width: "50%", display: "inline-block" }}
+              >
+                Price
+              </Typography>
+              <Typography variable={"body2"} component={"span"}>
+                {product.currentPrice}$
+              </Typography>
             </Box>
-            <Box className={"item field"}>
-              <span className={"item__text"}>Color</span>
-              <span className={"item__text"}>{product.color}</span>
+            <Box sx={{ width: "100%" }}>
+              <Typography
+                variant={"body2"}
+                component={"span"}
+                sx={{ width: "50%", display: "inline-block" }}
+              >
+                Color
+              </Typography>
+              <Typography variable={"body2"} component={"span"}>
+                {product.color}
+              </Typography>
             </Box>
-            <Box className={"item field"}>
-              <span className={"item__text"}>Size</span>
-              <span className={"item__text"}>{product.size}</span>
-            </Box>
-            <Box className={"item field"}>
-              <span className={"item__text"}>Quantity</span>
-              <span className={"item__text"}>
+            <Box sx={{ width: "100%" }}>
+              <Typography
+                variant={"body2"}
+                component={"span"}
+                sx={{ width: "50%", display: "inline-block" }}
+              >
+                Quantity
+              </Typography>
+              <Typography variable={"body2"} component={"span"}>
                 <button onClick={handleDecrease}>-</button>
                 {cartQuantity}
                 <button onClick={handleIncrease}>+</button>
-              </span>
+              </Typography>
             </Box>
-            <Box className={"item field"}>
-              <span className={"item__text"}>Total</span>
-              <span className={"item__text"}>
+            <Box sx={{ width: "100%" }}>
+              <Typography
+                variant={"body2"}
+                component={"span"}
+                sx={{ width: "50%", display: "inline-block" }}
+              >
+                Total
+              </Typography>
+              <Typography variable={"body2"} component={"span"}>
                 {product.currentPrice * cartQuantity} $
-              </span>
+              </Typography>
             </Box>
           </Stack>
         </Box>
