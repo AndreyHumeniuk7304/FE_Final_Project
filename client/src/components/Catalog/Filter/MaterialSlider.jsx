@@ -1,25 +1,37 @@
 import React from "react";
 import { useField } from "formik";
-import { Slider } from "@mui/material";
 import PropTypes from "prop-types";
+import { Slider, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 
-export const MaterialSlider = () => {
-  // const [field, meta] = useField(props);
-  //console.log(field);
+export const MaterialSlider = ({ label, title, ...props }) => {
+  const [field, meta, helpers] = useField(props);
+
   return (
-    <Slider
-      //getAriaLabel={() => "Minimum distance shift"}
-      defaultValue={[0, 100]}
-      // value={[5, 70]}
-      // onChange={handleChange2}
-      valueLabelDisplay="auto"
-      //getAriaValueText={valuetext}
-      disableSwap
-    />
+    <Box className="filter__slider">
+      <Typography className="slider__title" variant="h6">
+        {title}
+      </Typography>
+      <Box className="slider__title">
+        <span>$</span> <span>{field.value[0]}</span>
+        <span> - </span>
+        <span>{field.value[1]}</span>
+      </Box>
+      <Slider
+        className="slider__element"
+        {...field}
+        {...props}
+        aria-labelledby={field.id}
+        onBlur={(e) => helpers.setTouched(e)}
+        onChange={(e, v) => helpers.setValue(v)}
+      />
+    </Box>
   );
 };
 
-// MaterialSlider.propTypes = {
-//   label: PropTypes.string,
-//   props: PropTypes.object,
-// };
+MaterialSlider.propTypes = {
+  props: PropTypes.object,
+  field: PropTypes.object,
+  label: PropTypes.object,
+  title: PropTypes.string,
+};

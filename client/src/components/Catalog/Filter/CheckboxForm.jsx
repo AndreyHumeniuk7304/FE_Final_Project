@@ -20,19 +20,22 @@ const CheckboxForm = ({ title, arr }) => {
       {isShow && (
         <Stack component="ul">
           {arr.map((data) => {
-            const [isChecked, setIsChecked] = useState(false);
             return (
               <ol key={Math.random()}>
                 <FormLabel
                   className="checkbox__lable"
-                  style={isChecked ? { paddingLeft: 10 } : null}
+                  onClick={
+                    (e) => console.log(event.currentTarget.style.color)
+                    // event.currentTarget.checked
+                    //   ? (event.currentTarget.style.display = "none")
+                    //   : ""
+                  }
                 >
                   <Field
                     type="checkbox"
                     name={title}
                     value={data}
                     className={"custom-checkbox"}
-                    onClick={() => setIsChecked(!isChecked)}
                   />
                   {data}
                 </FormLabel>

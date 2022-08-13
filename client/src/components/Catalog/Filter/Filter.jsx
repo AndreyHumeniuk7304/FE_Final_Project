@@ -20,17 +20,17 @@ const Filter = () => {
         }}
         validator={() => ({})}
       >
-        {({ values, handleSubmit }) => (
+        {({ values, handleChange, handleSubmit }) => (
           <Form onSubmit={values.handleSubmit}>
             <CheckboxForm title={"brands"} arr={brandsList} />
             <CheckboxForm title={"mechanism"} arr={mechanismList} />
             <CheckboxForm title={"material"} arr={materialList} />
             <MaterialSlider
-            // id="exampleSlider"
-            // name="exampleSlider"
-            // valueLabelDisplay="auto"
-            // min={0}
-            // max={100}
+              title={"Price"}
+              onChange={handleChange}
+              name="price"
+              min={0}
+              max={100}
             />
             <Button
               type="submit"
