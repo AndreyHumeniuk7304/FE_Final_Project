@@ -22,6 +22,10 @@
     }
     &__btn {
       color: black;
+      font-weight: bold;
+      &:hover {
+        font-size: large;
+      }
     }
 
     &__slider {
@@ -60,6 +64,9 @@
       cursor: pointer;
       &:hover {
         color: gray;
+        &--active {
+          text-transform: uppercase;
+        }
       }
     }
     &__color {

@@ -4,7 +4,6 @@ import CheckboxForm from "./CheckboxForm";
 import { brandsList, mechanismList, materialList, colorList } from "./data";
 import { MaterialSlider } from "./MaterialSlider";
 import { useSelector } from "react-redux";
-import { getFilteredProducts } from "../../../api/getFilteredProducts";
 import { useState } from "react";
 
 const Filter = () => {
@@ -29,11 +28,17 @@ const Filter = () => {
   ];
 
   const setFilterLink = (values, actions) => {
+    console.log(values);
     let link = "filter?";
     for (let key in values) {
-      values[key].length && (link = link + key + "=" + values[key] + "&");
+      let value = "";
+      values[key].length && (value = values[key].join().toLowerCase());
+      key === "currentPrice"
+        ? ""
+        : values[key].length && (link = link + key + "=" + value + "&");
     }
-    console.log(link);
+
+    return link;
   };
 
   return (
@@ -62,12 +67,11 @@ const Filter = () => {
           </div>
           <Formik
             initialValues={{
-              Categories: [], /// add in the future when main page will be ready
               brand: [],
               mechanism: [],
               material: [],
               color: [],
-              price: MinMaxPrice,
+              currentPrice: MinMaxPrice,
             }}
             onSubmit={setFilterLink}
           >
@@ -77,14 +81,14 @@ const Filter = () => {
                 className="filter__form"
                 id="filter"
               >
-                <CheckboxForm title={"brands"} arr={brandsList} />
+                <CheckboxForm title={"brand"} arr={brandsList} />
                 <CheckboxForm title={"mechanism"} arr={mechanismList} />
                 <CheckboxForm title={"material"} arr={materialList} />
-                <CheckboxForm title={"color"} arr={colorList} />
+                <CheckboxForm title={"color"} arr={colorList} values={values} />
                 <MaterialSlider
                   title={"Price"}
                   onChange={handleChange}
-                  name="price"
+                  name="currentPrice"
                   min={MinMaxPrice[0]}
                   max={MinMaxPrice[1]}
                 />

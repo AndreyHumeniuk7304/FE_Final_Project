@@ -1,8 +1,8 @@
-import { Box, FormLabel, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import { Field } from "formik";
 import PropTypes from "prop-types";
 import { useState } from "react";
+import CheckboxItem from "./CheckboxItem";
 
 const CheckboxForm = ({ title, arr }) => {
   const [isShow, setIsShow] = useState(true);
@@ -19,39 +19,11 @@ const CheckboxForm = ({ title, arr }) => {
 
       {isShow && (
         <Stack component="ul">
-          {arr.map((data) => {
-            return (
-              <ol key={Math.random()}>
-                <FormLabel
-                  className="checkbox__lable"
-                  // onClick={
-                  //   (e) => console.log(event.currentTarget.style.color)
-                  //   // event.currentTarget.checked
-                  //   //   ? (event.currentTarget.style.display = "none")
-                  //   //   : ""
-                  // }
-                >
-                  <Field
-                    type="checkbox"
-                    name={title}
-                    value={data}
-                    className={"custom-checkbox"}
-                  />
-                  {title === "color" && (
-                    <>
-                      <span
-                        className="checkbox__color"
-                        style={{
-                          backgroundColor: data === "steel" ? "silver" : data,
-                        }}
-                      ></span>
-                    </>
-                  )}{" "}
-                  {data}
-                </FormLabel>
-              </ol>
-            );
-          })}
+          {arr.map((itemName) => (
+            <ol key={Math.random()}>
+              <CheckboxItem itemName={itemName} title={title} />
+            </ol>
+          ))}
         </Stack>
       )}
     </Box>
