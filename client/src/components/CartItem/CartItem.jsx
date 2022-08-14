@@ -30,7 +30,7 @@ const CartItem = (props) => {
       <Stack
         direction={"row"}
         alignItems={"flex-start"}
-        justifyContent={"space-between"}
+        justifyContent={"flex-start"}
         sx={{ width: "100%", position: "relative" }}
       >
         <Box
@@ -43,7 +43,13 @@ const CartItem = (props) => {
             objectFit: "cover",
           }}
         />
-        <Box sx={{ marginLeft: 1, flexBasis: { desktop: "50%" } }}>
+        <Box
+          sx={{
+            marginLeft: 1,
+            flexBasis: { desktop: "50%" },
+            flexGrow: 1,
+          }}
+        >
           <Typography
             variant={"subtitle1"}
             component={"h3"}
@@ -111,11 +117,15 @@ const CartItem = (props) => {
               <Typography
                 variant={"body2"}
                 component={"span"}
-                sx={{ width: "50%", display: "inline-block" }}
+                sx={{ width: "50%", display: "inline-block", fontWeight: 700 }}
               >
                 Total
               </Typography>
-              <Typography variable={"body2"} component={"span"}>
+              <Typography
+                variable={"body2"}
+                component={"span"}
+                sx={{ fontWeight: 700 }}
+              >
                 {product.currentPrice * cartQuantity} $
               </Typography>
             </Box>

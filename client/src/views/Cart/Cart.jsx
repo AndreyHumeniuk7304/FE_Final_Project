@@ -13,6 +13,16 @@ const Cart = () => {
     dispatch(getCartItem(isLogin));
   }, []);
 
+  useEffect(() => {
+    const onUnload = () => {
+      localStorage.setItem("cart", JSON.stringify(cartList));
+    };
+
+    window.addEventListener("beforeunload", onUnload);
+
+    return () => window.removeEventListener("beforeunload", onUnload);
+  });
+
   const createCartItemList = () => {
     return cartList.map((item) => {
       return <CartItem key={item.product._id} item={item} />;

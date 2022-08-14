@@ -1,7 +1,7 @@
 import axiosDefault from "axios";
 
 const axios = axiosDefault.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "http://localhost:3001/api",
 });
 // axios.defaults.headers.common["Authorization"] =
 //   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZWZkNDMzNjExMDllMzU0MDhmNDc3ZCIsImZpcnN0TmFtZSI6ImFkbWluIiwibGFzdE5hbWUiOiJhZG1pbiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2MDQ2ODI2OCwiZXhwIjoxNjYwNTA0MjY4fQ.CXC4cbDKPSzUwGlrzEVf_vG8vNVLrhTpJtVDhyjdHSk";
