@@ -1,4 +1,11 @@
-const reducer = (state = {}, action) => {
+const initialState = {
+  categorieProductList: [],
+  isLoading: false,
+  hasError: false,
+  isFilterOpenMobile: false,
+};
+
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "START_FETCH_PRODUCTS": {
       return {
@@ -6,14 +13,15 @@ const reducer = (state = {}, action) => {
         isLoading: true,
       };
     }
-    case "LOADED_PRODUCTS": {
+    case "LOADED_CATEGORIES_PRODUCTS": {
       return {
         ...state,
-        productList: action.payload,
+        categorieProductList: action.payload,
         isLoading: false,
         hasError: false,
       };
     }
+
     case "ERROR_LOADED_PRODUCTS": {
       return {
         ...state,

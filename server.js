@@ -1,3 +1,4 @@
+const cors = require('cors')
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -30,6 +31,7 @@ const app = express();
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors())
 
 // DB Config
 const db = require("./config/keys").mongoURI;
@@ -77,6 +79,6 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 3001;
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
