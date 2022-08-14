@@ -1,6 +1,10 @@
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { fetchCategoriesProducts } from "../../store/catalog/actions";
 
 const Header = () => {
+  const dispatch = useDispatch();
+
   return (
     <header className="header">
       <div className="container">

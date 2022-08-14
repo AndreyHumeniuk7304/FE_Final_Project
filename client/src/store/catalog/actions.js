@@ -1,19 +1,31 @@
-import getAllProducts from "../../api/getAllProducts";
+import getCategoryProductsToRender from "../../api/getCategoryProductsToRender";
+import getAllProductsToRender from "../../api/getAllProductsToRender";
 
-export const fetchProducts = () => (dispatch) => {
+export const fetchCategoriesProducts = (categoriesType) => (dispatch) => {
   dispatch({ type: "START_FETCH_PRODUCTS" });
-  getAllProducts()
+  getCategoryProductsToRender(categoriesType)
     .then((products) => {
-      dispatch(loadedProducts(products));
+      dispatch(loadedCategorieProducts(products));
     })
     .catch(() => {
       dispatch(errorLoadedProducts());
     });
 };
 
-export const loadedProducts = (products) => {
+export const fetchAllProducts = () => (dispatch) => {
+  dispatch({ type: "START_FETCH_PRODUCTS" });
+  getAllProductsToRender()
+    .then((products) => {
+      dispatch(loadedCategorieProducts(products));
+    })
+    .catch(() => {
+      dispatch(errorLoadedProducts());
+    });
+};
+
+export const loadedCategorieProducts = (products) => {
   return {
-    type: "LOADED_PRODUCTS",
+    type: "LOADED_CATEGORIES_PRODUCTS",
     payload: products,
   };
 };

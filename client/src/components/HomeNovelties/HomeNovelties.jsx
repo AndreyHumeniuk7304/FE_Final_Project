@@ -19,7 +19,9 @@ const Novelties = styled("div")(({ theme }) => ({
 }));
 
 const HomeNovelties = () => {
-  const products = useSelector((state) => state.catalog.productList);
+  const categorieProductList = useSelector(
+    (state) => state.catalog.categorieProductList
+  );
 
   return (
     <>
@@ -31,8 +33,8 @@ const HomeNovelties = () => {
           NEW COLLECTION
         </Box>
         <Box className="novelties__wrapper">
-          {products !== undefined &&
-            products.map((product, index, array) => {
+          {categorieProductList !== undefined &&
+            categorieProductList.map((product, index, array) => {
               // let randomProduct =
               //   array[Math.floor(Math.random() * array.length)];
               return (
