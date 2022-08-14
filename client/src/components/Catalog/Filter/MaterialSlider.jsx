@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Slider, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
-export const MaterialSlider = ({ label, title, ...props }) => {
+export const MaterialSlider = ({ label, title, min, max, ...props }) => {
   const [field, meta, helpers] = useField(props);
 
   return (
@@ -13,9 +13,9 @@ export const MaterialSlider = ({ label, title, ...props }) => {
         {title}
       </Typography>
       <Box className="slider__title">
-        <span>$</span> <span>{field.value[0]}</span>
+        <span>$</span> <span>{min}</span>
         <span> - </span>
-        <span>{field.value[1]}</span>
+        <span>{max}</span>
       </Box>
       <Slider
         className="slider__element"
@@ -34,4 +34,6 @@ MaterialSlider.propTypes = {
   field: PropTypes.object,
   label: PropTypes.object,
   title: PropTypes.string,
+  min: PropTypes.number,
+  max: PropTypes.number,
 };
