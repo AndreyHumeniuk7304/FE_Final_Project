@@ -86,7 +86,7 @@ const Filter = ({ categories }) => {
           }}
           onSubmit={setFilterLink}
         >
-          {({ values, handleChange, handleSubmit }) => (
+          {({ values, handleChange, handleSubmit, resetForm }) => (
             <Form
               onSubmit={values.handleSubmit}
               className="filter__form"
@@ -113,6 +113,9 @@ const Filter = ({ categories }) => {
                 }}
               >
                 Apply
+              </Button>
+              <Button className="filter__btn" type="submit" onClick={resetForm}>
+                Reset
               </Button>
             </Form>
           )}

@@ -1,19 +1,22 @@
 import { FormLabel } from "@mui/material";
-import { Field } from "formik";
+import { Field, useField } from "formik";
 import PropTypes from "prop-types";
-import { useState } from "react";
 
 const CheckboxItem = ({ itemName, title }) => {
+  const setCheckedStyle = (e) => {
+    e.target.checked &&
+      (e.currentTarget.parentElement.style.textDecoration = "underline ");
+    e.currentTarget.parentElement.style.textDecoration = "underline ";
+    console.log(e.currentTarget.parentElement);
+  };
   return (
-    <FormLabel
-      className="checkbox__lable"
-      // style={{ textDecoration: isChecked ? "underline" : "none" }}
-    >
+    <FormLabel className="checkbox__lable">
       <Field
         type="checkbox"
         name={title}
         value={itemName}
         className={"custom-checkbox"}
+        onClick={setCheckedStyle}
       />
       {title === "color" && (
         <>
