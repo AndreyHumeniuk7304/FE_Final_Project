@@ -1,10 +1,8 @@
 import { useSelector } from "react-redux";
-import { filterProductsByCartegory } from "../../../ulits/helpers/helpers";
 import ProductCard from "./ProductCard/ProductCard";
 import PropTypes from "prop-types";
 
-const ProductList = ({ category }) => {
-  const productList = useSelector((state) => state.catalog.productList);
+const ProductList = ({ categorieProducts }) => {
   const isLoading = useSelector((state) => state.catalog.isLoading);
   const hasError = useSelector((state) => state.catalog.hasError);
 
@@ -15,7 +13,7 @@ const ProductList = ({ category }) => {
       ) : isLoading ? (
         <span className="">Loading...</span>
       ) : (
-        filterProductsByCartegory(productList, category).map((card) => {
+        categorieProducts.map((card) => {
           return (
             <ProductCard
               key={card._id}
@@ -31,7 +29,7 @@ const ProductList = ({ category }) => {
 };
 
 ProductList.propTypes = {
-  category: PropTypes.string,
+  categorieProducts: PropTypes.array,
 };
 
 export default ProductList;
