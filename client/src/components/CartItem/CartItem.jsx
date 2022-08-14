@@ -132,6 +132,7 @@ const CartItem = (props) => {
           <Close fontSize="small" />
         </IconButton>
         <Button
+          onClick={deleteItem}
           sx={{
             padding: 0,
             alignSelf: "flex-end",

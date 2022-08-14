@@ -37,7 +37,6 @@ const cartReducer = (state = initialState, action) => {
         }
         return item;
       });
-      console.log(cart);
       localStorage.setItem("cart", JSON.stringify(cart));
 
       return {
@@ -49,8 +48,17 @@ const cartReducer = (state = initialState, action) => {
       const cart = JSON.parse(localStorage.getItem("cart")).filter(
         (item) => item.product._id !== action.payload
       );
-      console.log(cart);
       localStorage.setItem("cart", JSON.stringify(cart));
+      return {
+        ...state,
+        list: cart,
+      };
+    }
+    case "ADD_PRODUCT_TO_CART_LOCAL": {
+      const cart = JSON.parse(localStorage.getItem("cart"));
+      const newCart = cart ? cart.concat(action.payload) : [action.payload];
+
+      localStorage.setItem("cart", JSON.stringify(newCart));
       return {
         ...state,
         list: cart,
