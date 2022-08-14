@@ -2,17 +2,17 @@ import Filter from "./Filter/Filter";
 import ProductList from "./ProductList/ProductList";
 import PropTypes from "prop-types";
 
-const Catalog = ({ category }) => {
+const Catalog = ({ categorieProducts }) => {
   return (
     <div className="catalog-container">
       <Filter />
-      <ProductList category={category} />
+      <ProductList categorieProducts={categorieProducts} />
     </div>
   );
 };
 
 Catalog.propTypes = {
-  category: PropTypes.string,
+  categorieProducts: PropTypes.array,
 };
 
 export default Catalog;
