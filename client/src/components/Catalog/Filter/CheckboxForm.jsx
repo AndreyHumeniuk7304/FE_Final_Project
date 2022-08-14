@@ -1,5 +1,4 @@
-import { Box, Typography } from "@mui/material";
-import { Stack } from "@mui/system";
+import { Box, Typography, Stack } from "@mui/material";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import CheckboxItem from "./CheckboxItem";
