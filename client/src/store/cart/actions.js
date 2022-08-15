@@ -4,7 +4,7 @@ import {
   decreaseQuantity,
   deleteProduct,
 } from "../../api/cart";
-import { getOneProduct } from "../../api/products";
+import getOneProduct from "../../api/getOneProduct";
 
 export const getCartItem = (isLogin) =>
   isLogin

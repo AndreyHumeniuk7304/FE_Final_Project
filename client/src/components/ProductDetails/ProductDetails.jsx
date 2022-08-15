@@ -5,11 +5,14 @@ import "./ProductDetails.scss";
 import { Box, Button, Checkbox, Typography } from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import theme from "../../theme";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/cart/actions";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState();
   const [counter, setCounter] = useState(1);
   const { itemNo } = useParams();
+  const dispatch = useDispatch();
   useEffect(() => {
     getOneProduct(itemNo).then((data) => setProduct(data));
   }, []);
@@ -22,6 +25,9 @@ const ProductDetails = () => {
     if (counter < 9) {
       setCounter(counter + 1);
     }
+  };
+  const handleclick = () => {
+    dispatch(addToCart(product._id, itemNo, false));
   };
   if (!product) return null;
 
@@ -147,6 +153,7 @@ const ProductDetails = () => {
               </div>
               <Box>
                 <Button
+                  onClick={handleclick}
                   variant="contained"
                   sx={{
                     [theme.breakpoints.between("mobile", "desktop")]: {
