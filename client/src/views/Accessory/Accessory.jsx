@@ -13,7 +13,11 @@ const Accessory = () => {
   );
   return (
     <div>
-      <Catalog categorieProducts={categorieProductList} />;
+      <Catalog
+        categorieProducts={categorieProductList}
+        categories={"Accessories"}
+      />
+      ;
     </div>
   );
 };

@@ -1,13 +1,131 @@
 .filter-wrapper {
-  background-color: black;
+  background-color: white;
   text-align: center;
-  color: white;
   width: 100%;
-  height: 50px;
-}
 
+  .filter {
+    //-webkit-appearance: none;
+    &__form {
+      display: none;
+    }
+    &__mob-title {
+      padding: 20px;
+      display: flex;
+      justify-content: space-around;
+
+      p {
+        color: black;
+      }
+      button {
+        background-color: inherit;
+      }
+    }
+    &__btn {
+      color: black;
+      font-weight: bold;
+      &:hover {
+        font-size: large;
+      }
+    }
+
+    &__slider {
+      padding: 0 20px;
+      .slider {
+        &__element {
+          color: black;
+          .MuiSlider-thumb {
+            border-radius: 0;
+            width: 4px;
+            height: 14px;
+          }
+        }
+        &__title {
+          font-weight: bold;
+          text-align: start;
+          padding: 20px 0 0 20px;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+  .checkbox {
+    padding: 20px 0 0 40px;
+    text-align: start;
+    text-transform: capitalize;
+
+    &__title {
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+    &__lable {
+      color: black;
+      width: fit-content;
+      cursor: pointer;
+      &:hover {
+        color: gray;
+        &--active {
+          text-transform: uppercase;
+        }
+      }
+    }
+    &__color {
+      padding: 0px 10px;
+      border: 0.5px solid black;
+      border-radius: 100%;
+      margin-right: 20px;
+    }
+  }
+}
 @include desktop {
   .filter-wrapper {
     width: 25%;
+  }
+}
+.custom-checkbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+@media screen and (min-width: 720px) {
+  .filter-wrapper {
+    background-color: black;
+    .filter {
+      &__form {
+        display: block;
+      }
+      &__mob-title {
+        display: none;
+      }
+      &__btn {
+        color: white;
+      }
+    }
+    .checkbox {
+      &__lable,
+      &__title {
+        color: white;
+      }
+      &__color {
+        border-color: white;
+      }
+    }
+    .slider {
+      &__title {
+        color: white;
+      }
+      &__element {
+        color: white;
+        .MuiSlider-thumb,
+        .MuiSlider-track {
+          color: white;
+        }
+
+        .MuiSlider-rail {
+          color: grey;
+        }
+      }
+    }
   }
 }

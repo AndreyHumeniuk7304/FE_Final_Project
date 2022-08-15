@@ -13,7 +13,8 @@ const Woman = () => {
   );
   return (
     <div>
-      <Catalog categorieProducts={categorieProductList} />;
+      <Catalog categorieProducts={categorieProductList} categories={"Ladies"} />
+      ;
     </div>
   );
 };
