@@ -44,7 +44,7 @@ const Header = () => {
                 <p className="header__account-container__text">My account</p>
               </Link>
               <Link
-                to="/shopping-bag"
+                to="/cart"
                 className="header__account-container__link shopping-bag"
               >
                 <div className="header__account-container__ico">

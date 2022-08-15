@@ -8,6 +8,7 @@ import Accessory from "./views/Accessory/Accessory";
 import Search from "./views/Search/Search";
 import MyAccount from "./views/MyAccount/MyAccount";
 import ShoppingBag from "./views/ShoppingBag/ShoppingBag";
+import Cart from "./views/Cart";
 import Footer from "./components/Footer/Footer";
 
 const App = () => {
@@ -22,7 +23,7 @@ const App = () => {
           <Route path="/accessory" element={<Accessory />} />
           <Route path="/search" element={<Search />} />
           <Route path="/my-account" element={<MyAccount />} />
-          <Route path="/shopping-bag" element={<ShoppingBag />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </div>
       <Footer />
