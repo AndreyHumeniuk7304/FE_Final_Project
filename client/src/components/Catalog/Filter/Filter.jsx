@@ -7,12 +7,18 @@ import PropTypes from "prop-types";
 import { fetchCategoriesProducts } from "../../../store/catalog/actions";
 import { useForm } from "react-hook-form";
 import { MaterialSlider } from "./MaterialSlider";
+import { useEffect } from "react";
 
 const Filter = ({ categories }) => {
   const [isClickedOnFilter, setIsClickedOnFilter] = useState(false);
+  const [currentPrice, setCurrentPrice] = useState([]);
   const productList = useSelector(
     (state) => state.catalog.categorieProductList
   );
+
+  useEffect(() => {
+    setCurrentPrice(getMinMaxPrice());
+  }, [productList]);
 
   const dispatch = useDispatch();
 
@@ -62,7 +68,6 @@ const Filter = ({ categories }) => {
 
   return (
     <>
-      (
       <div className="filter-wrapper filter">
         <div className="filter__mob-title">
           <p
@@ -109,16 +114,23 @@ const Filter = ({ categories }) => {
             name="currentPrice"
             defaultValues={getMinMaxPrice()}
             register={register}
+            currentPrice={currentPrice}
+            setCurrentPrice={setCurrentPrice}
           />
           <Button type="submit" onClick={() => false}>
             Apply
           </Button>
-          <Button type="button" onClick={() => reset()}>
+          <Button
+            type="button"
+            onClick={() => {
+              reset();
+              setCurrentPrice(getMinMaxPrice());
+            }}
+          >
             Reset
           </Button>
         </form>
       </div>
-      )
     </>
   );
 };
