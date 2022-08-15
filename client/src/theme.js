@@ -18,10 +18,17 @@ const theme = createTheme({
       mobile: 0,
       desktop: 720,
     },
+    keys: ["mobile", "desktop"],
   },
   typography: {
     fontFamily: ["Open Sans", "sans-serif"].join(","),
     secondaryFontFamily: ["Josefin Sans"].join(","),
+    h5: {
+      color: "#000000",
+      fontSize: "24px",
+      fontWeight: 700,
+      lineHeight: "33px",
+    },
   },
 });
 
