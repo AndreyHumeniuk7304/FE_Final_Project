@@ -3,21 +3,18 @@ import ProductList from "./ProductList/ProductList";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 
-const Catalog = ({ categorieProducts, categories }) => {
+const Catalog = ({ categories }) => {
   const isLoading = useSelector((state) => state.catalog.isLoading);
 
   return (
-    !isLoading && (
-      <div className="catalog-container">
-        <Filter categories={categories} />
-        <ProductList categorieProducts={categorieProducts} />
-      </div>
-    )
+    <div className="catalog-container">
+      <Filter categories={categories} />
+      <ProductList categories={categories} />
+    </div>
   );
 };
 
 Catalog.propTypes = {
-  categorieProducts: PropTypes.array,
   categories: PropTypes.string,
 };
 
