@@ -13,7 +13,9 @@ const Root = styled("div")(({ theme }) => ({
 }));
 
 const HomeCategory = () => {
-  const products = useSelector((state) => state.catalog.productList);
+  const categorieProductList = useSelector(
+    (state) => state.catalog.categorieProductList
+  );
 
   return (
     <>
@@ -25,8 +27,8 @@ const HomeCategory = () => {
           POPULAR WATCHES
         </Box>
         <div className="homeCategory__wrapper">
-          {products !== undefined &&
-            products.map((product, index) => {
+          {categorieProductList !== undefined &&
+            categorieProductList.map((product, index) => {
               return (
                 index < 5 && (
                   <div key={product._id} className="homeCategory__type">

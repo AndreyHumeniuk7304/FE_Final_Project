@@ -6,12 +6,8 @@ import Man from "./views/Man/Man";
 import Woman from "./views/Woman/Woman";
 import Accessory from "./views/Accessory/Accessory";
 import Search from "./views/Search/Search";
-import { useDispatch } from "react-redux";
 import MyAccount from "./views/MyAccount/MyAccount";
 import ShoppingBag from "./views/ShoppingBag/ShoppingBag";
-import { useEffect } from "react";
-import { fetchProducts } from "./store/catalog/actions";
-import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Footer from "./components/Footer/Footer";
 
 const App = () => {
@@ -33,7 +29,6 @@ const App = () => {
           <Route path="/search" element={<Search />} />
           <Route path="/my-account" element={<MyAccount />} />
           <Route path="/shopping-bag" element={<ShoppingBag />} />
-          <Route path="/products/:itemNo" element={<ProductDetails />} />
         </Routes>
       </div>
       <Footer />
