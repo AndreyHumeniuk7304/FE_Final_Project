@@ -9,14 +9,9 @@ import Search from "./views/Search/Search";
 import MyAccount from "./views/MyAccount/MyAccount";
 import ShoppingBag from "./views/ShoppingBag/ShoppingBag";
 import Footer from "./components/Footer/Footer";
+import ProductDetails from "./components/ProductDetails/ProductDetails";
 
 const App = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
-
   return (
     <div>
       <Header />
@@ -29,6 +24,7 @@ const App = () => {
           <Route path="/search" element={<Search />} />
           <Route path="/my-account" element={<MyAccount />} />
           <Route path="/shopping-bag" element={<ShoppingBag />} />
+          <Route path="/product/:itemNo" element={<ProductDetails />} />
         </Routes>
       </div>
       <Footer />
