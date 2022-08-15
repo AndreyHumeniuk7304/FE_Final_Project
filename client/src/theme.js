@@ -19,11 +19,18 @@ const theme = createTheme({
       tablet: 720,
       desktop: 1024,
     },
+    keys: ["mobile", "desktop"],
   },
   typography: {
     fontFamily: ["Open Sans", "sans-serif"].join(","),
     secondaryFontFamily: ["Josefin Sans"].join(","),
     Roboto: ["Roboto", "sans-serif"].join(","),
+    h5: {
+      color: "#000000",
+      fontSize: "24px",
+      fontWeight: 700,
+      lineHeight: "33px",
+    },
   },
 });
 

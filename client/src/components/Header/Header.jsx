@@ -12,7 +12,7 @@ const Header = () => {
           <div className="header__top-content">
             <div className="header__logo-container">
               <Link to="/" className="header__logo-container_link">
-                <img src="./images/header-logo.png" alt="logo" />
+                <img src="../images/header-logo.png" alt="logo" />
               </Link>
             </div>
 
@@ -24,7 +24,7 @@ const Header = () => {
                 <div className="header__account-container__ico">
                   <img
                     className="header__account-container__ico-img"
-                    src="./images/search-ico.svg"
+                    src="../images/search-ico.svg"
                     alt="search"
                   />
                 </div>
@@ -37,7 +37,7 @@ const Header = () => {
                 <div className="header__account-container__ico">
                   <img
                     className="header__account-container__ico-img"
-                    src="./images/account-ico.svg"
+                    src="../images/account-ico.svg"
                     alt="my-account"
                   />
                 </div>
@@ -50,7 +50,7 @@ const Header = () => {
                 <div className="header__account-container__ico">
                   <img
                     className="header__account-container__ico-img"
-                    src="./images/shopping-bag-ico.svg"
+                    src="../images/shopping-bag-ico.svg"
                     alt="my-account"
                   />
                 </div>
@@ -62,7 +62,7 @@ const Header = () => {
                 <div className="header__account-container__ico">
                   <img
                     className="header__account-container__ico-img"
-                    src="./images/burger-ico.svg"
+                    src="../images/burger-ico.svg"
                     alt="my-account"
                   />
                 </div>
