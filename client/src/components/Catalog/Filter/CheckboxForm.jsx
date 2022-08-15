@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import CheckboxItem from "./CheckboxItem";
 
-const CheckboxForm = ({ title, arr }) => {
+const CheckboxForm = ({ title, arr, register }) => {
   const [isShow, setIsShow] = useState(true);
 
   return (
@@ -20,7 +20,11 @@ const CheckboxForm = ({ title, arr }) => {
         <Stack component="ul">
           {arr.map((itemName) => (
             <ol key={Math.random()}>
-              <CheckboxItem itemName={itemName} title={title} />
+              <CheckboxItem
+                itemName={itemName}
+                title={title}
+                register={register}
+              />
             </ol>
           ))}
         </Stack>
@@ -35,4 +39,5 @@ CheckboxForm.propTypes = {
   title: PropTypes.string,
   arr: PropTypes.array,
   handleSubmit: PropTypes.func,
+  register: PropTypes.func,
 };

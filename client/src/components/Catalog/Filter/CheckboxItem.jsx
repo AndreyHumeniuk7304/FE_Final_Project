@@ -1,8 +1,7 @@
 import { FormLabel } from "@mui/material";
-import { Field, useField } from "formik";
 import PropTypes from "prop-types";
 
-const CheckboxItem = ({ itemName, title }) => {
+const CheckboxItem = ({ itemName, title, register }) => {
   const setCheckedStyle = (e) => {
     e.target.checked &&
       (e.currentTarget.parentElement.style.textDecoration = "underline ");
@@ -11,12 +10,13 @@ const CheckboxItem = ({ itemName, title }) => {
   };
   return (
     <FormLabel className="checkbox__lable">
-      <Field
+      <input
         type="checkbox"
         name={title}
         value={itemName}
         className={"custom-checkbox"}
         onClick={setCheckedStyle}
+        {...register(title)}
       />
       {title === "color" && (
         <>
@@ -39,4 +39,5 @@ CheckboxItem.propTypes = {
   itemName: PropTypes.string,
   title: PropTypes.string,
   values: PropTypes.object,
+  register: PropTypes.func,
 };
