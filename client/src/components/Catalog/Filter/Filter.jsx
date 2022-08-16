@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import CheckboxForm from "./CheckboxForm";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
@@ -7,7 +7,6 @@ import { fetchCategoriesProducts } from "../../../store/catalog/actions";
 import { useForm } from "react-hook-form";
 import { MaterialSlider } from "./MaterialSlider";
 import { CheckedFilterItem } from "./checkedFilterItem";
-import { Stack } from "@mui/system";
 import FilterMobileHeader from "./FilterMobileHeader";
 
 const Filter = ({ categories, setSearch, search }) => {
@@ -141,6 +140,7 @@ const Filter = ({ categories, setSearch, search }) => {
               type="button"
               onClick={() => {
                 reset();
+                setSearch("");
                 setCurrentPrice(getMinMaxPrice());
                 setCurentValues({ categories: categories });
                 dispatch(
