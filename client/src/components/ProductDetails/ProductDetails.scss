@@ -1,0 +1,39 @@
+.background {
+  background-color: #fff;
+}
+
+.details {
+  &__img {
+    max-width: 100%;
+    min-width: 100%;
+  }
+
+  &__item {
+    &-title {
+      text-transform: uppercase
+    }
+
+    &-color {
+      color: #000000;
+    }
+  }
+}
+
+.counter {
+  padding-bottom: 20px;
+
+  &__button {
+    color: white;
+    background-color: black;
+    padding: 6px 10px;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  &__span {
+    padding: 4px 8px;
+  }
+}
+
+
+
