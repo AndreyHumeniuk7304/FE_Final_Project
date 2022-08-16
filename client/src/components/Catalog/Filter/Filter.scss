@@ -4,7 +4,19 @@
   width: 100%;
 
   .filter {
-    //-webkit-appearance: none;
+    &__checked {
+      color: white;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+
+      .checked__item {
+        padding: 2px 20px;
+        border: 1px solid white;
+        border-radius: 10px;
+        margin: 5px;
+      }
+    }
     &__form {
       display: none;
     }

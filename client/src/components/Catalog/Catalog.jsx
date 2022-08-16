@@ -1,15 +1,15 @@
 import Filter from "./Filter/Filter";
 import ProductList from "./ProductList/ProductList";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 
 const Catalog = ({ categories }) => {
-  const isLoading = useSelector((state) => state.catalog.isLoading);
-
+  const [search, setSearch] = useSearchParams();
+  let querystring = search.toString().slice(20);
   return (
     <div className="catalog-container">
-      <Filter categories={categories} />
-      <ProductList categories={categories} />
+      <Filter categories={categories} setSearch={setSearch} />
+      <ProductList querystring={querystring ? querystring : categories} />
     </div>
   );
 };

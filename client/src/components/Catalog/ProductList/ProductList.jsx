@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { fetchCategoriesProducts } from "../../../store/catalog/actions";
 
-const ProductList = ({ categories }) => {
+const ProductList = ({ querystring }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
-      fetchCategoriesProducts(`products/filter?Categories=${categories}`)
+      fetchCategoriesProducts(`products/filter?Categories=${querystring}`)
     );
   }, [dispatch]);
 
@@ -42,7 +42,7 @@ const ProductList = ({ categories }) => {
 };
 
 ProductList.propTypes = {
-  categories: PropTypes.string,
+  querystring: PropTypes.string,
 };
 
 export default ProductList;
