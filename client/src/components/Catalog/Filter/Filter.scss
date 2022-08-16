@@ -5,28 +5,31 @@
 
   .filter {
     &__checked {
-      color: white;
       display: flex;
       flex-wrap: wrap;
       flex-direction: row;
 
       .checked__item {
+        border: 1px solid $color-mobile;
         padding: 2px 20px;
-        border: 1px solid white;
         border-radius: 10px;
         margin: 5px;
       }
     }
     &__form {
       display: none;
+      &--active {
+        display: block;
+      }
     }
+
     &__mob-title {
       padding: 20px;
       display: flex;
       justify-content: space-around;
 
       p {
-        color: black;
+        color: $color-mobile;
       }
       button {
         background-color: inherit;
@@ -34,7 +37,7 @@
       }
     }
     &__btn {
-      color: black;
+      color: $color-mobile;
       font-weight: bold;
       &:hover {
         font-size: large;
@@ -45,7 +48,7 @@
       padding: 0 20px;
       .slider {
         &__element {
-          color: black;
+          color: $color-mobile;
           .MuiSlider-thumb {
             border-radius: 0;
             width: 4px;
@@ -73,7 +76,7 @@
       text-transform: uppercase;
     }
     &__lable {
-      color: black;
+      color: $color-mobile;
       width: fit-content;
       cursor: pointer;
       &:hover {
@@ -85,7 +88,7 @@
     }
     &__color {
       padding: 0px 10px;
-      border: 0.5px solid black;
+      border: 0.5px solid $color-mobile;
       border-radius: 100%;
       margin-right: 20px;
     }
@@ -106,6 +109,13 @@
   .filter-wrapper {
     background-color: black;
     .filter {
+      &__checked {
+        color: $color-desktop;
+
+        .checked__item {
+          border-color: $color-desktop;
+        }
+      }
       &__form {
         display: block;
       }
@@ -113,27 +123,27 @@
         display: none;
       }
       &__btn {
-        color: white;
+        color: $color-desktop;
       }
     }
     .checkbox {
       &__lable,
       &__title {
-        color: white;
+        color: $color-desktop;
       }
       &__color {
-        border-color: white;
+        color: $color-desktop;
       }
     }
     .slider {
       &__title {
-        color: white;
+        color: $color-desktop;
       }
       &__element {
-        color: white;
+        color: $color-desktop;
         .MuiSlider-thumb,
         .MuiSlider-track {
-          color: white;
+          color: $color-desktop;
         }
 
         .MuiSlider-rail {

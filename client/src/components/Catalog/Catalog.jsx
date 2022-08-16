@@ -5,11 +5,15 @@ import { useSearchParams } from "react-router-dom";
 
 const Catalog = ({ categories }) => {
   const [search, setSearch] = useSearchParams();
+
   let querystring = search.toString().slice(20);
   return (
     <div className="catalog-container">
-      <Filter categories={categories} setSearch={setSearch} />
-      <ProductList querystring={querystring ? querystring : categories} />
+      <Filter categories={categories} setSearch={setSearch} search={search} />
+      <ProductList
+        querystring={querystring ? querystring : categories}
+        search={search}
+      />
     </div>
   );
 };

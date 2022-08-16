@@ -10,7 +10,7 @@ import { CheckedFilterItem } from "./checkedFilterItem";
 import { Stack } from "@mui/system";
 import FilterMobileHeader from "./FilterMobileHeader";
 
-const Filter = ({ categories, setSearch }) => {
+const Filter = ({ categories, setSearch, search }) => {
   const [currentPrice, setCurrentPrice] = useState([]);
   const [curentValues, setCurentValues] = useState({ categories: categories });
 
@@ -21,6 +21,10 @@ const Filter = ({ categories, setSearch }) => {
   useEffect(() => {
     setCurrentPrice(getMinMaxPrice());
   }, [productList]);
+
+  useEffect(() => {
+    search.toString() === "" && setCurentValues({ categories: categories });
+  }, [search.toString()]);
 
   const dispatch = useDispatch();
 
@@ -46,7 +50,16 @@ const Filter = ({ categories, setSearch }) => {
         ? (value = values[key].join().toLowerCase())
         : (value = values[key]);
       key === "currentPrice"
-        ? ""
+        ? (link =
+            link +
+            "minPrice" +
+            "=" +
+            currentPrice[0] +
+            "&" +
+            "maxPrice" +
+            "=" +
+            currentPrice[1] +
+            "&")
         : value !== ""
         ? (link = link + key + "=" + value + "&")
         : null;
@@ -151,4 +164,5 @@ export default Filter;
 Filter.propTypes = {
   categories: PropTypes.string,
   setSearch: PropTypes.func,
+  search: PropTypes.object,
 };

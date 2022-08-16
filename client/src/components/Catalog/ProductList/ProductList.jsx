@@ -4,13 +4,13 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { fetchCategoriesProducts } from "../../../store/catalog/actions";
 
-const ProductList = ({ querystring }) => {
+const ProductList = ({ querystring, search }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
       fetchCategoriesProducts(`products/filter?Categories=${querystring}`)
     );
-  }, [dispatch]);
+  }, [search.toString()]);
 
   const { categorieProductList, isLoading, hasError } = useSelector(
     (state) => state.catalog
@@ -43,6 +43,7 @@ const ProductList = ({ querystring }) => {
 
 ProductList.propTypes = {
   querystring: PropTypes.string,
+  search: PropTypes.object,
 };
 
 export default ProductList;

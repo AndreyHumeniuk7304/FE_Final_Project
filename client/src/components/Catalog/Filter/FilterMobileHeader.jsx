@@ -2,12 +2,15 @@ import { useState } from "react";
 
 const FilterMobileHeader = () => {
   const [isClickedOnFilter, setIsClickedOnFilter] = useState(false);
+
   return (
     <div className="filter__mob-title">
       <p
         onClick={(e) => {
           setIsClickedOnFilter(true);
-          document.getElementById("filter").style.display = "block";
+          document
+            .getElementById("filter")
+            .classList.add("filter__form--active");
         }}
       >
         Filter
@@ -16,7 +19,9 @@ const FilterMobileHeader = () => {
         <button
           onClick={() => {
             setIsClickedOnFilter(false);
-            document.getElementById("filter").style.display = "none";
+            document
+              .getElementById("filter")
+              .classList.remove("filter__form--active");
           }}
         >
           X
