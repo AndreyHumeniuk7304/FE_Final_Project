@@ -4,10 +4,13 @@
   @include flex-container;
   align-items: flex-start;
   flex-wrap: wrap;
-  // @include grid-container;
-  // grid-template-columns: 50% 50%;
-  padding: 0 2%;
-  gap: 10%;
+  padding-left: 6%;
+  padding-right: 6%;
+  gap: 6%;
+
+  &__card {
+    width: 45%;
+  }
 }
 
 @include desktop {

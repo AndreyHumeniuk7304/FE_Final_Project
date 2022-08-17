@@ -1,23 +1,24 @@
 import Filter from "./Filter/Filter";
 import ProductList from "./ProductList/ProductList";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 
-const Catalog = ({ categorieProducts, categories }) => {
-  const isLoading = useSelector((state) => state.catalog.isLoading);
+const Catalog = ({ categories }) => {
+  const [search, setSearch] = useSearchParams();
 
+  let querystring = search.toString().slice(20);
   return (
-    !isLoading && (
-      <div className="catalog-container">
-        <Filter categories={categories} />
-        <ProductList categorieProducts={categorieProducts} />
-      </div>
-    )
+    <div className="catalog-container">
+      <Filter categories={categories} setSearch={setSearch} search={search} />
+      <ProductList
+        querystring={querystring ? querystring : categories}
+        search={search}
+      />
+    </div>
   );
 };
 
 Catalog.propTypes = {
-  categorieProducts: PropTypes.array,
   categories: PropTypes.string,
 };
 

@@ -1,18 +1,29 @@
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import CheckboxForm from "./CheckboxForm";
-import { brandsList, mechanismList, materialList, colorList } from "./data";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { fetchCategoriesProducts } from "../../../store/catalog/actions";
 import { useForm } from "react-hook-form";
 import { MaterialSlider } from "./MaterialSlider";
+import { CheckedFilterItem } from "./checkedFilterItem";
+import FilterMobileHeader from "./FilterMobileHeader";
 
-const Filter = ({ categories }) => {
-  const [isClickedOnFilter, setIsClickedOnFilter] = useState(false);
+const Filter = ({ categories, setSearch, search }) => {
+  const [currentPrice, setCurrentPrice] = useState([]);
+  const [curentValues, setCurentValues] = useState({ categories: categories });
+
   const productList = useSelector(
     (state) => state.catalog.categorieProductList
   );
+
+  useEffect(() => {
+    setCurrentPrice(getMinMaxPrice());
+  }, [productList]);
+
+  useEffect(() => {
+    search.toString() === "" && setCurentValues({ categories: categories });
+  }, [search.toString()]);
 
   const dispatch = useDispatch();
 
@@ -29,18 +40,31 @@ const Filter = ({ categories }) => {
     );
 
   const setFilterLink = (values) => {
+    setCurentValues({ ...values, currentPrice: currentPrice });
+
     let link = "filter?";
     for (let key in values) {
       let value = "";
-
       Array.isArray(values[key])
         ? (value = values[key].join().toLowerCase())
         : (value = values[key]);
       key === "currentPrice"
-        ? ""
-        : values[key].length && (link = link + key + "=" + value + "&");
+        ? (link =
+            link +
+            "minPrice" +
+            "=" +
+            currentPrice[0] +
+            "&" +
+            "maxPrice" +
+            "=" +
+            currentPrice[1] +
+            "&")
+        : value !== ""
+        ? (link = link + key + "=" + value + "&")
+        : null;
     }
-    console.log(link);
+    setSearch(link);
+
     dispatch(fetchCategoriesProducts(`products/${link}`));
   };
 
@@ -60,70 +84,87 @@ const Filter = ({ categories }) => {
     },
   });
 
+  const getFilterItem = (caregory) => {
+    let newList = productList.map(
+      (listItem) => listItem[caregory] && listItem[caregory].trim()
+    );
+    newList = [...new Set(newList)];
+    return newList;
+  };
+
   return (
     <>
-      (
       <div className="filter-wrapper filter">
-        <div className="filter__mob-title">
-          <p
-            onClick={() => {
-              setIsClickedOnFilter(true);
-              document.getElementById("filter").style.display = "block";
-            }}
+        <FilterMobileHeader />
+        <Stack>
+          <CheckedFilterItem
+            curentValues={curentValues}
+            defaultValues={getMinMaxPrice()}
+          />
+
+          <form
+            onSubmit={handleSubmit((data) => {
+              setFilterLink(data);
+            })}
+            className="filter__form"
+            id="filter"
           >
-            Filter
-          </p>
-          {isClickedOnFilter && (
-            <button
+            <CheckboxForm
+              title={"brand"}
+              arr={getFilterItem("brand")}
+              register={register}
+            />
+            <CheckboxForm
+              title={"mechanism"}
+              arr={getFilterItem("mechanism")}
+              register={register}
+            />
+            <CheckboxForm
+              title={"material"}
+              arr={getFilterItem("material")}
+              register={register}
+            />
+            <CheckboxForm
+              title={"color"}
+              arr={getFilterItem("color")}
+              register={register}
+            />
+            <MaterialSlider
+              title={"currentPrice"}
+              name="currentPrice"
+              defaultValues={getMinMaxPrice()}
+              register={register}
+              currentPrice={currentPrice}
+              setCurrentPrice={setCurrentPrice}
+            />
+            <Button type="submit">Apply</Button>
+            <Button
+              type="button"
               onClick={() => {
-                setIsClickedOnFilter(false);
-                document.getElementById("filter").style.display = "none";
+                reset();
+                setSearch("");
+                setCurrentPrice(getMinMaxPrice());
+                setCurentValues({ categories: categories });
+                dispatch(
+                  fetchCategoriesProducts(
+                    `products/filter?Categories=${categories}`
+                  )
+                );
               }}
             >
-              X
-            </button>
-          )}
-        </div>
-
-        <form
-          onSubmit={handleSubmit((data) => {
-            setFilterLink(data);
-          })}
-          className="filter__form"
-          id="filter"
-        >
-          <CheckboxForm title={"brand"} arr={brandsList} register={register} />
-          <CheckboxForm
-            title={"mechanism"}
-            arr={mechanismList}
-            register={register}
-          />
-          <CheckboxForm
-            title={"material"}
-            arr={materialList}
-            register={register}
-          />
-          <CheckboxForm title={"color"} arr={colorList} register={register} />
-          <MaterialSlider
-            title={"currentPrice"}
-            name="currentPrice"
-            defaultValues={getMinMaxPrice()}
-            register={register}
-          />
-          <Button type="submit" onClick={() => false}>
-            Apply
-          </Button>
-          <Button type="button" onClick={() => reset()}>
-            Reset
-          </Button>
-        </form>
+              Reset
+            </Button>
+          </form>
+        </Stack>
       </div>
-      )
     </>
   );
 };
+
 export default Filter;
 
 Filter.propTypes = {
   categories: PropTypes.string,
+  setSearch: PropTypes.func,
+  search: PropTypes.object,
 };
