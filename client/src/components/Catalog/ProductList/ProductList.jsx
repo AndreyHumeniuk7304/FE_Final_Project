@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import ProductCard from "./ProductCard/ProductCard";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const ProductList = ({ categorieProducts }) => {
   const isLoading = useSelector((state) => state.catalog.isLoading);
@@ -21,12 +22,17 @@ const ProductList = ({ categorieProducts }) => {
       ) : (
         categorieProducts.map((card) => {
           return (
-            <ProductCard
+            <Link
+              to={card.productUrl}
+              className="productlist-wrapper__card"
               key={card._id}
-              image={card.imageUrls[0]}
-              name={card.name}
-              price={card.currentPrice}
-            />
+            >
+              <ProductCard
+                image={card.imageUrls[0]}
+                name={card.name}
+                price={card.currentPrice}
+              />
+            </Link>
           );
         })
       )}
