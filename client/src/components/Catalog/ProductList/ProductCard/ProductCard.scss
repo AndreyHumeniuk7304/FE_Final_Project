@@ -1,10 +1,9 @@
 .card-wrapper {
-  width: 35%;
-  //width:60; for grid
-  margin-top: 5%;
-  margin-bottom: 5%;
+  width: 90%;
+  margin-top: 11%;
+  margin-bottom: 11%;
   cursor: pointer;
-  height: 10%;
+  display: inline-block;
 
   &__image {
     max-width: 100%;
@@ -14,11 +13,13 @@
   &__name {
     font-size: 1.6vw;
     margin-top: 4%;
+    color: black;
   }
 
   &__price {
     font-size: 1.7vw;
     margin-top: 4%;
     font-weight: bold;
+    color: black;
   }
 }

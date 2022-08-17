@@ -3,6 +3,7 @@ import ProductCard from "./ProductCard/ProductCard";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { fetchCategoriesProducts } from "../../../store/catalog/actions";
+import { Link } from "react-router-dom";
 
 const ProductList = ({ querystring, search }) => {
   const dispatch = useDispatch();
@@ -28,12 +29,17 @@ const ProductList = ({ querystring, search }) => {
       ) : (
         categorieProductList.map((card) => {
           return (
-            <ProductCard
+            <Link
+              to={card.productUrl}
+              className="productlist-wrapper__card"
               key={card._id}
-              image={card.imageUrls[0]}
-              name={card.name}
-              price={card.currentPrice}
-            />
+            >
+              <ProductCard
+                image={card.imageUrls[0]}
+                name={card.name}
+                price={card.currentPrice}
+              />
+            </Link>
           );
         })
       )}
