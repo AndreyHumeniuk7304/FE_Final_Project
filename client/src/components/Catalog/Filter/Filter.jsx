@@ -85,7 +85,9 @@ const Filter = ({ categories, setSearch, search }) => {
   });
 
   const getFilterItem = (caregory) => {
-    let newList = productList.map((listItem) => listItem[caregory].trim());
+    let newList = productList.map(
+      (listItem) => listItem[caregory] && listItem[caregory].trim()
+    );
     newList = [...new Set(newList)];
     return newList;
   };
