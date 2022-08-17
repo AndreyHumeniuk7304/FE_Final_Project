@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import SearchInput from "../SearchInput/SearchInput";
 import { fetchCategoriesProducts } from "../../store/catalog/actions";
 
 const Header = () => {
@@ -17,19 +18,7 @@ const Header = () => {
             </div>
 
             <div className="header__account-container">
-              <Link
-                to="/search"
-                className="header__account-container__link search"
-              >
-                <div className="header__account-container__ico">
-                  <img
-                    className="header__account-container__ico-img"
-                    src="../images/search-ico.svg"
-                    alt="search"
-                  />
-                </div>
-                <p className="header__account-container__text">Search</p>
-              </Link>
+              <SearchInput />
               <Link
                 to="/my-account"
                 className="header__account-container__link account"

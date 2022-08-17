@@ -93,9 +93,9 @@ a {
   display: none;
 }
 
-@media screen and (min-width: 765px) {
+@media screen and (min-width: 720px) {
   .header__account-container__link {
-    margin-right: 45px;
+    margin: 0 35px 0 35px;
   }
 
   .header__categories-container {
@@ -132,6 +132,9 @@ a {
       display: flex;
       align-items: center;
       gap: 8px;
+    }
+    &__account-container__link:last-child {
+      display: none;
     }
 
     &__account-container__ico:last-child {
