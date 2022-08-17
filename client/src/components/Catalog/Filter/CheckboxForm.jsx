@@ -4,7 +4,7 @@ import { useState } from "react";
 import CheckboxItem from "./CheckboxItem";
 
 const CheckboxForm = ({ title, arr, register }) => {
-  const [isShow, setIsShow] = useState(true);
+  const [isShow, setIsShow] = useState(false);
 
   return (
     <Box className="checkbox">

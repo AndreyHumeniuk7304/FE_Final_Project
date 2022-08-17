@@ -1,13 +1,20 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "./ProductCard/ProductCard";
 import PropTypes from "prop-types";
+import { useEffect } from "react";
+import { fetchCategoriesProducts } from "../../../store/catalog/actions";
 import { Link } from "react-router-dom";
 
-const ProductList = ({ categorieProducts }) => {
-  const isLoading = useSelector((state) => state.catalog.isLoading);
-  const hasError = useSelector((state) => state.catalog.hasError);
-  const categorieProductList = useSelector(
-    (state) => state.catalog.categorieProductList
+const ProductList = ({ querystring, search }) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(
+      fetchCategoriesProducts(`products/filter?Categories=${querystring}`)
+    );
+  }, [search.toString()]);
+
+  const { categorieProductList, isLoading, hasError } = useSelector(
+    (state) => state.catalog
   );
 
   return (
@@ -20,7 +27,7 @@ const ProductList = ({ categorieProducts }) => {
       ) : isLoading ? (
         <span className="">Loading...</span>
       ) : (
-        categorieProducts.map((card) => {
+        categorieProductList.map((card) => {
           return (
             <Link
               to={card.productUrl}
@@ -41,7 +48,8 @@ const ProductList = ({ categorieProducts }) => {
 };
 
 ProductList.propTypes = {
-  categorieProducts: PropTypes.array,
+  querystring: PropTypes.string,
+  search: PropTypes.object,
 };
 
 export default ProductList;
