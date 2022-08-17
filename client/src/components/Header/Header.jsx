@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { styled } from "@mui/material/styles";
 import { fetchCategoriesProducts } from "../../store/catalog/actions";
+import { Box } from "@mui/material";
 
-const Header = () => {
+const Header = (props) => {
   const dispatch = useDispatch();
-
+  const { statusOpenBurger, handleBurger } = props;
   return (
-    <header className="header">
+    <header className={statusOpenBurger ? "header active-burger" : "header"}>
       <div className="container">
         <div className="container-header">
           <div className="header__top-content">
@@ -58,13 +61,25 @@ const Header = () => {
                 <p className="header__account-container__text">Shopping Bag</p>
               </Link>
 
-              <a href="#!" className="header__account-container__link burger">
+              <a
+                href="#!"
+                onClick={handleBurger}
+                className="header__account-container__link burger"
+              >
                 <div className="header__account-container__ico">
-                  <img
-                    className="header__account-container__ico-img"
-                    src="../images/burger-ico.svg"
-                    alt="my-account"
-                  />
+                  {!statusOpenBurger ? (
+                    <img
+                      className="header__account-container__ico-img"
+                      src="../images/burger-ico.svg"
+                      alt="my-account"
+                    />
+                  ) : (
+                    <img
+                      className="header__account-container__ico-img btn-close"
+                      src="../images/close-button.png"
+                      alt="cross"
+                    />
+                  )}
                 </div>
               </a>
             </div>
@@ -85,8 +100,92 @@ const Header = () => {
           </div>
         </div>
       </div>
+      <div className={!statusOpenBurger ? "burger-menu" : "burger-menu_active"}>
+        <div className="container">
+          <div className="burger-menu__wrapper">
+            <div className="burger-menu__login">
+              <a className="burger-menu__login_link">Login / Register</a>
+            </div>
+            <div className="burger-menu__pages">
+              <ul className="burger-menu__pages-list pages-list">
+                <li className="pages-list__item top-item">
+                  <a href="" className="pages-list__item-link">
+                    New collection
+                  </a>
+                </li>
+                <li className="pages-list__item top-item">
+                  <a href="" className="pages-list__item-link">
+                    New arrivals
+                  </a>
+                </li>
+                <li className="pages-list__item bottom-item">
+                  <a href="" className="pages-list__item-link">
+                    WOMAN COLLECTION
+                  </a>
+                </li>
+                <li className="pages-list__item bottom-item">
+                  <a href="" className="pages-list__item-link">
+                    MAN COLLECTION
+                  </a>
+                </li>
+                <li className="pages-list__item bottom-item">
+                  <a href="" className="pages-list__item-link">
+                    ACCESSORY
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="burger-menu__footer">
+              <Box component="h3" className="burger-menu__footer_title">
+                HELP
+              </Box>
+              <ul className="burger-menu__footer_list">
+                <li className="burger-menu__footer_list-item">
+                  Frequently asked questions
+                </li>
+                <li className="burger-menu__footer_list-item">Contact</li>
+                <li className="burger-menu__footer_list-item">
+                  How to purchase
+                </li>
+                <li className="burger-menu__footer_list-item">Payment</li>
+              </ul>
+              <Box component="h3" className="burger-menu__footer_title">
+                COMPANY
+              </Box>
+              <ul className="burger-menu__footer_list">
+                <li className="burger-menu__footer_list-item">
+                  Frequently asked questions
+                </li>
+                <li className="burger-menu__footer_list-item">Contact</li>
+                <li className="burger-menu__footer_list-item">
+                  How to purchase
+                </li>
+                <li className="burger-menu__footer_list-item">Payment</li>
+              </ul>
+              <Box component="h3" className="burger-menu__footer_title">
+                FOLLOW US
+              </Box>
+              <ul className="burger-menu__footer_list">
+                <li className="burger-menu__footer_list-item">
+                  Frequently asked questions
+                </li>
+                <li className="burger-menu__footer_list-item">Contact</li>
+                <li className="burger-menu__footer_list-item">
+                  How to purchase
+                </li>
+                <li className="burger-menu__footer_list-item">Payment</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  handleBurger: PropTypes.func,
+  statusOpenBurger: PropTypes.bool,
 };
 
 export default Header;

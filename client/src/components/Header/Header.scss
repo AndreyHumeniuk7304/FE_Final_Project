@@ -3,6 +3,10 @@ a {
   color: white;
   display: inline-block;
 }
+
+body {
+  position: relative;
+}
 .container {
   min-width: 320px;
   max-width: 1295px;
@@ -12,10 +16,10 @@ a {
 }
 
 .header {
+  position: fixed;
   background-color: black;
   color: white;
   width: 100%;
-  position: relative;
 
   &__top-content {
     display: flex;
@@ -48,6 +52,15 @@ a {
     font-weight: 400;
     font-size: 12px;
     line-height: 12px;
+
+    &__link {
+      transition: 0.2s;
+      border-bottom: 1px solid transparent;
+
+      &:focus {
+        border-bottom: 1px solid white;
+      }
+    }
   }
 
   &__logo-container {
@@ -89,6 +102,98 @@ a {
   }
 }
 
+.active-burger {
+  position: absolute;
+  height: 100%;
+  top: 0%;
+  left: 0;
+  z-index: 100;
+}
+
+.burger-menu {
+  display: none;
+  position: absolute;
+  padding-top: 40px;
+  // position: fixed;
+  top: 120px;
+  left: 0;
+  height: 80%;
+  width: 100%;
+  background-color: black;
+  // display: none;
+
+  &__login {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 19px;
+    // padding-bottom: 21px;
+
+    &:after {
+      content: "";
+      display: block;
+      height: 1px;
+      width: 80%;
+      margin-top: 21px;
+      margin-bottom: 32px;
+
+      background-color: rgba(130, 128, 128, 1);
+    }
+  }
+
+  &__footer_title {
+    padding-left: 3px;
+    margin-bottom: 10px;
+    // font-family: "Josefin Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 14px;
+  }
+
+  &__footer_list {
+    margin-bottom: 40px;
+
+    &-item {
+      margin-bottom: 12px;
+      font-family: "Open Sans";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 19px;
+    }
+  }
+}
+
+.pages-list__item {
+  margin-bottom: 30px;
+
+  &.top-item {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 19px;
+  }
+
+  &.bottom-item {
+    font-family: "Josefin Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 14px;
+  }
+
+  &:last-child {
+    margin-bottom: 66px;
+  }
+}
+
+.burger-menu_active {
+  display: block;
+}
+
 .header__account-container__text {
   display: none;
 }
@@ -109,6 +214,9 @@ a {
 }
 
 @media screen and (min-width: 1023px) {
+  .burger-menu {
+    display: none;
+  }
   .container {
     padding: 0 25px;
   }
@@ -154,7 +262,8 @@ a {
         transition: 0.3s;
       }
 
-      &__link:hover {
+      &__link:hover,
+      :focus {
         border-bottom: 1px solid white;
       }
     }

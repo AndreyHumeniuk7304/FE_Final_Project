@@ -10,23 +10,31 @@ import MyAccount from "./views/MyAccount/MyAccount";
 import Cart from "./views/Cart";
 import Footer from "./components/Footer/Footer";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
+import { useState } from "react";
 
 const App = () => {
+  const [statusOpenBurger, setStatusOpenBurger] = useState(false);
+
+  const handleBurger = () => {
+    setStatusOpenBurger(!statusOpenBurger);
+  };
   return (
     <div>
-      <Header />
-      <div className="main">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/man" element={<Man />} />
-          <Route path="/woman" element={<Woman />} />
-          <Route path="/accessory" element={<Accessory />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/my-account" element={<MyAccount />} />
-          <Route path="/product/:itemNo" element={<ProductDetails />} />
-          <Route path="/cart" element={<Cart />} />
-        </Routes>
-      </div>
+      <Header statusOpenBurger={statusOpenBurger} handleBurger={handleBurger} />
+      {!statusOpenBurger ? (
+        <div className="main">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/man" element={<Man />} />
+            <Route path="/woman" element={<Woman />} />
+            <Route path="/accessory" element={<Accessory />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/my-account" element={<MyAccount />} />
+            <Route path="/product/:itemNo" element={<ProductDetails />} />
+            <Route path="/cart" element={<Cart />} />
+          </Routes>
+        </div>
+      ) : null}
       <Footer />
     </div>
   );
