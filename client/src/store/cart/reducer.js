@@ -1,6 +1,7 @@
 const initialState = {
   list: [],
   isLogin: false,
+  isLoaded: false,
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -9,6 +10,7 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         list: action.payload,
+        isLoaded: true,
       };
     }
     case "DECREASE_PRODUCT_QUANTITY_LOCAL": {
@@ -62,6 +64,12 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         list: cart,
+      };
+    }
+    case "IS_NOT_LOADED": {
+      return {
+        ...state,
+        isLoaded: false,
       };
     }
     default:

@@ -1,16 +1,18 @@
 import CartItem from "../../components/CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getCartItem } from "../../store/cart/actions";
+import { getCartItem, isNotLoaded } from "../../store/cart/actions";
 import { Box, Container, Stack, Typography } from "@mui/material";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.cart.isLogin);
   const cartList = useSelector((state) => state.cart.list);
+  const isLoaded = useSelector((state) => state.cart.isLoaded);
 
   useEffect(() => {
     dispatch(getCartItem(isLogin));
+    return () => dispatch(isNotLoaded());
   }, []);
 
   useEffect(() => {
@@ -75,7 +77,13 @@ const Cart = () => {
             spacing={2}
             sx={{ flexGrow: 1 }}
           >
-            {createCartItemList()}
+            {isLoaded ? (
+              createCartItemList()
+            ) : (
+              <Typography variant={"subtitle1"} component={"p"}>
+                Cart is loading
+              </Typography>
+            )}
           </Stack>
 
           <Stack
@@ -128,7 +136,7 @@ const Cart = () => {
                 component={"span"}
                 sx={{ fontWeight: 700 }}
               >
-                {getTotalPrice()} $
+                {isLoaded ? getTotalPrice() : 0} $
               </Typography>
             </Box>
           </Stack>

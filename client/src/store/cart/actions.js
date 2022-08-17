@@ -107,3 +107,5 @@ export const addToCart = (id, itemNo, isLogin) =>
           console.log(err);
         }
       };
+
+export const isNotLoaded = () => ({ type: "IS_NOT_LOADED" });
