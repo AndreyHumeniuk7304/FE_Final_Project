@@ -4,9 +4,6 @@ a {
   display: inline-block;
 }
 
-body {
-  position: relative;
-}
 .container {
   min-width: 320px;
   max-width: 1295px;
@@ -17,9 +14,13 @@ body {
 
 .header {
   position: fixed;
+  top: 0;
+  left: 0;
   background-color: black;
   color: white;
   width: 100%;
+  z-index: 1;
+  // max-width: 500%;
 
   &__top-content {
     display: flex;
@@ -37,11 +38,6 @@ body {
     top: 70px;
     background-color: rgba(88, 87, 87, 1);
   }
-
-  // max-width: 100%;
-  // padding-top: 1%;
-  // padding-bottom: 1%;
-  // justify-content: space-between;
 
   &__categories-container {
     display: flex;
@@ -65,12 +61,6 @@ body {
 
   &__logo-container {
     padding-top: 10px;
-    // display: flex;
-    // align-items: center;
-    // &_link {
-    //   display: flex;
-    //   align-items: center;
-    // }
 
     &_link {
       display: inline-block;
@@ -79,7 +69,6 @@ body {
 
   &__account-container {
     display: flex;
-    // padding-top: 14px;
 
     &__ico {
       width: 14px;
@@ -103,11 +92,11 @@ body {
 }
 
 .active-burger {
-  position: absolute;
-  height: 100%;
-  top: 0%;
-  left: 0;
-  z-index: 100;
+  position: static;
+  // height: 100%;
+  // top: 0%;
+  // left: 0;
+  // z-index: 100;
 }
 
 .burger-menu {

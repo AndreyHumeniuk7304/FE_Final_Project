@@ -19,23 +19,25 @@ const App = () => {
     setStatusOpenBurger(!statusOpenBurger);
   };
   return (
-    <div>
+    <div className="fullWrapper">
       <Header statusOpenBurger={statusOpenBurger} handleBurger={handleBurger} />
       {!statusOpenBurger ? (
-        <div className="main">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/man" element={<Man />} />
-            <Route path="/woman" element={<Woman />} />
-            <Route path="/accessory" element={<Accessory />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/my-account" element={<MyAccount />} />
-            <Route path="/product/:itemNo" element={<ProductDetails />} />
-            <Route path="/cart" element={<Cart />} />
-          </Routes>
-        </div>
+        <>
+          <div className="main">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/man" element={<Man />} />
+              <Route path="/woman" element={<Woman />} />
+              <Route path="/accessory" element={<Accessory />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/my-account" element={<MyAccount />} />
+              <Route path="/product/:itemNo" element={<ProductDetails />} />
+              <Route path="/cart" element={<Cart />} />
+            </Routes>
+          </div>
+          <Footer />
+        </>
       ) : null}
-      <Footer />
     </div>
   );
 };

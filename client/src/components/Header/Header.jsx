@@ -1,12 +1,13 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+// import { useState } from "react";
+// import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { styled } from "@mui/material/styles";
-import { fetchCategoriesProducts } from "../../store/catalog/actions";
+// import { styled } from "@mui/material/styles";
+// import { fetchCategoriesProducts } from "../../store/catalog/actions";
 import { Box } from "@mui/material";
+import PropTypes from "prop-types";
 
 const Header = (props) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { statusOpenBurger, handleBurger } = props;
   return (
     <header className={statusOpenBurger ? "header active-burger" : "header"}>
@@ -124,9 +125,13 @@ const Header = (props) => {
                   </a>
                 </li>
                 <li className="pages-list__item bottom-item">
-                  <a href="" className="pages-list__item-link">
+                  <Link
+                    onClick={handleBurger}
+                    to="/man"
+                    className="pages-list__item-link"
+                  >
                     MAN COLLECTION
-                  </a>
+                  </Link>
                 </li>
                 <li className="pages-list__item bottom-item">
                   <a href="" className="pages-list__item-link">
