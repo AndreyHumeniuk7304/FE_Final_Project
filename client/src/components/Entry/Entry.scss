@@ -1,0 +1,26 @@
+.entry {
+  &__box {
+    margin: auto;
+    min-width: 320px;
+    max-width: 450px;
+    color: $color-desktop;
+  }
+  &__header {
+    display: flex;
+    flex-direction: row;
+
+    .header {
+      &__item {
+        width: 100%;
+        text-align: center;
+        cursor: pointer;
+      }
+    }
+  }
+  &__content {
+    padding: 70px 0;
+  }
+}
+
+@media screen and (min-width: 720px) {
+}
