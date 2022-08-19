@@ -6,28 +6,28 @@ import CustomInput from "../Forms/CastomInput";
 import CustomErrorMessage from "../Forms/CustomErrorMessage";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { getIsLogin } from "../../store/userAccount/actions";
-import { useDispatch } from "react-redux";
+import { fetchProducts, setError } from "../../store/userAccount/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 //temporary data
-const userLoginData = [
-  { email: "admin@gmail.com", password: "qwerty123" },
-  { email: "user567@gmail.com", password: "qwerty567" },
-];
+const userData = {
+  loginOrEmail: "customer@gmail.com",
+  password: "1111111",
+};
+
 //================
 
 const Login = () => {
   const dispatch = useDispatch();
+  const { isLogin, error } = useSelector((state) => state.userAccount);
 
   const schema = yup.object({
-    email: yup
-      .string()
-      .required("Email is required.")
-      .email("Email must be a valid."),
+    loginOrEmail: yup.string().required("login/Email is required."),
     password: yup
       .string()
       .required("Password is required.")
-      .min(8, "Password is too short - should be 8 chars minimum."),
+      .max(30, "Password is too long - should be 30 chars maximum.")
+      .min(7, "Password is too short - should be 7 chars minimum."),
   });
 
   const {
@@ -37,7 +37,7 @@ const Login = () => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      email: "",
+      loginOrEmail: "",
       password: "",
       isSignedAutomatically: "",
     },
@@ -46,12 +46,9 @@ const Login = () => {
   const [isLoginNotValid, setIsLoginNotValid] = useState(false);
 
   const setValidation = (values) => {
-    const isValid = userLoginData.some(
-      (data) => data.email === values.email && data.password === values.password
-    );
-    isValid ? dispatch(getIsLogin()) : setIsLoginNotValid(true);
-    values.isSignedAutomatically === "on" &&
-      localStorage.setItem("login", JSON.stringify(values));
+    const isAutoLog = values.isSignedAutomatically === "on";
+    delete values.isSignedAutomatically;
+    dispatch(fetchProducts(values, isAutoLog));
   };
 
   return (
@@ -61,16 +58,16 @@ const Login = () => {
       <form
         onSubmit={handleSubmit((values) => setValidation(values))}
         className="form"
-        onFocus={() => setIsLoginNotValid(false)}
+        onFocus={() => dispatch(setError(""))}
       >
         <ul className="form__box">
           <li className={"form__item"}>
             <CustomInput
               register={register}
-              name={"Email"}
-              formName={"email"}
+              name={"Login or Email"}
+              formName={"loginOrEmail"}
             />
-            <CustomErrorMessage err={errors.email?.message} />
+            <CustomErrorMessage err={errors.loginOrEmail?.message} />
           </li>
 
           <li className={"form__item"}>
@@ -83,8 +80,10 @@ const Login = () => {
 
             <CustomErrorMessage err={errors.password?.message} />
 
-            {isLoginNotValid && (
-              <CustomErrorMessage err={"Email or password is incorrect"} />
+            {error && (
+              <CustomErrorMessage
+                err={"Login/Email or password is incorrect"}
+              />
             )}
           </li>
         </ul>
