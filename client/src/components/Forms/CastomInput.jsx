@@ -1,19 +1,14 @@
 import PropTypes from "prop-types";
 
-export default function CustomInput({
-  name,
-  formName,
-  register,
-  formType,
-  err,
-}) {
+export default function CustomInput({ name, formName, register, formType }) {
   return (
     <>
       <input
         placeholder={name}
         className={"form__input"}
         type={formType && formType}
-        {...register(formName, err)}
+        {...register(formName)}
+        autoComplete={"off"}
       />
     </>
   );
@@ -24,5 +19,4 @@ CustomInput.propTypes = {
   formName: PropTypes.string,
   register: PropTypes.func,
   formType: PropTypes.string,
-  err: PropTypes.object,
 };
