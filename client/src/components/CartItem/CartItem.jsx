@@ -7,9 +7,11 @@ import {
 } from "../../store/cart/actions";
 import { Box, Button, IconButton, Typography, Stack } from "@mui/material";
 import { Close, Add, Remove } from "@mui/icons-material";
+import { useNavigate } from "react-router";
 
 const CartItem = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isLogin = useSelector((state) => state.cart.isLogin);
   const { product, cartQuantity } = props.item;
 
@@ -25,6 +27,10 @@ const CartItem = (props) => {
     dispatch(deleteCartItem(product._id, isLogin));
   };
 
+  const openItem = () => {
+    navigate(`../product/${product.itemNo}`);
+  };
+
   return (
     <>
       <Stack
@@ -37,10 +43,12 @@ const CartItem = (props) => {
           component={"img"}
           src={product.imageUrls[0]}
           alt="Product photo"
+          onClick={openItem}
           sx={{
             width: "110px",
             height: "180px",
             objectFit: "cover",
+            cursor: "pointer",
           }}
         />
         <Box
@@ -53,7 +61,11 @@ const CartItem = (props) => {
           <Typography
             variant={"subtitle1"}
             component={"h3"}
-            sx={{ fontWeight: 700 }}
+            onClick={openItem}
+            sx={{
+              fontWeight: 700,
+              cursor: "pointer",
+            }}
           >
             {product.name}
           </Typography>
