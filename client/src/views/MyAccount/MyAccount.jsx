@@ -1,11 +1,8 @@
+import { useSelector } from "react-redux";
 import Entry from "../../components/Entry/Entry";
 
 const MyAccount = () => {
-  return (
-    <>
-      <div>MyAccount</div>
-      <Entry />
-    </>
-  );
+  const { isLogin } = useSelector((state) => state.userAccount);
+  return <>{!isLogin && <Entry />}</>;
 };
 export default MyAccount;

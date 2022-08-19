@@ -6,6 +6,8 @@ import CustomInput from "../Forms/CastomInput";
 import CustomErrorMessage from "../Forms/CustomErrorMessage";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { getIsLogin } from "../../store/userAccount/actions";
+import { useDispatch } from "react-redux";
 
 //temporary data
 const userLoginData = [
@@ -15,6 +17,8 @@ const userLoginData = [
 //================
 
 const Login = () => {
+  const dispatch = useDispatch();
+
   const schema = yup.object({
     email: yup
       .string()
@@ -32,20 +36,22 @@ const Login = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
-    // defaultValues: {
-    //   email: "",
-    //   password: "",
-    // },
+    defaultValues: {
+      email: "",
+      password: "",
+      isSignedAutomatically: "",
+    },
   });
 
   const [isLoginNotValid, setIsLoginNotValid] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
 
   const setValidation = (values) => {
     const isValid = userLoginData.some(
       (data) => data.email === values.email && data.password === values.password
     );
-    isValid ? setIsLogin(true) : setIsLoginNotValid(true);
+    isValid ? dispatch(getIsLogin()) : setIsLoginNotValid(true);
+    values.isSignedAutomatically === "on" &&
+      localStorage.setItem("login", JSON.stringify(values));
   };
 
   return (
@@ -86,7 +92,7 @@ const Login = () => {
           <label className="entry__checkbox">
             <CustomInput
               register={register}
-              formName={"isSigned"}
+              formName={"isSignedAutomatically"}
               formType={"radio"}
             />
             Keep me signed in
