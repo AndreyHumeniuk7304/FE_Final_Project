@@ -3,6 +3,7 @@ import {
   getCart,
   decreaseQuantity,
   deleteProduct,
+  updateCart,
 } from "../../api/cart";
 import getOneProduct from "../../api/getOneProduct";
 
@@ -80,11 +81,19 @@ export const deleteCartItem = (id, isLogin) =>
         payload: id,
       };
 
-export const addToCart = (id, itemNo, isLogin) =>
+export const addToCart = (id, itemNo, quantity, isLogin) =>
   isLogin
     ? async (dispatch) => {
         try {
-          const newCart = await addProductToCart(id);
+          const cart = await getCart();
+          const newCart = await updateCart(
+            cart
+              ? cart.map((item) => ({
+                  product: item.product._id,
+                  cartQuantity: item.cartQuantity,
+                }))
+              : [{ product: id, cartQuantity: quantity }]
+          );
           dispatch({
             type: "SET_CART_LIST",
             payload: newCart.products ? newCart.products : [],
@@ -97,7 +106,7 @@ export const addToCart = (id, itemNo, isLogin) =>
         try {
           const cartItem = {
             product: await getOneProduct(itemNo),
-            cartQuantity: 1,
+            cartQuantity: quantity,
           };
           dispatch({
             type: "ADD_PRODUCT_TO_CART_LOCAL",

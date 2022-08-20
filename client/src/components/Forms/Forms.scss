@@ -1,0 +1,33 @@
+.form {
+  &__box {
+    display: grid;
+    grid-gap: 30px;
+    padding: 70px 0 55px;
+  }
+
+  &__input {
+    color: white;
+    padding: 2px 10px;
+    background-color: inherit;
+    border: inherit;
+    border-bottom: 1px solid white;
+
+    &:valid {
+      border-bottom: 1px solid white;
+      outline-offset: 0px;
+      outline: none;
+    }
+  }
+  &__item {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  &__error {
+    color: red;
+    font-style: italic;
+    padding-top: 5px;
+  }
+}

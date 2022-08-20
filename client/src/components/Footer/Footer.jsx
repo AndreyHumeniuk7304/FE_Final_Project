@@ -1,5 +1,6 @@
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/system";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -23,9 +24,11 @@ const Footer = () => {
                 </a>
               </li>
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="#!">
-                  <Box sx={{ fontFamily: "fontFamily" }}>Contact</Box>
-                </a>
+                <Link to="contact">
+                  <a className="list-item__link" href="#!">
+                    <Box sx={{ fontFamily: "fontFamily" }}>Contact</Box>
+                  </a>
+                </Link>
               </li>
               <li className="footer__item__list-item">
                 <a className="list-item__link" href="#!">

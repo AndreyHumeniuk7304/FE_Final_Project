@@ -58,7 +58,22 @@ const cartReducer = (state = initialState, action) => {
     }
     case "ADD_PRODUCT_TO_CART_LOCAL": {
       const cart = JSON.parse(localStorage.getItem("cart"));
-      const newCart = cart ? cart.concat(action.payload) : [action.payload];
+      let newCart;
+      if (cart) {
+        newCart = cart.find(
+          (item) => item.product._id === action.payload.product._id
+        )
+          ? cart.map((item) => {
+              if (item.product._id === action.payload.product._id) {
+                ++item.cartQuantity;
+              }
+              return item;
+            })
+          : cart.concat(action.payload);
+      } else {
+        newCart = [action.payload];
+      }
+      // const newCart = cart ? cart.concat(action.payload) : [action.payload];
 
       localStorage.setItem("cart", JSON.stringify(newCart));
       return {

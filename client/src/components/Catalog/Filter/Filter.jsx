@@ -9,9 +9,9 @@ import { MaterialSlider } from "./MaterialSlider";
 import { CheckedFilterItem } from "./checkedFilterItem";
 import FilterMobileHeader from "./FilterMobileHeader";
 
-const Filter = ({ categories, setSearch, search }) => {
+const Filter = ({ setSearch, search, categories }) => {
   const [currentPrice, setCurrentPrice] = useState([]);
-  const [curentValues, setCurentValues] = useState({ categories: categories });
+  const [curentValues, setCurentValues] = useState();
 
   const productList = useSelector(
     (state) => state.catalog.categorieProductList
@@ -114,6 +114,7 @@ const Filter = ({ categories, setSearch, search }) => {
               arr={getFilterItem("brand")}
               register={register}
             />
+
             <CheckboxForm
               title={"mechanism"}
               arr={getFilterItem("mechanism")}
