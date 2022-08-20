@@ -10,9 +10,21 @@ import MyAccount from "./views/MyAccount/MyAccount";
 import Cart from "./views/Cart";
 import Footer from "./components/Footer/Footer";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getSuccess } from "./store/userAccount/actions";
 import Contact from "./components/Footer/Contact/Contact";
 
 const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    localStorage.getItem("login") &&
+      getSuccess(
+        { success: true, token: localStorage.getItem("login") },
+        dispatch
+      );
+  }, []);
+
   return (
     <div>
       <Header />
