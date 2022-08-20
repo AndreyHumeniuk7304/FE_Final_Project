@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import getFilterProducts from "../../api/getFilterProducts";
+import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
 
 const Modal = styled("div")(({ theme }) => ({
   [theme.breakpoints.down("tablet")]: {
@@ -11,26 +13,18 @@ const Modal = styled("div")(({ theme }) => ({
   },
 }));
 
-const SearchModal = ({ value, clearInput }) => {
-  let count = 1;
+const SearchModal = ({ value, clearInput, activeFocus, setActiveFocus }) => {
+  let count = 0;
   const [foundProducts, setFoundProducts] = useState([]);
-  const [activeFocus, setActiveFocus] = useState([]);
 
   useEffect(() => {
     getFilterProducts("products/search", {
-      query: document.querySelector("#standard-basic").value,
-    }).then((products) => setFoundProducts(products));
-  }, [value]);
-
-  useEffect(() => {
-    document.addEventListener("click", () => {
-      if (document.querySelector("#standard-basic") == document.activeElement) {
-        setActiveFocus(true);
-      } else {
-        setActiveFocus(false);
-      }
+      query: value,
+    }).then((products) => {
+      setFoundProducts(products);
+      products.length >= 1 && setActiveFocus(true);
     });
-  }, []);
+  }, [value]);
 
   return (
     <>
@@ -38,14 +32,14 @@ const SearchModal = ({ value, clearInput }) => {
         <Modal className="modal">
           <div className="modal__content">
             {foundProducts.map((product) => {
+              count++;
               if (product.name.toLowerCase().includes(value) && count <= 4) {
-                count++;
                 return (
                   <Link
                     to={product.productUrl}
                     className="modal__product"
                     key={product._id}
-                    onClick={clearInput}
+                    onClick={(e) => clearInput(e.target.value)}
                   >
                     <div className="modal__product-img">
                       <img src={product.imageUrls[0]} />
@@ -58,6 +52,26 @@ const SearchModal = ({ value, clearInput }) => {
                       </div>
                     </div>
                   </Link>
+                );
+              }
+              if (count == 5) {
+                return (
+                  <Box textAlign="center" key={"button"}>
+                    <Button
+                      variant="text"
+                      sx={{
+                        color: "#000",
+                        margin: "10px auto",
+                      }}
+                    >
+                      <Link
+                        to="/search"
+                        onClick={(e) => clearInput(e.target.input)}
+                      >
+                        Show all results
+                      </Link>
+                    </Button>
+                  </Box>
                 );
               }
             })}
@@ -73,6 +87,8 @@ const SearchModal = ({ value, clearInput }) => {
 SearchModal.propTypes = {
   value: PropTypes.string,
   clearInput: PropTypes.func,
+  activeFocus: PropTypes.bool,
+  setActiveFocus: PropTypes.func,
 };
 
 export default SearchModal;

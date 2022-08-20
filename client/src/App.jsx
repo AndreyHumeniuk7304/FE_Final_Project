@@ -9,6 +9,7 @@ import MyAccount from "./views/MyAccount/MyAccount";
 import Cart from "./views/Cart";
 import Footer from "./components/Footer/Footer";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
+import Search from "./views/Search/Search";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/my-account" element={<MyAccount />} />
           <Route path="/product/:itemNo" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
       </div>
       <Footer />

@@ -2,9 +2,11 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import SearchInput from "../SearchInput/SearchInput";
 import { fetchCategoriesProducts } from "../../store/catalog/actions";
+import { useState } from "react";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const [isExpandInput, setIsExpandInput] = useState(true);
 
   return (
     <header className="header">
@@ -18,10 +20,18 @@ const Header = () => {
             </div>
 
             <div className="header__account-container">
-              <SearchInput />
+              {window.screen.width < 720 ? (
+                <SearchInput
+                  isExpandInput={isExpandInput}
+                  setIsExpandInput={setIsExpandInput}
+                />
+              ) : (
+                <SearchInput />
+              )}
               <Link
                 to="/my-account"
                 className="header__account-container__link account"
+                style={{ display: isExpandInput ? "flex" : "none" }}
               >
                 <div className="header__account-container__ico">
                   <img
@@ -35,6 +45,7 @@ const Header = () => {
               <Link
                 to="/cart"
                 className="header__account-container__link shopping-bag"
+                style={{ display: isExpandInput ? "flex" : "none" }}
               >
                 <div className="header__account-container__ico">
                   <img
@@ -47,7 +58,11 @@ const Header = () => {
                 <p className="header__account-container__text">Shopping Bag</p>
               </Link>
 
-              <a href="#!" className="header__account-container__link burger">
+              <a
+                href="#!"
+                className="header__account-container__link burger"
+                style={{ display: isExpandInput ? "flex" : "none" }}
+              >
                 <div className="header__account-container__ico">
                   <img
                     className="header__account-container__ico-img"
