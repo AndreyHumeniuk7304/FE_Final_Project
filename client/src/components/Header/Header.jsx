@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 
 const Header = (props) => {
   // const dispatch = useDispatch();
-  const { statusOpenBurger, handleBurger } = props;
+  const { statusOpenBurger, handleBurger, closeBurger } = props;
   return (
     <header className={statusOpenBurger ? "header active-burger" : "header"}>
       <div className="container">
@@ -86,13 +86,22 @@ const Header = (props) => {
             </div>
           </div>
           <div className="header__categories-container">
-            <Link to="/man" className="header__categories-container__link">
+            <Link
+              onClick={closeBurger}
+              to="/man"
+              className="header__categories-container__link"
+            >
               MAN
             </Link>
-            <Link to="/woman" className="header__categories-container__link">
+            <Link
+              onClick={closeBurger}
+              to="/woman"
+              className="header__categories-container__link"
+            >
               WOMEN
             </Link>
             <Link
+              onClick={closeBurger}
               to="/accessory"
               className="header__categories-container__link"
             >
@@ -120,13 +129,17 @@ const Header = (props) => {
                   </a>
                 </li>
                 <li className="pages-list__item bottom-item">
-                  <a href="" className="pages-list__item-link">
+                  <Link
+                    onClick={closeBurger}
+                    to="/woman"
+                    className="pages-list__item-link"
+                  >
                     WOMAN COLLECTION
-                  </a>
+                  </Link>
                 </li>
                 <li className="pages-list__item bottom-item">
                   <Link
-                    onClick={handleBurger}
+                    onClick={closeBurger}
                     to="/man"
                     className="pages-list__item-link"
                   >
@@ -134,9 +147,13 @@ const Header = (props) => {
                   </Link>
                 </li>
                 <li className="pages-list__item bottom-item">
-                  <a href="" className="pages-list__item-link">
+                  <Link
+                    onClick={closeBurger}
+                    to="/accessory"
+                    className="pages-list__item-link"
+                  >
                     ACCESSORY
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -167,19 +184,38 @@ const Header = (props) => {
                 </li>
                 <li className="burger-menu__footer_list-item">Payment</li>
               </ul>
-              <Box component="h3" className="burger-menu__footer_title">
+              <Box
+                component="h3"
+                className="burger-menu__footer_title_lst-title"
+              >
                 FOLLOW US
               </Box>
-              <ul className="burger-menu__footer_list">
-                <li className="burger-menu__footer_list-item">
-                  Frequently asked questions
-                </li>
-                <li className="burger-menu__footer_list-item">Contact</li>
-                <li className="burger-menu__footer_list-item">
-                  How to purchase
-                </li>
-                <li className="burger-menu__footer_list-item">Payment</li>
-              </ul>
+              <Box
+                component="div"
+                className="burger-menu__footer_icons footer_icons"
+              >
+                <a href="#!" className="footer_icons__item">
+                  <img
+                    className="footer_icons__item_img"
+                    src="./images/facebok-logo.png"
+                    alt=""
+                  />
+                </a>
+                <a href="!#" className="footer_icons__item">
+                  <img
+                    className="footer_icons__item_img"
+                    src="./images/inst-logo.png"
+                    alt=""
+                  />
+                </a>
+                <a href="#!" className="footer_icons__item">
+                  <img
+                    className="footer_icons__item_img"
+                    src="./images/pint-logo.png"
+                    alt=""
+                  />
+                </a>
+              </Box>
             </div>
           </div>
         </div>
@@ -191,6 +227,7 @@ const Header = (props) => {
 Header.propTypes = {
   handleBurger: PropTypes.func,
   statusOpenBurger: PropTypes.bool,
+  closeBurger: PropTypes.func,
 };
 
 export default Header;

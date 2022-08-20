@@ -10,18 +10,36 @@ import MyAccount from "./views/MyAccount/MyAccount";
 import Cart from "./views/Cart";
 import Footer from "./components/Footer/Footer";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const App = () => {
   const [statusOpenBurger, setStatusOpenBurger] = useState(false);
 
+  useEffect(() => {
+    statusOpenBurger
+      ? document.body.classList.add("hiddenScroll")
+      : document.body.classList.remove("hiddenScroll");
+
+    // return () => {
+    //   document.body.classList.remove("hiddenScroll");
+    // };
+  });
+
   const handleBurger = () => {
     setStatusOpenBurger(!statusOpenBurger);
   };
+
+  const closeBurger = () => {
+    setStatusOpenBurger(false);
+  };
   return (
     <div className="fullWrapper">
-      <Header statusOpenBurger={statusOpenBurger} handleBurger={handleBurger} />
-      {!statusOpenBurger ? (
+      <Header
+        statusOpenBurger={statusOpenBurger}
+        handleBurger={handleBurger}
+        closeBurger={closeBurger}
+      />
+      {
         <>
           <div className="main">
             <Routes>
@@ -37,7 +55,7 @@ const App = () => {
           </div>
           <Footer />
         </>
-      ) : null}
+      }
     </div>
   );
 };
