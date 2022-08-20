@@ -13,6 +13,7 @@ import ProductDetails from "./components/ProductDetails/ProductDetails";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getSuccess } from "./store/userAccount/actions";
+import Contact from "./components/Footer/Contact/Contact";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/my-account" element={<MyAccount />} />
           <Route path="/product/:itemNo" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
       <Footer />
