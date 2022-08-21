@@ -61,7 +61,7 @@ const Registrations = ({ setIsRegist }) => {
       telephone: "",
       password: "",
       confirmPassword: "",
-      gender: "male",
+      gender: "Male",
       isAdmin: false,
     },
   });
