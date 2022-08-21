@@ -38,23 +38,7 @@
       vertical-align: 5px;
     }
   }
-  &__btn {
-    padding-top: 50px;
-    width: fit-content;
-    margin: 0 auto;
 
-    button {
-      padding: 15px 104px;
-      background-color: white;
-      width: fit-content;
-      vertical-align: center;
-      border-radius: 0;
-      color: black;
-      &:hover {
-        color: white;
-      }
-    }
-  }
   .header {
     &__item {
       width: 100%;

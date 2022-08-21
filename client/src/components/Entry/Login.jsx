@@ -86,7 +86,7 @@ const Login = () => {
           />
           <label>Keep me signed in</label>
         </div>
-        <div className="entry__btn">
+        <div className="form__btn">
           <Button type="submit">Login</Button>
         </div>
       </form>

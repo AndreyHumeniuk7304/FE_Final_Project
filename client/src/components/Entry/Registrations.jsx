@@ -7,6 +7,7 @@ import CustomInput from "../Forms/CastomInput";
 import CustomErrorMessage from "../Forms/CustomErrorMessage";
 import addNewCustomers from "../../api/addNewCustomer";
 import PropTypes from "prop-types";
+import CustomDropList from "../Forms/CustomDropList";
 
 const registInputNames = [
   "firstName",
@@ -14,6 +15,7 @@ const registInputNames = [
   "login",
   "email",
   "telephone",
+  "gender",
   "password",
   "confirmPassword",
 ];
@@ -59,6 +61,7 @@ const Registrations = ({ setIsRegist }) => {
       telephone: "",
       password: "",
       confirmPassword: "",
+      gender: "male",
       isAdmin: false,
     },
   });
@@ -81,21 +84,29 @@ const Registrations = ({ setIsRegist }) => {
         <ul className="form__box">
           {registInputNames.map((inputName) => (
             <li className={"form__item"} key={inputName}>
-              <CustomInput
-                register={register}
-                name={camelizeDecode(inputName)}
-                formName={inputName}
-                formType={
-                  inputName === "password" || inputName === "confirmPassword"
-                    ? "password"
-                    : ""
-                }
-              />
+              {inputName !== "gender" ? (
+                <CustomInput
+                  register={register}
+                  name={camelizeDecode(inputName)}
+                  formName={inputName}
+                  formType={
+                    inputName === "password" || inputName === "confirmPassword"
+                      ? "password"
+                      : ""
+                  }
+                />
+              ) : (
+                <CustomDropList
+                  name={inputName}
+                  arr={["Male", "Female"]}
+                  register={register}
+                />
+              )}
               <CustomErrorMessage err={errors[inputName]?.message} />
             </li>
           ))}
         </ul>
-        <div className="entry__btn">
+        <div className="form__btn">
           <Button type="submit">Registation</Button>
         </div>
       </form>
