@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Login from "./Login";
-import Registration from "./Registation";
+import Registration from "./Registrations";
 
 const Entry = () => {
   const [isRegist, setIsRegist] = useState(false);
@@ -26,7 +26,7 @@ const Entry = () => {
         </div>
         <div className="entry__content">
           {!isRegist && <Login />}
-          {isRegist && <Registration />}
+          {isRegist && <Registration setIsRegist={setIsRegist} />}
         </div>
       </div>
     </div>

@@ -6,6 +6,10 @@
     max-width: 450px;
     color: $color-desktop;
   }
+  &__text {
+    padding-bottom: 70px;
+  }
+
   &__header {
     display: flex;
     flex-direction: row;
@@ -22,6 +26,7 @@
     }
   }
   &__checkbox {
+    padding-top: 55px;
     input {
       accent-color: black;
       width: 22px;
@@ -34,7 +39,7 @@
     }
   }
   &__btn {
-    padding-top: 100px;
+    padding-top: 50px;
     width: fit-content;
     margin: 0 auto;
 
