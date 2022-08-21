@@ -125,7 +125,7 @@ const Filter = ({ setSearch, search, categories }) => {
               <Box className="checkbox" key={title}>
                 <CheckboxForm
                   title={title}
-                  arr={getFilterItem(title)}
+                  getFilterItem={getFilterItem}
                   register={register}
                 />
               </Box>

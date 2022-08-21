@@ -3,15 +3,18 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import CheckboxItem from "./CheckboxItem";
 
-const CheckboxForm = ({ title, arr, register }) => {
+const CheckboxForm = ({ title, register, getFilterItem }) => {
   const [isShow, setIsShow] = useState(false);
-
+  const [arr, setArr] = useState();
   return (
     <>
       <Typography
         className="checkbox__title"
         variant="h6"
-        onClick={() => setIsShow(!isShow)}
+        onClick={() => {
+          setIsShow(!isShow);
+          setArr(getFilterItem(title));
+        }}
       >
         {title}
       </Typography>
@@ -37,7 +40,7 @@ export default CheckboxForm;
 
 CheckboxForm.propTypes = {
   title: PropTypes.string,
-  arr: PropTypes.array,
+  getFilterItem: PropTypes.func,
   handleSubmit: PropTypes.func,
   register: PropTypes.func,
 };
