@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 export const CheckedFilterItem = ({ curentValues }) => {
   const getArrayOfFilter = () => {
     let valuesArr = [];
+
     for (let key in curentValues) {
       let value = curentValues[key];
 
