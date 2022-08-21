@@ -1,5 +1,6 @@
 import getCustomers from "../../api/getCustomers";
 import jwt_decode from "jwt-decode";
+import { Navigate } from "react-router";
 
 const getIsLogin = () => {
   return { type: "SET_IS_LOGIN" };
@@ -23,6 +24,7 @@ const fetchProducts = (userData, isAutoLog) => {
       .then((response) => {
         const isLoaded = response.status === 200;
         isLoaded && getSuccess(response.data, dispatch);
+        isLoaded && <Navigate to="/user" replace={true} />;
         isAutoLog &&
           localStorage.setItem("login", JSON.stringify(response.data.token));
       })

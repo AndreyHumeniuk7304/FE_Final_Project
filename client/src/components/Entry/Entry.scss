@@ -12,6 +12,9 @@
     .header {
       &__item {
         padding: 5px;
+        &--underline {
+          border-bottom: 1px solid white;
+        }
       }
       #login {
         border-bottom: 1px solid white;
