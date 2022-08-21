@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { fetchCategoriesProducts } from "../../../store/catalog/actions";
 import { useForm } from "react-hook-form";
 import { MaterialSlider } from "./MaterialSlider";
-import { CheckedFilterItem } from "./CheckedFilterItem";
+import { CheckedFilterItem } from "./checkedFilterItem";
 import FilterMobileHeader from "./FilterMobileHeader";
 
 const filterTitles = ["brand", "mechanism", "material", "color"];
