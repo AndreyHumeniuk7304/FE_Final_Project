@@ -4,13 +4,14 @@ export const CheckedFilterItem = ({ curentValues }) => {
   const getArrayOfFilter = () => {
     let valuesArr = [];
     for (let key in curentValues) {
-      Array.isArray(curentValues[key])
+      let value = curentValues[key];
+
+      Array.isArray(value)
         ? key === "currentPrice"
-          ? (valuesArr = [...valuesArr, curentValues[key].join("-")])
-          : curentValues[key].forEach(
-              (data) => (valuesArr = [...valuesArr, data])
-            )
-        : (valuesArr = [...valuesArr, curentValues[key]]);
+          ? (valuesArr = [...valuesArr, value.join("-")])
+          : value.forEach((data) => (valuesArr = [...valuesArr, data]))
+        : key.toLowerCase() !== "categories" &&
+          (valuesArr = [...valuesArr, value]);
     }
     valuesArr = valuesArr.filter((data) => data !== "" && data !== ",");
     return valuesArr;
@@ -31,5 +32,4 @@ export const CheckedFilterItem = ({ curentValues }) => {
 
 CheckedFilterItem.propTypes = {
   curentValues: PropTypes.object,
-  defaultValues: PropTypes.array,
 };

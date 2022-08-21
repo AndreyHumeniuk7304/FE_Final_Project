@@ -12,18 +12,14 @@ const Entry = () => {
           <h6
             className={`header__item ${!isRegist && "header__item--underline"}`}
             id="login"
-            onClick={(e) => {
-              setIsRegist(false);
-            }}
+            onClick={() => setIsRegist(false)}
           >
             Login
           </h6>
           <h6
             className={`header__item ${isRegist && "header__item--underline"}`}
             id="regist"
-            onClick={(e) => {
-              setIsRegist(true);
-            }}
+            onClick={() => setIsRegist(true)}
           >
             Registration
           </h6>
