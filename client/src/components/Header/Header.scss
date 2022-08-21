@@ -21,14 +21,6 @@ a {
   width: 100%;
   z-index: 2;
   overflow-y: auto;
-  // max-width: 500%;
-
-  // .container-header {
-  //   position: static;
-  //   width: 500px;
-  //   height: 500px;
-  //   overflow-y: scroll;
-  // }
 
   &__top-content {
     display: flex;
@@ -116,7 +108,6 @@ a {
     font-weight: 700;
     font-size: 14px;
     line-height: 19px;
-    // padding-bottom: 21px;
 
     &:after {
       content: "";
@@ -133,7 +124,6 @@ a {
   &__footer_title {
     padding-left: 3px;
     margin-bottom: 10px;
-    // font-family: "Josefin Sans";
     font-style: normal;
     font-weight: 700;
     font-size: 15px;
@@ -205,9 +195,6 @@ a {
       display: inline-block;
       margin-left: 15px;
       font-size: 12px;
-
-      &:hover {
-      }
     }
   }
 
@@ -220,13 +207,11 @@ a {
   display: block;
   position: absolute;
   padding-top: 40px;
-  // position: fixed;
   top: 120px;
   left: 0;
   height: 80%;
   width: 100%;
   background-color: black;
-  // display: none;
 }
 
 .header__account-container__text {
@@ -259,7 +244,6 @@ a {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
-    // flex-basis: 100%;
   }
 
   .header {

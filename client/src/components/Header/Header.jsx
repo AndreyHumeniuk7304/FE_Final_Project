@@ -1,7 +1,4 @@
-// import { useState } from "react";
-// import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-// import { styled } from "@mui/material/styles";
 // import { fetchCategoriesProducts } from "../../store/catalog/actions";
 import { Box } from "@mui/material";
 import PropTypes from "prop-types";

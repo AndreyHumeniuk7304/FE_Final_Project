@@ -10,10 +10,21 @@ import MyAccount from "./views/MyAccount/MyAccount";
 import Cart from "./views/Cart";
 import Footer from "./components/Footer/Footer";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
+import { useDispatch } from "react-redux";
+import { getSuccess } from "./store/userAccount/actions";
 import Contact from "./components/Footer/Contact/Contact";
 import { useEffect, useState } from "react";
 
 const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    localStorage.getItem("login") &&
+      getSuccess(
+        { success: true, token: localStorage.getItem("login") },
+        dispatch
+      );
+  }, []);
+
   const [statusOpenBurger, setStatusOpenBurger] = useState(false);
 
   useEffect(() => {

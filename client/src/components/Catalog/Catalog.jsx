@@ -1,24 +1,19 @@
 import Filter from "./Filter/Filter";
 import ProductList from "./ProductList/ProductList";
 import PropTypes from "prop-types";
-import { useSearchParams } from "react-router-dom";
 
-const Catalog = ({ categories }) => {
-  const [search, setSearch] = useSearchParams();
-
-  let querystring = search.toString().slice(20);
+const Catalog = ({ setSearch, search, categories }) => {
   return (
     <div className="catalog-container">
-      <Filter categories={categories} setSearch={setSearch} search={search} />
-      <ProductList
-        querystring={querystring ? querystring : categories}
-        search={search}
-      />
+      <Filter setSearch={setSearch} search={search} categories={categories} />
+      <ProductList />
     </div>
   );
 };
 
 Catalog.propTypes = {
+  setSearch: PropTypes.func,
+  search: PropTypes.object,
   categories: PropTypes.string,
 };
 

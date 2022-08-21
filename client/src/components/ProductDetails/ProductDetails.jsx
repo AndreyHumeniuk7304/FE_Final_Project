@@ -27,7 +27,7 @@ const ProductDetails = () => {
     }
   };
   const handleclick = () => {
-    dispatch(addToCart(product._id, itemNo, false));
+    dispatch(addToCart(product._id, itemNo, 1, false));
   };
   if (!product) return null;
 
