@@ -21,7 +21,6 @@ const fetchProducts = (userData, isAutoLog) => {
   return async (dispatch) => {
     await getCustomers(userData)
       .then((response) => {
-        console.log(response);
         const isLoaded = response.status === 200;
         isLoaded && getSuccess(response.data, dispatch);
         isAutoLog &&

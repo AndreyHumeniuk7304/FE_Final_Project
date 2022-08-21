@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useState } from "react";
 import Login from "./Login";
 import Registration from "./Registation";
@@ -49,7 +48,3 @@ const Entry = () => {
 };
 
 export default Entry;
-
-Entry.propTypes = {
-  //categories: PropTypes.string,
-};
