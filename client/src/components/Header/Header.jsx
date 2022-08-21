@@ -160,26 +160,33 @@ const Header = (props) => {
               </Box>
               <ul className="burger-menu__footer_list">
                 <li className="burger-menu__footer_list-item">
-                  Frequently asked questions
+                  <a href="#!"> Frequently asked questions</a>
                 </li>
-                <li className="burger-menu__footer_list-item">Contact</li>
                 <li className="burger-menu__footer_list-item">
-                  How to purchase
+                  <Link onClick={closeBurger} to="/contact">
+                    Contact
+                  </Link>
                 </li>
-                <li className="burger-menu__footer_list-item">Payment</li>
+                <li className="burger-menu__footer_list-item">
+                  <a href="#!">How to purchase</a>
+                </li>
+                <li className="burger-menu__footer_list-item">
+                  <a href="!#">Payment</a>
+                </li>
               </ul>
               <Box component="h3" className="burger-menu__footer_title">
                 COMPANY
               </Box>
               <ul className="burger-menu__footer_list">
                 <li className="burger-menu__footer_list-item">
-                  Frequently asked questions
+                  <a href="#!">History of the brande</a>
                 </li>
-                <li className="burger-menu__footer_list-item">Contact</li>
                 <li className="burger-menu__footer_list-item">
-                  How to purchase
+                  <a href="#!">Policy</a>
                 </li>
-                <li className="burger-menu__footer_list-item">Payment</li>
+                <li className="burger-menu__footer_list-item">
+                  <a href="#!">Work with Us</a>
+                </li>
               </ul>
               <Box
                 component="h3"
