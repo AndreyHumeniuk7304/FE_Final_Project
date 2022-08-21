@@ -9,7 +9,7 @@ const Woman = () => {
 
   let querystring = search.toString().slice(27);
   const dispatch = useDispatch();
-  console.log(querystring);
+
   useEffect(() => {
     dispatch(
       fetchCategoriesProducts(

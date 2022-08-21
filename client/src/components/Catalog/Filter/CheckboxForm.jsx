@@ -7,7 +7,7 @@ const CheckboxForm = ({ title, arr, register }) => {
   const [isShow, setIsShow] = useState(false);
 
   return (
-    <Box className="checkbox">
+    <>
       <Typography
         className="checkbox__title"
         variant="h6"
@@ -29,7 +29,7 @@ const CheckboxForm = ({ title, arr, register }) => {
           ))}
         </Stack>
       )}
-    </Box>
+    </>
   );
 };
 

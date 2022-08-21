@@ -9,7 +9,7 @@ const Man = () => {
 
   let querystring = search.toString().slice(25);
   const dispatch = useDispatch();
-  console.log(querystring);
+
   useEffect(() => {
     dispatch(
       fetchCategoriesProducts(`products/filter?Categories=Mens&${querystring}`)

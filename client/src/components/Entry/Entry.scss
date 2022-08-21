@@ -9,11 +9,16 @@
   &__header {
     display: flex;
     flex-direction: row;
-    h6 {
-      padding: 5px;
-    }
-    #login {
-      border-bottom: 1px solid white;
+    .header {
+      &__item {
+        padding: 5px;
+        &--underline {
+          border-bottom: 1px solid white;
+        }
+      }
+      #login {
+        border-bottom: 1px solid white;
+      }
     }
   }
   &__checkbox {
@@ -21,7 +26,11 @@
       accent-color: black;
       width: 22px;
       height: 22px;
-      vertical-align: text-bottom;
+    }
+    label {
+      padding-left: 20px;
+      vertical-align: middle;
+      vertical-align: 5px;
     }
   }
   &__btn {

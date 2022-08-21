@@ -1,10 +1,8 @@
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchCategoriesProducts } from "../../store/catalog/actions";
 
 const Header = () => {
-  const dispatch = useDispatch();
-
+  const isLogin = useSelector((state) => state.userAccount.isLogin);
   return (
     <header className="header">
       <div className="container">
@@ -31,7 +29,7 @@ const Header = () => {
                 <p className="header__account-container__text">Search</p>
               </Link>
               <Link
-                to="/my-account"
+                to={isLogin ? "/my-account/user" : "/my-account/entry"}
                 className="header__account-container__link account"
               >
                 <div className="header__account-container__ico">
