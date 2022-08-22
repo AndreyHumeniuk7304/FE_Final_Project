@@ -1,5 +1,6 @@
 const initialState = {
   categorieProductList: [],
+  searchWord: "",
   isLoading: false,
   hasError: false,
   isFilterOpenMobile: false,
@@ -11,6 +12,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+      };
+    }
+    case "SAVE_SEARCH_WORD": {
+      return {
+        ...state,
+        searchWord: action.payload,
       };
     }
     case "LOADED_CATEGORIES_PRODUCTS": {

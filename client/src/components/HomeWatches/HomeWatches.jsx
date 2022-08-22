@@ -32,7 +32,7 @@ const HomeCategory = () => {
               return (
                 index < 5 && (
                   <div key={product._id} className="homeCategory__type">
-                    <Link to="/">
+                    <Link to={product.productUrl}>
                       <Root className="homeCategory__text-wrapper">
                         <Box
                           className="homeCategory__text"

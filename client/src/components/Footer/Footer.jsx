@@ -25,9 +25,10 @@ const Footer = () => {
               </li>
               <li className="footer__item__list-item">
                 <Link to="contact">
-                  <a className="list-item__link" href="#!">
+                  {/* link in another link */}
+                  <div className="list-item__link" href="#!">
                     <Box sx={{ fontFamily: "fontFamily" }}>Contact</Box>
-                  </a>
+                  </div>
                 </Link>
               </li>
               <li className="footer__item__list-item">

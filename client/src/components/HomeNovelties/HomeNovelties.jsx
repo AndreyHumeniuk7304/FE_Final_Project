@@ -35,8 +35,6 @@ const HomeNovelties = () => {
         <Box className="novelties__wrapper">
           {categorieProductList !== undefined &&
             categorieProductList.map((product, index, array) => {
-              // let randomProduct =
-              //   array[Math.floor(Math.random() * array.length)];
               return (
                 index < 3 && (
                   <Box

@@ -46,3 +46,9 @@
 .modal .active {
   display: block;
 }
+@media (max-width: 720px) {
+  .modal {
+    top: 120px;
+    left: -123%;
+  }
+}

@@ -3,17 +3,12 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import getFilterProducts from "../../api/getFilterProducts";
 import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
+import { useDispatch } from "react-redux";
+import { writeSearchWord } from "../../store/catalog/actions";
 
-const Modal = styled("div")(({ theme }) => ({
-  [theme.breakpoints.down("tablet")]: {
-    top: "120px",
-    left: "-123%",
-  },
-}));
-
-const SearchModal = ({ value, clearInput, activeFocus, setActiveFocus }) => {
+const SearchModal = ({ value, activeFocus, setActiveFocus }) => {
+  const dispatch = useDispatch();
   let count = 0;
   const [foundProducts, setFoundProducts] = useState([]);
 
@@ -29,7 +24,7 @@ const SearchModal = ({ value, clearInput, activeFocus, setActiveFocus }) => {
   return (
     <>
       {activeFocus ? (
-        <Modal className="modal">
+        <div className="modal">
           <div className="modal__content">
             {foundProducts.map((product) => {
               count++;
@@ -39,7 +34,6 @@ const SearchModal = ({ value, clearInput, activeFocus, setActiveFocus }) => {
                     to={product.productUrl}
                     className="modal__product"
                     key={product._id}
-                    onClick={(e) => clearInput(e.target.value)}
                   >
                     <div className="modal__product-img">
                       <img src={product.imageUrls[0]} />
@@ -66,7 +60,9 @@ const SearchModal = ({ value, clearInput, activeFocus, setActiveFocus }) => {
                     >
                       <Link
                         to="/search"
-                        onClick={(e) => clearInput(e.target.input)}
+                        onClick={() => {
+                          dispatch(writeSearchWord(`${value}`));
+                        }}
                       >
                         Show all results
                       </Link>
@@ -76,7 +72,7 @@ const SearchModal = ({ value, clearInput, activeFocus, setActiveFocus }) => {
               }
             })}
           </div>
-        </Modal>
+        </div>
       ) : (
         ""
       )}
@@ -86,7 +82,6 @@ const SearchModal = ({ value, clearInput, activeFocus, setActiveFocus }) => {
 
 SearchModal.propTypes = {
   value: PropTypes.string,
-  clearInput: PropTypes.func,
   activeFocus: PropTypes.bool,
   setActiveFocus: PropTypes.func,
 };

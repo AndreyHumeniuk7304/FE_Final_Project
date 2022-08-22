@@ -1,22 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
-import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import SearchModal from "../SearchModal/SearchModal";
 import PropTypes from "prop-types";
-
-const Form = styled("form")(({ theme }) => ({
-  [theme.breakpoints.down("tablet")]: {
-    display: "none",
-  },
-}));
-
-const Wrapper = styled("div")(({ theme }) => ({
-  [theme.breakpoints.down("tablet")]: {
-    margin: "0px 25px 0px 0px",
-  },
-}));
 
 const SearchInput = ({ isExpandInput, setIsExpandInput }) => {
   const [valueInput, setValueInput] = useState("");
@@ -38,13 +25,8 @@ const SearchInput = ({ isExpandInput, setIsExpandInput }) => {
     });
   }, []);
 
-  const clearInput = (value) => {
-    value.blur();
-    setValueInput("");
-  };
-
   return (
-    <Wrapper className="header__account-input">
+    <div className="header__account-input">
       <SearchIcon
         ref={searchIcon}
         id="searchicon"
@@ -54,7 +36,7 @@ const SearchInput = ({ isExpandInput, setIsExpandInput }) => {
         }}
         className="searchIcon"
       />
-      <Form
+      <form
         sx={{
           "& > :not(style)": {
             maxWidth: "25ch",
@@ -65,6 +47,7 @@ const SearchInput = ({ isExpandInput, setIsExpandInput }) => {
         noValidate
         autoComplete="off"
         id="search-form"
+        className="header__account-form"
         style={{ display: !isExpandInput ? "block" : "none" }}
       >
         <TextField
@@ -78,16 +61,15 @@ const SearchInput = ({ isExpandInput, setIsExpandInput }) => {
           }}
           InputLabelProps={{ className: "textField__label" }}
         />
-      </Form>
+      </form>
       {valueInput != "" && (
         <SearchModal
           value={valueInput}
-          clearInput={clearInput}
           activeFocus={activeFocus}
           setActiveFocus={setActiveFocus}
         />
       )}
-    </Wrapper>
+    </div>
   );
 };
 
