@@ -48,6 +48,7 @@ const SearchInput = ({ isExpandInput, setIsExpandInput }) => {
         autoComplete="off"
         id="search-form"
         className="header__account-form"
+        onSubmit={(e) => e.preventDefault()}
         style={{ display: !isExpandInput ? "block" : "none" }}
       >
         <TextField
