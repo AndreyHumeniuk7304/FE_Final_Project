@@ -1,4 +1,4 @@
-import { Button, Stack } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import CheckboxForm from "./CheckboxForm";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import { MaterialSlider } from "./MaterialSlider";
 import { CheckedFilterItem } from "./checkedFilterItem";
 import FilterMobileHeader from "./FilterMobileHeader";
+
+const filterTitles = ["brand", "mechanism", "material", "color"];
 
 const Filter = ({ setSearch, search, categories }) => {
   const [currentPrice, setCurrentPrice] = useState([]);
@@ -94,6 +96,16 @@ const Filter = ({ setSearch, search, categories }) => {
     return newList;
   };
 
+  const resetFilter = () => {
+    reset();
+    setSearch("");
+    setCurrentPrice(getMinMaxPrice());
+    setCurentValues({ categories: categories });
+    dispatch(
+      fetchCategoriesProducts(`products/filter?Categories=${categories}`)
+    );
+  };
+
   return (
     <>
       <div className="filter-wrapper filter">
@@ -111,27 +123,16 @@ const Filter = ({ setSearch, search, categories }) => {
             className="filter__form"
             id="filter"
           >
-            <CheckboxForm
-              title={"brand"}
-              arr={getFilterItem("brand")}
-              register={register}
-            />
+            {filterTitles.map((title) => (
+              <Box className="checkbox" key={title}>
+                <CheckboxForm
+                  title={title}
+                  getFilterItem={getFilterItem}
+                  register={register}
+                />
+              </Box>
+            ))}
 
-            <CheckboxForm
-              title={"mechanism"}
-              arr={getFilterItem("mechanism")}
-              register={register}
-            />
-            <CheckboxForm
-              title={"material"}
-              arr={getFilterItem("material")}
-              register={register}
-            />
-            <CheckboxForm
-              title={"color"}
-              arr={getFilterItem("color")}
-              register={register}
-            />
             <MaterialSlider
               title={"currentPrice"}
               name="currentPrice"
@@ -141,20 +142,7 @@ const Filter = ({ setSearch, search, categories }) => {
               setCurrentPrice={setCurrentPrice}
             />
             <Button type="submit">Apply</Button>
-            <Button
-              type="button"
-              onClick={() => {
-                reset();
-                setSearch("");
-                setCurrentPrice(getMinMaxPrice());
-                setCurentValues({ categories: categories });
-                dispatch(
-                  fetchCategoriesProducts(
-                    `products/filter?Categories=${categories}`
-                  )
-                );
-              }}
-            >
+            <Button type="button" onClick={resetFilter}>
               Reset
             </Button>
           </form>

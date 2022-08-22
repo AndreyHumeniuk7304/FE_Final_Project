@@ -1,11 +1,11 @@
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import SearchInput from "../SearchInput/SearchInput";
 import { fetchCategoriesProducts } from "../../store/catalog/actions";
 import { useState } from "react";
 
 const Header = () => {
-  const dispatch = useDispatch();
+  const isLogin = useSelector((state) => state.userAccount.isLogin);
   const [isExpandInput, setIsExpandInput] = useState(true);
 
   return (
@@ -29,7 +29,7 @@ const Header = () => {
                 <SearchInput />
               )}
               <Link
-                to="/my-account"
+                to={isLogin ? "/my-account/user" : "/my-account/entry"}
                 className="header__account-container__link account"
                 style={{ display: isExpandInput ? "flex" : "none" }}
               >

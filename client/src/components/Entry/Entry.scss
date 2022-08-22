@@ -6,41 +6,39 @@
     max-width: 450px;
     color: $color-desktop;
   }
+  &__text {
+    padding-bottom: 70px;
+  }
+
   &__header {
     display: flex;
     flex-direction: row;
-    h6 {
-      padding: 5px;
-    }
-    #login {
-      border-bottom: 1px solid white;
+    .header {
+      &__item {
+        padding: 5px;
+        &--underline {
+          border-bottom: 1px solid white;
+        }
+      }
+      #login {
+        border-bottom: 1px solid white;
+      }
     }
   }
   &__checkbox {
+    padding-top: 55px;
     input {
       accent-color: black;
       width: 22px;
       height: 22px;
-      vertical-align: text-bottom;
+    }
+    label {
+      padding-left: 20px;
+      vertical-align: middle;
+      vertical-align: 5px;
     }
   }
-  &__btn {
-    padding-top: 100px;
-    width: fit-content;
-    margin: 0 auto;
 
-    button {
-      padding: 15px 104px;
-      background-color: white;
-      width: fit-content;
-      vertical-align: center;
-      border-radius: 0;
-      color: black;
-      &:hover {
-        color: white;
-      }
-    }
-  }
   .header {
     &__item {
       width: 100%;

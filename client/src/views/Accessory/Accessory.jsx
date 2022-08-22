@@ -9,7 +9,7 @@ const Accessory = () => {
 
   let querystring = search.toString().slice(32);
   const dispatch = useDispatch();
-  console.log(querystring);
+
   useEffect(() => {
     dispatch(
       fetchCategoriesProducts(

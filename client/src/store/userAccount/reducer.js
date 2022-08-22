@@ -1,7 +1,7 @@
 const initialState = {
   isLogin: false,
   error: "",
-  customers: {},
+  customer: {},
   wishList: [],
 };
 
@@ -11,12 +11,13 @@ const userAccountReducer = (state = initialState, action) => {
       return {
         ...state,
         isLogin: true,
+        error: "",
       };
     }
     case "GET_LOGIN_SUCCESS": {
       return {
         ...state,
-        customers: action.payload,
+        customer: action.payload,
       };
     }
     case "GET_LOGIN_ERROR": {
