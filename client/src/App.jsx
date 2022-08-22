@@ -10,10 +10,10 @@ import MyAccount from "./views/MyAccount/MyAccount";
 import Cart from "./views/Cart";
 import Footer from "./components/Footer/Footer";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getSuccess } from "./store/userAccount/actions";
 import Contact from "./components/Footer/Contact/Contact";
+import { useEffect, useState } from "react";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -25,7 +25,51 @@ const App = () => {
       );
   }, []);
 
+  const [statusOpenBurger, setStatusOpenBurger] = useState(false);
+
+  useEffect(() => {
+    statusOpenBurger
+      ? document.body.classList.add("hiddenScroll")
+      : document.body.classList.remove("hiddenScroll");
+
+    // return () => {
+    //   document.body.classList.remove("hiddenScroll");
+    // };
+  });
+
+  const handleBurger = () => {
+    setStatusOpenBurger(!statusOpenBurger);
+  };
+
+  const closeBurger = () => {
+    setStatusOpenBurger(false);
+  };
   return (
+
+    <div className="fullWrapper">
+      <Header
+        statusOpenBurger={statusOpenBurger}
+        handleBurger={handleBurger}
+        closeBurger={closeBurger}
+      />
+      {
+        <>
+          <div className="main">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/man" element={<Man />} />
+              <Route path="/woman" element={<Woman />} />
+              <Route path="/accessory" element={<Accessory />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/my-account" element={<MyAccount />} />
+              <Route path="/product/:itemNo" element={<ProductDetails />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
+          </div>
+          <Footer />
+        </>
+      }
     <div>
       <Header />
       <div className="main">

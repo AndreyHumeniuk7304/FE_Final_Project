@@ -1,10 +1,19 @@
+
+import { Link } from "react-router-dom";
+// import { fetchCategoriesProducts } from "../../store/catalog/actions";
+import { Box } from "@mui/material";
+import PropTypes from "prop-types";
+
+const Header = (props) => {
+  // const dispatch = useDispatch();
+  const { statusOpenBurger, handleBurger, closeBurger } = props;
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Header = () => {
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   return (
-    <header className="header">
+    <header className={statusOpenBurger ? "header active-burger" : "header"}>
       <div className="container">
         <div className="container-header">
           <div className="header__top-content">
@@ -56,25 +65,46 @@ const Header = () => {
                 <p className="header__account-container__text">Shopping Bag</p>
               </Link>
 
-              <a href="#!" className="header__account-container__link burger">
+              <a
+                href="#!"
+                onClick={handleBurger}
+                className="header__account-container__link burger"
+              >
                 <div className="header__account-container__ico">
-                  <img
-                    className="header__account-container__ico-img"
-                    src="../images/burger-ico.svg"
-                    alt="my-account"
-                  />
+                  {!statusOpenBurger ? (
+                    <img
+                      className="header__account-container__ico-img"
+                      src="../images/burger-ico.svg"
+                      alt="my-account"
+                    />
+                  ) : (
+                    <img
+                      className="header__account-container__ico-img btn-close"
+                      src="../images/close-button.png"
+                      alt="cross"
+                    />
+                  )}
                 </div>
               </a>
             </div>
           </div>
           <div className="header__categories-container">
-            <Link to="/man" className="header__categories-container__link">
+            <Link
+              onClick={closeBurger}
+              to="/man"
+              className="header__categories-container__link"
+            >
               MAN
             </Link>
-            <Link to="/woman" className="header__categories-container__link">
+            <Link
+              onClick={closeBurger}
+              to="/woman"
+              className="header__categories-container__link"
+            >
               WOMEN
             </Link>
             <Link
+              onClick={closeBurger}
               to="/accessory"
               className="header__categories-container__link"
             >
@@ -83,8 +113,131 @@ const Header = () => {
           </div>
         </div>
       </div>
+      <div className={!statusOpenBurger ? "burger-menu" : "burger-menu_active"}>
+        <div className="container">
+          <div className="burger-menu__wrapper">
+            <div className="burger-menu__login">
+              <a className="burger-menu__login_link">Login / Register</a>
+            </div>
+            <div className="burger-menu__pages">
+              <ul className="burger-menu__pages-list pages-list">
+                <li className="pages-list__item top-item">
+                  <a href="" className="pages-list__item-link">
+                    New collection
+                  </a>
+                </li>
+                <li className="pages-list__item top-item">
+                  <a href="" className="pages-list__item-link">
+                    New arrivals
+                  </a>
+                </li>
+                <li className="pages-list__item bottom-item">
+                  <Link
+                    onClick={closeBurger}
+                    to="/woman"
+                    className="pages-list__item-link"
+                  >
+                    WOMAN COLLECTION
+                  </Link>
+                </li>
+                <li className="pages-list__item bottom-item">
+                  <Link
+                    onClick={closeBurger}
+                    to="/man"
+                    className="pages-list__item-link"
+                  >
+                    MAN COLLECTION
+                  </Link>
+                </li>
+                <li className="pages-list__item bottom-item">
+                  <Link
+                    onClick={closeBurger}
+                    to="/accessory"
+                    className="pages-list__item-link"
+                  >
+                    ACCESSORY
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div className="burger-menu__footer">
+              <Box component="h3" className="burger-menu__footer_title">
+                HELP
+              </Box>
+              <ul className="burger-menu__footer_list">
+                <li className="burger-menu__footer_list-item">
+                  <a href="#!"> Frequently asked questions</a>
+                </li>
+                <li className="burger-menu__footer_list-item">
+                  <Link onClick={closeBurger} to="/contact">
+                    Contact
+                  </Link>
+                </li>
+                <li className="burger-menu__footer_list-item">
+                  <a href="#!">How to purchase</a>
+                </li>
+                <li className="burger-menu__footer_list-item">
+                  <a href="!#">Payment</a>
+                </li>
+              </ul>
+              <Box component="h3" className="burger-menu__footer_title">
+                COMPANY
+              </Box>
+              <ul className="burger-menu__footer_list">
+                <li className="burger-menu__footer_list-item">
+                  <a href="#!">History of the brande</a>
+                </li>
+                <li className="burger-menu__footer_list-item">
+                  <a href="#!">Policy</a>
+                </li>
+                <li className="burger-menu__footer_list-item">
+                  <a href="#!">Work with Us</a>
+                </li>
+              </ul>
+              <Box
+                component="h3"
+                className="burger-menu__footer_title_lst-title"
+              >
+                FOLLOW US
+              </Box>
+              <Box
+                component="div"
+                className="burger-menu__footer_icons footer_icons"
+              >
+                <a href="#!" className="footer_icons__item">
+                  <img
+                    className="footer_icons__item_img"
+                    src="./images/facebok-logo.png"
+                    alt=""
+                  />
+                </a>
+                <a href="!#" className="footer_icons__item">
+                  <img
+                    className="footer_icons__item_img"
+                    src="./images/inst-logo.png"
+                    alt=""
+                  />
+                </a>
+                <a href="#!" className="footer_icons__item">
+                  <img
+                    className="footer_icons__item_img"
+                    src="./images/pint-logo.png"
+                    alt=""
+                  />
+                </a>
+              </Box>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  handleBurger: PropTypes.func,
+  statusOpenBurger: PropTypes.bool,
+  closeBurger: PropTypes.func,
 };
 
 export default Header;
