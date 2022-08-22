@@ -1,0 +1,37 @@
+.address{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 352px;
+    padding-bottom: 70px;
+    &__left-menu{
+
+border-right: 1px solid gray;
+padding-right: 150px;
+
+    }
+    &__right-menu{
+        padding-left: 150px;
+    }
+    &__book{
+font-size: 18px;
+margin-bottom: 30px;
+    }
+    &__delivery{
+        font-size: 18px;
+        margin-bottom: 30px;
+
+    }
+    &__billing{
+        font-size: 18px;
+        margin-bottom: 30px;
+
+    }
+    &__btn{
+        background-color: black;
+        color: white;
+        width: 270px;
+        height: 57px;
+        font-size: 24px;
+    }
+}

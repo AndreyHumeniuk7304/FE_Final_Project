@@ -1,0 +1,53 @@
+.profile{
+    background-color: white;
+    &__container{
+        max-width: 1295px;
+        margin: auto;
+    }
+    &__input{
+        display: flex;
+        flex-direction: column;
+        border: none;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+        outline:none;
+        width: 455px;
+    }
+    &__input:hover{
+        border-bottom: 1px solid rgba(128, 128, 128, 1);
+
+    }
+    &__form{
+       
+    }
+    &__label{
+        display: block;
+        font-size: 18px;
+        // margin-bottom: 16px;
+        padding: 45px 0 10px 0;
+    }
+    &__checkbox-container{
+        margin-top: 40px;
+display: flex;
+margin-bottom: 39px;
+    }
+    &__checkbox-input{
+        width: 16px;
+        height: 16px;
+        margin-right: 20px;
+    }
+    &__checkbox-label{
+        font-size: 12px;
+        margin-right: 67px;
+    }
+    &__birthday{
+        margin-bottom: 78px;
+    }
+    &__button{
+        width: 270px;
+        height: 57px;
+        background-color: black;
+        color: white;
+        font-size: 24px;
+        margin-bottom: 70px;
+    }
+}
