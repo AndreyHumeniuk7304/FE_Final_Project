@@ -1,10 +1,8 @@
-import Cabinet from "../../components/Cabinet/Cabinet";
+import { useSelector } from "react-redux";
+import Entry from "../../components/Entry/Entry";
 
 const MyAccount = () => {
-  return (
-    <>
-      <Cabinet />
-    </>
-  );
+  const { isLogin } = useSelector((state) => state.userAccount);
+  return <>{!isLogin && <Entry />}</>;
 };
 export default MyAccount;
