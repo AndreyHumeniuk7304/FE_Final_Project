@@ -32,7 +32,7 @@ const Login = () => {
     defaultValues: {
       loginOrEmail: "",
       password: "",
-      isSignedAutomatically: "",
+      isSignedAutomatically: false,
     },
   });
 
@@ -44,12 +44,12 @@ const Login = () => {
 
   return (
     <>
-      <p>Please enter your account details to log in</p>
+      <p className="entry__text">Please enter your account details to log in</p>
 
       <form
         onSubmit={handleSubmit((values) => setValidation(values))}
         className="form"
-        onFocus={() => dispatch(setError(""))}
+        //onFocus={() => dispatch(setError(""))}
       >
         <ul className="form__box">
           <li className={"form__item"}>
@@ -86,7 +86,7 @@ const Login = () => {
           />
           <label>Keep me signed in</label>
         </div>
-        <div className="entry__btn">
+        <div className="form__btn">
           <Button type="submit">Login</Button>
         </div>
       </form>
