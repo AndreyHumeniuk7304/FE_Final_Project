@@ -14,7 +14,7 @@ export const getCartItem = (isLogin) =>
           const cart = await getCart();
           dispatch({
             type: "SET_CART_LIST",
-            payload: cart.products ? cart.products : [],
+            payload: cart ? cart.products : [],
           });
         } catch (err) {
           console.log(err);
@@ -86,17 +86,29 @@ export const addToCart = (id, itemNo, quantity, isLogin) =>
     ? async (dispatch) => {
         try {
           const cart = await getCart();
-          const newCart = await updateCart(
-            cart
-              ? cart.map((item) => ({
+          let isInclude = false;
+          const localCart = cart
+            ? cart.products.map((item) => {
+                if (item.product._id === id) {
+                  isInclude = !isInclude;
+                  return {
+                    product: item.product._id,
+                    cartQuantity: item.cartQuantity + quantity,
+                  };
+                }
+                return {
                   product: item.product._id,
                   cartQuantity: item.cartQuantity,
-                }))
-              : [{ product: id, cartQuantity: quantity }]
-          );
+                };
+              })
+            : [];
+          if (!isInclude) {
+            localCart.push({ product: id, cartQuantity: quantity });
+          }
+          const newCart = await updateCart(localCart);
           dispatch({
             type: "SET_CART_LIST",
-            payload: newCart.products ? newCart.products : [],
+            payload: newCart.products,
           });
         } catch (err) {
           console.log(err);
