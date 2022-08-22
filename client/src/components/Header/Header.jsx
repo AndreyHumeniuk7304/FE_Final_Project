@@ -1,16 +1,11 @@
-
 import { Link } from "react-router-dom";
-// import { fetchCategoriesProducts } from "../../store/catalog/actions";
 import { Box } from "@mui/material";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 
 const Header = (props) => {
-  // const dispatch = useDispatch();
   const { statusOpenBurger, handleBurger, closeBurger } = props;
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
-const Header = () => {
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   return (
     <header className={statusOpenBurger ? "header active-burger" : "header"}>
