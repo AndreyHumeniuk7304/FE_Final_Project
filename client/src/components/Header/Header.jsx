@@ -2,11 +2,16 @@ import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
+import SearchInput from "../SearchInput/SearchInput";
+import { fetchCategoriesProducts } from "../../store/catalog/actions";
+import { useState } from "react";
 
 const Header = (props) => {
   const { statusOpenBurger, handleBurger, closeBurger } = props;
 
   const isLogin = useSelector((state) => state.userAccount.isLogin);
+  const [isExpandInput, setIsExpandInput] = useState(true);
+
   return (
     <header className={statusOpenBurger ? "header active-burger" : "header"}>
       <div className="container">
@@ -19,22 +24,18 @@ const Header = (props) => {
             </div>
 
             <div className="header__account-container">
-              <Link
-                to="/search"
-                className="header__account-container__link search"
-              >
-                <div className="header__account-container__ico">
-                  <img
-                    className="header__account-container__ico-img"
-                    src="../images/search-ico.svg"
-                    alt="search"
-                  />
-                </div>
-                <p className="header__account-container__text">Search</p>
-              </Link>
+              {window.screen.width < 720 ? (
+                <SearchInput
+                  isExpandInput={isExpandInput}
+                  setIsExpandInput={setIsExpandInput}
+                />
+              ) : (
+                <SearchInput />
+              )}
               <Link
                 to={isLogin ? "/my-account/user" : "/my-account/entry"}
                 className="header__account-container__link account"
+                style={{ display: isExpandInput ? "flex" : "none" }}
               >
                 <div className="header__account-container__ico">
                   <img
@@ -48,6 +49,7 @@ const Header = (props) => {
               <Link
                 to="/cart"
                 className="header__account-container__link shopping-bag"
+                style={{ display: isExpandInput ? "flex" : "none" }}
               >
                 <div className="header__account-container__ico">
                   <img
@@ -64,6 +66,7 @@ const Header = (props) => {
                 href="#!"
                 onClick={handleBurger}
                 className="header__account-container__link burger"
+                style={{ display: isExpandInput ? "flex" : "none" }}
               >
                 <div className="header__account-container__ico">
                   {!statusOpenBurger ? (

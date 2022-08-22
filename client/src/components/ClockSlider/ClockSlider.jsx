@@ -27,19 +27,19 @@ const ClockSlider = () => {
       speed={1500}
       pagination={{ clickable: true }}
     >
-      <SwiperSlide className="swiper__slider">
+      <SwiperSlide className="swiper__slider" onClick={() => console.log()}>
         <Link to="/" className="">
           <div className="swiper__wrapper"></div>
           <img src="https://res.cloudinary.com/fe-advjs-final-project-3/image/upload/v1660230409/Garmin_Sale_Desktop_jd7g1t.webp" />
         </Link>
       </SwiperSlide>
-      <SwiperSlide className="swiper__slider">
+      <SwiperSlide className="swiper__slider" onClick={() => console.log()}>
         <Link to="/" className="">
           <div className="swiper__wrapper"></div>
           <img src="https://res.cloudinary.com/fe-advjs-final-project-3/image/upload/v1660230425/Banner__AWFAO_Hero_Desktop2_xd2mw5.webp" />
         </Link>
       </SwiperSlide>
-      <SwiperSlide className="swiper__slider">
+      <SwiperSlide className="swiper__slider" onClick={() => console.log()}>
         <Link to="/" className="">
           <div className="swiper__wrapper"></div>
           <img src="https://res.cloudinary.com/fe-advjs-final-project-3/image/upload/v1660230435/50__Sale_Desktop_scpavm.webp" />

@@ -18,6 +18,7 @@ const Filter = ({ setSearch, search, categories }) => {
   const productList = useSelector(
     (state) => state.catalog.categorieProductList
   );
+  const searchWord = useSelector((state) => state.catalog.searchWord);
 
   useEffect(() => {
     setCurrentPrice(getMinMaxPrice());
@@ -66,8 +67,9 @@ const Filter = ({ setSearch, search, categories }) => {
         : null;
     }
     setSearch(link);
-
-    dispatch(fetchCategoriesProducts(`products/${link}`));
+    searchWord !== ""
+      ? dispatch(fetchCategoriesProducts(`products/${link}brand=${searchWord}`))
+      : dispatch(fetchCategoriesProducts(`products/${link}`));
   };
 
   const getMinMaxPrice = () => [

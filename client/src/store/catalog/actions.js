@@ -12,6 +12,13 @@ export const fetchCategoriesProducts = (categoriesType) => (dispatch) => {
     });
 };
 
+export const writeSearchWord = (payload) => {
+  return {
+    type: "SAVE_SEARCH_WORD",
+    payload,
+  };
+};
+
 export const fetchAllProducts = () => (dispatch) => {
   dispatch({ type: "START_FETCH_PRODUCTS" });
   getAllProductsToRender()

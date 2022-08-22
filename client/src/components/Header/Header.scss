@@ -13,14 +13,14 @@ a {
 }
 
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
+  // position: fixed;
+  // top: 0;
+  // left: 0;
   background-color: black;
   color: white;
   width: 100%;
-  z-index: 2;
-  overflow-y: auto;
+  // z-index: 2;
+  // overflow-y: auto;
 
   &__top-content {
     display: flex;
@@ -218,9 +218,9 @@ a {
   display: none;
 }
 
-@media screen and (min-width: 765px) {
+@media screen and (min-width: 720px) {
   .header__account-container__link {
-    margin-right: 45px;
+    margin: 0 35px 0 35px;
   }
 
   .header__categories-container {
@@ -259,6 +259,9 @@ a {
       display: flex;
       align-items: center;
       gap: 8px;
+    }
+    &__account-container__link:last-child {
+      display: none;
     }
 
     &__account-container__ico:last-child {
