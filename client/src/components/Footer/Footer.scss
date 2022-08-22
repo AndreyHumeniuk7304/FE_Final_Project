@@ -2,19 +2,16 @@
 
 .footer-container {
   @include flex-container;
-
   color: white;
   justify-content: space-between;
+  align-items: baseline;
 }
 
 .footer {
-  // position: fixed;
-  // bottom: 0;
-  // left: 0;
   width: 100%;
   background-color: black;
-  // padding-top: 54px;
-  padding: 36px 0;
+  padding: 20px 0 15px;
+  overflow: hidden;
 
   &__item {
     &__title {
@@ -24,6 +21,8 @@
       font-size: 10px;
       line-height: 10px;
       text-transform: uppercase;
+      margin-bottom: 19px;
+      cursor: pointer;
 
       &::after {
         content: url("../../../public/images/arrow-drop-down.svg");
@@ -34,23 +33,48 @@
 
     &__list {
       display: none;
+      // transform: translateY(200%);
+      // transition: 1s;
+
+      &-item {
+        font-size: 8px;
+        margin-bottom: 10px;
+
+        .list-item__link {
+          transition: 0.1s;
+
+          &:hover {
+            transform: scale(1.03);
+          }
+        }
+      }
     }
+  }
+
+  .open_footer-items {
+    display: block;
+    // transform: translateY(0);
   }
 }
 
 @media screen and (min-width: 765px) {
-  .footer__item__title {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
+  .footer {
+    padding: 30px 0 20px;
+
+    &__item__title {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 16px;
+    }
+
+    &__item__list-item {
+      font-size: 12px;
+    }
   }
 }
 
 @media screen and (min-width: 1023px) {
-  .footer-container {
-    align-items: baseline;
-  }
   .footer {
     &__item {
       &__title {
@@ -68,19 +92,9 @@
         display: block;
 
         &-item {
-          // font-weight: 400;
           font-size: 18px;
           line-height: 25px;
           margin-bottom: 19px;
-
-          .list-item__link {
-            transition: 0.1s;
-
-            &:hover {
-              transform: scale(1.03);
-              // border-bottom: 1px solid #fff;
-            }
-          }
         }
       }
     }

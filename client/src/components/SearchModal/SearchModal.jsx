@@ -63,6 +63,7 @@ const SearchModal = ({ value, activeFocus, setActiveFocus }) => {
                         onClick={() => {
                           dispatch(writeSearchWord(`${value}`));
                         }}
+                        className="modal__btn"
                       >
                         Show all results
                       </Link>
