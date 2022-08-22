@@ -2,7 +2,6 @@
   &__box {
     display: grid;
     grid-gap: 30px;
-    padding: 70px 0 55px;
   }
 
   &__input {
@@ -18,6 +17,13 @@
       outline: none;
     }
   }
+  &__droplist {
+    background-color: black;
+    border: none;
+    border-bottom: 1px solid white;
+    color: grey;
+    padding-left: 7px;
+  }
   &__item {
     list-style-type: none;
     display: flex;
@@ -29,5 +35,22 @@
     color: red;
     font-style: italic;
     padding-top: 5px;
+  }
+  &__btn {
+    padding-top: 50px;
+    width: fit-content;
+    margin: 0 auto;
+
+    button {
+      padding: 15px 104px;
+      background-color: white;
+      width: fit-content;
+      vertical-align: center;
+      border-radius: 0;
+      color: black;
+      &:hover {
+        color: white;
+      }
+    }
   }
 }

@@ -1,6 +1,4 @@
 import { Button } from "@mui/material";
-import PropTypes from "prop-types";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import CustomInput from "../Forms/CastomInput";
 import CustomErrorMessage from "../Forms/CustomErrorMessage";
@@ -9,20 +7,15 @@ import * as yup from "yup";
 import { fetchProducts, setError } from "../../store/userAccount/actions";
 import { useDispatch, useSelector } from "react-redux";
 
-//temporary data
-const userData = {
-  loginOrEmail: "customer@gmail.com",
-  password: "1111111",
-};
-
-//================
-
 const Login = () => {
   const dispatch = useDispatch();
-  const { isLogin, error } = useSelector((state) => state.userAccount);
+  const error = useSelector((state) => state.userAccount.error);
 
   const schema = yup.object({
-    loginOrEmail: yup.string().required("login/Email is required."),
+    loginOrEmail: yup
+      .string()
+      .required("login/Email is required.")
+      .min(5, "Login is too short - should be 5 chars minimum."),
     password: yup
       .string()
       .required("Password is required.")
@@ -39,26 +32,24 @@ const Login = () => {
     defaultValues: {
       loginOrEmail: "",
       password: "",
-      isSignedAutomatically: "",
+      isSignedAutomatically: false,
     },
   });
 
-  const [isLoginNotValid, setIsLoginNotValid] = useState(false);
-
   const setValidation = (values) => {
-    const isAutoLog = values.isSignedAutomatically === "on";
+    const isAutoLog = values.isSignedAutomatically;
     delete values.isSignedAutomatically;
     dispatch(fetchProducts(values, isAutoLog));
   };
 
   return (
     <>
-      <p>Please enter your account details to log in</p>
+      <p className="entry__text">Please enter your account details to log in</p>
 
       <form
         onSubmit={handleSubmit((values) => setValidation(values))}
         className="form"
-        onFocus={() => dispatch(setError(""))}
+        //onFocus={() => dispatch(setError(""))}
       >
         <ul className="form__box">
           <li className={"form__item"}>
@@ -87,17 +78,15 @@ const Login = () => {
             )}
           </li>
         </ul>
-        <div>
-          <label className="entry__checkbox">
-            <CustomInput
-              register={register}
-              formName={"isSignedAutomatically"}
-              formType={"radio"}
-            />
-            Keep me signed in
-          </label>
+        <div className="entry__checkbox">
+          <CustomInput
+            register={register}
+            formName={"isSignedAutomatically"}
+            formType={"checkbox"}
+          />
+          <label>Keep me signed in</label>
         </div>
-        <div className="entry__btn">
+        <div className="form__btn">
           <Button type="submit">Login</Button>
         </div>
       </form>
@@ -106,7 +95,3 @@ const Login = () => {
 };
 
 export default Login;
-
-Login.propTypes = {
-  //categories: PropTypes.string,
-};

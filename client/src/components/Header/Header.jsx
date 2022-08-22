@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 // import { fetchCategoriesProducts } from "../../store/catalog/actions";
 import { Box } from "@mui/material";
@@ -6,6 +7,11 @@ import PropTypes from "prop-types";
 const Header = (props) => {
   // const dispatch = useDispatch();
   const { statusOpenBurger, handleBurger, closeBurger } = props;
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+const Header = () => {
+  const isLogin = useSelector((state) => state.userAccount.isLogin);
   return (
     <header className={statusOpenBurger ? "header active-burger" : "header"}>
       <div className="container">
@@ -32,7 +38,7 @@ const Header = (props) => {
                 <p className="header__account-container__text">Search</p>
               </Link>
               <Link
-                to="/my-account"
+                to={isLogin ? "/my-account/user" : "/my-account/entry"}
                 className="header__account-container__link account"
               >
                 <div className="header__account-container__ico">

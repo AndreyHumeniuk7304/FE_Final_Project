@@ -1,6 +1,5 @@
 const initialState = {
   list: [],
-  isLogin: false,
   isLoaded: false,
 };
 

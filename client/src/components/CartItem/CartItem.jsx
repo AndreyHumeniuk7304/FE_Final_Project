@@ -12,7 +12,7 @@ import { useNavigate } from "react-router";
 const CartItem = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLogin = useSelector((state) => state.cart.isLogin);
+  const isLogin = useSelector((state) => state.userAccount.isLogin);
   const { product, cartQuantity } = props.item;
 
   const handleDecrease = () => {
