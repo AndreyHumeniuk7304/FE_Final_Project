@@ -45,33 +45,12 @@ const App = () => {
     setStatusOpenBurger(false);
   };
   return (
-
-    <div className="fullWrapper">
+    <>
       <Header
         statusOpenBurger={statusOpenBurger}
         handleBurger={handleBurger}
         closeBurger={closeBurger}
       />
-      {
-        <>
-          <div className="main">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/man" element={<Man />} />
-              <Route path="/woman" element={<Woman />} />
-              <Route path="/accessory" element={<Accessory />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="/my-account" element={<MyAccount />} />
-              <Route path="/product/:itemNo" element={<ProductDetails />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/contact" element={<Contact />} />
-            </Routes>
-          </div>
-          <Footer />
-        </>
-      }
-    <div>
-      <Header />
       <div className="main">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -86,7 +65,7 @@ const App = () => {
         </Routes>
       </div>
       <Footer />
-    </div>
+    </>
   );
 };
 
