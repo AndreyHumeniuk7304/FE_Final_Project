@@ -25,6 +25,7 @@ const Filter = ({ setSearch, search, categories }) => {
   }, [productList]);
 
   useEffect(() => {
+    console.log();
     search.toString() === "" && setCurentValues({ categories: categories });
   }, [search.toString()]);
 
@@ -129,6 +130,7 @@ const Filter = ({ setSearch, search, categories }) => {
                   title={title}
                   getFilterItem={getFilterItem}
                   register={register}
+                  search={search}
                 />
               </Box>
             ))}

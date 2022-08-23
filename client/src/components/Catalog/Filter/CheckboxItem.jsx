@@ -1,21 +1,29 @@
 import { FormLabel } from "@mui/material";
 import PropTypes from "prop-types";
-import { useState } from "react";
 
-const CheckboxItem = ({ itemName, title, register }) => {
-  const [isChecked, setIsChecked] = useState(false);
-
+const CheckboxItem = ({
+  itemName,
+  title,
+  register,
+  isItemChecked,
+  setIsItemChecked,
+}) => {
   return (
     <FormLabel
       className="checkbox__lable"
-      style={{ textDecoration: isChecked ? "underline" : "none" }}
+      style={{
+        textDecoration: isItemChecked.includes(itemName) ? "underline" : "none",
+      }}
     >
       <input
         type="checkbox"
         name={title}
         value={itemName}
+        defaultChecked={isItemChecked.includes(itemName)}
         className={"custom-checkbox"}
-        onClick={(e) => setIsChecked(e.target.checked)}
+        onClick={(e) => {
+          setIsItemChecked([...isItemChecked, e.target.value]);
+        }}
         {...register(title)}
       />
       {title === "color" && (
@@ -38,6 +46,7 @@ export default CheckboxItem;
 CheckboxItem.propTypes = {
   itemName: PropTypes.string,
   title: PropTypes.string,
-  values: PropTypes.object,
+  isItemChecked: PropTypes.array,
+  setIsItemChecked: PropTypes.func,
   register: PropTypes.func,
 };

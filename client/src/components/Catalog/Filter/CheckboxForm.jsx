@@ -1,11 +1,19 @@
-import { Box, Typography, Stack } from "@mui/material";
+import { Typography, Stack } from "@mui/material";
 import PropTypes from "prop-types";
+import { useEffect } from "react";
 import { useState } from "react";
 import CheckboxItem from "./CheckboxItem";
 
-const CheckboxForm = ({ title, register, getFilterItem }) => {
+const CheckboxForm = ({ title, register, getFilterItem, search }) => {
   const [isShow, setIsShow] = useState(false);
+  const [isItemChecked, setIsItemChecked] = useState([]);
   const [arr, setArr] = useState();
+
+  useEffect(() => {
+    setIsItemChecked([]);
+    setIsItemChecked(search.getAll(title).join().split(","));
+  }, [search.toString()]);
+
   return (
     <>
       <Typography
@@ -27,6 +35,8 @@ const CheckboxForm = ({ title, register, getFilterItem }) => {
                 itemName={itemName}
                 title={title}
                 register={register}
+                isItemChecked={isItemChecked}
+                setIsItemChecked={setIsItemChecked}
               />
             </ol>
           ))}
@@ -41,6 +51,6 @@ export default CheckboxForm;
 CheckboxForm.propTypes = {
   title: PropTypes.string,
   getFilterItem: PropTypes.func,
-  handleSubmit: PropTypes.func,
+  search: PropTypes.object,
   register: PropTypes.func,
 };
