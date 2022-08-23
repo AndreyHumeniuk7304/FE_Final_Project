@@ -9,7 +9,7 @@ import { MaterialSlider } from "./MaterialSlider";
 import { CheckedFilterItem } from "./checkedFilterItem";
 import FilterMobileHeader from "./FilterMobileHeader";
 
-const filterTitles = ["brand", "mechanism", "material", "color"];
+export const filterTitles = ["brand", "mechanism", "material", "color"];
 
 const Filter = ({ setSearch, search, categories }) => {
   const [currentPrice, setCurrentPrice] = useState([]);
@@ -112,10 +112,7 @@ const Filter = ({ setSearch, search, categories }) => {
       <div className="filter-wrapper filter">
         <FilterMobileHeader />
         <Stack>
-          <CheckedFilterItem
-            curentValues={curentValues}
-            defaultValues={getMinMaxPrice()}
-          />
+          <CheckedFilterItem search={search} />
 
           <form
             onSubmit={handleSubmit((data) => {

@@ -12,6 +12,7 @@ const CheckboxForm = ({ title, register, getFilterItem, search }) => {
   useEffect(() => {
     setIsItemChecked([]);
     setIsItemChecked(search.getAll(title).join().split(","));
+    setIsShow(false);
   }, [search.toString()]);
 
   return (
