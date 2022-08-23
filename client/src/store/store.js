@@ -5,11 +5,13 @@ import cartReducer from "./cart/reducer";
 import userAccountReducer from "./userAccount/reducer";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import nightModeReducer from "./switchTheme/reducer";
 
 export const reducer = combineReducers({
   catalog: catalogReducer,
   cart: cartReducer,
   userAccount: userAccountReducer,
+  nightMode: nightModeReducer,
 });
 
 const persistConfig = {

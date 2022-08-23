@@ -1,5 +1,4 @@
 .filter-wrapper {
-  background-color: white;
   text-align: center;
   width: 100%;
 
@@ -76,7 +75,6 @@
       text-transform: uppercase;
     }
     &__lable {
-      color: $color-mobile;
       width: fit-content;
       cursor: pointer;
       &:hover {
@@ -126,19 +124,7 @@
         color: $color-desktop;
       }
     }
-    .checkbox {
-      &__lable,
-      &__title {
-        color: $color-desktop;
-      }
-      &__color {
-        color: $color-desktop;
-      }
-    }
     .slider {
-      &__title {
-        color: $color-desktop;
-      }
       &__element {
         color: $color-desktop;
         .MuiSlider-thumb,

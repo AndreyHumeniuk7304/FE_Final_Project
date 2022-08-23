@@ -66,6 +66,7 @@ const CartItem = (props) => {
               fontWeight: 700,
               cursor: "pointer",
             }}
+            className="cartItem-name"
           >
             {product.name}
           </Typography>
@@ -80,10 +81,15 @@ const CartItem = (props) => {
                 variant={"body2"}
                 component={"span"}
                 sx={{ width: "50%", display: "inline-block" }}
+                className="cartItem-price"
               >
                 Price
               </Typography>
-              <Typography variable={"body2"} component={"span"}>
+              <Typography
+                variable={"body2"}
+                component={"span"}
+                className="cartItem-currentPrice"
+              >
                 {product.currentPrice}$
               </Typography>
             </Box>
@@ -92,10 +98,15 @@ const CartItem = (props) => {
                 variant={"body2"}
                 component={"span"}
                 sx={{ width: "50%", display: "inline-block" }}
+                className="cartItem-color"
               >
                 Color
               </Typography>
-              <Typography variable={"body2"} component={"span"}>
+              <Typography
+                variable={"body2"}
+                component={"span"}
+                className="cartItem-currentColor"
+              >
                 {product.color}
               </Typography>
             </Box>
@@ -104,10 +115,15 @@ const CartItem = (props) => {
                 variant={"body2"}
                 component={"span"}
                 sx={{ width: "50%", display: "inline-block" }}
+                className="cartItem-quantity"
               >
                 Quantity
               </Typography>
-              <Typography variable={"body2"} component={"span"}>
+              <Typography
+                variable={"body2"}
+                component={"span"}
+                className="cartItem-quantity"
+              >
                 <IconButton
                   onClick={handleDecrease}
                   sx={{ padding: "5px" }}
@@ -130,6 +146,7 @@ const CartItem = (props) => {
                 variant={"body2"}
                 component={"span"}
                 sx={{ width: "50%", display: "inline-block", fontWeight: 700 }}
+                className="cartItem-total"
               >
                 Total
               </Typography>
@@ -137,6 +154,7 @@ const CartItem = (props) => {
                 variable={"body2"}
                 component={"span"}
                 sx={{ fontWeight: 700 }}
+                className="cartItem-totalPrice"
               >
                 {product.currentPrice * cartQuantity} $
               </Typography>
@@ -167,6 +185,7 @@ const CartItem = (props) => {
             sx={{
               color: "secondary.main",
             }}
+            className="cartItem-remove"
           >
             Remove from basket
           </Typography>
