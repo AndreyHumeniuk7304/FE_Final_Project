@@ -18,13 +18,13 @@ const getSuccess = (data, dispatch) => {
   dispatch(setLogin(jwt_decode(data.token)));
 };
 
-const fetchProducts = (userData, isAutoLog) => {
+const fetchProducts = (userData, isAutoLog, nav) => {
   return async (dispatch) => {
     await getCustomers(userData)
       .then((response) => {
         const isLoaded = response.status === 200;
         isLoaded && getSuccess(response.data, dispatch);
-        isLoaded && <Navigate to="/user" replace={true} />;
+        isLoaded && nav("/my-account/user");
         isAutoLog &&
           localStorage.setItem("login", JSON.stringify(response.data.token));
       })

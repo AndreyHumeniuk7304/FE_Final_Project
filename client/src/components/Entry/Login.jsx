@@ -6,9 +6,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { fetchProducts, setError } from "../../store/userAccount/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const nav = useNavigate();
   const error = useSelector((state) => state.userAccount.error);
 
   const schema = yup.object({
@@ -39,7 +41,8 @@ const Login = () => {
   const setValidation = (values) => {
     const isAutoLog = values.isSignedAutomatically;
     delete values.isSignedAutomatically;
-    dispatch(fetchProducts(values, isAutoLog));
+
+    dispatch(fetchProducts(values, isAutoLog, nav));
   };
 
   return (
@@ -49,7 +52,7 @@ const Login = () => {
       <form
         onSubmit={handleSubmit((values) => setValidation(values))}
         className="form"
-        //onFocus={() => dispatch(setError(""))}
+        onFocus={() => dispatch(setError(""))}
       >
         <ul className="form__box">
           <li className={"form__item"}>
