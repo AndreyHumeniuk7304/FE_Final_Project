@@ -8,21 +8,25 @@ const CheckboxItem = ({
   isItemChecked,
   setIsItemChecked,
 }) => {
+  const isChecked = isItemChecked.includes(itemName);
+
   return (
     <FormLabel
       className="checkbox__lable"
       style={{
-        textDecoration: isItemChecked.includes(itemName) ? "underline" : "none",
+        textDecoration: isChecked ? "underline" : "none",
       }}
     >
       <input
         type="checkbox"
         name={title}
         value={itemName}
-        defaultChecked={isItemChecked.includes(itemName)}
+        defaultChecked={isChecked}
         className={"custom-checkbox"}
         onClick={(e) => {
-          setIsItemChecked([...isItemChecked, e.target.value]);
+          !isChecked
+            ? setIsItemChecked([...isItemChecked, e.target.value])
+            : setIsItemChecked(isItemChecked.filter((e) => e !== e));
         }}
         {...register(title)}
       />
