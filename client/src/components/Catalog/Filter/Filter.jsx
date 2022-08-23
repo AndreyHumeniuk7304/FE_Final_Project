@@ -13,7 +13,6 @@ export const filterTitles = ["brand", "mechanism", "material", "color"];
 
 const Filter = ({ setSearch, search, categories }) => {
   const [currentPrice, setCurrentPrice] = useState([]);
-  const [curentValues, setCurentValues] = useState();
 
   const productList = useSelector(
     (state) => state.catalog.categorieProductList
@@ -23,11 +22,6 @@ const Filter = ({ setSearch, search, categories }) => {
   useEffect(() => {
     setCurrentPrice(getMinMaxPrice());
   }, [productList]);
-
-  useEffect(() => {
-    console.log();
-    search.toString() === "" && setCurentValues({ categories: categories });
-  }, [search.toString()]);
 
   const dispatch = useDispatch();
 
@@ -44,8 +38,6 @@ const Filter = ({ setSearch, search, categories }) => {
     );
 
   const setFilterLink = (values) => {
-    setCurentValues({ ...values, currentPrice: currentPrice });
-
     let link = "filter?";
     for (let key in values) {
       let value = "";
@@ -101,7 +93,6 @@ const Filter = ({ setSearch, search, categories }) => {
     reset();
     setSearch("");
     setCurrentPrice(getMinMaxPrice());
-    setCurentValues({ categories: categories });
     dispatch(
       fetchCategoriesProducts(`products/filter?Categories=${categories}`)
     );
@@ -141,7 +132,11 @@ const Filter = ({ setSearch, search, categories }) => {
               setCurrentPrice={setCurrentPrice}
             />
             <Button type="submit">Apply</Button>
-            <Button type="button" onClick={resetFilter}>
+            <Button
+              type="button"
+              onClick={resetFilter}
+              disabled={!search.toString().length}
+            >
               Reset
             </Button>
           </form>
