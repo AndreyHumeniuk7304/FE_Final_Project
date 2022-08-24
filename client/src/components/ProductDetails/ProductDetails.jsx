@@ -30,7 +30,7 @@ const ProductDetails = () => {
     }
   };
   const handleclick = () => {
-    dispatch(addToCart(product._id, itemNo, 1, isLogin));
+    dispatch(addToCart(product._id, itemNo, counter, isLogin));
   };
   if (!product) return null;
 

@@ -15,6 +15,7 @@ import { getSuccess } from "./store/userAccount/actions";
 import Contact from "./components/Footer/Contact/Contact";
 import { useEffect, useState } from "react";
 import UpdateProducts from "./views/UpdateProducts";
+import UpdateProduct from "./components/UpdateProduct";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -61,6 +62,7 @@ const App = () => {
           <Route path="/search" element={<Search />} />
           <Route path="/my-account/:name" element={<MyAccount />} />
           <Route path="/product/:itemNo" element={<ProductDetails />} />
+          <Route path="/product/:itemNo/update" element={<UpdateProduct />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/update-products" element={<UpdateProducts />} />
