@@ -20,27 +20,16 @@ const HomeCategory = () => {
   return (
     <>
       <div className="homeCategory">
-        <Box
-          className="homeCategory__title"
-          sx={{ color: "primary.light", fontFamily: "fontFamily" }}
-        >
-          POPULAR WATCHES
-        </Box>
+        <Box className="homeCategory__title">POPULAR WATCHES</Box>
         <div className="homeCategory__wrapper">
           {categorieProductList !== undefined &&
             categorieProductList.map((product, index) => {
               return (
                 index < 5 && (
                   <div key={product._id} className="homeCategory__type">
-                    <Link to="/">
+                    <Link to={product.productUrl}>
                       <Root className="homeCategory__text-wrapper">
-                        <Box
-                          className="homeCategory__text"
-                          sx={{
-                            color: "primary.light",
-                            fontFamily: "fontFamily",
-                          }}
-                        >
+                        <Box className="homeCategory__text">
                           {product.name.split(" ").slice(0, 2).join(" ")}
                         </Box>
                       </Root>

@@ -6,7 +6,7 @@ import { Box, Container, Stack, Typography } from "@mui/material";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const isLogin = useSelector((state) => state.cart.isLogin);
+  const isLogin = useSelector((state) => state.userAccount.isLogin);
   const cartList = useSelector((state) => state.cart.list);
   const isLoaded = useSelector((state) => state.cart.isLoaded);
 
@@ -44,10 +44,7 @@ const Cart = () => {
 
   return (
     <>
-      <Container
-        maxWidth={"desktop"}
-        sx={{ color: "primary.light", marginTop: 3 }}
-      >
+      <Container maxWidth={"desktop"} sx={{ marginTop: 3 }}>
         <Typography
           variant={"subtitle1"}
           component={"h2"}
@@ -78,7 +75,17 @@ const Cart = () => {
             sx={{ flexGrow: 1 }}
           >
             {isLoaded ? (
-              createCartItemList()
+              cartList.length === 0 ? (
+                <Typography
+                  variant={"subtitle1"}
+                  component={"p"}
+                  className="cart-title"
+                >
+                  Cart is empty
+                </Typography>
+              ) : (
+                createCartItemList()
+              )
             ) : (
               <Typography variant={"subtitle1"} component={"p"}>
                 Cart is loading

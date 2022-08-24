@@ -1,60 +1,53 @@
-.panel{
-margin: 15px auto;
-min-width: 300px;
-max-width: 540px;
+.panel {
+  margin: 15px auto;
+  min-width: 300px;
+  max-width: 540px;
 }
-.collapse{
-    display: none;
+.collapse {
+  display: none;
 }
-.show{
-    display: block;
+.show {
+  display: block;
 }
-.float-right{
-    float: right;
+.float-right {
+  float: right;
 }
-.contact-card{
- 
-    position: relative;
-    flex-direction:column;
-   margin: 25px 5px 10px 5px;
+.contact-card {
+  position: relative;
+  flex-direction: column;
+  margin: 25px 5px 10px 5px;
+  display: flex;
+  border-bottom: 1px solid rgba(4, 187, 248, 0.125);
+  padding-bottom: 5px;
+
+  &__header {
     display: flex;
-    border-bottom: 1px solid rgba(4, 187, 248, 0.125);
-    padding-bottom: 5px;
-
-    &__header{
-        display: flex;
-        flex-direction:column;
-        cursor: pointer;
-        
-    }
-    &__expand{
-color: white;
-margin-top: 25px;
-    }
-    &__icon{
-        width: 50px;
-        height: 50px;
-        margin-right: 20px;
-        fill: white;
-        margin-bottom: -10px;
-    }
-    &__call-us{
-        color: white;
-        margin-bottom: 10px;
-        font-family: "Josefin Sans";
-
-    }
-    &__text{
+    flex-direction: column;
+    cursor: pointer;
+  }
+  &__expand {
     color: white;
+    margin-top: 25px;
+  }
+  &__icon {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+    margin-bottom: -10px;
+  }
+  &__call-us {
+    margin-bottom: 10px;
+    font-family: "Josefin Sans";
+  }
+  &__text {
     line-height: 1.5;
     text-align: justify;
     font-family: "Josefin Sans";
-    }
-    &__link{
-color: rgb(13, 102, 102);
-    }
-    &__num{
-color: rgb(13, 102, 102);
-
-    }
+  }
+  &__link {
+    color: rgb(13, 102, 102);
+  }
+  &__num {
+    color: rgb(13, 102, 102);
+  }
 }

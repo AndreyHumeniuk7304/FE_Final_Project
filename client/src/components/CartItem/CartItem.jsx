@@ -7,10 +7,12 @@ import {
 } from "../../store/cart/actions";
 import { Box, Button, IconButton, Typography, Stack } from "@mui/material";
 import { Close, Add, Remove } from "@mui/icons-material";
+import { useNavigate } from "react-router";
 
 const CartItem = (props) => {
   const dispatch = useDispatch();
-  const isLogin = useSelector((state) => state.cart.isLogin);
+  const navigate = useNavigate();
+  const isLogin = useSelector((state) => state.userAccount.isLogin);
   const { product, cartQuantity } = props.item;
 
   const handleDecrease = () => {
@@ -25,6 +27,10 @@ const CartItem = (props) => {
     dispatch(deleteCartItem(product._id, isLogin));
   };
 
+  const openItem = () => {
+    navigate(`../product/${product.itemNo}`);
+  };
+
   return (
     <>
       <Stack
@@ -37,10 +43,12 @@ const CartItem = (props) => {
           component={"img"}
           src={product.imageUrls[0]}
           alt="Product photo"
+          onClick={openItem}
           sx={{
             width: "110px",
             height: "180px",
             objectFit: "cover",
+            cursor: "pointer",
           }}
         />
         <Box
@@ -53,7 +61,12 @@ const CartItem = (props) => {
           <Typography
             variant={"subtitle1"}
             component={"h3"}
-            sx={{ fontWeight: 700 }}
+            onClick={openItem}
+            sx={{
+              fontWeight: 700,
+              cursor: "pointer",
+            }}
+            className="cartItem-name"
           >
             {product.name}
           </Typography>
@@ -68,10 +81,15 @@ const CartItem = (props) => {
                 variant={"body2"}
                 component={"span"}
                 sx={{ width: "50%", display: "inline-block" }}
+                className="cartItem-price"
               >
                 Price
               </Typography>
-              <Typography variable={"body2"} component={"span"}>
+              <Typography
+                variable={"body2"}
+                component={"span"}
+                className="cartItem-currentPrice"
+              >
                 {product.currentPrice}$
               </Typography>
             </Box>
@@ -80,10 +98,15 @@ const CartItem = (props) => {
                 variant={"body2"}
                 component={"span"}
                 sx={{ width: "50%", display: "inline-block" }}
+                className="cartItem-color"
               >
                 Color
               </Typography>
-              <Typography variable={"body2"} component={"span"}>
+              <Typography
+                variable={"body2"}
+                component={"span"}
+                className="cartItem-currentColor"
+              >
                 {product.color}
               </Typography>
             </Box>
@@ -92,10 +115,15 @@ const CartItem = (props) => {
                 variant={"body2"}
                 component={"span"}
                 sx={{ width: "50%", display: "inline-block" }}
+                className="cartItem-quantity"
               >
                 Quantity
               </Typography>
-              <Typography variable={"body2"} component={"span"}>
+              <Typography
+                variable={"body2"}
+                component={"span"}
+                className="cartItem-quantity"
+              >
                 <IconButton
                   onClick={handleDecrease}
                   sx={{ padding: "5px" }}
@@ -118,6 +146,7 @@ const CartItem = (props) => {
                 variant={"body2"}
                 component={"span"}
                 sx={{ width: "50%", display: "inline-block", fontWeight: 700 }}
+                className="cartItem-total"
               >
                 Total
               </Typography>
@@ -125,6 +154,7 @@ const CartItem = (props) => {
                 variable={"body2"}
                 component={"span"}
                 sx={{ fontWeight: 700 }}
+                className="cartItem-totalPrice"
               >
                 {product.currentPrice * cartQuantity} $
               </Typography>
@@ -155,6 +185,7 @@ const CartItem = (props) => {
             sx={{
               color: "secondary.main",
             }}
+            className="cartItem-remove"
           >
             Remove from basket
           </Typography>

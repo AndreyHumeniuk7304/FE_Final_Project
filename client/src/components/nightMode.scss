@@ -1,0 +1,46 @@
+//---------- light mode ----------
+body.light {
+  background-color: $background-light-mode-1 !important;
+  color: $color-night-mode !important;
+  .header,
+  .footer {
+    background-color: $background-light-mode-2;
+  }
+  .header__item--underline {
+    border-bottom: 1px solid $color-night-mode;
+  }
+  .filter__form {
+    background: $background-light-mode-1;
+  }
+  .entry__box,
+  .productlist-wrapper {
+    background-color: $color-light-mode;
+  }
+  .contact-card__icon {
+    fill: $color-night-mode;
+  }
+}
+//---------- night mode ----------
+body.dark {
+  background-color: $background-night-mode-1 !important;
+  color: $color-light-mode !important;
+  .header,
+  .footer {
+    background-color: #071a2f;
+  }
+  .filter__form {
+    background-color: $background-night-mode-1;
+  }
+  .productlist-wrapper {
+    background-color: $background-night-mode-2;
+  }
+  .entry__box {
+    background-color: $background-night-mode-3;
+  }
+  .checkBoxForm {
+    color: $color-light-mode;
+  }
+  .contact-card__icon {
+    fill: $color-light-mode;
+  }
+}

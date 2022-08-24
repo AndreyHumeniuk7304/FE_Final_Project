@@ -3,6 +3,7 @@ import {
   getCart,
   decreaseQuantity,
   deleteProduct,
+  updateCart,
 } from "../../api/cart";
 import getOneProduct from "../../api/getOneProduct";
 
@@ -13,7 +14,7 @@ export const getCartItem = (isLogin) =>
           const cart = await getCart();
           dispatch({
             type: "SET_CART_LIST",
-            payload: cart.products ? cart.products : [],
+            payload: cart ? cart.products : [],
           });
         } catch (err) {
           console.log(err);
@@ -80,14 +81,34 @@ export const deleteCartItem = (id, isLogin) =>
         payload: id,
       };
 
-export const addToCart = (id, itemNo, isLogin) =>
+export const addToCart = (id, itemNo, quantity, isLogin) =>
   isLogin
     ? async (dispatch) => {
         try {
-          const newCart = await addProductToCart(id);
+          const cart = await getCart();
+          let isInclude = false;
+          const localCart = cart
+            ? cart.products.map((item) => {
+                if (item.product._id === id) {
+                  isInclude = !isInclude;
+                  return {
+                    product: item.product._id,
+                    cartQuantity: item.cartQuantity + quantity,
+                  };
+                }
+                return {
+                  product: item.product._id,
+                  cartQuantity: item.cartQuantity,
+                };
+              })
+            : [];
+          if (!isInclude) {
+            localCart.push({ product: id, cartQuantity: quantity });
+          }
+          const newCart = await updateCart(localCart);
           dispatch({
             type: "SET_CART_LIST",
-            payload: newCart.products ? newCart.products : [],
+            payload: newCart.products,
           });
         } catch (err) {
           console.log(err);
@@ -97,7 +118,7 @@ export const addToCart = (id, itemNo, isLogin) =>
         try {
           const cartItem = {
             product: await getOneProduct(itemNo),
-            cartQuantity: 1,
+            cartQuantity: quantity,
           };
           dispatch({
             type: "ADD_PRODUCT_TO_CART_LOCAL",

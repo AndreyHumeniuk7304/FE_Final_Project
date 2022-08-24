@@ -1,14 +1,19 @@
 import { FormLabel } from "@mui/material";
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const CheckboxItem = ({ itemName, title, register }) => {
   const [isChecked, setIsChecked] = useState(false);
+  const nightMode = useSelector((state) => state.nightMode);
 
   return (
     <FormLabel
       className="checkbox__lable"
-      style={{ textDecoration: isChecked ? "underline" : "none" }}
+      style={{
+        textDecoration: isChecked ? "underline" : "none",
+        color: nightMode ? "#fff" : "#000",
+      }}
     >
       <input
         type="checkbox"

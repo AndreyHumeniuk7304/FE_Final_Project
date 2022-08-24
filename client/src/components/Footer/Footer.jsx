@@ -1,21 +1,32 @@
-import { styled } from "@mui/material/styles";
 import { Box } from "@mui/system";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const [statusOpenFooter, setStatusOpenFooter] = useState(false);
+
+  const handleFooter = () => {
+    setStatusOpenFooter(!statusOpenFooter);
+  };
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer-container">
           <div className="footer__item">
             <Box
-              component="h2"
-              //   sx={{ fontFamily: "secondaryFontFamily" }}
+              onClick={handleFooter}
+              component="h3"
               className="footer__item__title"
             >
               help
             </Box>
-            <ul className="footer__item__list">
+            <ul
+              className={
+                !statusOpenFooter
+                  ? "footer__item__list"
+                  : "footer__item__list open_footer-items"
+              }
+            >
               <li className="footer__item__list-item">
                 <a className="list-item__link" href="#!">
                   <Box sx={{ fontFamily: "fontFamily" }}>
@@ -24,10 +35,8 @@ const Footer = () => {
                 </a>
               </li>
               <li className="footer__item__list-item">
-                <Link to="contact">
-                  <a className="list-item__link" href="#!">
-                    <Box sx={{ fontFamily: "fontFamily" }}>Contact</Box>
-                  </a>
+                <Link className="list-item__link" to="contact">
+                  <Box sx={{ fontFamily: "fontFamily" }}>Contact</Box>
                 </Link>
               </li>
               <li className="footer__item__list-item">
@@ -42,9 +51,21 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="footer__item help">
-            <h3 className="footer__item__title">follow us</h3>
-            <ul className="footer__item__list">
+          <div className="footer__item">
+            <Box
+              component="h3"
+              onClick={handleFooter}
+              className="footer__item__title"
+            >
+              follow us
+            </Box>
+            <ul
+              className={
+                !statusOpenFooter
+                  ? "footer__item__list"
+                  : "footer__item__list open_footer-items"
+              }
+            >
               <li className="footer__item__list-item">
                 <a className="list-item__link" href="#!">
                   <Box sx={{ fontFamily: "fontFamily" }}>Facebook</Box>
@@ -62,9 +83,21 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="footer__item compamy">
-            <h3 className="footer__item__title">company</h3>
-            <ul className="footer__item__list">
+          <div className="footer__item">
+            <Box
+              onClick={handleFooter}
+              component="h3"
+              className="footer__item__title"
+            >
+              company
+            </Box>
+            <ul
+              className={
+                !statusOpenFooter
+                  ? "footer__item__list"
+                  : "footer__item__list open_footer-items"
+              }
+            >
               <li className="footer__item__list-item">
                 <a className="list-item__link" href="#!">
                   <Box sx={{ fontFamily: "fontFamily" }}>

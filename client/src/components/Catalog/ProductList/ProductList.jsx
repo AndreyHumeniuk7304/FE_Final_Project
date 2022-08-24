@@ -1,18 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ProductCard from "./ProductCard/ProductCard";
 import PropTypes from "prop-types";
-import { useEffect } from "react";
-import { fetchCategoriesProducts } from "../../../store/catalog/actions";
 import { Link } from "react-router-dom";
 
-const ProductList = ({ querystring, search }) => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(
-      fetchCategoriesProducts(`products/filter?Categories=${querystring}`)
-    );
-  }, [search.toString()]);
-
+const ProductList = () => {
   const { categorieProductList, isLoading, hasError } = useSelector(
     (state) => state.catalog
   );
@@ -45,11 +36,6 @@ const ProductList = ({ querystring, search }) => {
       )}
     </div>
   );
-};
-
-ProductList.propTypes = {
-  querystring: PropTypes.string,
-  search: PropTypes.object,
 };
 
 export default ProductList;

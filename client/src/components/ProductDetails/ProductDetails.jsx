@@ -5,12 +5,15 @@ import "./ProductDetails.scss";
 import { Box, Button, Checkbox, Typography } from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import theme from "../../theme";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/cart/actions";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState();
   const [counter, setCounter] = useState(1);
+  const isLogin = useSelector((state) => state.userAccount.isLogin);
+  const nightMode = useSelector((state) => state.nightMode);
+
   const { itemNo } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -27,7 +30,7 @@ const ProductDetails = () => {
     }
   };
   const handleclick = () => {
-    dispatch(addToCart(product._id, itemNo, false));
+    dispatch(addToCart(product._id, itemNo, 1, isLogin));
   };
   if (!product) return null;
 
@@ -69,6 +72,7 @@ const ProductDetails = () => {
                     mt: "10px",
                   },
                 }}
+                style={{ color: nightMode ? "#fff" : "#000" }}
               >
                 {product.name}
               </Typography>
@@ -87,6 +91,7 @@ const ProductDetails = () => {
                 className="details__item-title"
                 variant="h5"
                 component="h5"
+                style={{ color: nightMode ? "#fff" : "#000" }}
               >
                 {product.currentPrice} $
               </Typography>
@@ -104,18 +109,33 @@ const ProductDetails = () => {
                 }}
               >
                 Color:{" "}
-                <span className="details__item-color">{product.color}</span>
+                <span
+                  className="details__item-color"
+                  style={{ color: nightMode ? "#fff" : "#000" }}
+                >
+                  {product.color}
+                </span>
               </Typography>
               <Typography variant="h6" sx={{ color: "secondary.dark" }}>
                 Material:{" "}
-                <span className="details__item-color">{product.material}</span>
+                <span
+                  className="details__item-color"
+                  style={{ color: nightMode ? "#fff" : "#000" }}
+                >
+                  {product.material}
+                </span>
               </Typography>
               <Typography
                 variant="h6"
                 sx={{ color: "secondary.dark", paddingBottom: "20px" }}
               >
                 Mechanism:{" "}
-                <span className="details__item-color">{product.mechanism}</span>
+                <span
+                  className="details__item-color"
+                  style={{ color: nightMode ? "#fff" : "#000" }}
+                >
+                  {product.mechanism}
+                </span>
               </Typography>
               <Typography
                 variant="h6"
