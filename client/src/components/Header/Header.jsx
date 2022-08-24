@@ -8,16 +8,20 @@ import { useState } from "react";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import { useEffect } from "react";
+import { switchThemeAction } from "../../store/switchTheme/action";
 
 const Header = (props) => {
   const { statusOpenBurger, handleBurger, closeBurger } = props;
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const [isExpandInput, setIsExpandInput] = useState(true);
-  const [nightMode, setNightMode] = useState(true);
+  const nightMode = useSelector((state) => state.nightMode);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (localStorage.getItem("nightMode")) {
-      setNightMode(JSON.parse(localStorage.getItem("nightMode")));
+      dispatch(
+        switchThemeAction(!JSON.parse(localStorage.getItem("nightMode")))
+      );
     } else {
       document.activeElement.classList.remove("light");
       document.activeElement.classList.add("dark");
@@ -36,9 +40,9 @@ const Header = (props) => {
     }
   }, [nightMode]);
 
-  const themeSwitcherLS = () => {
+  const themeSwitcherLS = (value) => {
     localStorage.setItem("nightMode", JSON.stringify(!nightMode));
-    setNightMode((prevState) => !prevState);
+    dispatch(switchThemeAction(!value));
   };
 
   return (
@@ -52,9 +56,15 @@ const Header = (props) => {
               </Link>
             </div>
             {nightMode === true ? (
-              <LightModeOutlinedIcon onClick={themeSwitcherLS} />
+              <LightModeOutlinedIcon
+                style={{ cursor: "pointer" }}
+                onClick={() => themeSwitcherLS(false)}
+              />
             ) : (
-              <DarkModeOutlinedIcon onClick={themeSwitcherLS} />
+              <DarkModeOutlinedIcon
+                style={{ cursor: "pointer" }}
+                onClick={() => themeSwitcherLS(true)}
+              />
             )}
 
             <div className="header__account-container">
