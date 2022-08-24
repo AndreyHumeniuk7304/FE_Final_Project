@@ -1,5 +1,6 @@
 const initialState = {
   isLogin: false,
+  isAdmin: false,
   error: "",
   customer: {},
   wishList: [],
