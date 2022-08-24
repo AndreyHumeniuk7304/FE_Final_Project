@@ -1,6 +1,5 @@
 a {
   text-decoration: none;
-  color: white;
   display: inline-block;
 }
 
@@ -16,7 +15,6 @@ a {
   // position: fixed;
   // top: 0;
   // left: 0;
-  background-color: black;
   color: white;
   width: 100%;
   // z-index: 2;
@@ -27,6 +25,7 @@ a {
     width: 100%;
     justify-content: space-between;
     padding: 12px 0 9px;
+    align-items: center;
   }
 
   &::before {
