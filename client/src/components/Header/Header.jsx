@@ -7,25 +7,39 @@ import { fetchCategoriesProducts } from "../../store/catalog/actions";
 import { useState } from "react";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import { switchThemeAction } from "../../store/switchTheme/actions";
 import { useEffect } from "react";
 
 const Header = (props) => {
   const { statusOpenBurger, handleBurger, closeBurger } = props;
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const [isExpandInput, setIsExpandInput] = useState(true);
-  const nightMode = useSelector((state) => state.nightMode);
-  const dispatch = useDispatch();
+  const [nightMode, setNightMode] = useState(true);
 
   useEffect(() => {
-    if (nightMode === true) {
+    if (localStorage.getItem("nightMode")) {
+      setNightMode(JSON.parse(localStorage.getItem("nightMode")));
+    } else {
       document.activeElement.classList.remove("light");
       document.activeElement.classList.add("dark");
-    } else {
+    }
+  });
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("nightMode")) === true) {
+      document.activeElement.classList.remove("light");
+      document.activeElement.classList.add("dark");
+    }
+
+    if (JSON.parse(localStorage.getItem("nightMode")) === false) {
       document.activeElement.classList.add("light");
       document.activeElement.classList.remove("dark");
     }
   }, [nightMode]);
+
+  const themeSwitcherLS = () => {
+    localStorage.setItem("nightMode", JSON.stringify(!nightMode));
+    setNightMode((prevState) => !prevState);
+  };
 
   return (
     <header className={statusOpenBurger ? "header active-burger" : "header"}>
@@ -38,13 +52,9 @@ const Header = (props) => {
               </Link>
             </div>
             {nightMode === true ? (
-              <LightModeOutlinedIcon
-                onClick={() => dispatch(switchThemeAction(true))}
-              />
+              <LightModeOutlinedIcon onClick={themeSwitcherLS} />
             ) : (
-              <DarkModeOutlinedIcon
-                onClick={() => dispatch(switchThemeAction(false))}
-              />
+              <DarkModeOutlinedIcon onClick={themeSwitcherLS} />
             )}
 
             <div className="header__account-container">
