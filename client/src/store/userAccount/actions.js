@@ -1,6 +1,5 @@
-import getCustomers from "../../api/getCustomers";
+import getCustomers, { setAuthToken } from "../../api/getCustomers";
 import jwt_decode from "jwt-decode";
-import { Navigate } from "react-router";
 
 const getIsLogin = () => {
   return { type: "SET_IS_LOGIN" };
@@ -22,11 +21,12 @@ const fetchProducts = (userData, isAutoLog, nav) => {
   return async (dispatch) => {
     await getCustomers(userData)
       .then((response) => {
-        const isLoaded = response.status === 200;
-        isLoaded && getSuccess(response.data, dispatch);
-        isLoaded && nav("/my-account/user");
+        const status = response.data.success;
+        status && getSuccess(response.data, dispatch);
+        status && nav("/my-account/user");
         isAutoLog &&
           localStorage.setItem("login", JSON.stringify(response.data.token));
+        setAuthToken(response.data.token);
       })
       .catch((error) => {
         dispatch(setError(error.message));
