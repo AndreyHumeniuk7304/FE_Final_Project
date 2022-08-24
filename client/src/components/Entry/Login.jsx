@@ -1,12 +1,21 @@
-import { Button } from "@mui/material";
 import { useForm } from "react-hook-form";
-import CustomInput from "../Forms/CastomInput";
-import CustomErrorMessage from "../Forms/CustomErrorMessage";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { fetchProducts, setError } from "../../store/userAccount/actions";
+import { fetchProducts } from "../../store/userAccount/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import Form from "../Forms/Form";
+
+const loginInputNames = [
+  { inputName: "loginOrEmail", formType: "input" },
+  { inputName: "password", formType: "password" },
+  {
+    inputName: "isSignedAutomatically",
+    formType: "checkbox",
+    label: "Keep me signed in",
+    className: "entry__checkbox",
+  },
+];
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -39,6 +48,7 @@ const Login = () => {
   });
 
   const setValidation = (values) => {
+    console.log(values);
     const isAutoLog = values.isSignedAutomatically;
     delete values.isSignedAutomatically;
 
@@ -48,51 +58,14 @@ const Login = () => {
   return (
     <>
       <p className="entry__text">Please enter your account details to log in</p>
-
-      <form
-        onSubmit={handleSubmit((values) => setValidation(values))}
-        className="form"
-        onFocus={() => dispatch(setError(""))}
-      >
-        <ul className="form__box">
-          <li className={"form__item"}>
-            <CustomInput
-              register={register}
-              name={"Login or Email"}
-              formName={"loginOrEmail"}
-            />
-            <CustomErrorMessage err={errors.loginOrEmail?.message} />
-          </li>
-
-          <li className={"form__item"}>
-            <CustomInput
-              register={register}
-              name={"Password"}
-              formName={"password"}
-              formType={"password"}
-            />
-
-            <CustomErrorMessage err={errors.password?.message} />
-
-            {error && (
-              <CustomErrorMessage
-                err={"Login/Email or password is incorrect"}
-              />
-            )}
-          </li>
-        </ul>
-        <div className="entry__checkbox">
-          <CustomInput
-            register={register}
-            formName={"isSignedAutomatically"}
-            formType={"checkbox"}
-          />
-          <label>Keep me signed in</label>
-        </div>
-        <div className="form__btn">
-          <Button type="submit">Login</Button>
-        </div>
-      </form>
+      <Form
+        actionWithForm={setValidation}
+        formArr={loginInputNames}
+        register={register}
+        handleSubmit={handleSubmit}
+        errors={errors}
+        btnName={"LOG IN"}
+      />
     </>
   );
 };

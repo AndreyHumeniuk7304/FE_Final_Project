@@ -1,24 +1,22 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import "yup-phone";
-import CustomInput from "../Forms/CastomInput";
-import CustomErrorMessage from "../Forms/CustomErrorMessage";
 import addNewCustomers from "../../api/addNewCustomer";
 import PropTypes from "prop-types";
-import CustomDropList from "../Forms/CustomDropList";
+import Form from "../Forms/Form";
 
 const registInputNames = [
-  "firstName",
-  "lastName",
-  "login",
-  "email",
-  "telephone",
-  "gender",
-  "password",
-  "confirmPassword",
+  { inputName: "firstName", formType: "input" },
+  { inputName: "lastName", formType: "input" },
+  { inputName: "login", formType: "input" },
+  { inputName: "email", formType: "input" },
+  { inputName: "telephone", formType: "input" },
+  { inputName: "gender", formName: ["Male", "Female"], formType: "droplist" },
+  { inputName: "password", formType: "password" },
+  { inputName: "confirmPassword", formType: "password" },
 ];
+
 const Registrations = ({ setIsRegist }) => {
   const schema = yup.object({
     firstName: yup.string().required("First name is required."),
@@ -42,11 +40,6 @@ const Registrations = ({ setIsRegist }) => {
       .oneOf([yup.ref("password"), null], "Passwords must match"),
   });
 
-  function camelizeDecode(str) {
-    const result = str.replace(/([A-Z])/g, " $1");
-    return result.charAt(0).toUpperCase() + result.slice(1);
-  }
-
   const {
     register,
     handleSubmit,
@@ -67,6 +60,7 @@ const Registrations = ({ setIsRegist }) => {
   });
 
   const addNewUser = (values) => {
+    console.log("ok");
     addNewCustomers(values)
       .then((savedCustomer) => {
         savedCustomer.status = 200 && setIsRegist(false);
@@ -77,39 +71,14 @@ const Registrations = ({ setIsRegist }) => {
   };
   return (
     <div>
-      <form
-        onSubmit={handleSubmit((values) => addNewUser(values))}
-        className="form"
-      >
-        <ul className="form__box">
-          {registInputNames.map((inputName) => (
-            <li className={"form__item"} key={inputName}>
-              {inputName !== "gender" ? (
-                <CustomInput
-                  register={register}
-                  name={camelizeDecode(inputName)}
-                  formName={inputName}
-                  formType={
-                    inputName === "password" || inputName === "confirmPassword"
-                      ? "password"
-                      : ""
-                  }
-                />
-              ) : (
-                <CustomDropList
-                  name={inputName}
-                  arr={["Male", "Female"]}
-                  register={register}
-                />
-              )}
-              <CustomErrorMessage err={errors[inputName]?.message} />
-            </li>
-          ))}
-        </ul>
-        <div className="form__btn">
-          <Button type="submit">Registation</Button>
-        </div>
-      </form>
+      <Form
+        actionWithForm={addNewUser}
+        formArr={registInputNames}
+        register={register}
+        handleSubmit={handleSubmit}
+        errors={errors}
+        btnName={"REGISTATION"}
+      />
     </div>
   );
 };
