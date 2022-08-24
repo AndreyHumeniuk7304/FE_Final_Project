@@ -12,8 +12,9 @@ const ProductDetails = () => {
   const [product, setProduct] = useState();
   const [counter, setCounter] = useState(1);
   const isLogin = useSelector((state) => state.userAccount.isLogin);
-  const nightMode = useSelector((state) => state.nightMode);
-
+  const [nightMode, setNightMode] = useState(
+    JSON.parse(localStorage.getItem("nightMode"))
+  );
   const { itemNo } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {

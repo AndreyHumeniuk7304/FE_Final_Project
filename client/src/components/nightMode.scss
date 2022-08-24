@@ -19,6 +19,13 @@ body.light {
   .contact-card__icon {
     fill: $color-night-mode;
   }
+  input {
+    color: $color-night-mode;
+    border-bottom: 1px solid $color-night-mode !important;
+  }
+  select {
+    border-bottom: 1px solid $color-night-mode !important ;
+  }
 }
 //---------- night mode ----------
 body.dark {
@@ -42,5 +49,8 @@ body.dark {
   }
   .contact-card__icon {
     fill: $color-light-mode;
+  }
+  select {
+    background-color: inherit !important;
   }
 }
