@@ -28,10 +28,12 @@ const Form = ({
       case "droplist": {
         return (
           <>
+            {label && <label className="form__label">Select {label}:</label>}
             <CustomDropList
               name={inputName}
               arr={formName}
               register={register}
+              camelizeDecode={camelizeDecode}
             />
           </>
         );
@@ -44,6 +46,7 @@ const Form = ({
                 register={register}
                 formName={inputName}
                 formType={"checkbox"}
+                label={label}
               />
               {label}
             </label>
@@ -54,11 +57,13 @@ const Form = ({
       default:
         return (
           <>
+            {label && <label>Enter the {label}:</label>}
             <CustomInput
               register={register}
               name={camelizeDecode(inputName)}
               formName={inputName}
               formType={formType}
+              label={label}
             />
             <CustomErrorMessage err={errors[inputName]?.message} />
           </>
