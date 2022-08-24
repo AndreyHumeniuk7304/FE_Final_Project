@@ -1,6 +1,6 @@
-.background {
-  background-color: #fff;
-}
+// .background {
+//   background-color: #001e3c;
+// }
 
 .details {
   &__img {
@@ -9,8 +9,9 @@
   }
 
   &__item {
+    padding-left: 20px;
     &-title {
-      text-transform: uppercase
+      text-transform: uppercase;
     }
 
     &-color {
@@ -34,6 +35,3 @@
     padding: 4px 8px;
   }
 }
-
-
-
