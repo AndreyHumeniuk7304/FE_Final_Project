@@ -28,9 +28,11 @@
   }
   &__checkbox {
     padding-top: 55px;
-    padding-left: 20px;
+    display: flex;
+    align-items: center;
 
     input {
+      margin-right: 20px;
       accent-color: black;
       width: 22px;
       height: 22px;
