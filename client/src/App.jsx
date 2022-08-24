@@ -18,7 +18,6 @@ import Profile from "./components/Cabinet/Profile/Profile";
 import History from "./components/Cabinet/History/History";
 import Wishlist from "./components/Cabinet/Wishlist/Wishlist";
 import Address from "./components/Cabinet/Address/Address";
-import { useEffect, useState } from "react";
 
 const App = () => {
   const dispatch = useDispatch();
