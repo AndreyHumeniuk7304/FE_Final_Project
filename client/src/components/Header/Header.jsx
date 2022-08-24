@@ -1,16 +1,31 @@
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import SearchInput from "../SearchInput/SearchInput";
 import { fetchCategoriesProducts } from "../../store/catalog/actions";
 import { useState } from "react";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+import { switchThemeAction } from "../../store/switchTheme/actions";
+import { useEffect } from "react";
 
 const Header = (props) => {
   const { statusOpenBurger, handleBurger, closeBurger } = props;
-
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const [isExpandInput, setIsExpandInput] = useState(true);
+  const nightMode = useSelector((state) => state.nightMode);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (nightMode === true) {
+      document.activeElement.classList.remove("light");
+      document.activeElement.classList.add("dark");
+    } else {
+      document.activeElement.classList.add("light");
+      document.activeElement.classList.remove("dark");
+    }
+  }, [nightMode]);
 
   return (
     <header className={statusOpenBurger ? "header active-burger" : "header"}>
@@ -22,6 +37,15 @@ const Header = (props) => {
                 <img src="../images/header-logo.png" alt="logo" />
               </Link>
             </div>
+            {nightMode === true ? (
+              <LightModeOutlinedIcon
+                onClick={() => dispatch(switchThemeAction(true))}
+              />
+            ) : (
+              <DarkModeOutlinedIcon
+                onClick={() => dispatch(switchThemeAction(false))}
+              />
+            )}
 
             <div className="header__account-container">
               {window.screen.width < 720 ? (

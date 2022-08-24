@@ -43,11 +43,12 @@
 
     button {
       padding: 15px 104px;
-      background-color: white;
       width: fit-content;
       vertical-align: center;
       border-radius: 0;
-      color: black;
+      color: #000;
+      background-color: #e6e4dc;
+      border-radius: 10px;
       &:hover {
         color: white;
       }

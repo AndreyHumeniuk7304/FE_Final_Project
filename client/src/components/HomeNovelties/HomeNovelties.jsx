@@ -26,12 +26,7 @@ const HomeNovelties = () => {
   return (
     <>
       <Novelties className="novelties">
-        <Box
-          className="novelties__title"
-          sx={{ color: "primary.light", fontFamily: "fontFamily" }}
-        >
-          NEW COLLECTION
-        </Box>
+        <Box className="novelties__title">NEW COLLECTION</Box>
         <Box className="novelties__wrapper">
           {categorieProductList !== undefined &&
             categorieProductList.map((product, index, array) => {
@@ -44,13 +39,7 @@ const HomeNovelties = () => {
                     <Link to={product.productUrl}>
                       <img src={product.imageUrls[0]} alt="" />
                       <TextWrapper className="novelties__text-wrapper">
-                        <Box
-                          className="novelties__text"
-                          sx={{
-                            color: "primary.light",
-                            fontFamily: "fontFamily",
-                          }}
-                        >
+                        <Box className="novelties__text">
                           {product.name.split(" ").slice(0, 2).join(" ")}
                         </Box>
                       </TextWrapper>
