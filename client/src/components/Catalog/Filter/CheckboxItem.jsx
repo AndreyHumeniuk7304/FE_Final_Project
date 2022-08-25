@@ -5,7 +5,9 @@ import { useSelector } from "react-redux";
 
 const CheckboxItem = ({ itemName, title, register }) => {
   const [isChecked, setIsChecked] = useState(false);
-  const nightMode = useSelector((state) => state.nightMode);
+  const [nightMode, setNightMode] = useState(
+    JSON.parse(localStorage.getItem("nightMode"))
+  );
 
   return (
     <FormLabel
