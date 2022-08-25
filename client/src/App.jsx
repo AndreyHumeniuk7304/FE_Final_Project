@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { getSuccess } from "./store/userAccount/actions";
 import Contact from "./components/Footer/Contact/Contact";
 import { useEffect, useState } from "react";
+import Checkout from "./views/Checkout/Checkout";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -46,25 +47,28 @@ const App = () => {
   };
   return (
     <>
-      <Header
-        statusOpenBurger={statusOpenBurger}
-        handleBurger={handleBurger}
-        closeBurger={closeBurger}
-      />
-      <div className="main">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/man" element={<Man />} />
-          <Route path="/woman" element={<Woman />} />
-          <Route path="/accessory" element={<Accessory />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/my-account/:name" element={<MyAccount />} />
-          <Route path="/product/:itemNo" element={<ProductDetails />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+      <div className="full-wrapper">
+        <Header
+          statusOpenBurger={statusOpenBurger}
+          handleBurger={handleBurger}
+          closeBurger={closeBurger}
+        />
+        <div className="main">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/man" element={<Man />} />
+            <Route path="/woman" element={<Woman />} />
+            <Route path="/accessory" element={<Accessory />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/my-account/:name" element={<MyAccount />} />
+            <Route path="/product/:itemNo" element={<ProductDetails />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/checkout" element={<Checkout />} />
+          </Routes>
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 };
