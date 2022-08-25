@@ -2,11 +2,17 @@ body.light .profile__button {
     background-color: #686868;
 }
 .profile{
+    // margin: 0 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    // background-color: white;
     &__container{
+        // display: flex;
+        // justify-content: center;
         max-width: 1295px;
+        // margin: auto;
+        // margin: 0 10px;
     }
     &__input{
         display: flex;
@@ -26,12 +32,15 @@ body.light .profile__button {
     }
     &__label{
         display: block;
+        // font-size: 18px;
+        // margin-bottom: 16px;
         padding: 20px 0 10px 0;
     }
     &__checkbox-container{
-    display: flex;
-    margin-top: 16px;
-    justify-content: flex-end;
+        // margin-top: 40px;
+display: flex;
+margin-top: 16px;
+justify-content: flex-end;
     }
     &__checkbox-input{
         width: 16px;
@@ -41,6 +50,9 @@ body.light .profile__button {
     &__checkbox-label{
         font-size: 12px;
         margin-right: 67px;
+    }
+    &__birthday{
+        // margin-bottom: 78px;
     }
     &__button{
         width: 270px;

@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { getSuccess } from "./store/userAccount/actions";
 import Contact from "./components/Footer/Contact/Contact";
 import { useEffect, useState } from "react";
+import Entry from "./views/Entry/Entry";
 import Profile from "./components/Cabinet/Profile/Profile";
 import History from "./components/Cabinet/History/History";
 import Wishlist from "./components/Cabinet/Wishlist/Wishlist";
@@ -62,9 +63,8 @@ const App = () => {
           <Route path="/woman" element={<Woman />} />
           <Route path="/accessory" element={<Accessory />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/my-account/:name" element={<MyAccount />} />
-          {/* <Route path="/my-account" element={<MyAccount />} /> */}
-
+          <Route path="/my-account/user" element={<MyAccount />} />
+          <Route path="/my-account/entry" element={<Entry />} />
           <Route path="/product/:itemNo" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<Contact />} />
