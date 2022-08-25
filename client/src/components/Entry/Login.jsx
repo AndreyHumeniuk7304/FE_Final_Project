@@ -1,12 +1,10 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { fetchProducts } from "../../store/userAccount/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import Form from "../Forms/Form";
 import { loginInputNames, loginSchema } from "./data";
-import ProductForm from "../ProductForm/ProductForm";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -45,7 +43,6 @@ const Login = () => {
         errors={errors || error}
         btnName={"LOG IN"}
       />
-      <ProductForm />
     </>
   );
 };

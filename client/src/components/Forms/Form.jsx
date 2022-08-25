@@ -11,6 +11,8 @@ const Form = ({
   handleSubmit,
   errors,
   btnName,
+  fieldArray,
+  control,
 }) => {
   const camelizeDecode = (str) => {
     const result = str.replace(/([A-Z])/g, " $1");
@@ -35,13 +37,14 @@ const Form = ({
               register={register}
               camelizeDecode={camelizeDecode}
             />
+            <CustomErrorMessage err={errors[inputName]?.message} />
           </>
         );
       }
       case "checkbox": {
         return (
           <>
-            <label className={className && className}>
+            <label className={className ? className : "form__label"}>
               <CustomInput
                 register={register}
                 formName={inputName}
@@ -54,10 +57,52 @@ const Form = ({
         );
       }
 
+      case "inputADD": {
+        return (
+          <ul>
+            {fieldArray.fields.map((item, index) => {
+              const err = errors[inputName];
+
+              return (
+                <li key={item.id}>
+                  <div className="form__input-add">
+                    <input
+                      {...register(`${inputName}.${index}`)}
+                      type="text"
+                      className={"form__input"}
+                    />
+                    <button
+                      style={{ marginRight: 20 }}
+                      type="btn"
+                      onClick={() => {
+                        fieldArray.append([" "]);
+                      }}
+                    >
+                      ADD
+                    </button>
+                    {index ? (
+                      <button
+                        type="btn"
+                        onClick={() => fieldArray.remove(index)}
+                      >
+                        DEL
+                      </button>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <CustomErrorMessage err={err ? err[index]?.message : ""} />
+                </li>
+              );
+            })}
+          </ul>
+        );
+      }
+
       default:
         return (
           <>
-            {label && <label>Enter the {label}:</label>}
+            {label && <label className="form__label">Enter the {label}:</label>}
             <CustomInput
               register={register}
               name={camelizeDecode(inputName)}
@@ -97,6 +142,8 @@ Form.propTypes = {
   handleSubmit: PropTypes.func,
   errors: PropTypes.object,
   btnName: PropTypes.string,
+  fieldArray: PropTypes.object,
+  control: PropTypes.object,
 };
 
 export default Form;

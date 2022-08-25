@@ -1,18 +1,9 @@
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import Form from "../Forms/Form";
-import { productInputNames } from "./data";
+import { productInputNames, productSchema } from "./data";
 
 const ProductForm = () => {
-  const schema = yup.object({
-    imageUrls: yup.string().url().required("ImageUrls is required."),
-    quantity: yup.number().required("Quantity is required."),
-    name: yup.string().min(20, "Name is full description of product, min 20."),
-    currentPrice: yup.number().required("CurrentPrice is required."),
-    date: yup.date().required("CurrentPrice is required."),
-  });
-
   const getCurrentDate = () => {
     const date = new Date();
     return `${date.getFullYear()}-${
@@ -24,8 +15,9 @@ const ProductForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(productSchema),
     defaultValues: {
       brand: "",
       Categories: "",
@@ -33,7 +25,7 @@ const ProductForm = () => {
       color: "",
       material: "",
       enabled: "",
-      imageUrls: "",
+      imageUrls: [" "],
       quantity: 1,
       name: "",
       currentPrice: "",
@@ -41,7 +33,10 @@ const ProductForm = () => {
       date: getCurrentDate(),
     },
   });
-  console.log();
+  const fieldArray = useFieldArray({
+    control,
+    name: "imageUrls",
+  });
 
   const setValidation = (values) => {
     console.log(values);
@@ -56,6 +51,8 @@ const ProductForm = () => {
         handleSubmit={handleSubmit}
         errors={errors}
         btnName={"APPROVE"}
+        fieldArray={fieldArray}
+        control={control}
       />
     </>
   );
