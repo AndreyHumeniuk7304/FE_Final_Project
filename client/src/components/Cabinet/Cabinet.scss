@@ -3,31 +3,26 @@ body.light .link-container{
 }
 .bold{font-weight: 700;}
 .my-account{
-
     max-width:100%;
     min-width: 320px;
     display: flex;
-
     &__welcome{
         padding: 25px 0 25px 5%;
         
         &--title{     
             font-weight: 700;   
         }
-
     }
 
     &__icon{
         color: #ffffff;
         width: 30px;
     }
-
     &__container{
         max-width: 1295px;
         margin: auto;
         padding-bottom: 15px;
     }
-
     &__block{
         max-width: 480px;
         display: flex;
@@ -35,29 +30,24 @@ body.light .link-container{
         justify-content: center;
         margin: auto;
     }
-
     &__section{
         width: 90%;
-        // background-color: black;
         color: #ffffff;
         padding: 15px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin: 10px;
-
         &--title{
             font-size: 20px;
             font-weight: 700;
 }
-
         &--text{
             display: none;
             font-size: 14px;
         }
     }
 }
-
 .link-container{
     width: 90%;
     background-color: black;
@@ -67,7 +57,6 @@ body.light .link-container{
     align-items: center;
     margin: 10px;
 }
-
 .icon-container{
     display: flex;
     align-items: center;
@@ -76,25 +65,20 @@ body.light .link-container{
     margin-right: 15px;
 }
 
-
 @media screen and (min-width: 720px) {
     .my-account{
         &__welcome{
-
             &--title{     
                 font-size: 20px;
             }
         }
-
         &__section{
             justify-content: flex-start;
             margin: 10px;
-                
             &--title{
                 font-size: 20px;
                 margin-bottom: 5px;
             }
-
             &--text{
                 display: block;
                 font-size: 14px;
@@ -102,36 +86,30 @@ body.light .link-container{
         }
     }
 }
+
 @media screen and (min-width: 1023px) {
     .my-account{
         &__welcome{
             padding: 80px 0 70px 6%;
-
             &--title{     
                 font-size: 35px;
             }
-
         }
-
         &__container{
             padding-bottom: 50px;
         }
-
         &__block{
              max-width: none;
         }
-
         &__section{
             &--title{
                 margin-bottom: 10px;
             }
         }
     }
-
     .icon-container{
         margin: 0 43px 0 40px;
     }
-
     .link-container{
         width: 46%;
         height: 162px;
