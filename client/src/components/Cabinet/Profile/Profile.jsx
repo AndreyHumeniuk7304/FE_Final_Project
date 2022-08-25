@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Links from "../Links/Links";
 const Profile = () => {
   return (
