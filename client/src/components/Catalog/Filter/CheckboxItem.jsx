@@ -3,28 +3,32 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useState } from "react";
 
-const CheckboxItem = ({ itemName, title, register }) => {
+const CheckboxItem = ({
+  itemName,
+  title,
+  register,
+  isItemChecked,
+  setIsItemChecked,
+}) => {
   useEffect(() => {
     setIsItemChecked(isItemChecked.includes(itemName));
   }, []);
-  const [isChecked, setIsChecked] = useState(false);
   const [nightMode, setNightMode] = useState(
     JSON.parse(localStorage.getItem("nightMode"))
   );
-
   return (
     <FormLabel
       className="checkbox__lable"
-      style={{ textDecoration: isChecked ? "underline" : "none" }}
+      style={{ textDecoration: isItemChecked ? "underline" : "none" }}
     >
       <input
         type="checkbox"
         name={title}
         value={itemName}
-        defaultChecked={isChecked}
+        defaultChecked={isItemChecked}
         className={"custom-checkbox"}
         onClick={(e) => {
-          !isChecked
+          !isItemChecked
             ? setIsItemChecked([...isItemChecked, e.target.value])
             : setIsItemChecked(isItemChecked.filter((e) => e !== e));
         }}
