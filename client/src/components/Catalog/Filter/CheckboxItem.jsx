@@ -10,25 +10,25 @@ const CheckboxItem = ({
   isItemChecked,
   setIsItemChecked,
 }) => {
-  useEffect(() => {
-    setIsItemChecked(isItemChecked.includes(itemName));
-  }, []);
+  const isChecked = isItemChecked.includes(itemName);
+
   const [nightMode, setNightMode] = useState(
     JSON.parse(localStorage.getItem("nightMode"))
   );
   return (
     <FormLabel
       className="checkbox__lable"
-      style={{ textDecoration: isItemChecked ? "underline" : "none" }}
+      style={{ textDecoration: isChecked ? "underline" : "none" }}
     >
       <input
         type="checkbox"
         name={title}
         value={itemName}
-        defaultChecked={isItemChecked}
+        defaultChecked={isChecked}
         className={"custom-checkbox"}
         onClick={(e) => {
-          !isItemChecked
+          setIsItemChecked([...isItemChecked, e.target.value]);
+          !isChecked
             ? setIsItemChecked([...isItemChecked, e.target.value])
             : setIsItemChecked(isItemChecked.filter((e) => e !== e));
         }}
