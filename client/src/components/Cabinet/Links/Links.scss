@@ -1,20 +1,19 @@
 
 .links{
-    background-color: white;
     max-width: 100%;
     min-width: 320px;
     &__welcome{
-         font-size: 36px;
+        //  font-size: 36px;
         padding: 51px 0 49px 5%;
 
     }
     &__link-list{
             display: flex;
             justify-content: space-around;
-            font-size: 24px;
+            // font-size: 24px;
     }
     &__style{
-        margin-bottom: 60px;
+        // margin-bottom: 60px;
         padding: 0 15px 10px 15px ;
         color: gray;
     }
@@ -25,4 +24,33 @@
 
 
     }
+    &__text{
+        text-align: center;
+    }
 }
+
+.link-container{
+    width: 90%;
+    background-color: black;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+}
+
+.icon-container{
+    display: flex;
+    align-items: center;
+    width: 31px;
+    height: 29PX;
+    margin-right: 15px;
+}
+
+
+@media screen and (min-width: 720px) {
+
+}
+@media screen and (min-width: 1023px) {
+ 
+  }

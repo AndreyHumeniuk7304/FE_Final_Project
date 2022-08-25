@@ -11,19 +11,19 @@ const Links = () => {
 
         <div className="links__link-list">
           <Link className="links__style" to="/my-account/profile">
-            <p>My profile</p>
+            <p className="links__text">My profile</p>
           </Link>
 
           <Link className="links__style" to="/my-account/wishlist">
-            <p>My wishlist</p>
+            <p className="links__text">My wishlist</p>
           </Link>
 
           <Link className="links__style" to="/my-account/history">
-            <p>Purchase history</p>
+            <p className="links__text">Purchase history</p>
           </Link>
 
           <Link className="links__style" to="/my-account/address-book">
-            <p>Address book</p>
+            <p className="links__text">Address book</p>
           </Link>
         </div>
       </div>

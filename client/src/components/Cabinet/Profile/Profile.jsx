@@ -8,19 +8,35 @@ const Profile = () => {
         <form className="profile__form">
           <div>
             <label className="bold profile__label">EMAIL ADRESS</label>
-            <input className="profile__input" type="email"></input>
+            <input
+              placeholder="Email adress"
+              className="profile__input"
+              type="email"
+            ></input>
           </div>
           <div>
             <label className="bold profile__label">FIRST NAME</label>
-            <input className="profile__input" type="text"></input>
+            <input
+              placeholder="First name"
+              className="profile__input"
+              type="text"
+            ></input>
           </div>
           <div>
             <label className="bold profile__label">SECOND NAME</label>
-            <input className="profile__input" type="text"></input>
+            <input
+              placeholder="Second name"
+              className="profile__input"
+              type="text"
+            ></input>
           </div>
           <div>
             <label className="bold profile__label">MOBILE PHONE</label>
-            <input className="profile__input" type="tel"></input>
+            <input
+              placeholder="Mobile phone"
+              className="profile__input"
+              type="tel"
+            ></input>
           </div>
           <div>
             <div className="profile__checkbox-container">
@@ -43,7 +59,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="profile__birthday">
-            <label className="profile__label">BIRTHDAY</label>
+            <label className="bold profile__label">BIRTHDAY</label>
             <input
               className="profile__input"
               type="date"
