@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import Form from "../Forms/Form";
 import { loginInputNames, loginSchema } from "./data";
+import ProductForm from "../ProductForm/ProductForm";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ const Login = () => {
         errors={errors || error}
         btnName={"LOG IN"}
       />
+      <ProductForm />
     </>
   );
 };

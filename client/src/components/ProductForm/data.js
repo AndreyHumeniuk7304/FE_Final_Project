@@ -1,3 +1,5 @@
+import * as yup from "yup";
+
 const brand = [
   "morellato",
   "hirsch",
@@ -67,7 +69,7 @@ export const productInputNames = [
     label: "is available",
   },
 
-  { inputName: "imageUrls", formType: "input", label: "image url" },
+  { inputName: "imageUrls", formType: "url", label: "image url" },
   { inputName: "quantity", formType: "number", label: "quantity, pc" },
   { inputName: "name", formType: "text", label: "full descriptions" },
   { inputName: "currentPrice", formType: "number", label: "current price" },
@@ -79,3 +81,11 @@ export const productInputNames = [
     label: "current date",
   },
 ];
+
+export const productSchema = yup.object({
+  imageUrls: yup.string().url().required("ImageUrls is required."),
+  quantity: yup.number().required("Quantity is required."),
+  name: yup.string().min(20, "Name is full description of product, min 20."),
+  currentPrice: yup.number().required("CurrentPrice is required."),
+  date: yup.date().required("CurrentPrice is required."),
+});

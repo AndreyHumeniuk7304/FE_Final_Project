@@ -7,7 +7,6 @@ export default function CustomInput({
   formType,
   label,
 }) {
-  console.log(label);
   return (
     <>
       {formType !== "text" ? (

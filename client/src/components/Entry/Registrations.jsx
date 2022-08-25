@@ -1,6 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import "yup-phone";
 import addNewCustomers from "../../api/addNewCustomer";
 import PropTypes from "prop-types";
 import Form from "../Forms/Form";

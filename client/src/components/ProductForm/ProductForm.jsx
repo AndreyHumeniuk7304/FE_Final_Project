@@ -13,6 +13,13 @@ const ProductForm = () => {
     date: yup.date().required("CurrentPrice is required."),
   });
 
+  const getCurrentDate = () => {
+    const date = new Date();
+    return `${date.getFullYear()}-${
+      date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth()
+    }-${date.getDate() < 10 ? +date.getDate() : date.getDate()}`;
+  };
+
   const {
     register,
     handleSubmit,
@@ -27,13 +34,14 @@ const ProductForm = () => {
       material: "",
       enabled: "",
       imageUrls: "",
-      quantity: "",
+      quantity: 1,
       name: "",
       currentPrice: "",
       previousPrice: "",
-      date: "",
+      date: getCurrentDate(),
     },
   });
+  console.log();
 
   const setValidation = (values) => {
     console.log(values);

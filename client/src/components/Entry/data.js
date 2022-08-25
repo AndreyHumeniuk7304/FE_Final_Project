@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import "yup-phone";
 
 export const loginInputNames = [
   { inputName: "loginOrEmail", formType: "input" },
