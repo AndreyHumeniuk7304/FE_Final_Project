@@ -57,7 +57,7 @@ const Form = ({
         );
       }
 
-      case "inputADD": {
+      case "multiInput": {
         return (
           <ul>
             {fieldArray.fields.map((item, index) => {

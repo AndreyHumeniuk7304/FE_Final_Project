@@ -71,7 +71,7 @@ export const productInputNames = [
     label: "is available",
   },
 
-  { inputName: "imageUrls", formType: "inputADD", label: "image url" },
+  { inputName: "imageUrls", formType: "multiInput", label: "image url" },
   { inputName: "quantity", formType: "number", label: "quantity, pc" },
   { inputName: "name", formType: "text", label: "full descriptions" },
   { inputName: "currentPrice", formType: "number", label: "current price" },
