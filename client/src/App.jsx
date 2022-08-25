@@ -15,6 +15,7 @@ import { getSuccess } from "./store/userAccount/actions";
 import Contact from "./components/Footer/Contact/Contact";
 import { useEffect, useState } from "react";
 import Entry from "./views/Entry/Entry";
+import Entry from "./views/Entry/Entry";
 import Profile from "./components/Cabinet/Profile/Profile";
 import History from "./components/Cabinet/History/History";
 import Wishlist from "./components/Cabinet/Wishlist/Wishlist";
