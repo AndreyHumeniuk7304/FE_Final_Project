@@ -2,12 +2,17 @@ body.light .profile__button {
     background-color: #686868;
 }
 .profile{
+    // margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     // background-color: white;
     &__container{
-        display: flex;
-        justify-content: center;
+        // display: flex;
+        // justify-content: center;
         max-width: 1295px;
         // margin: auto;
+        // margin: 0 10px;
     }
     &__input{
         display: flex;
@@ -64,5 +69,23 @@ justify-content: flex-end;
 
 }
 @media screen and (min-width: 1023px) {
- 
+    .profile{
+        &__container{
+margin: 50px 0 50px 0;
+        }
+        &__label{
+            margin-bottom: 15px;
+        }
+        &__input{
+            margin-bottom: 25px;
+            width: 520px;
+        }
+        &__checkbox-container{
+            margin-bottom: 25px;
+            justify-content: left;
+        }
+        &__button{
+            margin: 15px 133px 20px 133px;
+        }
+    }
   }

@@ -4,6 +4,6 @@ import Cabinet from "../../components/Cabinet/Cabinet";
 
 const MyAccount = () => {
   const { isLogin } = useSelector((state) => state.userAccount);
-  return <>{!isLogin ? <Entry /> : <Cabinet />}</>;
+  return <>{isLogin ? <Entry /> : <Cabinet />}</>;
 };
 export default MyAccount;

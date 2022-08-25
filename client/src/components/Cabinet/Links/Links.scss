@@ -4,7 +4,7 @@
     min-width: 320px;
     &__welcome{
         //  font-size: 36px;
-        padding: 51px 0 49px 5%;
+        padding: 51px 0 49px 3%;
 
     }
     &__link-list{
@@ -52,5 +52,18 @@
 
 }
 @media screen and (min-width: 1023px) {
- 
+
+ .links{
+    min-width: 1023px;
+    &__welcome{
+        //  font-size: 36px;
+        padding: 51px 0 49px 6%;
+
+    }
+    &__link-list{
+        // display: flex;
+        // justify-content: space-around;
+        font-size: 24px;
+}
+ }
   }

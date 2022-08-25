@@ -6,7 +6,7 @@ const Contact = () => {
       <div className="panel">
         <div className="contact-card">
           <div className="contact-card__header">
-            <p className="contact-card__call-us">
+            <span className="contact-card__call-us">
               <div className="contact-card__expand float-right"></div>
               <svg
                 className="contact-card__icon"
@@ -20,11 +20,11 @@ const Contact = () => {
                 />
               </svg>
               Call Us
-            </p>
+            </span>
           </div>
           <div className="contact-card__panel-collapse">
             <div>
-              <p className="contact-card__text">
+              <span className="contact-card__text">
                 Up for a chat? Feel free to call us on{" "}
                 {
                   <b>
@@ -36,14 +36,14 @@ const Contact = () => {
                 and the friendly voice on the other end of the phone will give
                 you a helping hand with any questions you might have. Please
                 note, phone lines are only open during office hours.
-              </p>
+              </span>
             </div>
           </div>
         </div>
 
         <div className="contact-card">
           <div className="contact-card__header">
-            <p className="contact-card__call-us">
+            <span className="contact-card__call-us">
               <div className="contact-card__expand float-right"> </div>
               <svg className="contact-card__icon" viewBox="0 0 60 72">
                 <path
@@ -59,11 +59,11 @@ const Contact = () => {
                 />
               </svg>
               Email Us
-            </p>
+            </span>
           </div>
           <div className="contact-card__panel-collapse">
             <div>
-              <p className="contact-card__text">
+              <span className="contact-card__text">
                 Get in touch via our email,{" "}
                 {
                   <a
@@ -78,13 +78,13 @@ const Contact = () => {
                 get back to you within 48 hours (not including weekends and bank
                 holidays), but please note there may be a delay during peak
                 times!
-              </p>
+              </span>
             </div>
           </div>
         </div>
         <div className="contact-card">
           <div className="contact-card__header">
-            <p className="contact-card__call-us">
+            <span className="contact-card__call-us">
               <div className="contact-card__expand float-right"></div>
               <svg className="contact-card__icon" viewBox="0 0 60 72">
                 <path
@@ -99,23 +99,23 @@ const Contact = () => {
                 />
               </svg>
               Chat to Us
-            </p>
+            </span>
           </div>
           <div className="contact-card__panel-collapse">
             <div>
-              <p className="contact-card__text">
+              <span className="contact-card__text">
                 Drop a member of our customer support team a line via our live
                 chat function right here on our website. Simply click the ‘Chat’
                 pop up in the corner of your screen and our team will be happy
                 to help you with any queries you might have. Please note, live
                 chat is only available during office hours.
-              </p>
+              </span>
             </div>
           </div>
         </div>
         <div className="contact-card">
           <div className="contact-card__header">
-            <p className="contact-card__call-us">
+            <span className="contact-card__call-us">
               <div className="contact-card__expand float-right"></div>
               <svg className="contact-card__icon" viewBox="0 0 30 35">
                 <path
@@ -149,17 +149,17 @@ const Contact = () => {
                 />
               </svg>
               Write to Us
-            </p>
+            </span>
           </div>
           <div className="contact-card__panel-collapse">
             <div>
-              <p className="contact-card__text">
+              <span className="contact-card__text">
                 In our digital-first world, it’s always nice to receive a bit of
                 snail mail, and we would be totally chuffed if you wrote to us!
                 Grab a pen, dust off your envelopes and send a letter to our
                 office (address found below) to put a smile on the faces of our
                 customer support team.
-              </p>
+              </span>
             </div>
           </div>
         </div>
