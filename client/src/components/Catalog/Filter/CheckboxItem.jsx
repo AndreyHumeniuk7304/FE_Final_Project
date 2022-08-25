@@ -4,6 +4,9 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 const CheckboxItem = ({ itemName, title, register }) => {
+  useEffect(() => {
+    setIsItemChecked(isItemChecked.includes(itemName));
+  }, []);
   const [isChecked, setIsChecked] = useState(false);
   const [nightMode, setNightMode] = useState(
     JSON.parse(localStorage.getItem("nightMode"))
