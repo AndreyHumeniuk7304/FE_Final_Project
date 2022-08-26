@@ -17,10 +17,22 @@
       outline: none;
     }
   }
+  &__input-add {
+    display: grid;
+    grid-template-columns: 1fr 50px 50px;
+    grid-gap: 15px;
+    button {
+      width: 100%;
+    }
+  }
+  &__label {
+    padding: 10px 0;
+  }
   &__droplist {
+    background-color: black;
     border: none;
     border-bottom: 1px solid white;
-    color: grey;
+    color: white;
     padding-left: 7px;
   }
   &__item {
