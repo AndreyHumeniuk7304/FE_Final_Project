@@ -22,14 +22,17 @@ const ProductList = () => {
         <Box
           sx={{
             display: "flex",
-            "& > *": {
-              m: 1,
-            },
+            margin: 1,
           }}
           className="productlist-wrapper__view"
         >
-          <ButtonGroup variant="outlined" aria-label="outlined button group">
+          <ButtonGroup
+            variant="outlined"
+            aria-label="outlined button group"
+            orientation="vertical"
+          >
             <Button
+              type="submit"
               onClick={() => {
                 setIsOneCartView(false);
               }}
@@ -42,6 +45,7 @@ const ProductList = () => {
               />
             </Button>
             <Button
+              type="submit"
               onClick={() => {
                 setIsOneCartView(true);
               }}

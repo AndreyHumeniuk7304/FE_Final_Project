@@ -10,21 +10,17 @@
   position: relative;
 
   &__view {
-    width: 100%;
+    width: 10%;
     position: absolute;
     top: 0%;
     left: 0%;
+    width: 2%;
   }
 
   &__message {
     height: 90vh;
     font-size: 5vw !important;
     @include flex-container;
-  }
-
-  &__icon {
-    max-width: 100% !important;
-    height: auto !important;
   }
 
   &__card-two {
@@ -35,15 +31,20 @@
     margin-top: -3%;
     width: 85%;
   }
+
+  .view-btn {
+    padding: 18% 0% !important;
+    min-width: 10% !important;
+  }
+
+  .active-button {
+    background-color: rgb(197, 190, 190) !important;
+    font-weight: bold !important;
+  }
 }
 
 @include desktop {
   .productlist-wrapper {
     width: 75%;
   }
-}
-
-.active-button {
-  background-color: rgb(197, 190, 190) !important;
-  font-weight: bold !important;
 }
