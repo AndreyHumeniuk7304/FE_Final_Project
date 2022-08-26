@@ -28,15 +28,14 @@
   }
   &__checkbox {
     padding-top: 55px;
+    display: flex;
+    align-items: center;
+
     input {
+      margin-right: 20px;
       accent-color: black;
       width: 22px;
       height: 22px;
-    }
-    label {
-      padding-left: 20px;
-      vertical-align: middle;
-      vertical-align: 5px;
     }
   }
 

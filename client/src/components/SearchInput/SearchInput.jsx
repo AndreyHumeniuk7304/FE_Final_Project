@@ -39,7 +39,7 @@ const SearchInput = ({ isExpandInput, setIsExpandInput }) => {
       <form
         sx={{
           "& > :not(style)": {
-            maxWidth: "25ch",
+            maxWidth: "15ch",
             height: "56px",
             fontSize: "10px",
           },

@@ -9,11 +9,10 @@ import { MaterialSlider } from "./MaterialSlider";
 import { CheckedFilterItem } from "./checkedFilterItem";
 import FilterMobileHeader from "./FilterMobileHeader";
 
-const filterTitles = ["brand", "mechanism", "material", "color"];
+export const filterTitles = ["brand", "mechanism", "material", "color"];
 
 const Filter = ({ setSearch, search, categories }) => {
   const [currentPrice, setCurrentPrice] = useState([]);
-  const [curentValues, setCurentValues] = useState();
 
   const productList = useSelector(
     (state) => state.catalog.categorieProductList
@@ -23,10 +22,6 @@ const Filter = ({ setSearch, search, categories }) => {
   useEffect(() => {
     setCurrentPrice(getMinMaxPrice());
   }, [productList]);
-
-  useEffect(() => {
-    search.toString() === "" && setCurentValues({ categories: categories });
-  }, [search.toString()]);
 
   const dispatch = useDispatch();
 
@@ -43,8 +38,6 @@ const Filter = ({ setSearch, search, categories }) => {
     );
 
   const setFilterLink = (values) => {
-    setCurentValues({ ...values, currentPrice: currentPrice });
-
     let link = "filter?";
     for (let key in values) {
       let value = "";
@@ -100,7 +93,6 @@ const Filter = ({ setSearch, search, categories }) => {
     reset();
     setSearch("");
     setCurrentPrice(getMinMaxPrice());
-    setCurentValues({ categories: categories });
     dispatch(
       fetchCategoriesProducts(`products/filter?Categories=${categories}`)
     );
@@ -111,10 +103,7 @@ const Filter = ({ setSearch, search, categories }) => {
       <div className="filter-wrapper filter">
         <FilterMobileHeader />
         <Stack>
-          <CheckedFilterItem
-            curentValues={curentValues}
-            defaultValues={getMinMaxPrice()}
-          />
+          <CheckedFilterItem search={search} />
 
           <form
             onSubmit={handleSubmit((data) => {
@@ -129,6 +118,7 @@ const Filter = ({ setSearch, search, categories }) => {
                   title={title}
                   getFilterItem={getFilterItem}
                   register={register}
+                  search={search}
                 />
               </Box>
             ))}
@@ -142,7 +132,11 @@ const Filter = ({ setSearch, search, categories }) => {
               setCurrentPrice={setCurrentPrice}
             />
             <Button type="submit">Apply</Button>
-            <Button type="button" onClick={resetFilter}>
+            <Button
+              type="button"
+              onClick={resetFilter}
+              disabled={!search.toString().length}
+            >
               Reset
             </Button>
           </form>

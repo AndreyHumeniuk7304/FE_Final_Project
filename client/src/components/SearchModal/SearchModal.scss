@@ -1,8 +1,8 @@
 .modal {
   background-color: #fff;
-  position: absolute;
+  position: fixed;
   top: 80px;
-  left: 0px;
+  left: 55%;
   z-index: 10;
   border: 1px solid black;
   border-radius: 10px;
@@ -51,7 +51,7 @@
 }
 @media (max-width: 720px) {
   .modal {
-    top: 120px;
-    left: -123%;
+    top: 140px;
+    left: calc(50% - 160px);
   }
 }

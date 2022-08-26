@@ -15,7 +15,6 @@ const ProductDetails = () => {
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const isAdmin = useSelector((state) => state.userAccount.customer.isAdmin);
   const nightMode = useSelector((state) => state.nightMode);
-
   const { itemNo } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {

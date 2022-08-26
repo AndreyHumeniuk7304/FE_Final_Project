@@ -7,8 +7,8 @@ import { fetchCategoriesProducts } from "../../store/catalog/actions";
 import { useState } from "react";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import { switchThemeAction } from "../../store/switchTheme/actions";
 import { useEffect } from "react";
+import { switchThemeAction } from "../../store/switchTheme/action";
 
 const Header = (props) => {
   const { statusOpenBurger, handleBurger, closeBurger } = props;
@@ -18,14 +18,32 @@ const Header = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (nightMode === true) {
+    if (localStorage.getItem("nightMode")) {
+      dispatch(
+        switchThemeAction(!JSON.parse(localStorage.getItem("nightMode")))
+      );
+    } else {
       document.activeElement.classList.remove("light");
       document.activeElement.classList.add("dark");
-    } else {
+    }
+  });
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("nightMode")) === true) {
+      document.activeElement.classList.remove("light");
+      document.activeElement.classList.add("dark");
+    }
+
+    if (JSON.parse(localStorage.getItem("nightMode")) === false) {
       document.activeElement.classList.add("light");
       document.activeElement.classList.remove("dark");
     }
   }, [nightMode]);
+
+  const themeSwitcherLS = (value) => {
+    localStorage.setItem("nightMode", JSON.stringify(!nightMode));
+    dispatch(switchThemeAction(!value));
+  };
 
   return (
     <header className={statusOpenBurger ? "header active-burger" : "header"}>
@@ -39,11 +57,13 @@ const Header = (props) => {
             </div>
             {nightMode === true ? (
               <LightModeOutlinedIcon
-                onClick={() => dispatch(switchThemeAction(true))}
+                style={{ cursor: "pointer", margin: "0 20px" }}
+                onClick={() => themeSwitcherLS(false)}
               />
             ) : (
               <DarkModeOutlinedIcon
-                onClick={() => dispatch(switchThemeAction(false))}
+                style={{ cursor: "pointer", margin: "0 20px" }}
+                onClick={() => themeSwitcherLS(true)}
               />
             )}
 
