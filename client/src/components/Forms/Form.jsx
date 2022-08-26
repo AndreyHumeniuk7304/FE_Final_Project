@@ -12,7 +12,6 @@ const Form = ({
   errors,
   btnName,
   fieldArray,
-  control,
 }) => {
   const camelizeDecode = (str) => {
     const result = str.replace(/([A-Z])/g, " $1");
@@ -100,6 +99,7 @@ const Form = ({
       }
 
       default:
+        console.log(errors);
         return (
           <>
             {label && <label className="form__label">Enter the {label}:</label>}
@@ -110,7 +110,9 @@ const Form = ({
               formType={formType}
               label={label}
             />
-            <CustomErrorMessage err={errors[inputName]?.message} />
+            <CustomErrorMessage
+              err={errors[inputName]?.message || errors[inputName]}
+            />
           </>
         );
     }
@@ -143,7 +145,6 @@ Form.propTypes = {
   errors: PropTypes.object,
   btnName: PropTypes.string,
   fieldArray: PropTypes.object,
-  control: PropTypes.object,
 };
 
 export default Form;

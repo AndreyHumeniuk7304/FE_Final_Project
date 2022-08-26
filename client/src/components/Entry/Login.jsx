@@ -14,7 +14,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors = error && error },
   } = useForm({
     resolver: yupResolver(loginSchema),
     defaultValues: {
@@ -25,10 +25,8 @@ const Login = () => {
   });
 
   const setValidation = (values) => {
-    console.log(values);
     const isAutoLog = values.isSignedAutomatically;
     delete values.isSignedAutomatically;
-
     dispatch(fetchProducts(values, isAutoLog, nav));
   };
 
@@ -40,7 +38,7 @@ const Login = () => {
         formArr={loginInputNames}
         register={register}
         handleSubmit={handleSubmit}
-        errors={errors || error}
+        errors={Object.keys(errors).length ? errors : error}
         btnName={"LOG IN"}
       />
     </>
