@@ -29,7 +29,7 @@ const fetchProducts = (userData, isAutoLog, nav) => {
         setAuthToken(response.data.token);
       })
       .catch((error) => {
-        dispatch(setError(error.message));
+        dispatch(setError(error.response.data));
       });
   };
 };
