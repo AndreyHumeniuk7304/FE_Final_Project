@@ -13,7 +13,6 @@ const ProductDetails = () => {
   const [counter, setCounter] = useState(1);
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const nightMode = useSelector((state) => state.nightMode);
-
   const { itemNo } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {

@@ -1,9 +1,55 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { Container } from "@mui/system";
-import { Form, Formik, Field } from "formik";
+import { Form, Formik, Field, ErrorMessage } from "formik";
+import theme from "../../theme";
 import "./CheckoutForm.scss";
+import { object, string, number } from "yup";
+import PropTypes from "prop-types";
+// import CustomErrorMessage from "../Forms/CustomErrorMessage";
+
+const CustomErrorMessage = ({ name }) => (
+  <ErrorMessage name={name}>
+    {(message) => (
+      <div className="error-box">
+        <i>{message}</i>
+      </div>
+    )}
+  </ErrorMessage>
+);
 
 const CheckoutForm = () => {
+  const schema = object({
+    cardNumber: number()
+      .typeError("Enter the value in number type")
+      .required("It's a required field")
+      .positive("A phone number can't start with a minus")
+      .integer("A phone number can't include a decimal point"),
+    cardHolderName: string().required("It's a required field"),
+    cardExpiryDateOfMonth: string().required("It's a required field"),
+    cardExpiryDateOfYear: string().required("It's a required field"),
+    cvv: number()
+      .typeError("Enter the value in number type")
+      .required("It's a required field"),
+    // userAge: number()
+    //   .typeError("Enter the value in number type")
+    //   .required("It's a required field"),
+    // deliveryAddress: string().required("It's a required field"),
+    // phoneNumber: number()
+    //   .typeError("Enter the value in number type")
+    //   .required("It's a required field")
+    //   .positive("A phone number can't start with a minus")
+    //   .integer("A phone number can't include a decimal point"),
+  });
+
+  const handleSubmit = (values, actions) => {
+    actions.setSubmitting(true);
+    setTimeout(() => {
+      actions.resetForm(true);
+      console.log("user information:", values);
+      actions.setSubmitting(false);
+      // dispatch(clearCart());
+    }, 2000);
+  };
   return (
     <Container sx={{ maxWidth: "lg" }}>
       <Formik
@@ -14,6 +60,8 @@ const CheckoutForm = () => {
           cardExpiryDateOfYear: "",
           cvv: "",
         }}
+        onSubmit={handleSubmit}
+        validationSchema={schema}
       >
         {(props) => {
           return (
@@ -69,6 +117,10 @@ const CheckoutForm = () => {
                       id="cardNumber"
                       name="cardNumber"
                     />
+                    <CustomErrorMessage
+                      className="error-box"
+                      name="cardNumber"
+                    />
                   </div>
 
                   <div className="form__inputs-item">
@@ -80,13 +132,17 @@ const CheckoutForm = () => {
                       id="cardHolderName"
                       name="cardHolderName"
                     />
+                    <CustomErrorMessage
+                      className="error-box"
+                      name="cardHolderName"
+                    />
                   </div>
 
                   <div className="form__inputs-item">
                     <label className="label" htmlFor="cardExpiryDate">
                       Card Expiry Date
                     </label>
-                    <div>
+                    <Box sx={{ color: "primary.dark" }}>
                       <Field
                         as="select"
                         className="input-item input-item-sm"
@@ -107,6 +163,10 @@ const CheckoutForm = () => {
                         <option value="nov">11</option>
                         <option value="dec">12</option>
                       </Field>
+                      <CustomErrorMessage
+                        className="error-box"
+                        name="cardExpiryDateOfMonth"
+                      />
                       /
                       <Field
                         as="select"
@@ -122,7 +182,11 @@ const CheckoutForm = () => {
                         <option value="2026">2026</option>
                         <option value="2027">2027</option>
                       </Field>
-                    </div>
+                      <CustomErrorMessage
+                        className="error-box"
+                        name="cardExpiryDateOfYear"
+                      />
+                    </Box>
                   </div>
                   <div className="form__inputs-item">
                     <label className="label" htmlFor="cvv">
@@ -133,8 +197,30 @@ const CheckoutForm = () => {
                       id="cvv"
                       name="cvv"
                     />
+                    <CustomErrorMessage className="error-box" name="cvv" />
                     {/* <a href="!#">What is CVC/CVV/CID ?</a> */}
                   </div>
+                  <Box sx={{ display: "flex", justifyContent: "center" }}>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      sx={{
+                        [theme.breakpoints.between("mobile", "desktop")]: {
+                          padding: "17px 115px",
+                          fontSize: "18px",
+                          lineHeight: "25px",
+                        },
+                        backgroundColor: "primary.dark",
+                        padding: "16px 60px",
+                        fontSize: "18px",
+                        lineHeight: "25px",
+                      }}
+                      // disabled={props.isSubmitting}
+                      className="checkout-btn"
+                    >
+                      pay
+                    </Button>
+                  </Box>
                 </section>
               </Form>
             </>
@@ -146,3 +232,7 @@ const CheckoutForm = () => {
 };
 
 export default CheckoutForm;
+
+CustomErrorMessage.propTypes = {
+  name: PropTypes.string,
+};
