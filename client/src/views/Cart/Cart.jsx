@@ -99,7 +99,7 @@ const Cart = () => {
               bgcolor: "secondary.main",
               padding: 2,
               color: "primary.dark",
-              mt: 2,
+              paddingTop: "10 px",
             }}
           >
             <Typography
