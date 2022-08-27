@@ -2,20 +2,24 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Form from "../Forms/Form";
 import { productInputNames, productSchema } from "./data";
+import PropTypes from "prop-types";
+import { useEffect } from "react";
 
-const ProductForm = () => {
-  const getCurrentDate = () => {
-    const date = new Date();
-    return `${date.getFullYear()}-${
-      date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth()
-    }-${date.getDate() < 10 ? +date.getDate() : date.getDate()}`;
-  };
+const ProductForm = (props) => {
+  const { initialValue, onSubmit } = props;
+  // const getCurrentDate = () => {
+  //   const date = new Date();
+  //   return `${date.getFullYear()}-${
+  //     date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth()
+  //   }-${date.getDate() < 10 ? +date.getDate() : date.getDate()}`;
+  // };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
+    reset,
   } = useForm({
     resolver: yupResolver(productSchema),
     defaultValues: {
@@ -30,16 +34,19 @@ const ProductForm = () => {
       name: "",
       currentPrice: "",
       previousPrice: "",
-      date: getCurrentDate(),
+      // date: getCurrentDate(),
     },
   });
+
   const fieldArray = useFieldArray({
     control,
     name: "imageUrls",
   });
 
+  useEffect(() => reset(initialValue), [initialValue]);
+
   const setValidation = (values) => {
-    console.log(values);
+    onSubmit(values);
   };
 
   return (
@@ -56,6 +63,11 @@ const ProductForm = () => {
       />
     </>
   );
+};
+
+ProductForm.propTypes = {
+  initialValue: PropTypes.object,
+  onSubmit: PropTypes.func,
 };
 
 export default ProductForm;

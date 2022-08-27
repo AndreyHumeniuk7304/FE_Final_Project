@@ -1,12 +1,8 @@
-import axiosDefault from "axios";
+import axios from "../ulits/instance/instance";
 
-const axios = axiosDefault.create({
-  baseURL: "http://localhost:3001/api",
-});
-
-export const createCart = async (products) => {
+export const updateProduct = async (products, id) => {
   try {
-    const { data } = await axios.post("/cart", { products });
+    const { data } = await axios.put(`/products/${id}`, products);
     return data;
   } catch (err) {
     return err;
