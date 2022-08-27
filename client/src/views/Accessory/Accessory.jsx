@@ -25,7 +25,6 @@ const Accessory = () => {
         setSearch={setSearch}
         search={search}
       />
-      ;
     </div>
   );
 };

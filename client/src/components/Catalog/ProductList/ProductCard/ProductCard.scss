@@ -1,6 +1,6 @@
 .card-wrapper {
   width: 90%;
-  margin-top: 11%;
+  margin-top: 8%;
   margin-bottom: 11%;
   cursor: pointer;
   display: inline-block;
@@ -10,9 +10,20 @@
     height: auto;
   }
 
+  &__name-one {
+    font-size: 2.5vw;
+    margin-top: 4%;
+  }
+
   &__name {
     font-size: 1.6vw;
     margin-top: 4%;
+  }
+
+  &__price-one {
+    font-size: 3vw;
+    margin-top: 4%;
+    font-weight: bold;
   }
 
   &__price {

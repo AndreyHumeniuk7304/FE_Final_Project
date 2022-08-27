@@ -23,7 +23,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: ["Open Sans", "sans-serif"].join(","),
-    secondaryFontFamily: ["Josefin Sans"].join(","),
+    secondaryFontFamily: ["Josefin Sans", "sans-serif"].join(","),
     Roboto: ["Roboto", "sans-serif"].join(","),
     h5: {
       color: "#000000",

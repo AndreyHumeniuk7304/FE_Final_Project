@@ -20,7 +20,7 @@ const Woman = () => {
 
   return (
     <div>
-      <Catalog categories={"Ladies"} setSearch={setSearch} search={search} />;
+      <Catalog categories={"Ladies"} setSearch={setSearch} search={search} />
     </div>
   );
 };

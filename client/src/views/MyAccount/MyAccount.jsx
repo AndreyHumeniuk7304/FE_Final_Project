@@ -1,4 +1,10 @@
+import Cabinet from "../../components/Cabinet/Cabinet";
+
 const MyAccount = () => {
-  return <></>;
+  return (
+    <>
+      <Cabinet />
+    </>
+  );
 };
 export default MyAccount;
