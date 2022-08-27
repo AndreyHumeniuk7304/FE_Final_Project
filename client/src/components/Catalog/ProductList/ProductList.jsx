@@ -104,6 +104,7 @@ const ProductList = () => {
                 image={card.imageUrls[0]}
                 name={card.name}
                 price={card.currentPrice}
+                viewIsOne={isOneCartView}
               />
             </Link>
           );
