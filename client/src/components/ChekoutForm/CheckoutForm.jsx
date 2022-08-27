@@ -5,7 +5,9 @@ import theme from "../../theme";
 import "./CheckoutForm.scss";
 import { object, string, number } from "yup";
 import PropTypes from "prop-types";
-// import CustomErrorMessage from "../Forms/CustomErrorMessage";
+import { useDispatch, useSelector } from "react-redux";
+import { getCartItem, isNotLoaded } from "../../store/cart/actions";
+import { useEffect } from "react";
 
 const CustomErrorMessage = ({ name }) => (
   <ErrorMessage name={name}>
@@ -18,6 +20,26 @@ const CustomErrorMessage = ({ name }) => (
 );
 
 const CheckoutForm = () => {
+  const dispatch = useDispatch();
+  const isLogin = useSelector((state) => state.userAccount.isLogin);
+  const cartList = useSelector((state) => state.cart.list);
+
+  useEffect(() => {
+    dispatch(getCartItem(isLogin));
+    return () => dispatch(isNotLoaded());
+  }, []);
+
+  const getTotalPrice = () => {
+    return cartList.length
+      ? cartList.reduce(
+          (accumulator, currentValue) =>
+            accumulator +
+            currentValue.product.currentPrice * currentValue.cartQuantity,
+          0
+        )
+      : 0;
+  };
+
   const schema = object({
     cardNumber: number()
       .typeError("Enter the value in number type")
@@ -30,15 +52,7 @@ const CheckoutForm = () => {
     cvv: number()
       .typeError("Enter the value in number type")
       .required("It's a required field"),
-    // userAge: number()
-    //   .typeError("Enter the value in number type")
-    //   .required("It's a required field"),
-    // deliveryAddress: string().required("It's a required field"),
-    // phoneNumber: number()
-    //   .typeError("Enter the value in number type")
-    //   .required("It's a required field")
-    //   .positive("A phone number can't start with a minus")
-    //   .integer("A phone number can't include a decimal point"),
+    deliveryAdress: string().required("It's a required field"),
   });
 
   const handleSubmit = (values, actions) => {
@@ -59,23 +73,29 @@ const CheckoutForm = () => {
           cardExpiryDateOfMonth: "",
           cardExpiryDateOfYear: "",
           cvv: "",
+          deliveryAdress: "",
         }}
         onSubmit={handleSubmit}
         validationSchema={schema}
       >
-        {(props) => {
+        {() => {
           return (
             <>
               <Form className="form">
                 <Typography
-                  align="center"
                   sx={{
+                    [theme.breakpoints.between("mobile", "tablet")]: {
+                      fontSize: 14,
+                      textAlign: "center",
+                      mb: "28px",
+                    },
                     fontFamily: "fontFamily",
+                    textAlign: "start",
                     color: "primary.dark",
-                    fontSize: 14,
+                    fontSize: 18,
                     fontWeight: 700,
                     paddingTop: "10px",
-                    mb: "28px",
+                    mb: "52px",
                   }}
                   component="h2"
                 >
@@ -84,27 +104,39 @@ const CheckoutForm = () => {
 
                 <Typography
                   sx={{
-                    fontSize: 14,
+                    [theme.breakpoints.between("mobile", "tablet")]: {
+                      fontSize: 14,
+                      fontWeight: 400,
+                      textAlign: "center",
+                    },
+                    fontSize: 18,
                     fontFamily: "fontFamily",
                     color: "primary.dark",
-                    fontWeight: 400,
+                    fontWeight: 500,
                     mb: "40px",
+                    textAlign: "start",
                   }}
                   component="h4"
                   align="center"
                 >
-                  Total payment amount $ 1260
+                  Total payment amount $ {getTotalPrice()}
                 </Typography>
 
                 <div className="form__pay-method">
                   <div className="form__pay-method__item">
-                    <img src="./images/mastercard-pay.png" alt="mastercard" />
+                    <a href="!#">
+                      <img src="./images/mastercard-pay.png" alt="mastercard" />
+                    </a>
                   </div>
                   <div className="form__pay-method__item">
-                    <img src="./images/amer-express-pay.jpg" alt="express" />
+                    <a href="!#">
+                      <img src="./images/amer-express-pay.jpg" alt="express" />
+                    </a>
                   </div>
                   <div className="form__pay-method__item">
-                    <img src="./images/visa-pay.png" alt="visa" />
+                    <a href="!#">
+                      <img src="./images/visa-pay.png" alt="visa" />
+                    </a>
                   </div>
                 </div>
                 <section className="form__inputs">
@@ -113,7 +145,7 @@ const CheckoutForm = () => {
                       Card Number
                     </label>
                     <Field
-                      className="input-item"
+                      className="input-item input-item-mob"
                       id="cardNumber"
                       name="cardNumber"
                     />
@@ -128,7 +160,7 @@ const CheckoutForm = () => {
                       Card Holder Name
                     </label>
                     <Field
-                      className="input-item"
+                      className="input-item "
                       id="cardHolderName"
                       name="cardHolderName"
                     />
@@ -193,29 +225,49 @@ const CheckoutForm = () => {
                       CVC/CVV/CID
                     </label>
                     <Field
+                      type="password"
                       className="input-item input-item-cvv"
                       id="cvv"
                       name="cvv"
                     />
                     <CustomErrorMessage className="error-box" name="cvv" />
-                    {/* <a href="!#">What is CVC/CVV/CID ?</a> */}
                   </div>
-                  <Box sx={{ display: "flex", justifyContent: "center" }}>
+
+                  <div className="form__inputs-item">
+                    <label className="label" htmlFor="deliveryAdress">
+                      Delivery Adress
+                    </label>
+                    <Field
+                      className="input-item"
+                      id="deliveryAdress"
+                      name="deliveryAdress"
+                    />
+                    <CustomErrorMessage
+                      className="error-box"
+                      name="deliveryAdress"
+                    />
+                  </div>
+                  <Box
+                    sx={{
+                      [theme.breakpoints.between("mobile", "desktop")]: {
+                        justifyContent: "center",
+                      },
+                      justifyContent: "flex-start",
+                    }}
+                  >
                     <Button
                       type="submit"
                       variant="contained"
                       sx={{
                         [theme.breakpoints.between("mobile", "desktop")]: {
-                          padding: "17px 115px",
-                          fontSize: "18px",
+                          fontSize: "16px",
                           lineHeight: "25px",
                         },
+                        padding: "17px 115px",
                         backgroundColor: "primary.dark",
-                        padding: "16px 60px",
                         fontSize: "18px",
-                        lineHeight: "25px",
+                        lineHeight: "35px",
                       }}
-                      // disabled={props.isSubmitting}
                       className="checkout-btn"
                     >
                       pay

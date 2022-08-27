@@ -23,10 +23,6 @@
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 30px;
-
-    &:last-child {
-      padding-bottom: 55px;
-    }
   }
 
   &__pay-method {
@@ -60,4 +56,50 @@
 .error-box {
   color: red;
   padding: 5px;
+}
+
+@media screen and (min-width: 768px) {
+  .label {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    margin-bottom: 0;
+    margin-right: 10px;
+
+    &-sm {
+      display: block;
+    }
+  }
+
+  .input-item {
+    padding: 2px;
+    font-size: 18px;
+    &-mob {
+      width: 40%;
+    }
+
+    border: none;
+    border-bottom: 1px solid black;
+    padding: 3px;
+  }
+
+  .form {
+    padding: 50px 20px;
+    &__pay-method {
+      margin-bottom: 60px;
+      justify-content: start;
+      gap: 37px;
+    }
+
+    &__inputs-item {
+      flex-wrap: wrap;
+      flex-direction: row;
+    }
+  }
+
+  .error-box {
+    width: 100%;
+    color: red;
+    padding: 12px 0;
+  }
 }
