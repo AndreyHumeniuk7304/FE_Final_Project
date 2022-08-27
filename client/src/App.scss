@@ -33,21 +33,21 @@ body {
 
 .main {
   flex: 1 1 auto;
-  // padding-top: 130px;
+  padding-top: 130px;
 }
 
 .hiddenScroll {
   overflow: hidden;
 }
 
-// @media screen and (min-width: 765px) {
-//   .main {
-//     padding-top: 140px;
-//   }
-// }
+@media screen and (min-width: 765px) {
+  .main {
+    padding-top: 140px;
+  }
+}
 
-// @media screen and (min-width: 1023px) {
-//   .main {
-//     padding-top: 75px;
-//   }
-// }
+@media screen and (min-width: 1023px) {
+  .main {
+    padding-top: 75px;
+  }
+}

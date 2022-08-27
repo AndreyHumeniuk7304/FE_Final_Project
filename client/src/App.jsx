@@ -16,6 +16,10 @@ import Contact from "./components/Footer/Contact/Contact";
 import { useEffect, useState } from "react";
 import Checkout from "./views/Checkout/Checkout";
 import Entry from "./views/Entry/Entry";
+import Profile from "./components/Cabinet/Profile/Profile";
+import History from "./components/Cabinet/History/History";
+import Wishlist from "./components/Cabinet/Wishlist/Wishlist";
+import Address from "./components/Cabinet/Address/Address";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -66,6 +70,10 @@ const App = () => {
             <Route path="/product/:itemNo" element={<ProductDetails />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/my-account/profile" element={<Profile />} />
+            <Route path="/my-account/history" element={<History />} />
+            <Route path="/my-account/wishlist" element={<Wishlist />} />
+            <Route path="/my-account/address-book" element={<Address />} />
             <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </div>
