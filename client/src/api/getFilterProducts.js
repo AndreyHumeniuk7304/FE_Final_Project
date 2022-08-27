@@ -1,6 +1,10 @@
-import instance from "../ulits/instance/instance";
+import axios from "../ulits/instance/instance";
 
 export default async function getFilterProducts(filterCategory, config) {
-  const { data } = await instance.post(`${filterCategory}`, config);
-  return data;
+  try {
+    const { data } = await axios.post(`${filterCategory}`, config);
+    return data;
+  } catch (err) {
+    return err;
+  }
 }

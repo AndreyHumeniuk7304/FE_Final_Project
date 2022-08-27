@@ -1,14 +1,4 @@
-import axiosDefault from "axios";
-
-const axios = axiosDefault.create({
-  baseURL: "http://localhost:3001/api",
-});
-
-const token = localStorage.getItem("login");
-
-if (token) {
-  axios.defaults.headers.common["Authorization"] = token;
-}
+import axios from "../ulits/instance/instance";
 
 export const createCart = async (products) => {
   try {
