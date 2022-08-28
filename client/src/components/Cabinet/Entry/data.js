@@ -2,8 +2,14 @@ import * as yup from "yup";
 import "yup-phone";
 
 export const loginInputNames = [
-  { inputName: "loginOrEmail", formType: "input" },
-  { inputName: "password", formType: "password" },
+  {
+    inputName: "loginOrEmail",
+    formType: "input",
+  },
+  {
+    inputName: "password",
+    formType: "password",
+  },
   {
     inputName: "isSignedAutomatically",
     formType: "checkbox",
