@@ -99,6 +99,7 @@ const Form = ({
       }
 
       default:
+        errors.isEmpty && console.log(errors);
         return (
           <>
             {label && <label className="form__label">Enter the {label}:</label>}
