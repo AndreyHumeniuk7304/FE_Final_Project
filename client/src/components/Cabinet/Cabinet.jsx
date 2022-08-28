@@ -59,6 +59,7 @@ const Cabinet = () => {
                 </div>
               </div>
             </Link>
+            <Logout />
           </div>
         </div>
       ) : (
