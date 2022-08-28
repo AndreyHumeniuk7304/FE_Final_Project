@@ -5,14 +5,13 @@ import { productInputNames, productSchema } from "./data";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 
-const ProductForm = (props) => {
-  const { initialValue, onSubmit } = props;
-  // const getCurrentDate = () => {
-  //   const date = new Date();
-  //   return `${date.getFullYear()}-${
-  //     date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth()
-  //   }-${date.getDate() < 10 ? +date.getDate() : date.getDate()}`;
-  // };
+const ProductForm = ({ initialValue, onSubmit }) => {
+  const getCurrentDate = () => {
+    const date = new Date();
+    return `${date.getFullYear()}-${
+      date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth()
+    }-${date.getDate() < 10 ? +date.getDate() : date.getDate()}`;
+  };
 
   const {
     register,
@@ -24,11 +23,11 @@ const ProductForm = (props) => {
     resolver: yupResolver(productSchema),
     defaultValues: {
       brand: "",
-      Categories: "",
+      categories: "",
       mechanism: "",
       color: "",
       material: "",
-      enabled: "",
+      enabled: true,
       imageUrls: [" "],
       quantity: 1,
       name: "",

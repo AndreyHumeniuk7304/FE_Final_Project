@@ -1,8 +1,8 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import addNewCustomers from "../../api/addNewCustomer";
+import addNewCustomers from "../../../api/addNewCustomer";
 import PropTypes from "prop-types";
-import Form from "../Forms/Form";
+import Form from "../../Forms/Form";
 import { registInputNames, registSchema } from "./data";
 
 const Registrations = ({ setIsRegist }) => {

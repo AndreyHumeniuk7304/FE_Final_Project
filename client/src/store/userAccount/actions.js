@@ -2,8 +2,8 @@ import getCustomers from "../../api/getCustomers";
 
 import jwt_decode from "jwt-decode";
 
-const getIsLogin = () => {
-  return { type: "SET_IS_LOGIN" };
+const getIsLogin = (isLogin) => {
+  return { type: "SET_IS_LOGIN", payload: isLogin };
 };
 
 const setLogin = (login) => {
@@ -18,7 +18,7 @@ const getSuccess = (data, dispatch) => {
   dispatch(setLogin({ ...jwt_decode(data.token), token: data.token }));
 };
 
-const fetchProducts = (userData, isAutoLog, nav) => {
+const fetchUser = (userData, isAutoLog, nav) => {
   return async (dispatch) => {
     await getCustomers(userData)
       .then((response) => {
@@ -34,4 +34,4 @@ const fetchProducts = (userData, isAutoLog, nav) => {
   };
 };
 
-export { fetchProducts, setError, getSuccess };
+export { fetchUser, setError, getSuccess, getIsLogin, setLogin };

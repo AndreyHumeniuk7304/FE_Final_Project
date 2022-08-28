@@ -1,8 +1,16 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Logout from "./Logout/Logout";
 
 const Cabinet = () => {
   const isAdmin = useSelector((state) => state.userAccount.customer.isAdmin);
+  const isLogin = useSelector((state) => state.userAccount.isLogin);
+  const nav = useNavigate();
+
+  useEffect(() => {
+    !isLogin ? nav("/my-account/entry") : nav("/my-account/user");
+  }, [isLogin]);
 
   return (
     <div className="my-account">
@@ -51,6 +59,7 @@ const Cabinet = () => {
                 </div>
               </div>
             </Link>
+            <Logout />
           </div>
         </div>
       ) : (
@@ -167,6 +176,7 @@ const Cabinet = () => {
                 </div>
               </div>
             </Link>
+            <Logout />
           </div>
         </div>
       )}

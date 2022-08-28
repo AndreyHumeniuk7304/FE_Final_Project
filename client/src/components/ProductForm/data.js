@@ -1,7 +1,6 @@
 import * as yup from "yup";
 
 const brand = [
-  "brand",
   "morellato",
   "hirsch",
   "certina",
@@ -13,11 +12,10 @@ const brand = [
   "frederique",
 ];
 
-const Categories = ["Categories", "Mens", "Ladies", "Accessories"];
-const mechanism = ["mechanism", "quartz", "mechanics"];
+const categories = ["Mens", "Ladies", "Accessories"];
+const mechanism = ["quartz", "mechanics"];
 
 const color = [
-  "color",
   "silver",
   "blue",
   "grey",
@@ -30,7 +28,7 @@ const color = [
   "gold",
 ];
 
-const material = ["material", "polymer", "rubber", "steel", "leather", "nylon"];
+const material = ["polymer", "rubber", "steel", "leather", "nylon"];
 
 export const productInputNames = [
   {
@@ -40,8 +38,8 @@ export const productInputNames = [
     label: "brand",
   },
   {
-    inputName: "Categories",
-    formName: Categories,
+    inputName: "categories",
+    formName: categories,
     formType: "droplist",
     label: "categories",
   },
@@ -66,7 +64,7 @@ export const productInputNames = [
   },
   {
     inputName: "enabled",
-    formName: ["enabled", "true", "false"],
+    formName: ["true", "false"],
     formType: "droplist",
     label: "is available",
   },
@@ -86,7 +84,7 @@ export const productInputNames = [
 
 export const productSchema = yup.object({
   brand: yup.string().required("Brand is required."),
-  Categories: yup.string().required("Categories is required."),
+  categories: yup.string().required("Categories is required."),
   mechanism: yup.string().required("Mechanism is required."),
   color: yup.string().required("Color is required."),
   material: yup.string().required("Material is required."),
