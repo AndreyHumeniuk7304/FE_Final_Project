@@ -29,7 +29,7 @@ const App = () => {
   useEffect(() => {
     localStorage.getItem("login") &&
       getSuccess(
-        { success: true, token: localStorage.getItem("login") },
+        { success: true, token: JSON.parse(localStorage.getItem("login")) },
         dispatch
       );
   }, []);
