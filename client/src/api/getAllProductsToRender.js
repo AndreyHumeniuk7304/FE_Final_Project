@@ -1,14 +1,10 @@
-import axios from "axios";
+import axios from "../ulits/instance/instance";
 
 export default async function getAllProductsToRender() {
-  const config = {
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-    },
-  };
-  const { data } = await axios.get(
-    `http://localhost:3001/api/products`,
-    config
-  );
-  return data;
+  try {
+    const { data } = await axios.get("/products");
+    return data;
+  } catch (err) {
+    return err;
+  }
 }

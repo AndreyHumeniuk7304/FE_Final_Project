@@ -1,11 +1,7 @@
-import instance from "../ulits/instance/instance";
+import axios from "../ulits/instance/instance";
 
 export default async function getCategoryProductsToRender(filterCategory) {
-  const config = {
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-    },
-  };
-  const { data } = await instance.get(`${filterCategory}`, config);
+  const { data } = await axios.get(`${filterCategory}`);
+
   return data.products;
 }
