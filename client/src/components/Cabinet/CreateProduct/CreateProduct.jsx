@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import addNewProduct from "../../../api/addNewProduct";
+import { addNewProduct } from "../../../api/products";
 import ProductForm from "../../ProductForm/ProductForm";
 
 const CreateProduct = () => {

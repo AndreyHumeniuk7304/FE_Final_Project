@@ -8,3 +8,12 @@ export const updateProduct = async (products, id) => {
     return err;
   }
 };
+
+export const addNewProduct = async (values) => {
+  try {
+    const { data } = await axios.post("/products", values);
+    return data;
+  } catch (err) {
+    return err;
+  }
+};
