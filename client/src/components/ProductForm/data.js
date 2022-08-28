@@ -13,7 +13,7 @@ const brand = [
   "frederique",
 ];
 
-const Categories = ["Categories", "Mens", "Ladies", "Accessories"];
+const categories = ["categories", "Mens", "Ladies", "Accessories"];
 const mechanism = ["mechanism", "quartz", "mechanics"];
 
 const color = [
@@ -40,8 +40,8 @@ export const productInputNames = [
     label: "brand",
   },
   {
-    inputName: "Categories",
-    formName: Categories,
+    inputName: "categories",
+    formName: categories,
     formType: "droplist",
     label: "categories",
   },
@@ -77,16 +77,16 @@ export const productInputNames = [
   { inputName: "currentPrice", formType: "number", label: "current price" },
   { inputName: "previousPrice", formType: "number", label: "previous price" },
 
-  // {
-  //   inputName: "date",
-  //   formType: "date",
-  //   label: "current date",
-  // },
+  {
+    inputName: "date",
+    formType: "date",
+    label: "current date",
+  },
 ];
 
 export const productSchema = yup.object({
   brand: yup.string().required("Brand is required."),
-  Categories: yup.string().required("Categories is required."),
+  categories: yup.string().required("Categories is required."),
   mechanism: yup.string().required("Mechanism is required."),
   color: yup.string().required("Color is required."),
   material: yup.string().required("Material is required."),
@@ -95,5 +95,5 @@ export const productSchema = yup.object({
   quantity: yup.number().required("Quantity is required."),
   name: yup.string().min(20, "Name is full description of product, min 20."),
   currentPrice: yup.number().required("CurrentPrice is required."),
-  // date: yup.date().required("CurrentPrice is required."),
+  date: yup.date().required("CurrentPrice is required."),
 });

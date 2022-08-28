@@ -23,7 +23,7 @@ const ProductForm = ({ initialValue, onSubmit }) => {
     resolver: yupResolver(productSchema),
     defaultValues: {
       brand: "",
-      Categories: "",
+      categories: "",
       mechanism: "",
       color: "",
       material: "",
@@ -33,7 +33,7 @@ const ProductForm = ({ initialValue, onSubmit }) => {
       name: "",
       currentPrice: "",
       previousPrice: "",
-      // date: getCurrentDate(),
+      date: getCurrentDate(),
     },
   });
 

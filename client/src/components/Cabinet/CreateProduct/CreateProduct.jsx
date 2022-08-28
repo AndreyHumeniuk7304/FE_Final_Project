@@ -1,11 +1,9 @@
-import { useDispatch } from "react-redux";
 import { addNewProduct } from "../../../api/products";
 import ProductForm from "../../ProductForm/ProductForm";
 
 const CreateProduct = () => {
-  const dispatch = useDispatch();
   const onSubmit = (values) => {
-    dispatch(addNewProduct(values));
+    addNewProduct(values);
     console.log(values);
   };
   return (
