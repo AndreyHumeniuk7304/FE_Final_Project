@@ -18,6 +18,7 @@ a {
   color: white;
   width: 100%;
   z-index: 2;
+  overflow: hidden;
   overflow-y: auto;
 
   &__top-content {
@@ -251,10 +252,10 @@ a {
   .header {
     &__top-content {
       flex-basis: 60%;
-    }
-
-    &::before {
-      display: none;
+      flex-wrap: nowrap;
+      &::before {
+        display: none;
+      }
     }
 
     &__account-container__link {
