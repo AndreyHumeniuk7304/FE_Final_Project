@@ -1,7 +1,15 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import Logout from "./Logout/Logout";
 
 const Cabinet = () => {
+  const isLogin = useSelector((state) => state.userAccount.isLogin);
+  const nav = useNavigate();
+
+  useEffect(() => {
+    !isLogin ? nav("/my-account/entry") : nav("/my-account/user");
+  }, [isLogin]);
   return (
     <div className="my-account">
       <div className="my-account__container">

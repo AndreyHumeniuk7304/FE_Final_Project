@@ -1,8 +1,8 @@
 import getCustomers, { setAuthToken } from "../../api/getCustomers";
 import jwt_decode from "jwt-decode";
 
-const getIsLogin = () => {
-  return { type: "SET_IS_LOGIN" };
+const getIsLogin = (isLogin) => {
+  return { type: "SET_IS_LOGIN", payload: isLogin };
 };
 
 const setLogin = (login) => {

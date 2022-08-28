@@ -20,18 +20,17 @@ import Profile from "./components/Cabinet/Profile/Profile";
 import History from "./components/Cabinet/History/History";
 import Wishlist from "./components/Cabinet/Wishlist/Wishlist";
 import Address from "./components/Cabinet/Address/Address";
+import { setAuthToken } from "./api/getCustomers";
 
 const App = () => {
   const dispatch = useDispatch();
+  const token = setAuthToken(localStorage.getItem("login"));
 
   useEffect(() => {
-    localStorage.getItem("login")
-      ? getSuccess(
-          { success: true, token: localStorage.getItem("login") },
-          dispatch
-        )
+    token
+      ? getSuccess({ success: true, token: token }, dispatch)
       : dispatch(getIsLogin(false)) && dispatch(setLogin({}));
-  }, [localStorage.getItem("login")]);
+  }, []);
 
   const [statusOpenBurger, setStatusOpenBurger] = useState(false);
 

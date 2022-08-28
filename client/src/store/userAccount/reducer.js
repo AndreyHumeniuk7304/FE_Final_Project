@@ -10,7 +10,7 @@ const userAccountReducer = (state = initialState, action) => {
     case "SET_IS_LOGIN": {
       return {
         ...state,
-        isLogin: true,
+        isLogin: action.payload,
         error: {},
       };
     }
