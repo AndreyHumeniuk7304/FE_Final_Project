@@ -2,6 +2,8 @@
   &__box {
     display: grid;
     grid-gap: 30px;
+    max-width: 500px;
+    margin: 0 auto;
   }
 
   &__input {
