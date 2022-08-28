@@ -11,7 +11,7 @@ import Cart from "./views/Cart";
 import Footer from "./components/Footer/Footer";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import { useDispatch } from "react-redux";
-import { getSuccess } from "./store/userAccount/actions";
+import { getIsLogin, getSuccess, setLogin } from "./store/userAccount/actions";
 import Contact from "./components/Footer/Contact/Contact";
 import { useEffect, useState } from "react";
 import Checkout from "./views/Checkout/Checkout";
@@ -23,13 +23,15 @@ import Address from "./components/Cabinet/Address/Address";
 
 const App = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
-    localStorage.getItem("login") &&
-      getSuccess(
-        { success: true, token: localStorage.getItem("login") },
-        dispatch
-      );
-  }, []);
+    localStorage.getItem("login")
+      ? getSuccess(
+          { success: true, token: localStorage.getItem("login") },
+          dispatch
+        )
+      : dispatch(getIsLogin(false)) && dispatch(setLogin({}));
+  }, [localStorage.getItem("login")]);
 
   const [statusOpenBurger, setStatusOpenBurger] = useState(false);
 

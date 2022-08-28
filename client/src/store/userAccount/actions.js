@@ -13,12 +13,11 @@ const setError = (error) => {
 };
 
 const getSuccess = (data, dispatch) => {
-  const { success, token } = data;
-  dispatch(getIsLogin(success));
-  dispatch(setLogin(jwt_decode(token)));
+  dispatch(getIsLogin(data.success));
+  dispatch(setLogin(jwt_decode(data.token)));
 };
 
-const fetchProducts = (userData, isAutoLog, nav) => {
+const fetchUser = (userData, isAutoLog, nav) => {
   return async (dispatch) => {
     await getCustomers(userData)
       .then((response) => {
@@ -35,4 +34,4 @@ const fetchProducts = (userData, isAutoLog, nav) => {
   };
 };
 
-export { fetchProducts, setError, getSuccess, setLogin, getIsLogin };
+export { fetchUser, setError, getSuccess, getIsLogin, setLogin };
