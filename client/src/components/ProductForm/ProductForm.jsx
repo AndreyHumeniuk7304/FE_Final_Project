@@ -5,7 +5,7 @@ import { productInputNames, productSchema } from "./data";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 
-const ProductForm = () => {
+const ProductForm = ({ initialValue, onSubmit }) => {
   const getCurrentDate = () => {
     const date = new Date();
     return `${date.getFullYear()}-${
