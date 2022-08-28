@@ -20,6 +20,7 @@ import Profile from "./components/Cabinet/Profile/Profile";
 import History from "./components/Cabinet/History/History";
 import Wishlist from "./components/Cabinet/Wishlist/Wishlist";
 import Address from "./components/Cabinet/Address/Address";
+// import UpdateProducts from "./views/UpdateProducts";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -70,6 +71,9 @@ const App = () => {
             <Route path="/product/:itemNo" element={<ProductDetails />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/contact" element={<Contact />} />
+            {/* <Route path="/my-account/create-product" element={ } /> */}
+            {/* <Route path="/my-account/update-product" element={<UpdateProducts />} /> */}
+            {/* <Route path="/my-account/delete-product" element={ } /> */}
             <Route path="/my-account/profile" element={<Profile />} />
             <Route path="/my-account/history" element={<History />} />
             <Route path="/my-account/wishlist" element={<Wishlist />} />
