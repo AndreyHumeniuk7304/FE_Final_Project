@@ -1,7 +1,6 @@
 import * as yup from "yup";
 
 const brand = [
-  "brand",
   "morellato",
   "hirsch",
   "certina",
@@ -13,11 +12,10 @@ const brand = [
   "frederique",
 ];
 
-const categories = ["categories", "Mens", "Ladies", "Accessories"];
-const mechanism = ["mechanism", "quartz", "mechanics"];
+const categories = ["Mens", "Ladies", "Accessories"];
+const mechanism = ["quartz", "mechanics"];
 
 const color = [
-  "color",
   "silver",
   "blue",
   "grey",
@@ -30,7 +28,7 @@ const color = [
   "gold",
 ];
 
-const material = ["material", "polymer", "rubber", "steel", "leather", "nylon"];
+const material = ["polymer", "rubber", "steel", "leather", "nylon"];
 
 export const productInputNames = [
   {
@@ -66,7 +64,7 @@ export const productInputNames = [
   },
   {
     inputName: "enabled",
-    formName: ["enabled", "true", "false"],
+    formName: ["true", "false"],
     formType: "droplist",
     label: "is available",
   },

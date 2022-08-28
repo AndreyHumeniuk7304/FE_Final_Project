@@ -22,11 +22,11 @@ const ProductForm = ({ initialValue, onSubmit }) => {
   } = useForm({
     resolver: yupResolver(productSchema),
     defaultValues: {
-      brand: "",
-      categories: "",
-      mechanism: "",
-      color: "",
-      material: "",
+      brand: "brand",
+      categories: "categories",
+      mechanism: "mechanism",
+      color: "color",
+      material: "material",
       enabled: true,
       imageUrls: [" "],
       quantity: 1,
