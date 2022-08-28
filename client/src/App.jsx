@@ -21,14 +21,15 @@ import History from "./components/Cabinet/History/History";
 import Wishlist from "./components/Cabinet/Wishlist/Wishlist";
 import Address from "./components/Cabinet/Address/Address";
 import { setAuthToken } from "./ulits/instance/instance";
-// import UpdateProducts from "./views/UpdateProducts";
+import UpdateProducts from "./views/UpdateProducts";
+import UpdateProduct from "./components/UpdateProduct";
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     localStorage.getItem("login") &&
       getSuccess(
-        { success: true, token: localStorage.getItem("login") },
+        { success: true, token: JSON.parse(localStorage.getItem("login")) },
         dispatch
       );
   }, []);
@@ -75,13 +76,18 @@ const App = () => {
             <Route path="/cart" element={<Cart />} />
             <Route path="/contact" element={<Contact />} />
             {/* <Route path="/my-account/create-product" element={ } /> */}
-            {/* <Route path="/my-account/update-product" element={<UpdateProducts />} /> */}
+            <Route
+              path="/my-account/update-product"
+              element={<UpdateProducts />}
+            />
             {/* <Route path="/my-account/delete-product" element={ } /> */}
             <Route path="/my-account/profile" element={<Profile />} />
             <Route path="/my-account/history" element={<History />} />
             <Route path="/my-account/wishlist" element={<Wishlist />} />
             <Route path="/my-account/address-book" element={<Address />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/product/:itemNo/update" element={<UpdateProduct />} />
+            <Route path="/update-products" element={<UpdateProducts />} />
           </Routes>
         </div>
         <Footer />
