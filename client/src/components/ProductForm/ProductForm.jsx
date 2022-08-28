@@ -33,7 +33,7 @@ const ProductForm = ({ initialValue, onSubmit }) => {
       name: "",
       currentPrice: "",
       previousPrice: "",
-      date: getCurrentDate(),
+      // date: getCurrentDate(),
     },
   });
 
