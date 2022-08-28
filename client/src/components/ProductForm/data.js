@@ -77,11 +77,11 @@ export const productInputNames = [
   { inputName: "currentPrice", formType: "number", label: "current price" },
   { inputName: "previousPrice", formType: "number", label: "previous price" },
 
-  {
-    inputName: "date",
-    formType: "date",
-    label: "current date",
-  },
+  // {
+  //   inputName: "date",
+  //   formType: "date",
+  //   label: "current date",
+  // },
 ];
 
 export const productSchema = yup.object({
@@ -95,5 +95,5 @@ export const productSchema = yup.object({
   quantity: yup.number().required("Quantity is required."),
   name: yup.string().min(20, "Name is full description of product, min 20."),
   currentPrice: yup.number().required("CurrentPrice is required."),
-  date: yup.date().required("CurrentPrice is required."),
+  // date: yup.date().required("CurrentPrice is required."),
 });
