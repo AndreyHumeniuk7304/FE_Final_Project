@@ -30,6 +30,8 @@ const ProductDetails = () => {
       setCounter(counter + 1);
     }
   };
+  const handleclick = () => {
+    dispatch(addToCart(product._id, itemNo, counter, isLogin));
   const addToCartClick = () => {
     dispatch(addToCart(product._id, itemNo, counter, isLogin));
   };

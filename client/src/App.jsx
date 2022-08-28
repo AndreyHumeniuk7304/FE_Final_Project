@@ -10,7 +10,7 @@ import MyAccount from "./views/MyAccount/MyAccount";
 import Cart from "./views/Cart";
 import Footer from "./components/Footer/Footer";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getSuccess } from "./store/userAccount/actions";
 import Contact from "./components/Footer/Contact/Contact";
 import { useEffect, useState } from "react";
@@ -20,6 +20,7 @@ import Profile from "./components/Cabinet/Profile/Profile";
 import History from "./components/Cabinet/History/History";
 import Wishlist from "./components/Cabinet/Wishlist/Wishlist";
 import Address from "./components/Cabinet/Address/Address";
+import { setAuthToken } from "./ulits/instance/instance";
 import UpdateProducts from "./views/UpdateProducts";
 import UpdateProduct from "./components/UpdateProduct";
 
@@ -34,16 +35,18 @@ const App = () => {
   }, []);
 
   const [statusOpenBurger, setStatusOpenBurger] = useState(false);
+  const isLogin = useSelector((state) => state.userAccount.isLogin);
+  const token = useSelector((state) => state.userAccount.customer.token);
 
   useEffect(() => {
     statusOpenBurger
       ? document.body.classList.add("hiddenScroll")
       : document.body.classList.remove("hiddenScroll");
-
-    // return () => {
-    //   document.body.classList.remove("hiddenScroll");
-    // };
   });
+
+  useEffect(() => {
+    setAuthToken(token);
+  }, [isLogin, token]);
 
   const handleBurger = () => {
     setStatusOpenBurger(!statusOpenBurger);

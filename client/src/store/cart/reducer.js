@@ -16,7 +16,7 @@ const cartReducer = (state = initialState, action) => {
       const cart = JSON.parse(localStorage.getItem("cart")).map((item) => {
         if (item.product._id === action.payload) {
           item.cartQuantity =
-            item.cartQuantity - 1 > 0 ? item.cartQuantity - 1 : 0;
+            item.cartQuantity - 1 > 0 ? item.cartQuantity - 1 : 1;
         }
         return item;
       });
