@@ -11,7 +11,7 @@ const userAccountReducer = (state = initialState, action) => {
       return {
         ...state,
         isLogin: true,
-        error: "",
+        error: {},
       };
     }
     case "GET_LOGIN_SUCCESS": {
