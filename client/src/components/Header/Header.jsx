@@ -57,12 +57,12 @@ const Header = (props) => {
             </div>
             {nightMode === true ? (
               <LightModeOutlinedIcon
-                style={{ cursor: "pointer", margin: "0 20px" }}
+                style={{ cursor: "pointer" }}
                 onClick={() => themeSwitcherLS(false)}
               />
             ) : (
               <DarkModeOutlinedIcon
-                style={{ cursor: "pointer", margin: "0 20px" }}
+                style={{ cursor: "pointer" }}
                 onClick={() => themeSwitcherLS(true)}
               />
             )}
