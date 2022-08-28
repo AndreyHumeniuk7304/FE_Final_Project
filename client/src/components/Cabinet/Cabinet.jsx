@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Logout from "./Logout/Logout";
 
 const Cabinet = () => {
   return (
@@ -114,6 +115,7 @@ const Cabinet = () => {
               </div>
             </div>
           </Link>
+          <Logout />
         </div>
       </div>
     </div>

@@ -13,8 +13,9 @@ const setError = (error) => {
 };
 
 const getSuccess = (data, dispatch) => {
-  dispatch(getIsLogin(data.success));
-  dispatch(setLogin(jwt_decode(data.token)));
+  const { success, token } = data;
+  dispatch(getIsLogin(success));
+  dispatch(setLogin(jwt_decode(token)));
 };
 
 const fetchProducts = (userData, isAutoLog, nav) => {
@@ -34,4 +35,4 @@ const fetchProducts = (userData, isAutoLog, nav) => {
   };
 };
 
-export { fetchProducts, setError, getSuccess };
+export { fetchProducts, setError, getSuccess, setLogin, getIsLogin };

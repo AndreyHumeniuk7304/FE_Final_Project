@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { fetchProducts } from "../../store/userAccount/actions";
+import { fetchProducts } from "../../../store/userAccount/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import Form from "../Forms/Form";
+import Form from "../../Forms/Form";
 import { loginInputNames, loginSchema } from "./data";
 
 const Login = () => {
