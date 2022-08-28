@@ -2,10 +2,13 @@ import CartItem from "../../components/CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCartItem, isNotLoaded } from "../../store/cart/actions";
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import theme from "../../theme";
+import { useNavigate } from "react-router";
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const cartList = useSelector((state) => state.cart.list);
   const isLoaded = useSelector((state) => state.cart.isLoaded);
@@ -16,13 +19,15 @@ const Cart = () => {
   }, []);
 
   useEffect(() => {
-    const onUnload = () => {
-      localStorage.setItem("cart", JSON.stringify(cartList));
-    };
+    if (!isLogin) {
+      const onUnload = () => {
+        localStorage.setItem("cart", JSON.stringify(cartList));
+      };
 
-    window.addEventListener("beforeunload", onUnload);
+      window.addEventListener("beforeunload", onUnload);
 
-    return () => window.removeEventListener("beforeunload", onUnload);
+      return () => window.removeEventListener("beforeunload", onUnload);
+    }
   });
 
   const createCartItemList = () => {
@@ -40,6 +45,10 @@ const Cart = () => {
           0
         )
       : 0;
+  };
+
+  const checkout = () => {
+    navigate("/checkout");
   };
 
   return (
@@ -74,7 +83,7 @@ const Cart = () => {
             spacing={2}
             sx={{ flexGrow: 1 }}
           >
-            {isLoaded ? (
+            {isLoaded && cartList ? (
               cartList.length === 0 ? (
                 <Typography
                   variant={"subtitle1"}
@@ -88,7 +97,7 @@ const Cart = () => {
               )
             ) : (
               <Typography variant={"subtitle1"} component={"p"}>
-                Cart is loading
+                Cart is loading...
               </Typography>
             )}
           </Stack>
@@ -99,7 +108,7 @@ const Cart = () => {
               bgcolor: "secondary.main",
               padding: 2,
               color: "primary.dark",
-              mt: 2,
+              paddingTop: "10 px",
             }}
           >
             <Typography
@@ -143,9 +152,29 @@ const Cart = () => {
                 component={"span"}
                 sx={{ fontWeight: 700 }}
               >
-                {isLoaded ? getTotalPrice() : 0} $
+                {isLoaded && cartList ? getTotalPrice() : 0} $
               </Typography>
             </Box>
+            {isLoaded && cartList.length !== 0 && (
+              <Button
+                onClick={checkout}
+                variant="contained"
+                sx={{
+                  [theme.breakpoints.between("mobile", "desktop")]: {
+                    padding: "12px 70px",
+                    fontSize: "16px",
+                    lineHeight: "25px",
+                  },
+                  backgroundColor: "primary.dark",
+                  padding: "16px 60px",
+                  mr: "40px",
+                  fontSize: "18px",
+                  lineHeight: "25px",
+                }}
+              >
+                Checkout
+              </Button>
+            )}
           </Stack>
         </Stack>
       </Container>
