@@ -11,7 +11,7 @@ import Cart from "./views/Cart";
 import Footer from "./components/Footer/Footer";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import { useDispatch, useSelector } from "react-redux";
-import { getIsLogin, getSuccess, setLogin } from "./store/userAccount/actions";
+import { getSuccess } from "./store/userAccount/actions";
 import Contact from "./components/Footer/Contact/Contact";
 import { useEffect, useState } from "react";
 import Checkout from "./views/Checkout/Checkout";
@@ -20,16 +20,16 @@ import Profile from "./components/Cabinet/Profile/Profile";
 import History from "./components/Cabinet/History/History";
 import Wishlist from "./components/Cabinet/Wishlist/Wishlist";
 import Address from "./components/Cabinet/Address/Address";
-import { setAuthToken } from "./api/getCustomers";
+import { setAuthToken } from "./ulits/instance/instance";
 
 const App = () => {
   const dispatch = useDispatch();
-  const tokenFromLS = setAuthToken(localStorage.getItem("login"));
-
   useEffect(() => {
-    tokenFromLS
-      ? getSuccess({ success: true, token: tokenFromLS }, dispatch)
-      : dispatch(getIsLogin(false)) && dispatch(setLogin({}));
+    localStorage.getItem("login") &&
+      getSuccess(
+        { success: true, token: localStorage.getItem("login") },
+        dispatch
+      );
   }, []);
 
   const [statusOpenBurger, setStatusOpenBurger] = useState(false);
