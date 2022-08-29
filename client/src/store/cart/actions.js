@@ -18,6 +18,10 @@ export const getCartItem = (isLogin) =>
           });
         } catch (err) {
           console.log(err);
+          dispatch({
+            type: "SET_CART_LIST",
+            payload: [],
+          });
         }
       }
     : {
@@ -38,6 +42,10 @@ export const decreaseProductQuantity = (id, isLogin) =>
           });
         } catch (err) {
           console.log(err);
+          dispatch({
+            type: "SET_CART_LIST",
+            payload: [],
+          });
         }
       }
     : {
@@ -56,6 +64,10 @@ export const increaseProductQuantity = (id, isLogin) =>
           });
         } catch (err) {
           console.log(err);
+          dispatch({
+            type: "SET_CART_LIST",
+            payload: [],
+          });
         }
       }
     : {
@@ -74,6 +86,10 @@ export const deleteCartItem = (id, isLogin) =>
           });
         } catch (err) {
           console.log(err);
+          dispatch({
+            type: "SET_CART_LIST",
+            payload: [],
+          });
         }
       }
     : {
@@ -112,6 +128,10 @@ export const addToCart = (id, itemNo, quantity, isLogin) =>
           });
         } catch (err) {
           console.log(err);
+          dispatch({
+            type: "SET_CART_LIST",
+            payload: [],
+          });
         }
       }
     : async (dispatch) => {
@@ -126,6 +146,10 @@ export const addToCart = (id, itemNo, quantity, isLogin) =>
           });
         } catch (err) {
           console.log(err);
+          dispatch({
+            type: "SET_CART_LIST",
+            payload: [],
+          });
         }
       };
 

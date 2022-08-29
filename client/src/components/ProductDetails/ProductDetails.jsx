@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import getOneProduct from "../../api/getOneProduct";
 import "./ProductDetails.scss";
 import { Box, Button, Checkbox, Typography } from "@mui/material";
@@ -9,9 +9,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/cart/actions";
 
 const ProductDetails = () => {
+  const navigate = useNavigate();
   const [product, setProduct] = useState();
   const [counter, setCounter] = useState(1);
   const isLogin = useSelector((state) => state.userAccount.isLogin);
+  const isAdmin = useSelector((state) => state.userAccount.customer.isAdmin);
   const nightMode = useSelector((state) => state.nightMode);
   const { itemNo } = useParams();
   const dispatch = useDispatch();
@@ -28,8 +30,12 @@ const ProductDetails = () => {
       setCounter(counter + 1);
     }
   };
-  const handleclick = () => {
-    dispatch(addToCart(product._id, itemNo, 1, isLogin));
+
+  const addToCartClick = () => {
+    dispatch(addToCart(product._id, itemNo, counter, isLogin));
+  };
+  const updateProductClick = () => {
+    navigate(`/product/${itemNo}/update`);
   };
   if (!product) return null;
 
@@ -171,24 +177,45 @@ const ProductDetails = () => {
                 </button>
               </div>
               <Box>
-                <Button
-                  onClick={handleclick}
-                  variant="contained"
-                  sx={{
-                    [theme.breakpoints.between("mobile", "desktop")]: {
-                      padding: "12px 70px",
-                      fontSize: "16px",
+                {isAdmin ? (
+                  <Button
+                    onClick={updateProductClick}
+                    variant="contained"
+                    sx={{
+                      [theme.breakpoints.between("mobile", "desktop")]: {
+                        padding: "12px 70px",
+                        fontSize: "16px",
+                        lineHeight: "25px",
+                      },
+                      backgroundColor: "primary.dark",
+                      padding: "16px 60px",
+                      mr: "40px",
+                      fontSize: "18px",
                       lineHeight: "25px",
-                    },
-                    backgroundColor: "primary.dark",
-                    padding: "16px 60px",
-                    mr: "40px",
-                    fontSize: "18px",
-                    lineHeight: "25px",
-                  }}
-                >
-                  ADD TO CART
-                </Button>
+                    }}
+                  >
+                    Update Product
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={addToCartClick}
+                    variant="contained"
+                    sx={{
+                      [theme.breakpoints.between("mobile", "desktop")]: {
+                        padding: "12px 70px",
+                        fontSize: "16px",
+                        lineHeight: "25px",
+                      },
+                      backgroundColor: "primary.dark",
+                      padding: "16px 60px",
+                      mr: "40px",
+                      fontSize: "18px",
+                      lineHeight: "25px",
+                    }}
+                  >
+                    ADD TO CART
+                  </Button>
+                )}
                 <Checkbox
                   icon={
                     <FavoriteBorder
@@ -215,4 +242,5 @@ const ProductDetails = () => {
     </>
   );
 };
+
 export default ProductDetails;

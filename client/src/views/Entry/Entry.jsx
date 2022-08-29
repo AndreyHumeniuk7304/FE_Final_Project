@@ -1,7 +1,7 @@
 import { useState } from "react";
-import EntryHeader from "../../components/Entry/EntryHeader";
-import Login from "../../components/Entry/Login";
-import Registration from "../../components/Entry/Registrations";
+import EntryHeader from "../../components/Cabinet/Entry/EntryHeader";
+import Login from "../../components/Cabinet/Entry/Login";
+import Registration from "../../components/Cabinet/Entry/Registrations";
 
 const Entry = () => {
   const [isRegist, setIsRegist] = useState(false);

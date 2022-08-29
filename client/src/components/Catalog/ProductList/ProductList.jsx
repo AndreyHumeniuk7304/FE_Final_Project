@@ -18,7 +18,7 @@ const ProductList = () => {
 
   return (
     <div className="productlist-wrapper">
-      {!hasError && !isLoading && (
+      {!hasError && !isLoading && categorieProductList.length > 0 && (
         <Box
           sx={{
             display: "flex",
@@ -61,8 +61,19 @@ const ProductList = () => {
         </Box>
       )}
 
-      {categorieProductList.length === 0 && (
-        <span>Sorry, we have nothing to offer you based on these filter</span>
+      {!hasError && !isLoading && categorieProductList.length === 0 && (
+        <Box
+          sx={{
+            height: "90vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant={"h4"}>
+            Sorry, we have nothing to offer you based on these filter
+          </Typography>{" "}
+        </Box>
       )}
       {hasError ? (
         <Box
