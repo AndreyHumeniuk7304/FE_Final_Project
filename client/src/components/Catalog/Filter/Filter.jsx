@@ -13,6 +13,7 @@ export const filterTitles = ["brand", "mechanism", "material", "color"];
 
 const Filter = ({ setSearch, search, categories }) => {
   const [currentPrice, setCurrentPrice] = useState([]);
+  const nightMode = useSelector((state) => state.nightMode);
 
   const productList = useSelector(
     (state) => state.catalog.categorieProductList
@@ -131,11 +132,17 @@ const Filter = ({ setSearch, search, categories }) => {
               currentPrice={currentPrice}
               setCurrentPrice={setCurrentPrice}
             />
-            <Button type="submit">Apply</Button>
+            <Button
+              style={{ color: nightMode ? "#fff" : "#000" }}
+              type="submit"
+            >
+              Apply
+            </Button>
             <Button
               type="button"
               onClick={resetFilter}
               disabled={!search.toString().length}
+              style={{ color: nightMode ? "#fff" : "#000" }}
             >
               Reset
             </Button>
