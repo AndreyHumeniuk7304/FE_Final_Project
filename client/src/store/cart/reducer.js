@@ -77,7 +77,7 @@ const cartReducer = (state = initialState, action) => {
       localStorage.setItem("cart", JSON.stringify(newCart));
       return {
         ...state,
-        list: cart,
+        list: newCart,
       };
     }
     case "IS_NOT_LOADED": {

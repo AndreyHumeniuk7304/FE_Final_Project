@@ -13,6 +13,7 @@ import { switchThemeAction } from "../../store/switchTheme/action";
 const Header = (props) => {
   const { statusOpenBurger, handleBurger, closeBurger } = props;
   const isLogin = useSelector((state) => state.userAccount.isLogin);
+  const cartList = useSelector((state) => state.cart.list);
   const [isExpandInput, setIsExpandInput] = useState(true);
   const nightMode = useSelector((state) => state.nightMode);
   const dispatch = useDispatch();
@@ -103,7 +104,9 @@ const Header = (props) => {
                   />
                 </div>
 
-                <p className="header__account-container__text">Shopping Bag</p>
+                <p className="header__cart-quantity">
+                  {cartList && cartList.length}
+                </p>
               </Link>
 
               <a
