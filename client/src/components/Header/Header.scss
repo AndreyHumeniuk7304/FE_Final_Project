@@ -251,7 +251,6 @@ a {
 
   .header {
     &__top-content {
-      flex-basis: 60%;
       flex-wrap: nowrap;
       &::before {
         display: none;
@@ -267,16 +266,16 @@ a {
       display: none;
     }
 
-    &__account-container__ico:last-child {
-      display: none;
-    }
+    // &__account-container__:last-child {
+    //   display: none;
+    // }
 
     &__account-container__text {
       display: block;
     }
 
     &__categories-container {
-      flex-basis: 40%;
+      // flex-basis: 40%;
       padding: 0;
       align-items: center;
       justify-content: flex-start;
