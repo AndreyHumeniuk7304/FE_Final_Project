@@ -21,6 +21,10 @@ const SearchModal = ({ value, activeFocus, setActiveFocus, clearInput }) => {
     });
   }, [value]);
 
+  // useEffect(() => {
+  //   localStorage.setItem("searchWorld", JSON.stringify(value));
+  // }, [foundProducts]);
+
   return (
     <>
       {activeFocus ? (
@@ -29,6 +33,7 @@ const SearchModal = ({ value, activeFocus, setActiveFocus, clearInput }) => {
             {foundProducts.map((product) => {
               count++;
               if (product.name.toLowerCase().includes(value) && count <= 4) {
+                console.log(product.productUrl);
                 return (
                   <Link
                     to={product.productUrl}

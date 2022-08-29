@@ -13,9 +13,17 @@ const Search = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(
-      fetchCategoriesProducts(`products/${querystring}&brand=${searchWord}`)
-    );
+    if (localStorage.getItem("searchWord") && searchWord === "") {
+      let word = JSON.parse(localStorage.getItem("searchWord"));
+      dispatch(
+        fetchCategoriesProducts(`products/${querystring}&brand=${word}`)
+      );
+    } else {
+      localStorage.setItem("searchWord", JSON.stringify(searchWord));
+      dispatch(
+        fetchCategoriesProducts(`products/${querystring}&brand=${searchWord}`)
+      );
+    }
   }, [search.toString(), searchWord]);
 
   return (
