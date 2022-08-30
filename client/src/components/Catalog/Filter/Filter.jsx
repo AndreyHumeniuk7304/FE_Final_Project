@@ -8,12 +8,12 @@ import { useForm } from "react-hook-form";
 import { MaterialSlider } from "./MaterialSlider";
 import { CheckedFilterItem } from "./checkedFilterItem";
 import FilterMobileHeader from "./FilterMobileHeader";
-import { getMinMaxPrice } from "./filterFunctions";
+import { getMinMaxPrice, setFilterLink } from "./filterFunctions";
 
 export const filterTitles = ["brand", "mechanism", "material", "color"];
 
 const Filter = ({ setSearch, search, categories }) => {
-  const [currentPrice, setCurrentPrice] = useState([]);
+  const [currentPrice, setCurrentPrice] = useState([100, 1000]);
 
   const { categorieProductList, searchWord } = useSelector(
     (state) => state.catalog
@@ -25,28 +25,8 @@ const Filter = ({ setSearch, search, categories }) => {
 
   const dispatch = useDispatch();
 
-  const setFilterLink = (values) => {
-    let link = "filter?";
-    for (let key in values) {
-      let value = "";
-      Array.isArray(values[key])
-        ? (value = values[key].join().toLowerCase())
-        : (value = values[key]);
-      key === "currentPrice"
-        ? (link =
-            link +
-            "minPrice" +
-            "=" +
-            currentPrice[0] +
-            "&" +
-            "maxPrice" +
-            "=" +
-            currentPrice[1] +
-            "&")
-        : value !== ""
-        ? (link = link + key + "=" + value + "&")
-        : null;
-    }
+  const submitFilter = (values) => {
+    const link = setFilterLink(values, currentPrice);
     setSearch(link);
     searchWord !== ""
       ? dispatch(fetchCategoriesProducts(`products/${link}brand=${searchWord}`))
@@ -82,7 +62,7 @@ const Filter = ({ setSearch, search, categories }) => {
 
           <form
             onSubmit={handleSubmit((data) => {
-              setFilterLink(data);
+              submitFilter(data);
             })}
             className="filter__form"
             id="filter"
