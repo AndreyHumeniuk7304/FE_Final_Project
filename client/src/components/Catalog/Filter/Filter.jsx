@@ -1,9 +1,6 @@
 import { Box, Button, Stack } from "@mui/material";
 import CheckboxForm from "./CheckboxForm";
-import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import { fetchCategoriesProducts } from "../../../store/catalog/actions";
 import { useForm } from "react-hook-form";
 import { MaterialSlider } from "./MaterialSlider";
 import { CheckedFilterItem } from "./checkedFilterItem";
@@ -14,6 +11,7 @@ import {
   getCategories,
 } from "./filterFunctions";
 import { useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const filterTitles = [
   "categories",
@@ -25,6 +23,7 @@ export const filterTitles = [
 
 const Filter = () => {
   const [currentPrice, setCurrentPrice] = useState([100, 1000]);
+  const [isFilterUsing, setIsFilterUsing] = useState(false);
   const [search, setSearch] = useSearchParams();
   const [categories, setCategories] = useState(getCategories(search));
   const { categorieProductList, searchWord } = useSelector(
@@ -35,8 +34,6 @@ const Filter = () => {
     getCategories(search).length && setCategories(getCategories(search));
     setCurrentPrice(getMinMaxPrice(categorieProductList));
   }, [categorieProductList]);
-
-  const dispatch = useDispatch();
 
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
@@ -52,6 +49,7 @@ const Filter = () => {
   const submitFilter = (values) => {
     const link = setFilterLink(values, currentPrice);
     setSearch(link);
+    setIsFilterUsing(true);
     // searchWord !== ""
     //   ? dispatch(
     //       fetchCategoriesProducts(`products/filter?${link}brand=${searchWord}`)
@@ -63,6 +61,7 @@ const Filter = () => {
     reset();
     setSearch(categories.length ? `categories=${categories}` : "");
     setCurrentPrice(getMinMaxPrice(categorieProductList));
+    setIsFilterUsing(false);
     // dispatch(
     //   fetchCategoriesProducts(`products/filter?categories=${categories}`)
     // );
@@ -104,7 +103,7 @@ const Filter = () => {
             <Button
               type="button"
               onClick={resetFilter}
-              //disabled={!search.toString().length}
+              disabled={!isFilterUsing}
             >
               Reset
             </Button>
