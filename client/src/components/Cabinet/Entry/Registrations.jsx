@@ -26,7 +26,6 @@ const Registrations = ({ setIsRegist }) => {
   });
 
   const addNewUser = (values) => {
-    console.log("ok");
     addNewCustomers(values)
       .then((savedCustomer) => {
         savedCustomer.status = 200 && setIsRegist(false);

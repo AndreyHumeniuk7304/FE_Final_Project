@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 const Search = () => {
   const searchWord = useSelector((state) => state.catalog.searchWord);
   const [search, setSearch] = useSearchParams();
-  let querystring = `filter?Categories=Ladies,Mens,Accessories`;
+  let querystring = `filter?categories=ladies,mens,accessories`;
   search.toString() && (querystring = "filter?" + search.toString().slice(9));
   const dispatch = useDispatch();
 
@@ -29,7 +29,7 @@ const Search = () => {
   return (
     <div>
       <Catalog
-        categories={"Ladies,Mens,Accessories"}
+        categories={"ladies,mens,accessories"}
         setSearch={setSearch}
         search={search}
       />
