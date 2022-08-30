@@ -23,6 +23,7 @@ import UpdateProduct from "./components/UpdateProduct";
 import CreateProduct from "./components/Cabinet/CreateProduct/CreateProduct";
 import { getCartItem, isNotLoaded } from "./store/cart/actions";
 import Products from "./views/Products/Products";
+import Routing from "./components/Routing/Routing";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -69,31 +70,7 @@ const App = () => {
           closeBurger={closeBurger}
         />
         <div className="main">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/products/:filter" element={<Products />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/my-account/user" element={<MyAccount />} />
-            <Route path="/my-account/entry" element={<Entry />} />
-            <Route path="/product/:itemNo" element={<ProductDetails />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route
-              path="/my-account/create-product"
-              element={<CreateProduct />}
-            />
-            <Route
-              path="/my-account/update-product"
-              element={<UpdateProducts />}
-            />
-            <Route path="/my-account/profile" element={<Profile />} />
-            <Route path="/my-account/history" element={<History />} />
-            <Route path="/my-account/wishlist" element={<Wishlist />} />
-            <Route path="/my-account/address-book" element={<Address />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/product/:itemNo/update" element={<UpdateProduct />} />
-            <Route path="/update-products" element={<UpdateProducts />} />
-          </Routes>
+          <Routing />
         </div>
         <Footer />
       </div>
