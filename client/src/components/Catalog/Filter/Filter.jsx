@@ -29,6 +29,7 @@ const Filter = () => {
   const { categorieProductList, searchWord } = useSelector(
     (state) => state.catalog
   );
+  const nightMode = useSelector((state) => state.nightMode);
 
   useEffect(() => {
     setCategories(getCategories(search));

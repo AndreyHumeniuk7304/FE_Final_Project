@@ -65,7 +65,7 @@ const SearchModal = ({ value, activeFocus, setActiveFocus, clearInput }) => {
                       }}
                     >
                       <Link
-                        to="/search"
+                        to={`/products/filter?categories=mens,ladies,accessories&brand=${value}`}
                         onClick={() => {
                           clearInput();
                           dispatch(writeSearchWord(`${value}`));
