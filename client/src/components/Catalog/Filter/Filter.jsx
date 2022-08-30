@@ -31,10 +31,10 @@ const Filter = () => {
   );
 
   useEffect(() => {
-    getCategories(search).length && setCategories(getCategories(search));
+    setCategories(getCategories(search));
     setCurrentPrice(getMinMaxPrice(categorieProductList));
   }, [categorieProductList]);
-  console.log(categories);
+
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
       categories: categories,
