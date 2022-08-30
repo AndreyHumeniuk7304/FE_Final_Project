@@ -4,12 +4,14 @@ import catalogReducer from "./catalog/reducer";
 import cartReducer from "./cart/reducer";
 import userAccountReducer from "./userAccount/reducer";
 import nightModeReducer from "./switchTheme/reducer";
+import wishlistReducer from "./wishlist/reducer";
 
 export const reducer = combineReducers({
   catalog: catalogReducer,
   cart: cartReducer,
   userAccount: userAccountReducer,
   nightMode: nightModeReducer,
+  wishlist: wishlistReducer,
 });
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__

@@ -24,6 +24,7 @@ import { setAuthToken } from "./ulits/instance/instance";
 import UpdateProducts from "./views/UpdateProducts";
 import UpdateProduct from "./components/UpdateProduct";
 import CreateProduct from "./components/Cabinet/CreateProduct/CreateProduct";
+import { getWishlistItem } from "./store/wishlist/actions";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -48,6 +49,10 @@ const App = () => {
   useEffect(() => {
     setAuthToken(token);
   }, [isLogin, token]);
+
+  useEffect(() => {
+    isLogin && dispatch(getWishlistItem());
+  }, [isLogin]);
 
   const handleBurger = () => {
     setStatusOpenBurger(!statusOpenBurger);

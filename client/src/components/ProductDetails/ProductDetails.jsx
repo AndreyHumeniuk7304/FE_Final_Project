@@ -7,6 +7,10 @@ import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import theme from "../../theme";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/cart/actions";
+import {
+  addToWishlist,
+  deleteWishlistItem,
+} from "../../store/wishlist/actions";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -17,6 +21,10 @@ const ProductDetails = () => {
   const nightMode = useSelector((state) => state.nightMode);
   const { itemNo } = useParams();
   const dispatch = useDispatch();
+  const wishlist = useSelector((state) => state.wishlist.list);
+  let isFavorite = wishlist.some((item) => item.itemNo === itemNo);
+  // const [isFavorite, setIsFavorite] = useState(result);
+  console.log(isFavorite, wishlist);
   useEffect(() => {
     getOneProduct(itemNo).then((data) => setProduct(data));
   }, []);
@@ -34,6 +42,14 @@ const ProductDetails = () => {
   const addToCartClick = () => {
     dispatch(addToCart(product._id, itemNo, counter, isLogin));
   };
+  const handleWishlistClick = () => {
+    console.log("handle", isFavorite);
+    isFavorite
+      ? dispatch(deleteWishlistItem(product._id))
+      : dispatch(addToWishlist(product._id));
+    isFavorite = !isFavorite;
+  };
+
   const updateProductClick = () => {
     navigate(`/product/${itemNo}/update`);
   };
@@ -57,7 +73,11 @@ const ProductDetails = () => {
           }}
         >
           <Box>
-            <img className="details__img" src={product.imageUrls[0]} />
+            <img
+              className="details__img"
+              src={product.imageUrls[0]}
+              alt={product.name}
+            />
           </Box>
           <Box
             className="details__item"
@@ -216,24 +236,28 @@ const ProductDetails = () => {
                     ADD TO CART
                   </Button>
                 )}
-                <Checkbox
-                  icon={
-                    <FavoriteBorder
-                      sx={{
-                        [theme.breakpoints.between("mobile", "desktop")]: {
+                {isLogin && (
+                  <Checkbox
+                    checked={isFavorite}
+                    onClick={handleWishlistClick}
+                    icon={
+                      <FavoriteBorder
+                        sx={{
+                          [theme.breakpoints.between("mobile", "desktop")]: {
+                            fontSize: "35px",
+                          },
+                          color: "primary.dark",
                           fontSize: "35px",
-                        },
-                        color: "primary.dark",
-                        fontSize: "35px",
-                      }}
-                    />
-                  }
-                  checkedIcon={
-                    <Favorite
-                      sx={{ color: "primary.dark", fontSize: "35px" }}
-                    />
-                  }
-                />
+                        }}
+                      />
+                    }
+                    checkedIcon={
+                      <Favorite
+                        sx={{ color: "primary.dark", fontSize: "35px" }}
+                      />
+                    }
+                  />
+                )}
               </Box>
             </Box>
           </Box>
