@@ -8,34 +8,39 @@ import { useForm } from "react-hook-form";
 import { MaterialSlider } from "./MaterialSlider";
 import { CheckedFilterItem } from "./checkedFilterItem";
 import FilterMobileHeader from "./FilterMobileHeader";
-import { getMinMaxPrice, setFilterLink } from "./filterFunctions";
+import {
+  getMinMaxPrice,
+  setFilterLink,
+  getCategories,
+} from "./filterFunctions";
+import { useSearchParams } from "react-router-dom";
 
-export const filterTitles = ["brand", "mechanism", "material", "color"];
+export const filterTitles = [
+  "categories",
+  "brand",
+  "mechanism",
+  "material",
+  "color",
+];
 
-const Filter = ({ setSearch, search, categories }) => {
+const Filter = () => {
   const [currentPrice, setCurrentPrice] = useState([100, 1000]);
-
+  const [search, setSearch] = useSearchParams();
+  const [categories, setCategories] = useState(getCategories(search));
   const { categorieProductList, searchWord } = useSelector(
     (state) => state.catalog
   );
 
   useEffect(() => {
+    getCategories(search).length && setCategories(getCategories(search));
     setCurrentPrice(getMinMaxPrice(categorieProductList));
   }, [categorieProductList]);
 
   const dispatch = useDispatch();
 
-  const submitFilter = (values) => {
-    const link = setFilterLink(values, currentPrice);
-    setSearch(link);
-    searchWord !== ""
-      ? dispatch(fetchCategoriesProducts(`products/${link}brand=${searchWord}`))
-      : dispatch(fetchCategoriesProducts(`products/${link}`));
-  };
-
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
-      Categories: categories,
+      categories: categories,
       brand: [],
       mechanism: [],
       material: [],
@@ -44,13 +49,23 @@ const Filter = ({ setSearch, search, categories }) => {
     },
   });
 
+  const submitFilter = (values) => {
+    const link = setFilterLink(values, currentPrice);
+    setSearch(link);
+    // searchWord !== ""
+    //   ? dispatch(
+    //       fetchCategoriesProducts(`products/filter?${link}brand=${searchWord}`)
+    //     )
+    //   : dispatch(fetchCategoriesProducts(`products/filter?${link}`));
+  };
+
   const resetFilter = () => {
     reset();
-    setSearch("");
+    setSearch(categories.length ? `categories=${categories}` : "");
     setCurrentPrice(getMinMaxPrice(categorieProductList));
-    dispatch(
-      fetchCategoriesProducts(`products/filter?Categories=${categories}`)
-    );
+    // dispatch(
+    //   fetchCategoriesProducts(`products/filter?categories=${categories}`)
+    // );
   };
 
   return (
@@ -89,7 +104,7 @@ const Filter = ({ setSearch, search, categories }) => {
             <Button
               type="button"
               onClick={resetFilter}
-              disabled={!search.toString().length}
+              //disabled={!search.toString().length}
             >
               Reset
             </Button>
@@ -101,9 +116,3 @@ const Filter = ({ setSearch, search, categories }) => {
 };
 
 export default Filter;
-
-Filter.propTypes = {
-  categories: PropTypes.string,
-  setSearch: PropTypes.func,
-  search: PropTypes.object,
-};

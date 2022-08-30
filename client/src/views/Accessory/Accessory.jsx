@@ -13,7 +13,7 @@ const Accessory = () => {
   useEffect(() => {
     dispatch(
       fetchCategoriesProducts(
-        `products/filter?Categories=Accessories&${querystring}`
+        `products/filter?categories=Accessories&${querystring}`
       )
     );
   }, [search.toString()]);

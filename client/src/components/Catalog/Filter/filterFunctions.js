@@ -12,7 +12,7 @@ export const getMinMaxPrice = (productList) => [
 ];
 
 export const setFilterLink = (values, currentPrice) => {
-  let link = "filter?";
+  let link = "?";
   for (let key in values) {
     let value = "";
     Array.isArray(values[key])
@@ -34,4 +34,15 @@ export const setFilterLink = (values, currentPrice) => {
       : null;
   }
   return link;
+};
+
+export const getCategories = (search) => {
+  const urlArr = search
+    .toString()
+    .replace(/[^a-zA-Z ]/g, ",")
+    .split(",");
+
+  return urlArr.indexOf("categories") !== -1
+    ? urlArr[urlArr.indexOf("categories") + 1]
+    : [];
 };

@@ -13,7 +13,7 @@ const Woman = () => {
   useEffect(() => {
     dispatch(
       fetchCategoriesProducts(
-        `products/filter?Categories=Ladies&${querystring}`
+        `products/filter?categories=Ladies&${querystring}`
       )
     );
   }, [search.toString()]);
