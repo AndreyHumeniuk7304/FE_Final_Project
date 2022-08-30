@@ -34,7 +34,7 @@ const Filter = () => {
     getCategories(search).length && setCategories(getCategories(search));
     setCurrentPrice(getMinMaxPrice(categorieProductList));
   }, [categorieProductList]);
-
+  console.log(categories);
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
       categories: categories,
@@ -49,6 +49,7 @@ const Filter = () => {
   const submitFilter = (values) => {
     const link = setFilterLink(values, currentPrice);
     setSearch(link);
+    console.log(link);
     setIsFilterUsing(true);
     // searchWord !== ""
     //   ? dispatch(
