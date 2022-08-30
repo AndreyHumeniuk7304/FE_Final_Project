@@ -1,0 +1,31 @@
+.error-container {
+  margin-top: 17%;
+  @include flex-container;
+  flex-direction: column;
+
+  &__text {
+    font-weight: bold;
+    font-size: 3vw;
+  }
+  &__img {
+    max-width: 60%;
+    height: auto;
+  }
+}
+
+@include desktop {
+  .error-container {
+    margin-top: 0%;
+    height: 50vw;
+    flex-direction: row;
+
+    &__text {
+      font-weight: bold;
+      font-size: 2vw;
+    }
+    &__img {
+      max-width: 60%;
+      height: auto;
+    }
+  }
+}

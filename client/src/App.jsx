@@ -1,28 +1,11 @@
 import "./App.scss";
 import Header from "./components/Header/Header";
-import { Route, Routes } from "react-router-dom";
-import Home from "./views/Home/Home";
-import Search from "./views/Search/Search";
-import MyAccount from "./views/MyAccount/MyAccount";
-import Cart from "./views/Cart";
 import Footer from "./components/Footer/Footer";
-import ProductDetails from "./components/ProductDetails/ProductDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { getSuccess } from "./store/userAccount/actions";
-import Contact from "./components/Footer/Contact/Contact";
 import { useEffect, useState } from "react";
-import Checkout from "./views/Checkout/Checkout";
-import Entry from "./views/Entry/Entry";
-import Profile from "./components/Cabinet/Profile/Profile";
-import History from "./components/Cabinet/History/History";
-import Wishlist from "./components/Cabinet/Wishlist/Wishlist";
-import Address from "./components/Cabinet/Address/Address";
 import { setAuthToken } from "./ulits/instance/instance";
-import UpdateProducts from "./views/UpdateProducts";
-import UpdateProduct from "./components/UpdateProduct";
-import CreateProduct from "./components/Cabinet/CreateProduct/CreateProduct";
 import { getCartItem, isNotLoaded } from "./store/cart/actions";
-import Products from "./views/Products/Products";
 import Routing from "./components/Routing/Routing";
 
 const App = () => {
