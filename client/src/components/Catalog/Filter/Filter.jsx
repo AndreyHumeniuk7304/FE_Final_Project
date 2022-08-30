@@ -8,27 +8,22 @@ import { useForm } from "react-hook-form";
 import { MaterialSlider } from "./MaterialSlider";
 import { CheckedFilterItem } from "./checkedFilterItem";
 import FilterMobileHeader from "./FilterMobileHeader";
+import { getMinMaxPrice } from "./filterFunctions";
 
 export const filterTitles = ["brand", "mechanism", "material", "color"];
 
 const Filter = ({ setSearch, search, categories }) => {
   const [currentPrice, setCurrentPrice] = useState([]);
 
-  const productList = useSelector(
-    (state) => state.catalog.categorieProductList
+  const { categorieProductList, searchWord } = useSelector(
+    (state) => state.catalog
   );
-  const searchWord = useSelector((state) => state.catalog.searchWord);
 
   useEffect(() => {
-    setCurrentPrice(getMinMaxPrice());
-  }, [productList]);
+    setCurrentPrice(getMinMaxPrice(categorieProductList));
+  }, [categorieProductList]);
 
   const dispatch = useDispatch();
-
-  const getMinMaxPrice = () => [
-    Math.min(...productList.map((item) => item.currentPrice)),
-    Math.max(...productList.map((item) => item.currentPrice)),
-  ];
 
   const setFilterLink = (values) => {
     let link = "filter?";
@@ -65,22 +60,14 @@ const Filter = ({ setSearch, search, categories }) => {
       mechanism: [],
       material: [],
       color: [],
-      currentPrice: getMinMaxPrice(),
+      currentPrice: getMinMaxPrice(categorieProductList),
     },
   });
-
-  const getFilterItem = (caregory) => {
-    let newList = productList.map(
-      (listItem) => listItem[caregory] && listItem[caregory].trim()
-    );
-    newList = [...new Set(newList)];
-    return newList;
-  };
 
   const resetFilter = () => {
     reset();
     setSearch("");
-    setCurrentPrice(getMinMaxPrice());
+    setCurrentPrice(getMinMaxPrice(categorieProductList));
     dispatch(
       fetchCategoriesProducts(`products/filter?Categories=${categories}`)
     );
@@ -104,7 +91,6 @@ const Filter = ({ setSearch, search, categories }) => {
               <Box className="checkbox" key={title}>
                 <CheckboxForm
                   title={title}
-                  getFilterItem={getFilterItem}
                   register={register}
                   search={search}
                 />
@@ -114,7 +100,7 @@ const Filter = ({ setSearch, search, categories }) => {
             <MaterialSlider
               title={"currentPrice"}
               name="currentPrice"
-              defaultValues={getMinMaxPrice()}
+              defaultValues={getMinMaxPrice(categorieProductList)}
               register={register}
               currentPrice={currentPrice}
               setCurrentPrice={setCurrentPrice}
