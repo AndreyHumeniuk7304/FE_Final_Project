@@ -1,22 +1,15 @@
 import CartItem from "../../components/CartItem";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getCartItem, isNotLoaded } from "../../store/cart/actions";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import theme from "../../theme";
 import { useNavigate } from "react-router";
 
 const Cart = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const cartList = useSelector((state) => state.cart.list);
   const isLoaded = useSelector((state) => state.cart.isLoaded);
-
-  useEffect(() => {
-    dispatch(getCartItem(isLogin));
-    return () => dispatch(isNotLoaded());
-  }, []);
 
   useEffect(() => {
     if (!isLogin) {
