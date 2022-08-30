@@ -152,21 +152,21 @@ const Header = (props) => {
           <div className="header__categories-container">
             <Link
               onClick={closeBurger}
-              to="/man"
+              to="/products/filter?categories=mens"
               className="header__categories-container__link"
             >
               MAN
             </Link>
             <Link
               onClick={closeBurger}
-              to="/woman"
+              to="/products/filter?categories=ladies"
               className="header__categories-container__link"
             >
               WOMEN
             </Link>
             <Link
               onClick={closeBurger}
-              to="/accessory"
+              to="/products/filter?categories=accessories"
               className="header__categories-container__link"
             >
               ACCESSORY
