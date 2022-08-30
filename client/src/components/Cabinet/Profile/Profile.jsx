@@ -8,6 +8,9 @@ import { Checkbox } from "@mui/material";
 // import Form from "../Forms/Form";
 import { useForm } from "react-hook-form";
 import Form from "../../Forms/Form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { registInputNames, registSchema } from "../Entry/data";
+import addNewCustomers from "../../../api/addNewCustomer";
 
 const Profile = () => {
   const isLogin = useSelector((state) => state.userAccount.isLogin);
@@ -21,39 +24,50 @@ const Profile = () => {
     dispatch(fetchCurrentCustomer(isLogin, token));
   }, [token]);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(registSchema),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      login: "",
-      email: "",
-      telephone: "",
-      password: "",
-      confirmPassword: "",
-      gender: "Male",
-      isAdmin: false,
-    },
-  });
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
+  // } = useForm({
+  //   resolver: yupResolver(registSchema),
+  //   defaultValues: {
+  //     firstName: "",
+  //     lastName: "",
+  //     login: "",
+  //     email: "",
+  //     telephone: "",
+  //     password: "",
+  //     confirmPassword: "",
+  //     gender: "Male",
+  //     isAdmin: false,
+  //   },
+  // });
+
+  // const updatedCustomer = (values) => {
+  //   console.log(values);
+  //   addNewCustomers(values)
+  //     .then((newCustomerData) => {
+  //       console.log(newCustomerData);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   console.log(customer);
   return (
     <div className="profile">
       <Links />
       <div className="profile__container">
-        <Form
-          actionWithForm={addNewUser}
+        {/* <Form
+          actionWithForm={updatedCustomer}
           formArr={registInputNames}
           register={register}
           handleSubmit={handleSubmit}
           errors={errors}
           btnName={"REGISTATION"}
-        />
-        {/* <form className="profile__form">
+        /> */}
+        <form className="profile__form">
           <div>
             <label className="bold profile__label">EMAIL ADRESS</label>
             <input
@@ -118,7 +132,7 @@ const Profile = () => {
             ></input>
           </div>
           <input className="profile__button" type="submit" value="SAVE"></input>
-        </form> */}
+        </form>
       </div>
     </div>
   );
