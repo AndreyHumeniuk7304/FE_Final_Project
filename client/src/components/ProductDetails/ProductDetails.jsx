@@ -6,7 +6,7 @@ import { Box, Button, Checkbox, Typography } from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import theme from "../../theme";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../store/cart/actions";
+import { addToCart, deleteCartItem } from "../../store/cart/actions";
 import {
   addToWishlist,
   deleteWishlistItem,
@@ -18,13 +18,13 @@ const ProductDetails = () => {
   const [counter, setCounter] = useState(1);
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const isAdmin = useSelector((state) => state.userAccount.customer.isAdmin);
+  const cart = useSelector((state) => state.cart.list);
   const nightMode = useSelector((state) => state.nightMode);
   const { itemNo } = useParams();
   const dispatch = useDispatch();
   const wishlist = useSelector((state) => state.wishlist.list);
   let isFavorite = wishlist.some((item) => item.itemNo === itemNo);
-  // const [isFavorite, setIsFavorite] = useState(result);
-  console.log(isFavorite, wishlist);
+  let isInCart = cart.some((item) => item.product.itemNo === itemNo);
   useEffect(() => {
     getOneProduct(itemNo).then((data) => setProduct(data));
   }, []);
@@ -39,11 +39,14 @@ const ProductDetails = () => {
     }
   };
 
-  const addToCartClick = () => {
-    dispatch(addToCart(product._id, itemNo, counter, isLogin));
+  const handleCartClick = () => {
+    isInCart
+      ? dispatch(deleteCartItem(product._id, isLogin))
+      : dispatch(addToCart(product._id, itemNo, counter, isLogin));
+    isInCart = !isInCart;
   };
+
   const handleWishlistClick = () => {
-    console.log("handle", isFavorite);
     isFavorite
       ? dispatch(deleteWishlistItem(product._id))
       : dispatch(addToWishlist(product._id));
@@ -218,7 +221,7 @@ const ProductDetails = () => {
                   </Button>
                 ) : (
                   <Button
-                    onClick={addToCartClick}
+                    onClick={handleCartClick}
                     variant="contained"
                     sx={{
                       [theme.breakpoints.between("mobile", "desktop")]: {
@@ -233,7 +236,7 @@ const ProductDetails = () => {
                       lineHeight: "25px",
                     }}
                   >
-                    ADD TO CART
+                    {isInCart ? "REMOVE FROM CART" : "ADD TO CART"}
                   </Button>
                 )}
                 {isLogin && (
