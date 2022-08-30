@@ -25,17 +25,10 @@ const Filter = ({ setSearch, search, categories }) => {
 
   const dispatch = useDispatch();
 
-  const getMinOrMaxPrice = (arr, minMax) =>
-    arr.length &&
-    arr.reduce((prev, curr) =>
-      minMax === ">"
-        ? prev.currentPrice < curr.currentPrice
-          ? prev
-          : curr
-        : prev.currentPrice > curr.currentPrice
-        ? prev
-        : curr
-    );
+  const getMinMaxPrice = () => [
+    Math.min(...productList.map((item) => item.currentPrice)),
+    Math.max(...productList.map((item) => item.currentPrice)),
+  ];
 
   const setFilterLink = (values) => {
     let link = "filter?";
@@ -64,11 +57,6 @@ const Filter = ({ setSearch, search, categories }) => {
       ? dispatch(fetchCategoriesProducts(`products/${link}brand=${searchWord}`))
       : dispatch(fetchCategoriesProducts(`products/${link}`));
   };
-
-  const getMinMaxPrice = () => [
-    getMinOrMaxPrice(productList, ">").currentPrice,
-    getMinOrMaxPrice(productList, "<").currentPrice,
-  ];
 
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
