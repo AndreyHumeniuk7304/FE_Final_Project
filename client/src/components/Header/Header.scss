@@ -1,3 +1,5 @@
+@import "./src/ulits/styles/mixins";
+
 a {
   text-decoration: none;
   display: inline-block;
@@ -18,24 +20,28 @@ a {
   color: white;
   width: 100%;
   z-index: 2;
+  overflow: hidden;
   overflow-y: auto;
 
   &__top-content {
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     justify-content: space-between;
     padding: 12px 0 9px;
     align-items: center;
-  }
+    position: relative;
 
-  &::before {
-    content: "";
-    width: 100%;
-    height: 1px;
-    position: absolute;
-    left: 0;
-    top: 70px;
-    background-color: rgba(88, 87, 87, 1);
+    &::before {
+      content: "";
+      width: 100%;
+      height: 1px;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: rgba(88, 87, 87, 1);
+      transform: scaleX(1.1);
+    }
   }
 
   &__categories-container {
@@ -59,7 +65,8 @@ a {
   }
 
   &__logo-container {
-    padding-top: 10px;
+    width: 100%;
+    text-align: center;
 
     &_link {
       display: inline-block;
@@ -67,7 +74,7 @@ a {
   }
 
   &__account-container {
-    display: flex;
+    @include flex-container();
 
     &__ico {
       width: 14px;
@@ -87,6 +94,22 @@ a {
         margin-right: 0;
       }
     }
+  }
+
+  &__cart-quantity{
+    color: white;
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    font-size: 8px;
+    background-color: #f00;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    @include flex-container();
+  }
+  .shopping-bag{
+    position: relative;
   }
 }
 
@@ -246,11 +269,10 @@ a {
 
   .header {
     &__top-content {
-      flex-basis: 60%;
-    }
-
-    &::before {
-      display: none;
+      flex-wrap: nowrap;
+      &::before {
+        display: none;
+      }
     }
 
     &__account-container__link {
@@ -262,16 +284,16 @@ a {
       display: none;
     }
 
-    &__account-container__ico:last-child {
-      display: none;
-    }
+    // &__account-container__:last-child {
+    //   display: none;
+    // }
 
     &__account-container__text {
       display: block;
     }
 
     &__categories-container {
-      flex-basis: 40%;
+      // flex-basis: 40%;
       padding: 0;
       align-items: center;
       justify-content: flex-start;

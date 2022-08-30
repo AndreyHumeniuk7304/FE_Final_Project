@@ -10,6 +10,18 @@ const Links = () => {
         </div>
 
         <div className="links__link-list">
+          <Link className="links__style" to="/my-account/create-product">
+            <p className="links__text">Create Product</p>
+          </Link>
+
+          <Link className="links__style" to="/my-account/update-product">
+            <p className="links__text">Update Product</p>
+          </Link>
+
+          <Link className="links__style" to="/my-account/delete-product">
+            <p className="links__text">Delete Product</p>
+          </Link>
+
           <Link className="links__style" to="/my-account/profile">
             <p className="links__text">My profile</p>
           </Link>

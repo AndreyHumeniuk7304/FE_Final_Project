@@ -124,17 +124,17 @@ const CheckoutForm = () => {
 
                 <div className="form__pay-method">
                   <div className="form__pay-method__item">
-                    <a href="!#">
+                    <a href="#!">
                       <img src="./images/mastercard-pay.png" alt="mastercard" />
                     </a>
                   </div>
                   <div className="form__pay-method__item">
-                    <a href="!#">
+                    <a href="#!">
                       <img src="./images/amer-express-pay.jpg" alt="express" />
                     </a>
                   </div>
                   <div className="form__pay-method__item">
-                    <a href="!#">
+                    <a href="#!">
                       <img src="./images/visa-pay.png" alt="visa" />
                     </a>
                   </div>

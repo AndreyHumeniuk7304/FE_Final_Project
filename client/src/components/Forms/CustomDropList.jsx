@@ -9,12 +9,9 @@ export default function CustomDropList({
   return (
     <>
       <select {...register(name)} className="form__droplist">
+        <option disabled>{camelizeDecode(name)}</option>
         {arr.map((data) => (
-          <option
-            key={Math.random()}
-            value={data}
-            disabled={arr[0] === data && true}
-          >
+          <option key={Math.random()} value={data}>
             {camelizeDecode(data)}
           </option>
         ))}

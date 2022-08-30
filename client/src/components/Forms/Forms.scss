@@ -2,17 +2,19 @@
   &__box {
     display: grid;
     grid-gap: 30px;
+    max-width: 500px;
+    margin: 0 auto;
   }
 
   &__input {
-    color: white;
+    color: black;
     padding: 2px 10px;
     background-color: inherit;
     border: inherit;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid black;
 
     &:valid {
-      border-bottom: 1px solid white;
+      border-bottom: 1px solid black;
       outline-offset: 0px;
       outline: none;
     }
@@ -26,13 +28,13 @@
     }
   }
   &__label {
+    color: black;
     padding: 10px 0;
   }
   &__droplist {
-    background-color: black;
     border: none;
-    border-bottom: 1px solid white;
-    color: white;
+    border-bottom: 1px solid black;
+    color: black;
     padding-left: 7px;
   }
   &__item {
@@ -60,9 +62,6 @@
       color: #000;
       background-color: #e6e4dc;
       border-radius: 10px;
-      &:hover {
-        color: white;
-      }
     }
   }
 }
