@@ -1,3 +1,5 @@
+@import "./src/ulits/styles/mixins";
+
 a {
   text-decoration: none;
   display: inline-block;
@@ -72,7 +74,7 @@ a {
   }
 
   &__account-container {
-    display: flex;
+    @include flex-container();
 
     &__ico {
       width: 14px;
@@ -92,6 +94,22 @@ a {
         margin-right: 0;
       }
     }
+  }
+
+  &__cart-quantity{
+    color: white;
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    font-size: 8px;
+    background-color: #f00;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    @include flex-container();
+  }
+  .shopping-bag{
+    position: relative;
   }
 }
 
@@ -251,7 +269,6 @@ a {
 
   .header {
     &__top-content {
-      flex-basis: 60%;
       flex-wrap: nowrap;
       &::before {
         display: none;
@@ -267,16 +284,16 @@ a {
       display: none;
     }
 
-    &__account-container__ico:last-child {
-      display: none;
-    }
+    // &__account-container__:last-child {
+    //   display: none;
+    // }
 
     &__account-container__text {
       display: block;
     }
 
     &__categories-container {
-      flex-basis: 40%;
+      // flex-basis: 40%;
       padding: 0;
       align-items: center;
       justify-content: flex-start;

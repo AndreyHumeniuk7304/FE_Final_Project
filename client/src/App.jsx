@@ -2,9 +2,6 @@ import "./App.scss";
 import Header from "./components/Header/Header";
 import { Route, Routes } from "react-router-dom";
 import Home from "./views/Home/Home";
-import Man from "./views/Man/Man";
-import Woman from "./views/Woman/Woman";
-import Accessory from "./views/Accessory/Accessory";
 import Search from "./views/Search/Search";
 import MyAccount from "./views/MyAccount/MyAccount";
 import Cart from "./views/Cart";
@@ -24,6 +21,8 @@ import { setAuthToken } from "./ulits/instance/instance";
 import UpdateProducts from "./views/UpdateProducts";
 import UpdateProduct from "./components/UpdateProduct";
 import CreateProduct from "./components/Cabinet/CreateProduct/CreateProduct";
+import { getCartItem, isNotLoaded } from "./store/cart/actions";
+import Products from "./views/Products/Products";
 import { getWishlistItem } from "./store/wishlist/actions";
 
 const App = () => {
@@ -51,6 +50,11 @@ const App = () => {
   }, [isLogin, token]);
 
   useEffect(() => {
+    dispatch(getCartItem(isLogin));
+    return () => dispatch(isNotLoaded());
+  }, []);
+
+  useEffect(() => {
     isLogin && dispatch(getWishlistItem());
   }, [isLogin]);
 
@@ -72,9 +76,7 @@ const App = () => {
         <div className="main">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/man" element={<Man />} />
-            <Route path="/woman" element={<Woman />} />
-            <Route path="/accessory" element={<Accessory />} />
+            <Route path="/products/:filter" element={<Products />} />
             <Route path="/search" element={<Search />} />
             <Route path="/my-account/user" element={<MyAccount />} />
             <Route path="/my-account/entry" element={<Entry />} />
