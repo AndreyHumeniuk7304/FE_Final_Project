@@ -10,11 +10,13 @@ const CheckboxItem = ({
   isItemChecked,
   setIsItemChecked,
 }) => {
-  const isChecked = isItemChecked.includes(itemName);
+  const [isChecked, setIsChecked] = useState();
+  useState(() => {
+    setIsChecked(isItemChecked.includes(itemName));
+  }, []);
 
-  const [nightMode, setNightMode] = useState(
-    JSON.parse(localStorage.getItem("nightMode"))
-  );
+  const nightMode = useSelector((state) => state.nightMode);
+
   return (
     <FormLabel
       className="checkbox__lable"
