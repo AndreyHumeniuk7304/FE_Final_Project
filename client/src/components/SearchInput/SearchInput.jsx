@@ -25,6 +25,11 @@ const SearchInput = ({ isExpandInput, setIsExpandInput }) => {
     });
   }, []);
 
+  const clearInput = () => {
+    setValueInput("");
+    input.current.value = "";
+  };
+
   return (
     <div className="header__account-input">
       <SearchIcon
@@ -68,6 +73,7 @@ const SearchInput = ({ isExpandInput, setIsExpandInput }) => {
           value={valueInput}
           activeFocus={activeFocus}
           setActiveFocus={setActiveFocus}
+          clearInput={clearInput}
         />
       )}
     </div>
