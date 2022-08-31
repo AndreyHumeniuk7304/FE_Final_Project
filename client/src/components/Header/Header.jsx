@@ -3,7 +3,6 @@ import { Box } from "@mui/material";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import SearchInput from "../SearchInput/SearchInput";
-import { fetchCategoriesProducts } from "../../store/catalog/actions";
 import { useState } from "react";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
