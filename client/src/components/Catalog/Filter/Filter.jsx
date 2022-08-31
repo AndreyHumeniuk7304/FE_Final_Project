@@ -9,23 +9,18 @@ import {
   getMinMaxPrice,
   setFilterLink,
   getCategories,
+  getItemInFilter,
+  filterTitles,
 } from "./filterFunctions";
 import { useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-
-export const filterTitles = [
-  "categories",
-  "brand",
-  "mechanism",
-  "material",
-  "color",
-];
 
 const Filter = () => {
   const [currentPrice, setCurrentPrice] = useState([100, 1000]);
   const [isFilterUsing, setIsFilterUsing] = useState(false);
   const [search, setSearch] = useSearchParams();
   const [categories, setCategories] = useState(getCategories(search));
+  const [isItemChecked, setIsItemChecked] = useState([]);
   const { categorieProductList, searchWord } = useSelector(
     (state) => state.catalog
   );
@@ -34,11 +29,12 @@ const Filter = () => {
   useEffect(() => {
     setCategories(getCategories(search));
     setCurrentPrice(getMinMaxPrice(categorieProductList));
+    getItemInFilter(search, setIsItemChecked);
   }, [categorieProductList]);
 
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
-      categories: categories,
+      categories: [],
       brand: [],
       mechanism: [],
       material: [],
@@ -50,7 +46,6 @@ const Filter = () => {
   const submitFilter = (values) => {
     const link = setFilterLink(values, currentPrice);
     setSearch(link);
-    console.log(link);
     setIsFilterUsing(true);
     // searchWord !== ""
     //   ? dispatch(
@@ -64,9 +59,7 @@ const Filter = () => {
     setSearch(categories.length ? `categories=${categories}` : "");
     setCurrentPrice(getMinMaxPrice(categorieProductList));
     setIsFilterUsing(false);
-    // dispatch(
-    //   fetchCategoriesProducts(`products/filter?categories=${categories}`)
-    // );
+    setIsItemChecked([]);
   };
 
   return (
@@ -74,7 +67,7 @@ const Filter = () => {
       <div className="filter-wrapper filter">
         <FilterMobileHeader />
         <Stack>
-          <CheckedFilterItem search={search} />
+          <CheckedFilterItem isItemChecked={isItemChecked} />
 
           <form
             onSubmit={handleSubmit((data) => {
@@ -88,7 +81,8 @@ const Filter = () => {
                 <CheckboxForm
                   title={title}
                   register={register}
-                  search={search}
+                  isItemChecked={isItemChecked}
+                  setIsItemChecked={setIsItemChecked}
                 />
               </Box>
             ))}
