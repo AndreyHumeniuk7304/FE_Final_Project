@@ -1,21 +1,10 @@
 import PropTypes from "prop-types";
-import { filterTitles } from "./Filter";
 
-export const CheckedFilterItem = ({ search }) => {
-  const getAllActiveFilter = () => {
-    let valuesArr = [];
-
-    filterTitles.map(
-      (title) =>
-        (valuesArr = [...valuesArr, ...search.getAll(title).join().split(",")])
-    );
-    return valuesArr.filter((a) => a);
-  };
-
+export const CheckedFilterItem = ({ isItemChecked }) => {
   return (
     <div>
       <ul className="filter__checked">
-        {getAllActiveFilter().map((data) => (
+        {isItemChecked.map((data) => (
           <ol className="checked__item" key={Math.random()}>
             {data}
           </ol>
@@ -26,5 +15,5 @@ export const CheckedFilterItem = ({ search }) => {
 };
 
 CheckedFilterItem.propTypes = {
-  search: PropTypes.object,
+  isItemChecked: PropTypes.array,
 };

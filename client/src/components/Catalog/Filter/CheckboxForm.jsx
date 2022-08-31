@@ -3,23 +3,22 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router";
+import { useSearchParams } from "react-router-dom";
 import CheckboxItem from "./CheckboxItem";
 import { getFilterItem } from "./filterFunctions";
 
-const CheckboxForm = ({ title, register, search }) => {
+const CheckboxForm = ({ title, register, isItemChecked, setIsItemChecked }) => {
   const [isShow, setIsShow] = useState(false);
-  const [isItemChecked, setIsItemChecked] = useState([]);
   const [arr, setArr] = useState();
-
-  useEffect(() => {
-    setIsItemChecked([]);
-    setIsItemChecked(search.getAll(title).join().split(","));
-    setIsShow(false);
-  }, [search.toString()]);
-
   const productList = useSelector(
     (state) => state.catalog.categorieProductList
   );
+
+  useEffect(() => {
+    setIsShow(true);
+    setArr(getFilterItem(title, productList));
+  }, [productList]);
 
   return (
     <>
@@ -57,6 +56,7 @@ export default CheckboxForm;
 
 CheckboxForm.propTypes = {
   title: PropTypes.string,
-  search: PropTypes.object,
   register: PropTypes.func,
+  isItemChecked: PropTypes.array,
+  setIsItemChecked: PropTypes.func,
 };

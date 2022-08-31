@@ -1,6 +1,5 @@
 import { FormLabel } from "@mui/material";
 import PropTypes from "prop-types";
-import { useEffect } from "react";
 import { useState } from "react";
 
 const CheckboxItem = ({
@@ -12,9 +11,9 @@ const CheckboxItem = ({
 }) => {
   const isChecked = isItemChecked.includes(itemName);
 
-  const [nightMode, setNightMode] = useState(
-    JSON.parse(localStorage.getItem("nightMode"))
-  );
+  // const [nightMode, setNightMode] = useState(
+  //   JSON.parse(localStorage.getItem("nightMode"))
+  // );
   return (
     <FormLabel
       className="checkbox__lable"
