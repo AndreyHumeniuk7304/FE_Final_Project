@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import { useDispatch } from "react-redux";
 import { writeSearchWord } from "../../store/catalog/actions";
 
-const SearchModal = ({ value, activeFocus, setActiveFocus }) => {
+const SearchModal = ({ value, activeFocus, setActiveFocus, clearInput }) => {
   const dispatch = useDispatch();
   let count = 0;
   const [foundProducts, setFoundProducts] = useState([]);
@@ -21,6 +21,10 @@ const SearchModal = ({ value, activeFocus, setActiveFocus }) => {
     });
   }, [value]);
 
+  // useEffect(() => {
+  //   localStorage.setItem("searchWorld", JSON.stringify(value));
+  // }, [foundProducts]);
+
   return (
     <>
       {activeFocus ? (
@@ -29,11 +33,13 @@ const SearchModal = ({ value, activeFocus, setActiveFocus }) => {
             {foundProducts.map((product) => {
               count++;
               if (product.name.toLowerCase().includes(value) && count <= 4) {
+                console.log(product.productUrl);
                 return (
                   <Link
                     to={product.productUrl}
                     className="modal__product"
                     key={product._id}
+                    onClick={() => clearInput()}
                   >
                     <div className="modal__product-img">
                       <img src={product.imageUrls[0]} />
@@ -59,8 +65,9 @@ const SearchModal = ({ value, activeFocus, setActiveFocus }) => {
                       }}
                     >
                       <Link
-                        to="/search"
+                        to={`/products/filter?categories=mens,ladies,accessories&brand=${value}`}
                         onClick={() => {
+                          clearInput();
                           dispatch(writeSearchWord(`${value}`));
                         }}
                         className="modal__btn"
@@ -85,6 +92,7 @@ SearchModal.propTypes = {
   value: PropTypes.string,
   activeFocus: PropTypes.bool,
   setActiveFocus: PropTypes.func,
+  clearInput: PropTypes.func,
 };
 
 export default SearchModal;

@@ -1,6 +1,7 @@
 import { FormLabel } from "@mui/material";
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const CheckboxItem = ({
   itemName,
@@ -9,17 +10,18 @@ const CheckboxItem = ({
   isItemChecked,
   setIsItemChecked,
 }) => {
-  const [isChecked, setIsChecked] = useState();
-  useState(() => {
-    setIsChecked(isItemChecked.includes(itemName));
-  }, []);
-  // const [nightMode, setNightMode] = useState(
-  //   JSON.parse(localStorage.getItem("nightMode"))
-  // );
+  const isChecked = isItemChecked.includes(itemName);
+
+  const [nightMode, setNightMode] = useState(
+    JSON.parse(localStorage.getItem("nightMode"))
+  );
   return (
     <FormLabel
       className="checkbox__lable"
-      style={{ textDecoration: isChecked ? "underline" : "none" }}
+      style={{
+        textDecoration: isChecked ? "underline" : "none",
+        color: nightMode ? "#fff" : "#686868",
+      }}
     >
       <input
         type="checkbox"
