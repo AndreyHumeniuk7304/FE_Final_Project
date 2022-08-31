@@ -9,8 +9,10 @@ const CheckboxItem = ({
   isItemChecked,
   setIsItemChecked,
 }) => {
-  const isChecked = isItemChecked.includes(itemName);
-
+  const [isChecked, setIsChecked] = useState();
+  useState(() => {
+    setIsChecked(isItemChecked.includes(itemName));
+  }, []);
   // const [nightMode, setNightMode] = useState(
   //   JSON.parse(localStorage.getItem("nightMode"))
   // );
@@ -26,10 +28,12 @@ const CheckboxItem = ({
         defaultChecked={isChecked}
         className={"custom-checkbox"}
         onClick={(e) => {
-          setIsItemChecked([...isItemChecked, e.target.value]);
+          setIsChecked(!isChecked);
           !isChecked
             ? setIsItemChecked([...isItemChecked, e.target.value])
-            : setIsItemChecked(isItemChecked.filter((e) => e !== e));
+            : setIsItemChecked(
+                isItemChecked.filter((el) => el !== e.target.value)
+              );
         }}
         {...register(title)}
       />

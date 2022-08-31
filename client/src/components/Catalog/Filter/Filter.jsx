@@ -28,11 +28,8 @@ const Filter = () => {
   useEffect(() => {
     setCategories(getCategories(search));
     setCurrentPrice(getMinMaxPrice(categorieProductList));
-  }, [categorieProductList]);
-
-  useEffect(() => {
     getItemInFilter(search, setIsItemChecked);
-  }, [search.toString()]);
+  }, [categorieProductList]);
 
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
