@@ -12,7 +12,7 @@ const brand = [
   "frederique",
 ];
 
-const categories = ["Mens", "Ladies", "Accessories"];
+const categories = ["mens", "ladies", "accessories"];
 const mechanism = ["quartz", "mechanics"];
 
 const color = [

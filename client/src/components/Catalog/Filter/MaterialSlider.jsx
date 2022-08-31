@@ -11,6 +11,7 @@ export const MaterialSlider = ({
   setCurrentPrice,
 }) => {
   const [isShow, setIsShow] = useState(false);
+
   return (
     <Box className="filter__slider">
       <Typography

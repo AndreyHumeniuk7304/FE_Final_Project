@@ -19,7 +19,7 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     getOneProduct(itemNo).then((data) => setProduct(data));
-  }, []);
+  }, [itemNo]);
   const decrease = () => {
     if (counter > 1) {
       setCounter(counter - 1);

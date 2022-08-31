@@ -1,7 +1,7 @@
 import { FormLabel } from "@mui/material";
 import PropTypes from "prop-types";
-import { useEffect } from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const CheckboxItem = ({
   itemName,
@@ -10,15 +10,20 @@ const CheckboxItem = ({
   isItemChecked,
   setIsItemChecked,
 }) => {
-  const isChecked = isItemChecked.includes(itemName);
+  const [isChecked, setIsChecked] = useState();
+  useState(() => {
+    setIsChecked(isItemChecked.includes(itemName));
+  }, []);
 
-  const [nightMode, setNightMode] = useState(
-    JSON.parse(localStorage.getItem("nightMode"))
-  );
+  const nightMode = useSelector((state) => state.nightMode);
+
   return (
     <FormLabel
       className="checkbox__lable"
-      style={{ textDecoration: isChecked ? "underline" : "none" }}
+      style={{
+        textDecoration: isChecked ? "underline" : "none",
+        color: nightMode ? "#fff" : "#686868",
+      }}
     >
       <input
         type="checkbox"
@@ -27,10 +32,12 @@ const CheckboxItem = ({
         defaultChecked={isChecked}
         className={"custom-checkbox"}
         onClick={(e) => {
-          setIsItemChecked([...isItemChecked, e.target.value]);
+          setIsChecked(!isChecked);
           !isChecked
             ? setIsItemChecked([...isItemChecked, e.target.value])
-            : setIsItemChecked(isItemChecked.filter((e) => e !== e));
+            : setIsItemChecked(
+                isItemChecked.filter((el) => el !== e.target.value)
+              );
         }}
         {...register(title)}
       />

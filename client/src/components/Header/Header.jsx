@@ -3,7 +3,6 @@ import { Box } from "@mui/material";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import SearchInput from "../SearchInput/SearchInput";
-import { fetchCategoriesProducts } from "../../store/catalog/actions";
 import { useState } from "react";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
@@ -152,21 +151,21 @@ const Header = (props) => {
           <div className="header__categories-container">
             <Link
               onClick={closeBurger}
-              to="/man"
+              to="/products/filter?categories=mens"
               className="header__categories-container__link"
             >
               MAN
             </Link>
             <Link
               onClick={closeBurger}
-              to="/woman"
+              to="/products/filter?categories=ladies"
               className="header__categories-container__link"
             >
               WOMEN
             </Link>
             <Link
               onClick={closeBurger}
-              to="/accessory"
+              to="/products/filter?categories=accessories"
               className="header__categories-container__link"
             >
               ACCESSORY
