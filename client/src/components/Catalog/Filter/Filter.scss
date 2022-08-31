@@ -9,7 +9,6 @@
       flex-direction: row;
 
       .checked__item {
-        border: 1px solid $color-mobile;
         padding: 2px 20px;
         border-radius: 10px;
         margin: 5px;
@@ -75,7 +74,7 @@
       width: fit-content;
       cursor: pointer;
       &:hover {
-        color: gray;
+        color: gray !important;
         &--active {
           text-transform: uppercase;
         }
@@ -102,14 +101,9 @@
 
 @media screen and (min-width: 720px) {
   .filter-wrapper {
-    background-color: black;
     .filter {
       &__checked {
         color: $color-desktop;
-
-        .checked__item {
-          border-color: $color-desktop;
-        }
       }
       &__form {
         display: block;

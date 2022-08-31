@@ -29,6 +29,7 @@ const Filter = () => {
   const { categorieProductList, searchWord } = useSelector(
     (state) => state.catalog
   );
+  const nightMode = useSelector((state) => state.nightMode);
 
   useEffect(() => {
     setCategories(getCategories(search));
@@ -100,11 +101,17 @@ const Filter = () => {
               currentPrice={currentPrice}
               setCurrentPrice={setCurrentPrice}
             />
-            <Button type="submit">Apply</Button>
+            <Button
+              style={{ color: nightMode ? "#fff" : "#000" }}
+              type="submit"
+            >
+              Apply
+            </Button>
             <Button
               type="button"
               onClick={resetFilter}
               disabled={!isFilterUsing}
+              style={{ color: nightMode ? "#fff" : "#000" }}
             >
               Reset
             </Button>
