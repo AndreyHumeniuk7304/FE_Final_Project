@@ -27,7 +27,7 @@ const ProductDetails = () => {
   let isInCart = cart.some((item) => item.product.itemNo === itemNo);
   useEffect(() => {
     getOneProduct(itemNo).then((data) => setProduct(data));
-  }, []);
+  }, [itemNo]);
   const decrease = () => {
     if (counter > 1) {
       setCounter(counter - 1);

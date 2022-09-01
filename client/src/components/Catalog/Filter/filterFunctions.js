@@ -46,3 +46,20 @@ export const getCategories = (search) => {
     ? urlArr[urlArr.indexOf("categories") + 1]
     : [];
 };
+
+export const getItemInFilter = (search, setIsItemChecked) => {
+  let arr = [];
+  filterTitles.forEach(
+    (title) => (arr = [...arr, ...search.getAll(title).join().split(",")])
+  );
+  arr = arr.filter((e) => e);
+  setIsItemChecked(arr);
+};
+
+export const filterTitles = [
+  "categories",
+  "brand",
+  "mechanism",
+  "material",
+  "color",
+];

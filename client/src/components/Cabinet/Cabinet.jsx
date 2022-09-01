@@ -46,19 +46,6 @@ const Cabinet = () => {
                 </div>
               </div>
             </Link>
-            <Link className="link-container" to="/my-account/delete-product">
-              <div className=" my-account__wishlist my-account__section">
-                <div className="icon-container">
-                  <img src="../images/delete-product.png" alt="delete card" />
-                </div>
-                <div>
-                  <h4 className="my-account__section--title">Delete product</h4>
-                  <span className="my-account__section--text">
-                    You can drop product
-                  </span>
-                </div>
-              </div>
-            </Link>
             <Logout />
           </div>
         </div>
