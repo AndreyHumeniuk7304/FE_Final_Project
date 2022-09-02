@@ -1,0 +1,24 @@
+.modal-container{
+    // height:  100vh;
+    width: 100vw;
+    // background-color: rgba(0,0,0,0.4);
+    // position: fixed;
+    // top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y:hidden;
+}
+.modal_content{
+    margin-top: 50px;
+    border-radius:  12px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-basis: 25vw;
+    padding: 15px;
+    font-size: 20px;}
+
+    @media screen and (min-width: 720px) {}
+    @media screen and (min-width: 1023px) {}

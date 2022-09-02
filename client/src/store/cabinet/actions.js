@@ -27,3 +27,7 @@ export const fetchCurrentCustomer = (isLogin, token) => (dispatch) => {
 // const updateCustomer = (userData)=>(return async (dispatch)=>{
 
 // })
+
+export const showModal = (open) => {
+  return { type: "SHOW_MODAL", payload: !open };
+};

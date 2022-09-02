@@ -1,6 +1,7 @@
 const initialState = {
   currentCustomer: [],
   hasError: false,
+  showModal: false,
 };
 
 const cabinetReducer = (state = initialState, action) => {
@@ -23,6 +24,12 @@ const cabinetReducer = (state = initialState, action) => {
     //     currentCustomer: action.payload,
     //   };
     // }
+    case "SHOW_MODAL": {
+      return {
+        ...state,
+        showModal: action.payload,
+      };
+    }
     default: {
       return state;
     }
