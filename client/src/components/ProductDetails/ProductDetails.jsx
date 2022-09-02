@@ -7,6 +7,7 @@ import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import theme from "../../theme";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/cart/actions";
+import Subscribe from "../Subscribe/Subscribe";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -235,7 +236,9 @@ const ProductDetails = () => {
                   }
                 />
               </Box>
+              <Box></Box>
             </Box>
+            <Subscribe />
           </Box>
         </Box>
       </Box>
