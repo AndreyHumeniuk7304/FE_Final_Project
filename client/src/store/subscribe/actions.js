@@ -1,7 +1,13 @@
 import getCustomers from "../../api/getCustomers";
 
 const getSubscribes = (sub) => {
-  return { type: "GET_SUBSCRIBE", payload: sub };
+  localStorage.setItem("subscribe", JSON.stringify(sub));
+  return { type: "SET_SUBSCRIBE", payload: sub };
+};
+
+const delSubscribes = (sub) => {
+  localStorage.removeItem("subscribe");
+  return { type: "DEL_SUBSCRIBE", payload: sub };
 };
 
 const fetchSubscribes = (userData, isAutoLog, nav) => {
@@ -20,4 +26,4 @@ const fetchSubscribes = (userData, isAutoLog, nav) => {
   };
 };
 
-export { fetchSubscribes, getSubscribes };
+export { fetchSubscribes, getSubscribes, delSubscribes };

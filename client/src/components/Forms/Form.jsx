@@ -117,7 +117,7 @@ const Form = ({
         );
     }
   };
-
+  console.log(errors);
   return (
     <form
       onSubmit={handleSubmit((values) => actionWithForm(values))}

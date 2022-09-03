@@ -13,4 +13,8 @@ export const subscribeInputName = [
 ];
 export const defaultValues = {
   email: "",
+  letterSubject:
+    "You received this email because you were subscribed to the newsletter",
+  letterHtml: "",
+  enabled: true,
 };

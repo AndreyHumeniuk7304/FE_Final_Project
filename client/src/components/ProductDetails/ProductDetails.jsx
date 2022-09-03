@@ -238,7 +238,7 @@ const ProductDetails = () => {
               </Box>
               <Box></Box>
             </Box>
-            <Subscribe />
+            <Subscribe itemNo={itemNo} />
           </Box>
         </Box>
       </Box>
