@@ -3,7 +3,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { getSuccess } from "./store/userAccount/actions";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { setAuthToken } from "./ulits/instance/instance";
 import { getCartItem, isNotLoaded } from "./store/cart/actions";
 import Routing from "./components/Routing/Routing";
@@ -40,6 +40,10 @@ const App = () => {
   const handleBurger = () => {
     setStatusOpenBurger(!statusOpenBurger);
   };
+
+  useEffect(() => {
+    window.history.scrollRestoration = "manual";
+  }, []);
 
   const closeBurger = () => {
     setStatusOpenBurger(false);
