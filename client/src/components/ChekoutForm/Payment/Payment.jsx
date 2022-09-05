@@ -1,43 +1,40 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import getAllProductsToRender from "../../../api/getAllProductsToRender";
-import {
-  getPaymentMethod,
-  addPaymentMethod,
-  deletePaymentMethod,
-} from "../../../api/paymentMethod";
+import React, { useEffect, useState } from "react";
+import { getPaymentMethod } from "../../../api/paymentMethod";
 
 const Payment = () => {
-  const token = useSelector((state) => state.userAccount.customer.token);
-  const newPaymentMethod = {
-    customId: "payment-method-1",
-    name: "Payment Method #1",
-    paymentProcessor: "Adyen",
-  };
+  const [paymentMethods, setPaymentMethods] = useState([]);
+  const [paymentMethod, setPaymentMethod] = useState();
 
   useEffect(() => {
-    // addPaymentMethod(newPaymentMethod).then((res) => console.log(res));
-    // deletePaymentMethod("payment-method-1");
-    // getPaymentMethod().then((res) => console.log(res));
+    getPaymentMethod().then((res) => setPaymentMethods(res));
   }, []);
+
+  const activePaymentMethod = (e) => {
+    paymentMethods.forEach((method) => {
+      method.imageUrl == e.target.src && setPaymentMethod(method);
+    });
+  };
 
   return (
     <div className="form__pay-method">
-      <div className="form__pay-method__item">
-        <a href="#!">
-          <img src="./images/mastercard-pay.png" alt="mastercard" />
-        </a>
-      </div>
-      <div className="form__pay-method__item">
-        <a href="#!">
-          <img src="./images/amer-express-pay.jpg" alt="express" />
-        </a>
-      </div>
-      <div className="form__pay-method__item">
-        <a href="#!">
-          <img src="./images/visa-pay.png" alt="visa" />
-        </a>
-      </div>
+      {paymentMethods != [] &&
+        paymentMethods.map((method) => {
+          return (
+            <div
+              key={method._id}
+              className="form__pay-method__item"
+              onClick={(e) => activePaymentMethod(e)}
+            >
+              <img
+                style={{
+                  width: method == paymentMethod ? "80px" : "40px",
+                }}
+                src={method.imageUrl}
+                alt={method.description}
+              />
+            </div>
+          );
+        })}
     </div>
   );
 };
