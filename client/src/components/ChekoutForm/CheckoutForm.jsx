@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartItem, isNotLoaded } from "../../store/cart/actions";
 import { useEffect } from "react";
+import Payment from "./Payment/Payment.jsx";
 
 const CustomErrorMessage = ({ name }) => (
   <ErrorMessage name={name}>
@@ -91,7 +92,7 @@ const CheckoutForm = () => {
                     },
                     fontFamily: "fontFamily",
                     textAlign: "start",
-                    color: "primary.dark",
+                    // color: "primary.dark",
                     fontSize: 18,
                     fontWeight: 700,
                     paddingTop: "10px",
@@ -111,7 +112,7 @@ const CheckoutForm = () => {
                     },
                     fontSize: 18,
                     fontFamily: "fontFamily",
-                    color: "primary.dark",
+                    // color: "primary.dark",
                     fontWeight: 500,
                     mb: "40px",
                     textAlign: "start",
@@ -122,23 +123,7 @@ const CheckoutForm = () => {
                   Total payment amount $ {getTotalPrice()}
                 </Typography>
 
-                <div className="form__pay-method">
-                  <div className="form__pay-method__item">
-                    <a href="#!">
-                      <img src="./images/mastercard-pay.png" alt="mastercard" />
-                    </a>
-                  </div>
-                  <div className="form__pay-method__item">
-                    <a href="#!">
-                      <img src="./images/amer-express-pay.jpg" alt="express" />
-                    </a>
-                  </div>
-                  <div className="form__pay-method__item">
-                    <a href="#!">
-                      <img src="./images/visa-pay.png" alt="visa" />
-                    </a>
-                  </div>
-                </div>
+                <Payment />
                 <section className="form__inputs">
                   <div className="form__inputs-item">
                     <label className="label" htmlFor="cardNumber">
@@ -174,7 +159,9 @@ const CheckoutForm = () => {
                     <label className="label" htmlFor="cardExpiryDate">
                       Card Expiry Date
                     </label>
-                    <Box sx={{ color: "primary.dark" }}>
+                    <Box
+                    //  sx={{ color: "primary.dark" }}
+                    >
                       <Field
                         as="select"
                         className="input-item input-item-sm"
