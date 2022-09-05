@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Catalog from "../../components/Catalog/Catalog";
 import { fetchCategoriesProducts } from "../../store/catalog/actions";
 
