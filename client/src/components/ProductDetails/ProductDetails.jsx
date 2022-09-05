@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import getOneProduct from "../../api/getOneProduct";
 import "./ProductDetails.scss";
-import { Box, Button, Checkbox, Typography } from "@mui/material";
+import { Box, Button, Checkbox, Rating, Typography } from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import theme from "../../theme";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../store/cart/actions";
+import { addToCart, deleteCartItem } from "../../store/cart/actions";
+import {
+  addToWishlist,
+  deleteWishlistItem,
+} from "../../store/wishlist/actions";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -14,9 +18,13 @@ const ProductDetails = () => {
   const [counter, setCounter] = useState(1);
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const isAdmin = useSelector((state) => state.userAccount.customer.isAdmin);
+  const cart = useSelector((state) => state.cart.list);
   const nightMode = useSelector((state) => state.nightMode);
   const { itemNo } = useParams();
   const dispatch = useDispatch();
+  const wishlist = useSelector((state) => state.wishlist.list);
+  let isFavorite = wishlist.some((item) => item.itemNo === itemNo);
+  let isInCart = cart.some((item) => item.product.itemNo === itemNo);
   useEffect(() => {
     getOneProduct(itemNo).then((data) => setProduct(data));
   }, [itemNo]);
@@ -31,9 +39,20 @@ const ProductDetails = () => {
     }
   };
 
-  const addToCartClick = () => {
-    dispatch(addToCart(product._id, itemNo, counter, isLogin));
+  const handleCartClick = () => {
+    isInCart
+      ? dispatch(deleteCartItem(product._id, isLogin))
+      : dispatch(addToCart(product._id, itemNo, counter, isLogin));
+    isInCart = !isInCart;
   };
+
+  const handleWishlistClick = () => {
+    isFavorite
+      ? dispatch(deleteWishlistItem(product._id))
+      : dispatch(addToWishlist(product._id));
+    isFavorite = !isFavorite;
+  };
+
   const updateProductClick = () => {
     navigate(`/product/${itemNo}/update`);
   };
@@ -57,7 +76,11 @@ const ProductDetails = () => {
           }}
         >
           <Box>
-            <img className="details__img" src={product.imageUrls[0]} />
+            <img
+              className="details__img"
+              src={product.imageUrls[0]}
+              alt={product.name}
+            />
           </Box>
           <Box
             className="details__item"
@@ -107,6 +130,7 @@ const ProductDetails = () => {
               >
                 REF: {product.itemNo}
               </Typography>
+              <Rating name="size-small" defaultValue={5} size="small" />
               <Typography
                 variant="h6"
                 sx={{
@@ -176,7 +200,13 @@ const ProductDetails = () => {
                   +
                 </button>
               </div>
-              <Box>
+              <Box
+                sx={{
+                  [theme.breakpoints.between("mobile", "desktop")]: {
+                    display: "flex",
+                  },
+                }}
+              >
                 {isAdmin ? (
                   <Button
                     onClick={updateProductClick}
@@ -198,11 +228,10 @@ const ProductDetails = () => {
                   </Button>
                 ) : (
                   <Button
-                    onClick={addToCartClick}
+                    onClick={handleCartClick}
                     variant="contained"
                     sx={{
                       [theme.breakpoints.between("mobile", "desktop")]: {
-                        padding: "12px 70px",
                         fontSize: "16px",
                         lineHeight: "25px",
                       },
@@ -213,27 +242,31 @@ const ProductDetails = () => {
                       lineHeight: "25px",
                     }}
                   >
-                    ADD TO CART
+                    {isInCart ? "REMOVE FROM CART" : "ADD TO CART"}
                   </Button>
                 )}
-                <Checkbox
-                  icon={
-                    <FavoriteBorder
-                      sx={{
-                        [theme.breakpoints.between("mobile", "desktop")]: {
+                {isLogin && (
+                  <Checkbox
+                    checked={isFavorite}
+                    onClick={handleWishlistClick}
+                    icon={
+                      <FavoriteBorder
+                        sx={{
+                          [theme.breakpoints.between("mobile", "desktop")]: {
+                            fontSize: "35px",
+                          },
+                          color: "primary.dark",
                           fontSize: "35px",
-                        },
-                        color: "primary.dark",
-                        fontSize: "35px",
-                      }}
-                    />
-                  }
-                  checkedIcon={
-                    <Favorite
-                      sx={{ color: "primary.dark", fontSize: "35px" }}
-                    />
-                  }
-                />
+                        }}
+                      />
+                    }
+                    checkedIcon={
+                      <Favorite
+                        sx={{ color: "primary.dark", fontSize: "35px" }}
+                      />
+                    }
+                  />
+                )}
               </Box>
             </Box>
           </Box>

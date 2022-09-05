@@ -7,6 +7,7 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import { setAuthToken } from "./ulits/instance/instance";
 import { getCartItem, isNotLoaded } from "./store/cart/actions";
 import Routing from "./components/Routing/Routing";
+import { getWishlistItem } from "./store/wishlist/actions";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -36,6 +37,10 @@ const App = () => {
     dispatch(getCartItem(isLogin));
     return () => dispatch(isNotLoaded());
   }, []);
+
+  useEffect(() => {
+    isLogin && dispatch(getWishlistItem());
+  }, [isLogin]);
 
   const handleBurger = () => {
     setStatusOpenBurger(!statusOpenBurger);
