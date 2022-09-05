@@ -6,15 +6,19 @@ import { useSearchParams } from "react-router-dom";
 
 const Paginations = () => {
   const [search, setSearch] = useSearchParams();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [numOfProductsOnPage, setNumOfProductsOnPage] = useState(10);
+  const [numOfProductsOnPage, setNumOfProductsOnPage] = useState(
+    +search.getAll("perPage")
+  );
   const productsQuntity = useSelector((state) => state.catalog.productsQuntity);
 
-  useEffect(() => {
-    setPage();
-  }, [currentPage, numOfProductsOnPage]);
+  // const getMoreProducts = () => {
+  //   setNumOfProductsOnPage(numOfProductsOnPage + 10);
+  //   +search.getAll("perPage") === numOfProductsOnPage
+  //     ? setNumOfProductsOnPage(numOfProductsOnPage + 10)
+  //     : setPage();
+  // };
 
-  const setPage = () => {
+  const setPage = (currentPage = 1) => {
     const linkWithoutPagesInfo = search
       .toString()
       .slice(0, search.toString().search("&perPage"));
@@ -27,13 +31,11 @@ const Paginations = () => {
 
   return (
     <>
-      <Button onClick={() => setNumOfProductsOnPage(numOfProductsOnPage + 10)}>
-        Show more
-      </Button>
+      {/* <Button onClick={getMoreProducts}>Show more</Button> */}
       <Pagination
         shape="rounded"
         onChange={(e, v) => {
-          setCurrentPage(v);
+          setPage(v);
         }}
         page={+search.getAll("startPage")}
         count={Math.ceil(productsQuntity / 10)}

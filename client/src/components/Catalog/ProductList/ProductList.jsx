@@ -126,7 +126,9 @@ const ProductList = () => {
           })
         )}
       </div>
-      <div>{productsQuntity > 10 && !isLoading && <Paginations />}</div>
+      <Box sx={{ pb: 3 }}>
+        {productsQuntity > 10 && !isLoading && <Paginations />}
+      </Box>
     </div>
   );
 };
