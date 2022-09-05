@@ -1,33 +1,30 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { Container } from "@mui/system";
-import { Form, Formik, Field, ErrorMessage } from "formik";
+import { yupResolver } from "@hookform/resolvers/yup";
+// import { Form, Formik, Field, ErrorMessage } from "formik";
 import theme from "../../theme";
 import "./CheckoutForm.scss";
-import { object, string, number } from "yup";
-import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { getCartItem, isNotLoaded } from "../../store/cart/actions";
-import { useEffect } from "react";
-
-const CustomErrorMessage = ({ name }) => (
-  <ErrorMessage name={name}>
-    {(message) => (
-      <div className="error-box">
-        <i>{message}</i>
-      </div>
-    )}
-  </ErrorMessage>
-);
+import { checkoutInputNames, checkoutSchema } from "./dataForm";
+import { useForm } from "react-hook-form";
+import Form from "../Forms/Form";
 
 const CheckoutForm = () => {
-  const dispatch = useDispatch();
-  const isLogin = useSelector((state) => state.userAccount.isLogin);
   const cartList = useSelector((state) => state.cart.list);
 
-  useEffect(() => {
-    dispatch(getCartItem(isLogin));
-    return () => dispatch(isNotLoaded());
-  }, []);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(checkoutSchema),
+    defaultValues: {
+      cardNumber: "",
+      cardHolderName: "",
+      expiryDate: "",
+      cvv: "",
+    },
+  });
 
   const getTotalPrice = () => {
     return cartList.length
@@ -40,33 +37,80 @@ const CheckoutForm = () => {
       : 0;
   };
 
-  const schema = object({
-    cardNumber: number()
-      .typeError("Enter the value in number type")
-      .required("It's a required field")
-      .positive("A phone number can't start with a minus")
-      .integer("A phone number can't include a decimal point"),
-    cardHolderName: string().required("It's a required field"),
-    cardExpiryDateOfMonth: string().required("It's a required field"),
-    cardExpiryDateOfYear: string().required("It's a required field"),
-    cvv: number()
-      .typeError("Enter the value in number type")
-      .required("It's a required field"),
-    deliveryAdress: string().required("It's a required field"),
-  });
-
-  const handleSubmit = (values, actions) => {
-    actions.setSubmitting(true);
-    setTimeout(() => {
-      actions.resetForm(true);
-      console.log("user information:", values);
-      actions.setSubmitting(false);
-      // dispatch(clearCart());
-    }, 2000);
+  const handleSubmitForm = () => {
+    console.log("ok");
   };
   return (
     <Container sx={{ maxWidth: "lg" }}>
-      <Formik
+      <Typography
+        sx={{
+          [theme.breakpoints.between("mobile", "tablet")]: {
+            fontSize: 14,
+
+            mb: "28px",
+          },
+          fontFamily: "fontFamily",
+          textAlign: "center",
+          // color: "primary.dark",
+          fontSize: 18,
+          fontWeight: 700,
+          paddingTop: "10px",
+          mb: "52px",
+        }}
+        component="h2"
+      >
+        Please select your payment method
+      </Typography>
+
+      <Typography
+        sx={{
+          [theme.breakpoints.between("mobile", "tablet")]: {
+            fontSize: 14,
+            fontWeight: 400,
+            textAlign: "center",
+          },
+          fontSize: 18,
+          fontFamily: "fontFamily",
+          // color: "primary.dark",
+          fontWeight: 500,
+          mb: "40px",
+          textAlign: "center",
+        }}
+        component="h4"
+        align="center"
+      >
+        Total payment amount $ {getTotalPrice()}
+      </Typography>
+
+      <div className="form__pay-method">
+        <div className="form__pay-method__item">
+          <a href="#!">
+            <img src="./images/mastercard-pay.png" alt="mastercard" />
+          </a>
+        </div>
+        <div className="form__pay-method__item">
+          <a href="#!">
+            <img src="./images/amer-express-pay.jpg" alt="express" />
+          </a>
+        </div>
+        <div className="form__pay-method__item">
+          <a href="#!">
+            <img src="./images/visa-pay.png" alt="visa" />
+          </a>
+        </div>
+      </div>
+      <div className="form-wrapper">
+        <Form
+          actionWithForm={handleSubmitForm}
+          formArr={checkoutInputNames}
+          register={register}
+          handleSubmit={handleSubmit}
+          errors={errors}
+          btnName={"Pay"}
+        />
+      </div>
+
+      {/* <Formik
         initialValues={{
           cardNumber: "",
           cardHolderName: "",
@@ -91,7 +135,7 @@ const CheckoutForm = () => {
                     },
                     fontFamily: "fontFamily",
                     textAlign: "start",
-                    color: "primary.dark",
+                    // color: "primary.dark",
                     fontSize: 18,
                     fontWeight: 700,
                     paddingTop: "10px",
@@ -111,7 +155,7 @@ const CheckoutForm = () => {
                     },
                     fontSize: 18,
                     fontFamily: "fontFamily",
-                    color: "primary.dark",
+                    // color: "primary.dark",
                     fontWeight: 500,
                     mb: "40px",
                     textAlign: "start",
@@ -139,6 +183,8 @@ const CheckoutForm = () => {
                     </a>
                   </div>
                 </div>
+
+                
                 <section className="form__inputs">
                   <div className="form__inputs-item">
                     <label className="label" htmlFor="cardNumber">
@@ -278,13 +324,13 @@ const CheckoutForm = () => {
             </>
           );
         }}
-      </Formik>
+      </Formik> */}
     </Container>
   );
 };
 
 export default CheckoutForm;
 
-CustomErrorMessage.propTypes = {
-  name: PropTypes.string,
-};
+// CustomErrorMessage.propTypes = {
+//   name: PropTypes.string,
+// };

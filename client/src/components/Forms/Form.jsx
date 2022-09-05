@@ -3,6 +3,7 @@ import { Button } from "@mui/material";
 import CustomInput from "../Forms/CastomInput";
 import CustomErrorMessage from "../Forms/CustomErrorMessage";
 import CustomDropList from "../Forms/CustomDropList";
+import CustomPaymantInput from "./CustomPaymantInput";
 
 const Form = ({
   actionWithForm,
@@ -35,6 +36,21 @@ const Form = ({
               arr={formName}
               register={register}
               camelizeDecode={camelizeDecode}
+            />
+            <CustomErrorMessage err={errors[inputName]?.message} />
+          </>
+        );
+      }
+      case "expiryDate": {
+        return (
+          <>
+            {label && <label className="form__label">Enter the {label}:</label>}
+            <CustomPaymantInput
+              register={register}
+              name={camelizeDecode(inputName)}
+              formName={inputName}
+              formType={formType}
+              label={label}
             />
             <CustomErrorMessage err={errors[inputName]?.message} />
           </>
