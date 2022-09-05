@@ -5,6 +5,16 @@
     max-width: 500px;
     margin: 0 auto;
   }
+  &__show-password {
+    width: 20px;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+  }
+  &__box {
+    width: 100%;
+    position: relative;
+  }
 
   &__input {
     color: black;
