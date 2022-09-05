@@ -151,21 +151,21 @@ const Header = (props) => {
           <div className="header__categories-container">
             <Link
               onClick={closeBurger}
-              to="/products/filter?categories=mens"
+              to="/products/filter?categories=mens&perPage=10&startPage=1"
               className="header__categories-container__link"
             >
               MAN
             </Link>
             <Link
               onClick={closeBurger}
-              to="/products/filter?categories=ladies"
+              to="/products/filter?categories=ladies&perPage=10&startPage=1"
               className="header__categories-container__link"
             >
               WOMEN
             </Link>
             <Link
               onClick={closeBurger}
-              to="/products/filter?categories=accessories"
+              to="/products/filter?categories=accessories&perPage=10&startPage=1"
               className="header__categories-container__link"
             >
               ACCESSORY

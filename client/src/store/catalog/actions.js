@@ -4,8 +4,8 @@ import getAllProductsToRender from "../../api/getAllProductsToRender";
 export const fetchCategoriesProducts = (categoriesType) => (dispatch) => {
   dispatch({ type: "START_FETCH_PRODUCTS" });
   getCategoryProductsToRender(categoriesType)
-    .then((products) => {
-      dispatch(loadedCategorieProducts(products));
+    .then((data) => {
+      dispatch(loadedCategorieProducts(data));
     })
     .catch(() => {
       dispatch(errorLoadedProducts());
