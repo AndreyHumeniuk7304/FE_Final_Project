@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import getOneProduct from "../../api/getOneProduct";
 import "./ProductDetails.scss";
-import { Box, Button, Checkbox, Typography } from "@mui/material";
+import { Box, Button, Checkbox, Rating, Typography } from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import theme from "../../theme";
 import { useDispatch, useSelector } from "react-redux";
@@ -130,6 +130,7 @@ const ProductDetails = () => {
               >
                 REF: {product.itemNo}
               </Typography>
+              <Rating name="size-small" defaultValue={5} size="small" />
               <Typography
                 variant="h6"
                 sx={{
@@ -199,7 +200,13 @@ const ProductDetails = () => {
                   +
                 </button>
               </div>
-              <Box>
+              <Box
+                sx={{
+                  [theme.breakpoints.between("mobile", "desktop")]: {
+                    display: "flex",
+                  },
+                }}
+              >
                 {isAdmin ? (
                   <Button
                     onClick={updateProductClick}
@@ -225,7 +232,6 @@ const ProductDetails = () => {
                     variant="contained"
                     sx={{
                       [theme.breakpoints.between("mobile", "desktop")]: {
-                        padding: "12px 70px",
                         fontSize: "16px",
                         lineHeight: "25px",
                       },
