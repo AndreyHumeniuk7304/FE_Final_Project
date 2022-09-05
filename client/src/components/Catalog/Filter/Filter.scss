@@ -60,6 +60,12 @@
       }
     }
   }
+  .form {
+    &__show-pasword {
+      width: 20px;
+    }
+  }
+
   .checkbox {
     padding: 20px 0 0 40px;
     text-align: start;

@@ -1,4 +1,6 @@
+import { Box, IconButton } from "@mui/material";
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 export default function CustomInput({
   name,
@@ -7,16 +9,36 @@ export default function CustomInput({
   formType,
   label,
 }) {
+  const togglePassword = (e) => {
+    let input = e.target.parentElement.children[0];
+    input.type === "password"
+      ? (input.type = "text") &&
+        (e.target.src =
+          "../images/eye_visible_hide_hidden_show_icon_145988.svg")
+      : (input.type = "password") &&
+        (e.target.src =
+          "../images/eye_slash_visible_hide_hidden_show_icon_145987.svg");
+  };
   return (
     <>
       {formType !== "text" ? (
-        <input
-          placeholder={label ? "" : name}
-          className={"form__input"}
-          type={formType && formType}
-          {...register(formName)}
-          autoComplete={"off"}
-        />
+        <div className="form__box">
+          <input
+            placeholder={label ? "" : name}
+            className={"form__input"}
+            type={formType && formType}
+            {...register(formName)}
+            autoComplete={"off"}
+          />
+          {formType === "password" && (
+            <img
+              className="form__show-password"
+              src="../images/eye_slash_visible_hide_hidden_show_icon_145987.svg"
+              alt="show password"
+              onClick={togglePassword}
+            />
+          )}
+        </div>
       ) : (
         <textarea
           placeholder={label ? "" : name}

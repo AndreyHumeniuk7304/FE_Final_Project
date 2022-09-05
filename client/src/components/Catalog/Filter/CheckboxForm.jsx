@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router";
-import { useSearchParams } from "react-router-dom";
 import CheckboxItem from "./CheckboxItem";
 import { getFilterItem } from "./filterFunctions";
 
