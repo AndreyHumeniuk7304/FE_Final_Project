@@ -8,8 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { checkoutInputNames, checkoutSchema } from "./dataForm";
 import { useForm } from "react-hook-form";
 import Form from "../Forms/Form";
-import { useEffect } from "react";
-import { addShippingMethods } from "../../api/shippingMethods";
 
 const CheckoutForm = () => {
   const cartList = useSelector((state) => state.cart.list);
