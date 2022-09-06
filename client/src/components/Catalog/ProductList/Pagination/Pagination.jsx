@@ -30,7 +30,7 @@ const Paginations = () => {
         `perPage=${numOfProductsOnPage}&startPage=${currentPage}`
     );
   };
-  console.log(productsQuntity > numOfProductsOnPage);
+
   return (
     <>
       {productsQuntity > numOfProductsOnPage &&
