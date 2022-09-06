@@ -52,7 +52,9 @@ const Form = ({
               formType={formType}
               label={label}
             />
-            <CustomErrorMessage err={errors[inputName]?.message} />
+            <CustomErrorMessage
+              err={errors[inputName]?.message || errors[inputName]}
+            />
           </>
         );
       }
