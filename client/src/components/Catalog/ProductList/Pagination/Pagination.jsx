@@ -10,15 +10,16 @@ const Paginations = () => {
     +search.getAll("perPage")
   );
   const [currentPage, setCurrentPage] = useState(+search.getAll("startPage"));
-
+  const [pageCount, setPageCount] = useState();
   const productsQuntity = useSelector((state) => state.catalog.productsQuntity);
-  const categorieProductList = useSelector(
-    (state) => state.catalog.categorieProductList
-  );
 
   useEffect(() => {
     setPage();
   }, [numOfProductsOnPage, currentPage]);
+
+  useEffect(() => {
+    setPageCount(Math.ceil(productsQuntity / +search.getAll("perPage")));
+  }, []);
 
   const setPage = () => {
     const linkWithoutPagesInfo = search
@@ -32,24 +33,26 @@ const Paginations = () => {
   };
 
   return (
-    <>
-      {productsQuntity > numOfProductsOnPage &&
-        +search.getAll("startPage") === 1 && (
-          <Button
-            onClick={() => setNumOfProductsOnPage(numOfProductsOnPage + 10)}
-          >
-            Show more
-          </Button>
-        )}
-      <Pagination
-        shape="rounded"
-        onChange={(e, v) => {
-          setCurrentPage(v);
-        }}
-        page={+search.getAll("startPage")}
-        count={Math.ceil(productsQuntity / +search.getAll("perPage"))}
-      />
-    </>
+    pageCount !== 1 && (
+      <>
+        {productsQuntity > numOfProductsOnPage &&
+          +search.getAll("startPage") === 1 && (
+            <Button
+              onClick={() => setNumOfProductsOnPage(numOfProductsOnPage + 10)}
+            >
+              Show more
+            </Button>
+          )}
+        <Pagination
+          shape="rounded"
+          onChange={(e, v) => {
+            setCurrentPage(v);
+          }}
+          page={+search.getAll("startPage")}
+          count={pageCount}
+        />
+      </>
+    )
   );
 };
 
