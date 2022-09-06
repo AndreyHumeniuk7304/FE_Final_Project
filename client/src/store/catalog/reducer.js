@@ -25,7 +25,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         categorieProductList: action.payload.products,
-        productsQuntity: action.payload.productsQuantity,
+        productsQuntity: action.payload.productsQuntity,
         isLoading: false,
         hasError: false,
       };

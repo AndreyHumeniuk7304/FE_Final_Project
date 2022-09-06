@@ -5,7 +5,12 @@ export const fetchCategoriesProducts = (categoriesType) => (dispatch) => {
   dispatch({ type: "START_FETCH_PRODUCTS" });
   getCategoryProductsToRender(categoriesType)
     .then((data) => {
-      dispatch(loadedCategorieProducts(data));
+      dispatch(
+        loadedCategorieProducts({
+          products: data.products,
+          productsQuntity: data.productsQuantity,
+        })
+      );
     })
     .catch(() => {
       dispatch(errorLoadedProducts());
@@ -23,7 +28,12 @@ export const fetchAllProducts = () => (dispatch) => {
   dispatch({ type: "START_FETCH_PRODUCTS" });
   getAllProductsToRender()
     .then((products) => {
-      dispatch(loadedCategorieProducts(products));
+      dispatch(
+        loadedCategorieProducts({
+          products: products,
+          productsQuntity: products.length,
+        })
+      );
     })
     .catch(() => {
       dispatch(errorLoadedProducts());
