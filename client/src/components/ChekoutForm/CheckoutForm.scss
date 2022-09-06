@@ -27,10 +27,18 @@
   &__pay-method {
     @include flex-container;
     justify-content: space-around;
-    margin-bottom: 30px;
+    // margin-bottom: 30px;
   }
-  &__pay-method__item {
+  &__pay-method__item,
+  &__mobile-img {
     cursor: pointer;
+  }
+  &__mobile-img {
+    display: inline-block;
+    padding-right: 30px;
+  }
+  &__mobile-img img {
+    width: 100px;
   }
 }
 
@@ -88,7 +96,7 @@
   .form {
     padding: 50px 20px;
     &__pay-method {
-      margin-bottom: 60px;
+      // margin-bottom: 60px;
       justify-content: start;
       gap: 37px;
     }

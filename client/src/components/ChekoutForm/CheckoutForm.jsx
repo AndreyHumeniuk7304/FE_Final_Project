@@ -7,7 +7,7 @@ import { object, string, number } from "yup";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartItem, isNotLoaded } from "../../store/cart/actions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Payment from "./Payment/Payment.jsx";
 
 const CustomErrorMessage = ({ name }) => (
@@ -24,6 +24,8 @@ const CheckoutForm = () => {
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const cartList = useSelector((state) => state.cart.list);
+  const [paymentMethod, setPaymentMethod] = useState();
+  const [typeOfMobilePayment, setTypeOfMobilePayment] = useState();
 
   useEffect(() => {
     dispatch(getCartItem(isLogin));
@@ -123,102 +125,135 @@ const CheckoutForm = () => {
                   Total payment amount $ {getTotalPrice()}
                 </Typography>
 
-                <Payment />
+                <Payment
+                  paymentMethod={paymentMethod}
+                  setPaymentMethod={setPaymentMethod}
+                />
                 <section className="form__inputs">
-                  <div className="form__inputs-item">
-                    <label className="label" htmlFor="cardNumber">
-                      Card Number
-                    </label>
-                    <Field
-                      className="input-item input-item-mob"
-                      id="cardNumber"
-                      name="cardNumber"
-                    />
-                    <CustomErrorMessage
-                      className="error-box"
-                      name="cardNumber"
-                    />
-                  </div>
-
-                  <div className="form__inputs-item">
-                    <label className="label" htmlFor="cardHolderName">
-                      Card Holder Name
-                    </label>
-                    <Field
-                      className="input-item "
-                      id="cardHolderName"
-                      name="cardHolderName"
-                    />
-                    <CustomErrorMessage
-                      className="error-box"
-                      name="cardHolderName"
-                    />
-                  </div>
-
-                  <div className="form__inputs-item">
-                    <label className="label" htmlFor="cardExpiryDate">
-                      Card Expiry Date
-                    </label>
-                    <Box
-                    //  sx={{ color: "primary.dark" }}
-                    >
-                      <Field
-                        as="select"
-                        className="input-item input-item-sm"
-                        id="cardExpiryDateOfMonth"
-                        name="cardExpiryDateOfMonth"
-                      >
-                        <option value=""></option>
-                        <option value="jan">01</option>
-                        <option value="feb">02</option>
-                        <option value="march">03</option>
-                        <option value="apr">04</option>
-                        <option value="may">05</option>
-                        <option value="june">06</option>
-                        <option value="july">07</option>
-                        <option value="aug">08</option>
-                        <option value="sept">09</option>
-                        <option value="oct">10</option>
-                        <option value="nov">11</option>
-                        <option value="dec">12</option>
-                      </Field>
-                      <CustomErrorMessage
-                        className="error-box"
-                        name="cardExpiryDateOfMonth"
-                      />
-                      /
-                      <Field
-                        as="select"
-                        className="input-item input-item-sm"
-                        id="cardExpiryDateOfYear"
-                        name="cardExpiryDateOfYear"
-                      >
-                        <option value=""></option>
-                        <option value="2022">2022</option>
-                        <option value="2023">2023</option>
-                        <option value="2024">2024</option>
-                        <option value="2025">2025</option>
-                        <option value="2026">2026</option>
-                        <option value="2027">2027</option>
-                      </Field>
-                      <CustomErrorMessage
-                        className="error-box"
-                        name="cardExpiryDateOfYear"
-                      />
-                    </Box>
-                  </div>
-                  <div className="form__inputs-item">
-                    <label className="label" htmlFor="cvv">
-                      CVC/CVV/CID
-                    </label>
-                    <Field
-                      type="password"
-                      className="input-item input-item-cvv"
-                      id="cvv"
-                      name="cvv"
-                    />
-                    <CustomErrorMessage className="error-box" name="cvv" />
-                  </div>
+                  {paymentMethod === undefined ||
+                  paymentMethod.name === "Cards" ? (
+                    <>
+                      <div className="form__inputs-item">
+                        <label className="label" htmlFor="cardNumber">
+                          Card Number
+                        </label>
+                        <Field
+                          className="input-item input-item-mob"
+                          id="cardNumber"
+                          name="cardNumber"
+                        />
+                        <CustomErrorMessage
+                          className="error-box"
+                          name="cardNumber"
+                        />
+                      </div>
+                      <div className="form__inputs-item">
+                        <label className="label" htmlFor="cardHolderName">
+                          Card Holder Name
+                        </label>
+                        <Field
+                          className="input-item "
+                          id="cardHolderName"
+                          name="cardHolderName"
+                        />
+                        <CustomErrorMessage
+                          className="error-box"
+                          name="cardHolderName"
+                        />
+                      </div>
+                      <div className="form__inputs-item">
+                        <label className="label" htmlFor="cardExpiryDate">
+                          Card Expiry Date
+                        </label>
+                        <Box>
+                          <Field
+                            as="select"
+                            className="input-item input-item-sm"
+                            id="cardExpiryDateOfMonth"
+                            name="cardExpiryDateOfMonth"
+                          >
+                            <option value=""></option>
+                            <option value="jan">01</option>
+                            <option value="feb">02</option>
+                            <option value="march">03</option>
+                            <option value="apr">04</option>
+                            <option value="may">05</option>
+                            <option value="june">06</option>
+                            <option value="july">07</option>
+                            <option value="aug">08</option>
+                            <option value="sept">09</option>
+                            <option value="oct">10</option>
+                            <option value="nov">11</option>
+                            <option value="dec">12</option>
+                          </Field>
+                          <CustomErrorMessage
+                            className="error-box"
+                            name="cardExpiryDateOfMonth"
+                          />
+                          /
+                          <Field
+                            as="select"
+                            className="input-item input-item-sm"
+                            id="cardExpiryDateOfYear"
+                            name="cardExpiryDateOfYear"
+                          >
+                            <option value=""></option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                          </Field>
+                          <CustomErrorMessage
+                            className="error-box"
+                            name="cardExpiryDateOfYear"
+                          />
+                        </Box>
+                      </div>
+                      <div className="form__inputs-item">
+                        <label className="label" htmlFor="cvv">
+                          CVC/CVV/CID
+                        </label>
+                        <Field
+                          type="password"
+                          className="input-item input-item-cvv"
+                          id="cvv"
+                          name="cvv"
+                        />
+                        <CustomErrorMessage className="error-box" name="cvv" />
+                      </div>
+                    </>
+                  ) : (
+                    paymentMethod.name === "Mobile" && (
+                      <div className="form__mobile-payment">
+                        {paymentMethod.fromOfMobilePayment.map(
+                          (type, index) => {
+                            return (
+                              <div
+                                key={index}
+                                className="form__mobile-img"
+                                onClick={() => setTypeOfMobilePayment(type)}
+                              >
+                                <img
+                                  style={{
+                                    width:
+                                      typeOfMobilePayment != undefined &&
+                                      type.typePay ===
+                                        typeOfMobilePayment.typePay
+                                        ? "150px"
+                                        : "80px",
+                                  }}
+                                  src={type.imgPay}
+                                  alt=""
+                                />
+                              </div>
+                            );
+                          }
+                        )}
+                      </div>
+                    )
+                  )}
 
                   <div className="form__inputs-item">
                     <label className="label" htmlFor="deliveryAdress">

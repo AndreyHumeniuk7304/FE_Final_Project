@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { getPaymentMethod } from "../../../api/paymentMethod";
+import PropTypes from "prop-types";
 
-const Payment = () => {
+const Payment = (props) => {
   const [paymentMethods, setPaymentMethods] = useState([]);
-  const [paymentMethod, setPaymentMethod] = useState();
+  const { paymentMethod, setPaymentMethod } = props;
 
   useEffect(() => {
     getPaymentMethod().then((res) => setPaymentMethods(res));
   }, []);
+
+  useEffect(() => {
+    setPaymentMethod(paymentMethods[0]);
+  }, [paymentMethods]);
 
   const activePaymentMethod = (e) => {
     paymentMethods.forEach((method) => {
@@ -37,6 +42,11 @@ const Payment = () => {
         })}
     </div>
   );
+};
+
+Payment.propTypes = {
+  paymentMethod: PropTypes.object,
+  setPaymentMethod: PropTypes.func,
 };
 
 export default Payment;
