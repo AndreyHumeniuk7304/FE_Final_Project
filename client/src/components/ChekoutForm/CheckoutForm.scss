@@ -7,11 +7,21 @@
   font-size: 12px;
   line-height: 16px;
   margin-bottom: 5px;
-  color: rgb(0, 0, 0);
+  // color: rgb(0, 0, 0);
 
   &-sm {
     display: block;
   }
+}
+
+.form__expiry-date {
+  width: 20%;
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: transparent;
+  outline: none;
+  margin-right: 2px;
+  padding: 2px 10px;
 }
 
 .form {
@@ -36,11 +46,14 @@
   border: none;
   border-bottom: 1px solid black;
   padding: 3px;
+  background-color: transparent;
+  outline: none;
 
   &-sm {
-    width: 60px;
+    width: 70px;
     display: inline-block;
     margin-right: 3px;
+    // color: transparent;
   }
 
   &-cvv {
@@ -86,7 +99,7 @@
     padding: 50px 20px;
     &__pay-method {
       margin-bottom: 60px;
-      justify-content: start;
+      justify-content: center;
       gap: 37px;
     }
 

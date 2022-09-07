@@ -31,7 +31,6 @@ export const deleteWishlistItem = (id) => async (dispatch) => {
 export const getWishlistItem = () => async (dispatch) => {
   try {
     const wishlistItem = await getWishlist();
-    console.log(wishlistItem);
     dispatch({
       type: "SET_WISHLIST",
       payload: wishlistItem ? wishlistItem.products : [],
