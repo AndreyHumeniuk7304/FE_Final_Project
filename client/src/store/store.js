@@ -5,12 +5,14 @@ import cartReducer from "./cart/reducer";
 import userAccountReducer from "./userAccount/reducer";
 import nightModeReducer from "./switchTheme/reducer";
 import cabinetReducer from "./cabinet/reducer";
+import wishlistReducer from "./wishlist/reducer";
 
 export const reducer = combineReducers({
   catalog: catalogReducer,
   cart: cartReducer,
   userAccount: userAccountReducer,
   nightMode: nightModeReducer,
+  wishlist: wishlistReducer,
   cabinet: cabinetReducer,
 });
 

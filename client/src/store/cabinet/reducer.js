@@ -1,7 +1,9 @@
 const initialState = {
   currentCustomer: [],
+  // deliveryAddress: [],
   hasError: false,
-  showModal: false,
+  showModalDelivery: false,
+  showModalBilling: false,
 };
 
 const cabinetReducer = (state = initialState, action) => {
@@ -18,6 +20,12 @@ const cabinetReducer = (state = initialState, action) => {
         hasError: true,
       };
     }
+    case "SET_DELIVERY_ADDRESS": {
+      return {
+        ...state,
+        currentCustomer: action.payload,
+      };
+    }
     // case "SET_NEW_DATA_CUSTOMER": {
     //   return {
     //     ...state,
@@ -28,6 +36,18 @@ const cabinetReducer = (state = initialState, action) => {
       return {
         ...state,
         showModal: action.payload,
+      };
+    }
+    case "SHOW_DELIVERY_MODAL": {
+      return {
+        ...state,
+        showModalDelivery: action.payload,
+      };
+    }
+    case "SHOW_BILLING_MODAL": {
+      return {
+        ...state,
+        showModalBilling: action.payload,
       };
     }
     default: {

@@ -6,10 +6,17 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import AdresModal from "./AdresModal";
-import { showModal } from "../../../store/cabinet/actions";
+import {
+  showBillingModal,
+  showDeliveryModal,
+  showModal,
+} from "../../../store/cabinet/actions";
 
 const Address = () => {
   const open = useSelector((state) => state.cabinet.showModal);
+
+  const openDelivery = useSelector((state) => state.cabinet.showModalDelivery);
+  const openBilling = useSelector((state) => state.cabinet.showModalBilling);
   const dispatch = useDispatch();
 
   const sayHi = () => {
@@ -19,6 +26,16 @@ const Address = () => {
   const reopen = () => {
     dispatch(showModal(open));
   };
+
+  const openDeliveryModal = () => {
+    dispatch(showDeliveryModal(openDelivery));
+    reopen();
+  };
+  const openBillingModal = () => {
+    dispatch(showBillingModal(openBilling));
+    reopen();
+  };
+
   console.log(open);
 
   return (
@@ -28,39 +45,26 @@ const Address = () => {
         <div className="profile">
           <div className="address">
             <div className="address__left-menu">
-              {/* <div className="address__book">
-            <Typography variant="h4">
-              ADDRESS BOOK
-              <IconButton onClick={reopen}>
-                <AddCircleIcon />
-              </IconButton>
-            </Typography>
-          </div> */}
               <div className="address__delivery">
-                <Typography variant="h4">
-                  DELIVERY ADDRESS
-                  {/* <IconButton onClick={reopen}> */}
-                  {/* <AddCircleIcon /> */}
-                  {/* </IconButton> */}
-                </Typography>
-                {/* <a href="#">DELIVERY ADDRESS</a> */}
+                <Typography variant="h4">DELIVERY ADDRESS</Typography>
               </div>
               <input
-                onClick={reopen}
+                onClick={openDeliveryModal}
                 className="address__btn"
                 type="button"
-                value="ADD NEW ADDRESS"
+                value="ADD DELIVERY ADDRESS"
               ></input>
             </div>
             <div className="address__right-menu">
               <div className="address__billing">
-                <a href="#">BILLING ADDRESS</a>
+                <Typography variant="h4">BILLING ADDRESS</Typography>
+                {/* <a href="#">BILLING ADDRESS</a> */}
               </div>
               <input
-                onClick={reopen}
+                onClick={openBillingModal}
                 className="address__btn"
                 type="button"
-                value="ADD NEW ADDRESS"
+                value="ADD BILLING ADDRESS"
               ></input>
             </div>
           </div>

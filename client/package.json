@@ -58,6 +58,7 @@
     ]
   },
   "devDependencies": {
+    "dotenv": "^16.0.2",
     "eslint": "^8.21.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",

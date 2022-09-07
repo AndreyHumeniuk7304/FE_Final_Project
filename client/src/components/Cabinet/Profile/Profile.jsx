@@ -17,7 +17,8 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("hi");
+    // console.log(isLogin);
+    // console.log("hi");
     dispatch(fetchCurrentCustomer(isLogin, token));
   }, [token]);
 
@@ -47,8 +48,8 @@ const Profile = () => {
         console.log(err);
       });
   };
-  console.log(open);
-  console.log(customer);
+  // console.log(open);
+  // console.log(customer);
   return (
     <>
       <div className="profile">
