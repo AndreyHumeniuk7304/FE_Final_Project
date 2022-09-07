@@ -48,7 +48,11 @@
     padding-right: 30px;
   }
   &__mobile-img img {
-    width: 100px;
+    width: 80px;
+  }
+  &__mobile-payment {
+    display: flex;
+    justify-content: center;
   }
 }
 

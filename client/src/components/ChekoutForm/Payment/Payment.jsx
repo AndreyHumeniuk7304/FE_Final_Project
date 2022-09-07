@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { getPaymentMethod } from "../../../api/paymentMethod";
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { paymentMethodAction } from "../../../store/paymentMethod/action";
 
-const Payment = (props) => {
+const Payment = () => {
   const [paymentMethods, setPaymentMethods] = useState([]);
-  const { paymentMethod, setPaymentMethod } = props;
+  const dispatch = useDispatch();
+  const paymentMethod = useSelector((state) => state.paymentMethod);
 
   useEffect(() => {
     getPaymentMethod().then((res) => setPaymentMethods(res));
   }, []);
 
   useEffect(() => {
-    setPaymentMethod(paymentMethods[0]);
+    paymentMethods.length != 0 &&
+      dispatch(paymentMethodAction(paymentMethods[0]));
   }, [paymentMethods]);
 
   const activePaymentMethod = (e) => {
     paymentMethods.forEach((method) => {
-      method.imageUrl == e.target.src && setPaymentMethod(method);
+      method.imageUrl == e.target.src && dispatch(paymentMethodAction(method));
     });
   };
 
