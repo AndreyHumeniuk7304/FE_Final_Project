@@ -41,6 +41,7 @@ export const fetchAllProducts = () => (dispatch) => {
 };
 
 export const loadedCategorieProducts = (products) => {
+  console.log(products);
   return {
     type: "LOADED_CATEGORIES_PRODUCTS",
     payload: products,
