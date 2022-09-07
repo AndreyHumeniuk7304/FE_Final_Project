@@ -11,6 +11,7 @@ import {
   addToWishlist,
   deleteWishlistItem,
 } from "../../store/wishlist/actions";
+import { Link } from "react-router-dom";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -131,6 +132,10 @@ const ProductDetails = () => {
                 REF: {product.itemNo}
               </Typography>
               <Rating name="size-small" defaultValue={5} size="small" />
+              <Link to={`/product/${product.itemNo}/comments`}>
+                Comments <span>(1)</span>
+              </Link>
+
               <Typography
                 variant="h6"
                 sx={{
