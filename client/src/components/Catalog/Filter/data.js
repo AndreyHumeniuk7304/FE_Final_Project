@@ -1,6 +1,16 @@
 const filterCategoriesItem = {
   categories: ["mens", "ladies", "accessories"],
-  brand: ["Certina", "Casio", "Oris", "Fossil", "Nixon", "Gucci", "Frederique"],
+  brand: [
+    "Certina",
+    "Casio",
+    "Oris",
+    "Fossil",
+    "Nixon",
+    "Gucci",
+    "Frederique",
+    "Morellato",
+    "hirsch",
+  ],
 
   mechanism: ["Mechanics", "Quartz"],
 

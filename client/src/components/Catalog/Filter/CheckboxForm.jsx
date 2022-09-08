@@ -7,9 +7,16 @@ import CheckboxItem from "./CheckboxItem";
 import { filterCategoriesItem } from "./data";
 //import { getFilterItem } from "./filterFunctions";
 
-const CheckboxForm = ({ title, register, isItemChecked, setIsItemChecked }) => {
+const CheckboxForm = ({
+  title,
+  register,
+  isItemChecked,
+  setIsItemChecked,
+  itemCLicked,
+  setIdemCliked,
+}) => {
   const [isShow, setIsShow] = useState(false);
-  const [itemCLicked, setIdemCliked] = useState("");
+
   //const [arr, setArr] = useState();
   const productList = useSelector(
     (state) => state.catalog.categorieProductList
@@ -61,4 +68,6 @@ CheckboxForm.propTypes = {
   register: PropTypes.func,
   isItemChecked: PropTypes.array,
   setIsItemChecked: PropTypes.func,
+  itemCLicked: PropTypes.string,
+  setIdemCliked: PropTypes.func,
 };

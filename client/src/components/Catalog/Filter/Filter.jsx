@@ -13,7 +13,7 @@ import {
   filterTitles,
 } from "./filterFunctions";
 import { useSearchParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProductsFilterPreloader } from "../../../store/catalog/actions";
 
 const Filter = () => {
@@ -22,10 +22,12 @@ const Filter = () => {
   const [search, setSearch] = useSearchParams();
   const [categories, setCategories] = useState(getCategories(search));
   const [isItemChecked, setIsItemChecked] = useState([]);
-
+  const [itemCLicked, setIdemCliked] = useState("");
+  const dispatch = useDispatch();
   const categorieProductList = useSelector(
     (state) => state.catalog.categorieProductList
   );
+
   const nightMode = useSelector((state) => state.nightMode);
 
   useEffect(() => {
@@ -59,8 +61,14 @@ const Filter = () => {
     setIsItemChecked([]);
   };
 
-  const getLinkOnChange = (values) =>
-    fetchAllProductsFilterPreloader(setFilterLink(values, currentPrice));
+  const getLinkOnChange = (values) => {
+    dispatch(
+      fetchAllProductsFilterPreloader(
+        "/products/filter" + setFilterLink(values, currentPrice)
+      )
+    );
+    console.log("/products/filter" + setFilterLink(values, currentPrice));
+  };
 
   return (
     <>
@@ -84,10 +92,11 @@ const Filter = () => {
                   register={register}
                   isItemChecked={isItemChecked}
                   setIsItemChecked={setIsItemChecked}
+                  itemCLicked={itemCLicked}
+                  setIdemCliked={setIdemCliked}
                 />
               </Box>
             ))}
-
             <MaterialSlider
               title={"currentPrice"}
               name="currentPrice"

@@ -1,6 +1,5 @@
-import { FormLabel, Tooltip } from "@mui/material";
+import { CircularProgress, FormLabel, Tooltip } from "@mui/material";
 import PropTypes from "prop-types";
-import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -19,11 +18,22 @@ const CheckboxItem = ({
     setIsChecked(isItemChecked.includes(itemName));
   }, []);
 
+  const { productsQuntityOnChange, isLoading } = useSelector(
+    (state) => state.catalog.filterOnChange
+  );
+
   const nightMode = useSelector((state) => state.nightMode);
 
   return (
     <Tooltip
-      title="100pc Apply &#x2B07;"
+      title={
+        isLoading ? (
+          <CircularProgress size={10} />
+        ) : (
+          `${productsQuntityOnChange}pc
+            available`
+        )
+      }
       open={itemName === itemCLicked}
       placement={"right"}
     >
