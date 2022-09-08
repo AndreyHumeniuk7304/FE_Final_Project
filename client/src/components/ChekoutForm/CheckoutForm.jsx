@@ -87,7 +87,7 @@ const CheckoutForm = () => {
         Total payment amount $ {getTotalPrice()}
       </Typography>
 
-      <Payment />
+      {/* <Payment /> */}
       <DataForm setCheckoutInputNames={setCheckoutInputNames} />
 
       {paymentMethod.name == "Mobile" && (
