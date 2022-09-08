@@ -21,8 +21,8 @@ const Filter = () => {
   const [search, setSearch] = useSearchParams();
   const [categories, setCategories] = useState(getCategories(search));
   const [isItemChecked, setIsItemChecked] = useState([]);
-  const { categorieProductList, searchWord } = useSelector(
-    (state) => state.catalog
+  const categorieProductList = useSelector(
+    (state) => state.catalog.categorieProductList
   );
   const nightMode = useSelector((state) => state.nightMode);
 
@@ -47,11 +47,6 @@ const Filter = () => {
     const link = setFilterLink(values, currentPrice);
     setSearch(link);
     setIsFilterUsing(true);
-    // searchWord !== ""
-    //   ? dispatch(
-    //       fetchCategoriesProducts(`products/filter?${link}brand=${searchWord}`)
-    //     )
-    //   : dispatch(fetchCategoriesProducts(`products/filter?${link}`));
   };
 
   const resetFilter = () => {
