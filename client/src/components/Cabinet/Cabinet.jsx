@@ -33,7 +33,10 @@ const Cabinet = () => {
                 </div>
               </div>
             </Link>
-            <Link className="link-container" to="/my-account/update-product">
+            <Link
+              className="link-container"
+              to="/my-account/update-product/filter?perPage=10&startPage=1"
+            >
               <div className=" my-account__history my-account__section">
                 <div className="icon-container">
                   <img src="../images/update-product.png" alt="update card" />

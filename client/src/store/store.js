@@ -5,6 +5,7 @@ import cartReducer from "./cart/reducer";
 import userAccountReducer from "./userAccount/reducer";
 import nightModeReducer from "./switchTheme/reducer";
 import wishlistReducer from "./wishlist/reducer";
+import paymentMethodReducer from "./paymentMethod/reducer";
 
 export const reducer = combineReducers({
   catalog: catalogReducer,
@@ -12,6 +13,7 @@ export const reducer = combineReducers({
   userAccount: userAccountReducer,
   nightMode: nightModeReducer,
   wishlist: wishlistReducer,
+  paymentMethod: paymentMethodReducer,
 });
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__
