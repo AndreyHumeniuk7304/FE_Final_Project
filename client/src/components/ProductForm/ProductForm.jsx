@@ -6,13 +6,6 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 
 const ProductForm = ({ initialValue, onSubmit }) => {
-  const getCurrentDate = () => {
-    const date = new Date();
-    return `${date.getFullYear()}-${
-      date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth()
-    }-${date.getDate() < 10 ? +date.getDate() : date.getDate()}`;
-  };
-
   const {
     register,
     handleSubmit,
@@ -33,7 +26,6 @@ const ProductForm = ({ initialValue, onSubmit }) => {
       name: "",
       currentPrice: "",
       previousPrice: "",
-      // date: getCurrentDate(),
     },
   });
 
