@@ -4,6 +4,7 @@ const initialState = {
   isLoading: false,
   hasError: false,
   isFilterOpenMobile: false,
+  productsQuntity: 0,
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,7 +24,8 @@ const reducer = (state = initialState, action) => {
     case "LOADED_CATEGORIES_PRODUCTS": {
       return {
         ...state,
-        categorieProductList: action.payload,
+        categorieProductList: action.payload.products,
+        productsQuntity: action.payload.productsQuntity,
         isLoading: false,
         hasError: false,
       };
