@@ -14,6 +14,7 @@ import {
 } from "./filterFunctions";
 import { useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { fetchAllProductsFilterPreloader } from "../../../store/catalog/actions";
 
 const Filter = () => {
   const [currentPrice, setCurrentPrice] = useState([100, 1000]);
@@ -21,6 +22,7 @@ const Filter = () => {
   const [search, setSearch] = useSearchParams();
   const [categories, setCategories] = useState(getCategories(search));
   const [isItemChecked, setIsItemChecked] = useState([]);
+
   const categorieProductList = useSelector(
     (state) => state.catalog.categorieProductList
   );
@@ -57,6 +59,9 @@ const Filter = () => {
     setIsItemChecked([]);
   };
 
+  const getLinkOnChange = (values) =>
+    fetchAllProductsFilterPreloader(setFilterLink(values, currentPrice));
+
   return (
     <>
       <div className="filter-wrapper filter">
@@ -68,6 +73,7 @@ const Filter = () => {
             onSubmit={handleSubmit((data) => {
               submitFilter(data);
             })}
+            onChange={handleSubmit((values) => getLinkOnChange(values))}
             className="filter__form"
             id="filter"
           >

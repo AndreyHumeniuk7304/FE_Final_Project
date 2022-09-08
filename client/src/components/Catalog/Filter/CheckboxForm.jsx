@@ -9,6 +9,7 @@ import { filterCategoriesItem } from "./data";
 
 const CheckboxForm = ({ title, register, isItemChecked, setIsItemChecked }) => {
   const [isShow, setIsShow] = useState(false);
+  const [itemCLicked, setIdemCliked] = useState("");
   //const [arr, setArr] = useState();
   const productList = useSelector(
     (state) => state.catalog.categorieProductList
@@ -42,6 +43,8 @@ const CheckboxForm = ({ title, register, isItemChecked, setIsItemChecked }) => {
                 register={register}
                 isItemChecked={isItemChecked}
                 setIsItemChecked={setIsItemChecked}
+                itemCLicked={itemCLicked}
+                setIdemCliked={setIdemCliked}
               />
             </ol>
           ))}

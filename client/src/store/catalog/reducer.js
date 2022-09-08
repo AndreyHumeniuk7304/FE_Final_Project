@@ -5,6 +5,7 @@ const initialState = {
   hasError: false,
   isFilterOpenMobile: false,
   productsQuntity: 0,
+  productsQuntityOnChange: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -36,6 +37,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         hasError: true,
+      };
+    }
+    case "SET_QUANTITY_PRODUCTS_ON_CHANGE": {
+      return {
+        ...state,
+        productsQuntityOnChange: action.payload,
       };
     }
 

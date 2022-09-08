@@ -50,3 +50,14 @@ export const loadedCategorieProducts = (products) => {
 export const errorLoadedProducts = () => ({
   type: "ERROR_LOADED_PRODUCTS",
 });
+
+export const fetchAllProductsFilterPreloader =
+  (categoriesType) => (dispatch) => {
+    getCategoryProductsToRender(categoriesType)
+      .then((data) => {
+        dispatch(loadedCategorieProducts(data.productsQuantity));
+      })
+      .catch(() => {
+        dispatch(errorLoadedProducts());
+      });
+  };
