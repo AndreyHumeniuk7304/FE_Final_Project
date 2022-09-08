@@ -28,7 +28,7 @@ const CheckboxItem = ({
     <Tooltip
       title={
         isLoading ? (
-          <CircularProgress size={10} />
+          <CircularProgress size={10} color="inherit" />
         ) : (
           `${productsQuntityOnChange}pc
             available`
