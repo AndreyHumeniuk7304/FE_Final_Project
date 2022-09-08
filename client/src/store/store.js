@@ -4,6 +4,8 @@ import catalogReducer from "./catalog/reducer";
 import cartReducer from "./cart/reducer";
 import userAccountReducer from "./userAccount/reducer";
 import nightModeReducer from "./switchTheme/reducer";
+import wishlistReducer from "./wishlist/reducer";
+import paymentMethodReducer from "./paymentMethod/reducer";
 import userSubscribe from "./subscribe/reducer";
 
 export const reducer = combineReducers({
@@ -11,6 +13,8 @@ export const reducer = combineReducers({
   cart: cartReducer,
   userAccount: userAccountReducer,
   nightMode: nightModeReducer,
+  wishlist: wishlistReducer,
+  paymentMethod: paymentMethodReducer,
   subscribe: userSubscribe,
 });
 

@@ -12,6 +12,7 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
+    "card-validator": "^8.1.1",
     "cors": "^2.8.5",
     "formik": "^2.2.9",
     "jwt-decode": "^3.1.2",
@@ -32,8 +33,8 @@
     "yup-phone": "^1.3.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "cross-env REACT_APP_MODE=development react-scripts start",
+    "build": "cross-env REACT_APP_MODE=production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint .",
@@ -58,6 +59,8 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.2",
     "eslint": "^8.21.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",

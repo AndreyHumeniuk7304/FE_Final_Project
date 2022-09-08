@@ -29,7 +29,10 @@ const Routing = () => {
       <Route path="/cart" element={<Cart />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/my-account/create-product" element={<CreateProduct />} />
-      <Route path="/my-account/update-product" element={<UpdateProducts />} />
+      <Route
+        path="/my-account/update-product/:filter"
+        element={<UpdateProducts />}
+      />
       <Route path="/my-account/profile" element={<Profile />} />
       <Route path="/my-account/history" element={<History />} />
       <Route path="/my-account/wishlist" element={<Wishlist />} />
