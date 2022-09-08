@@ -3,11 +3,16 @@ import Form from "../../Forms/Form";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addDeliveryAdress,
+  //   addDeliveryAdress,
   showModal,
   showBillingModal,
   showDeliveryModal,
+  setCurrentCustomer,
+  //   updateCustomer,
+  //   asd,
 } from "../../../store/cabinet/actions";
+// import updatedCustomer from "../../../api/updatedCustomer";
+// import updatedCustomer from "../../../api/updatedCustomer";
 import updatedCustomer from "../../../api/updatedCustomer";
 
 const AdresModal = () => {
@@ -38,10 +43,50 @@ const AdresModal = () => {
   //   const unitCostomer = (values, currentCustomer) => {
   //     let aaaaa = [...currentCustomer, values];
   //   };
-  const putUbdateCustomer = (values) => {
-    updatedCustomer(values).catch((err) => {
-      console.log(err);
-    });
+
+  //   const updatedCurrentCustomer = (values) => {
+  //     console.log(values);
+  //     updatedCustomer(values)
+  //       .then((newCustomerData) => {
+  //         console.log(newCustomerData);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   };
+
+  //   const putUbdateCustomer = (updateCustomer) => {
+  //     console.log(updateCustomer);
+  //     updatedCustomer(updateCustomer)
+  //       .then((newCustomerData) => {
+  //         console.log(newCustomerData);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   };
+
+  const asd = (updateCustomer) => {
+    console.log(updateCustomer);
+    delete updateCustomer.password;
+    delete updateCustomer.newPassword;
+    // delete updateCustomer.config;
+    // delete updateCustomer.data;
+    // delete updateCustomer.headers;
+    // delete updateCustomer.request;
+    // delete updateCustomer.status;
+    // delete updateCustomer.statusText;
+    // delete updateCustomer.deliveryAddress;
+    const customerToPut = { ...updateCustomer };
+    console.log(customerToPut);
+    updatedCustomer(customerToPut)
+      .then((newUpdateCustomer) => {
+        dispatch(setCurrentCustomer(newUpdateCustomer.data));
+        console.log(newUpdateCustomer.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const addDeliveryAddress = (values) => {
@@ -49,10 +94,12 @@ const AdresModal = () => {
     // console.log(values);
     const deliveryAddress = values;
     // console.log(currentCustomer);
-    let updateCustomer = { ...currentCustomer, deliveryAddress };
-    console.log(updateCustomer);
-    putUbdateCustomer(updateCustomer);
-    dispatch(addDeliveryAdress(updateCustomer));
+    let updatedCustomer = { ...currentCustomer, ...deliveryAddress };
+    // console.log(updatedCustomer);
+    asd(updatedCustomer);
+    // asdf();
+    // updatedCurrentCustomer(updateCustomer);
+    // dispatch(addDeliveryAdress(updateCustomer));
     reopen();
     // updatedCustomer(values)
     //   .then((newCustomerData) => {
@@ -85,12 +132,9 @@ const AdresModal = () => {
   const customerInputNames = [
     { inputName: "Street", formType: "input" },
     { inputName: "City", formType: "input" },
-    // { inputName: "email", formType: "input" },
     { inputName: "House", formType: "input" },
     { inputName: "Flat", formType: "input" },
     { inputName: "Postal code", formType: "input" },
-    // { inputName: "password", formType: "password" },
-    // { inputName: "confirmPassword", formType: "password" },
   ];
 
   return (
@@ -119,9 +163,3 @@ const AdresModal = () => {
 };
 
 export default AdresModal;
-
-// AdresModal.defaultProps = {
-//   header: "Добавить товар в корзину?",
-//   closeButton: "true",
-//   backgroundColor: "rgba(15, 150, 50, 0.7)",
-// };

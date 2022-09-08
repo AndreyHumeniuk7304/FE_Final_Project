@@ -9,6 +9,7 @@ const History = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("hi");
     dispatch(fetchCustomerOrders());
   }, []);
 

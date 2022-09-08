@@ -1,6 +1,6 @@
 const initialState = {
   currentCustomer: [],
-  // deliveryAddress: [],
+  purchasesHistory: [],
   hasError: false,
   showModalDelivery: false,
   showModalBilling: false,
@@ -48,6 +48,13 @@ const cabinetReducer = (state = initialState, action) => {
       return {
         ...state,
         showModalBilling: action.payload,
+      };
+    }
+
+    case "LOADED_PURCHASES_HISTORY": {
+      return {
+        ...state,
+        purchasesHistory: action.payload,
       };
     }
     default: {
