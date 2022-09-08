@@ -5,12 +5,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import theme from "../../theme";
 import "./CheckoutForm.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { checkoutSchema } from "./DataForm";
 import { useForm } from "react-hook-form";
 import Payment from "./Payment/Payment.jsx";
 import Form from "../Forms/Form";
 import { useState } from "react";
-import DataForm from "./DataForm";
+import DataForm, { checkoutSchema } from "./DataForm";
 
 const CheckoutForm = () => {
   const cartList = useSelector((state) => state.cart.list);
