@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import getOneProduct from "../../api/getOneProduct";
 import "./ProductDetails.scss";
-import { Box, Button, Checkbox, Rating, Typography } from "@mui/material";
+import { Box, Button, Checkbox, Typography } from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import theme from "../../theme";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,11 +11,12 @@ import {
   addToWishlist,
   deleteWishlistItem,
 } from "../../store/wishlist/actions";
-import { Link } from "react-router-dom";
+import Comments from "../Comments/Comments";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
   const [product, setProduct] = useState();
+  console.log(product);
   const [counter, setCounter] = useState(1);
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const isAdmin = useSelector((state) => state.userAccount.customer.isAdmin);
@@ -61,7 +62,7 @@ const ProductDetails = () => {
 
   return (
     <>
-      <Box className="background">
+      <Box className="background" sx={{ borderBottom: "1px solid lightgrey" }}>
         <Box
           className="details container"
           sx={{
@@ -87,6 +88,9 @@ const ProductDetails = () => {
             className="details__item"
             sx={{
               width: "100%",
+              [theme.breakpoints.between("mobile", "desktop")]: {
+                padding: "0",
+              },
             }}
           >
             <Box sx={{ display: "flex" }}>
@@ -105,25 +109,50 @@ const ProductDetails = () => {
               >
                 {product.name}
               </Typography>
-              <Typography
-                sx={{
-                  minWidth: "max-content",
-                  width: "30%",
-                  textAlign: "center",
-                  [theme.breakpoints.between("mobile", "desktop")]: {
-                    fontSize: "14px",
-                    lineHeight: "19px",
-                    mt: "10px",
-                    textAlign: "end",
-                  },
-                }}
-                className="details__item-title"
-                variant="h5"
-                component="h5"
-                style={{ color: nightMode ? "#fff" : "#000" }}
-              >
-                {product.currentPrice} $
-              </Typography>
+              <Box className="price">
+                <Typography
+                  sx={{
+                    minWidth: "max-content",
+                    width: "30%",
+                    textAlign: "center",
+                    [theme.breakpoints.between("mobile", "desktop")]: {
+                      fontSize: "14px",
+                      lineHeight: "19px",
+                      mt: "10px",
+                      textAlign: "end",
+                    },
+                  }}
+                  className="details__item-title"
+                  variant="h5"
+                  component="h5"
+                  style={{ color: nightMode ? "#fff" : "#000" }}
+                >
+                  {product.currentPrice} $
+                </Typography>
+                {product.previousPrice && (
+                  <Typography
+                    sx={{
+                      minWidth: "max-content",
+                      width: "30%",
+                      textAlign: "center",
+                      textDecoration: "line-through",
+                      fontWeight: "400",
+                      [theme.breakpoints.between("mobile", "desktop")]: {
+                        fontSize: "14px",
+                        lineHeight: "19px",
+                        mt: "10px",
+                        textAlign: "end",
+                      },
+                    }}
+                    className="details__item-title"
+                    variant="h5"
+                    component="h5"
+                    style={{ color: nightMode ? "#fff" : "#595959" }}
+                  >
+                    {product.previousPrice} $
+                  </Typography>
+                )}
+              </Box>
             </Box>
             <Box>
               <Typography
@@ -131,11 +160,6 @@ const ProductDetails = () => {
               >
                 REF: {product.itemNo}
               </Typography>
-              <Rating name="size-small" defaultValue={5} size="small" />
-              <Link to={`/product/${product.itemNo}/comments`}>
-                Comments <span>(1)</span>
-              </Link>
-
               <Typography
                 variant="h6"
                 sx={{
@@ -277,6 +301,7 @@ const ProductDetails = () => {
           </Box>
         </Box>
       </Box>
+      <Comments id={product._id} />
     </>
   );
 };
