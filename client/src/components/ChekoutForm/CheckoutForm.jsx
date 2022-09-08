@@ -5,22 +5,34 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import theme from "../../theme";
 import "./CheckoutForm.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { checkoutSchema } from "./DataForm";
+import { checkoutSchema } from "./dataForm";
 import { useForm } from "react-hook-form";
 import Payment from "./Payment/Payment.jsx";
 import Form from "../Forms/Form";
 import { useState } from "react";
-import DataForm from "./DataForm";
+import DataForm from "./dataForm";
+import DeliveryInfo from "./Delivery/DeliveryInfo";
+import { getShippingMethods } from "../../api/shippingMethods";
+import { useEffect } from "react";
+import { shippingMethodAction } from "../../store/shippingMethod/action";
 
 const CheckoutForm = () => {
   const cartList = useSelector((state) => state.cart.list);
   const [typeOfMobilePayment, setTypeOfMobilePayment] = useState();
   const paymentMethod = useSelector((state) => state.paymentMethod);
   const [checkoutInputNames, setCheckoutInputNames] = useState([]);
+  const [shippingMethods, setShippingMethods] = useState([]);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getShippingMethods().then((data) => setShippingMethods(data));
+  }, []);
 
   const {
     register,
     handleSubmit,
+    handleChange,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(checkoutSchema),
@@ -29,6 +41,7 @@ const CheckoutForm = () => {
       cardHolderName: "",
       cardExpiryDate: "",
       cvv: "",
+      deliveryAdress: "",
     },
   });
 
@@ -45,6 +58,14 @@ const CheckoutForm = () => {
 
   const handleSubmitForm = (value) => {
     console.log(value);
+  };
+
+  const handleChangeForm = (e) => {
+    shippingMethods.forEach((method) => {
+      if (e.target.value === method.name) {
+        dispatch(shippingMethodAction(method));
+      }
+    });
   };
   return (
     <Container sx={{ maxWidth: "lg" }}>
@@ -67,7 +88,6 @@ const CheckoutForm = () => {
       >
         Please select your payment method
       </Typography>
-
       <Typography
         sx={{
           [theme.breakpoints.between("mobile", "tablet")]: {
@@ -87,10 +107,8 @@ const CheckoutForm = () => {
       >
         Total payment amount $ {getTotalPrice()}
       </Typography>
-
       <Payment />
       <DataForm setCheckoutInputNames={setCheckoutInputNames} />
-
       {paymentMethod.name == "Mobile" && (
         <div className="form__mobile-payment">
           {paymentMethod.fromOfMobilePayment.map((method, index) => {
@@ -116,18 +134,22 @@ const CheckoutForm = () => {
           })}
         </div>
       )}
-
       <div className="form-wrapper">
         <Form
-          actionWithForm={handleSubmitForm}
+          actionWithForm={() => {
+            console.log("ok");
+          }}
           formArr={checkoutInputNames === [] ? [] : checkoutInputNames}
           // formArr={[]}
+
           register={register}
+          handleChange={handleChangeForm}
           handleSubmit={handleSubmit}
           errors={errors}
           btnName={"Pay"}
         />
       </div>
+      <DeliveryInfo />
     </Container>
   );
 };
