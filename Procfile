@@ -1,1 +1,5 @@
-web: cd ./client/ && npm i && npm build && cd .. && node server.js
+web: cd ./client/
+web: npm i
+web: npm build
+web: cd ..
+web: node server.js
