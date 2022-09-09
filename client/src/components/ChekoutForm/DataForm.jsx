@@ -29,25 +29,30 @@ const DataForm = (props) => {
           label: "Card Expiry Date",
         },
         { inputName: "cvv", formType: "input", label: "CVC/CVV/CID" },
-      ]);
-    }
-    if (paymentMethod.name === "Mobile") {
-      setCheckoutInputNames([
         {
-          inputName: "paymentMethod",
+          inputName: "deliveryAdress",
+          formType: "input",
+          label: "Delivery adress",
+        },
+        {
+          inputName: "shippingMethod",
           formType: "droplist",
-          formName: ["Mobile", "Cards", "Cash"],
-          label: "Payment Method",
+          label: "Shipping method",
+          formName: ["", "UkrPoshta", "Nova Poshta", "Meest"],
         },
       ]);
-    }
-    if (paymentMethod.name === "Cash") {
+    } else {
       setCheckoutInputNames([
         {
-          inputName: "paymentMethod",
+          inputName: "deliveryAdress",
+          formType: "input",
+          label: "Delivery adress",
+        },
+        {
+          inputName: "shippingMethod",
           formType: "droplist",
-          formName: ["Cash", "Cards", "Mobile"],
-          label: "Payment Method",
+          label: "Shipping method",
+          formName: ["", "UkrPoshta", "Nova Poshta", "Meest"],
         },
       ]);
     }
@@ -119,6 +124,8 @@ export const checkoutSchema = object({
   cvv: string()
     .test("test-number", "Cvv is invalid", (value) => valid.cvv(value).isValid)
     .required("It's a required field"),
+  deliveryAdress: string().required("It's a required field"),
+  shippingMethod: string().required("It's a required field"),
 });
 
 export const checkoutSchemaMinimize = object({

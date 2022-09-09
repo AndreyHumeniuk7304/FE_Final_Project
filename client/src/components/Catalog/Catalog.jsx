@@ -1,6 +1,6 @@
 import Filter from "./Filter/Filter";
+import Paginations from "./ProductList/Pagination/Pagination";
 import ProductList from "./ProductList/ProductList";
-import PropTypes from "prop-types";
 
 const Catalog = () => {
   return (
