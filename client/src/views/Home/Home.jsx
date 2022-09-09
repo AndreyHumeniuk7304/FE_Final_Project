@@ -13,7 +13,7 @@ const Home = () => {
   }, [dispatch]);
   return (
     <>
-      <ClockSlider />
+      {/*<ClockSlider />*/}
       <HomeNovelties />
       <HomeWatches />
     </>
