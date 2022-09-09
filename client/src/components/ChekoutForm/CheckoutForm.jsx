@@ -6,10 +6,9 @@ import theme from "../../theme";
 import "./CheckoutForm.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-// import Payment from "./Payment/Payment.jsx";
 import Form from "../Forms/Form";
 import { useState, useEffect } from "react";
-import DataForm, { checkoutSchema } from "./DataForm";
+import DataForm, { checkoutSchema, checkoutSchemaMinimize } from "./DataForm";
 import { getPaymentMethod } from "../../api/paymentMethod";
 import { paymentMethodAction } from "../../store/paymentMethod/action";
 
@@ -19,9 +18,6 @@ const CheckoutForm = () => {
   const [checkoutInputNames, setCheckoutInputNames] = useState([]);
   const [paymentMethods, setPaymentMethods] = useState([]);
   const dispatch = useDispatch();
-
-  console.log(paymentMethod);
-  console.log(checkoutInputNames);
 
   useEffect(() => {
     getPaymentMethod().then((res) => setPaymentMethods(res));
@@ -33,8 +29,12 @@ const CheckoutForm = () => {
     handleChange,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(checkoutSchema),
+    resolver:
+      paymentMethod.name == "Cards"
+        ? yupResolver(checkoutSchema)
+        : yupResolver(checkoutSchemaMinimize),
     defaultValues: {
+      paymentMethod: "",
       cardNumber: "",
       cardHolderName: "",
       cardExpiryDate: "",
@@ -42,7 +42,7 @@ const CheckoutForm = () => {
       deliveryAdress: "",
     },
   });
-
+  console.log(paymentMethod.name);
   const getTotalPrice = () => {
     return cartList.length
       ? cartList.reduce(
@@ -59,37 +59,12 @@ const CheckoutForm = () => {
   };
 
   const handleChangeForm = (e) => {
-    console.log(e.target.value);
-    // shippingMethods.forEach((method) => {
-    //   if (e.target.value === method.name) {
-    //     dispatch(shippingMethodAction(method));
-    //   }
-    // });
     paymentMethods.forEach((method) => {
       e.target.value === method.name && dispatch(paymentMethodAction(method));
     });
   };
   return (
     <Container sx={{ maxWidth: "lg" }}>
-      {/* <Typography
-        sx={{
-          [theme.breakpoints.between("mobile", "tablet")]: {
-            fontSize: 14,
-
-            mb: "28px",
-          },
-          fontFamily: "fontFamily",
-          textAlign: "center",
-          // color: "primary.dark",
-          fontSize: 18,
-          fontWeight: 700,
-          paddingTop: "10px",
-          mb: "52px",
-        }}
-        component="h2"
-      >
-        Please select your payment method
-      </Typography> */}
       <Typography
         sx={{
           [theme.breakpoints.between("mobile", "tablet")]: {
@@ -99,7 +74,6 @@ const CheckoutForm = () => {
           },
           fontSize: 18,
           fontFamily: "fontFamily",
-          // color: "primary.dark",
           fontWeight: 500,
           mb: "40px",
           textAlign: "center",
@@ -109,12 +83,11 @@ const CheckoutForm = () => {
       >
         Total payment amount $ {getTotalPrice()}
       </Typography>
-      {/* <Payment /> */}
       <DataForm setCheckoutInputNames={setCheckoutInputNames} />
       <div className="form-wrapper">
         <Form
-          actionWithForm={() => {
-            console.log("ok");
+          actionWithForm={(values) => {
+            console.log(values);
           }}
           formArr={checkoutInputNames}
           register={register}

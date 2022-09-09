@@ -30,12 +30,23 @@ const DataForm = (props) => {
         },
         { inputName: "cvv", formType: "input", label: "CVC/CVV/CID" },
       ]);
-    } else {
+    }
+    if (paymentMethod.name === "Mobile") {
       setCheckoutInputNames([
         {
           inputName: "paymentMethod",
           formType: "droplist",
-          formName: ["Cards", "Mobile", "Cash"],
+          formName: ["Mobile", "Cards", "Cash"],
+          label: "Payment Method",
+        },
+      ]);
+    }
+    if (paymentMethod.name === "Cash") {
+      setCheckoutInputNames([
+        {
+          inputName: "paymentMethod",
+          formType: "droplist",
+          formName: ["Cash", "Cards", "Mobile"],
           label: "Payment Method",
         },
       ]);
@@ -108,4 +119,8 @@ export const checkoutSchema = object({
   cvv: string()
     .test("test-number", "Cvv is invalid", (value) => valid.cvv(value).isValid)
     .required("It's a required field"),
+});
+
+export const checkoutSchemaMinimize = object({
+  paymentMethod: string().required("It's a required field"),
 });
