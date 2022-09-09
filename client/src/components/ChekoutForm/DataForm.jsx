@@ -8,31 +8,38 @@ const DataForm = (props) => {
   const { setCheckoutInputNames } = props;
 
   useEffect(() => {
-    // if (paymentMethod.name === "Cards") {
-    setCheckoutInputNames([
-      {
-        inputName: "paymentMethod",
-        formType: "droplist",
-        formName: ["Cards", "Modile", "Cash"],
-        label: "Payment Method",
-      },
-      { inputName: "cardNumber", formType: "input", label: "Card Number" },
-      {
-        inputName: "cardHolderName",
-        formType: "input",
-        label: "Card Holder Name",
-        className: "entry__checkbox",
-      },
-      {
-        inputName: "cardExpiryDate",
-        formType: "expiryDate",
-        label: "Card Expiry Date",
-      },
-      { inputName: "cvv", formType: "input", label: "CVC/CVV/CID" },
-    ]);
-    // } else {
-    //   setCheckoutInputNames([]);
-    // }
+    if (paymentMethod.name === "Cards" || paymentMethod.name === undefined) {
+      setCheckoutInputNames([
+        {
+          inputName: "paymentMethod",
+          formType: "droplist",
+          formName: ["Cards", "Mobile", "Cash"],
+          label: "Payment Method",
+        },
+        { inputName: "cardNumber", formType: "input", label: "Card Number" },
+        {
+          inputName: "cardHolderName",
+          formType: "input",
+          label: "Card Holder Name",
+          className: "entry__checkbox",
+        },
+        {
+          inputName: "cardExpiryDate",
+          formType: "expiryDate",
+          label: "Card Expiry Date",
+        },
+        { inputName: "cvv", formType: "input", label: "CVC/CVV/CID" },
+      ]);
+    } else {
+      setCheckoutInputNames([
+        {
+          inputName: "paymentMethod",
+          formType: "droplist",
+          formName: ["Cards", "Mobile", "Cash"],
+          label: "Payment Method",
+        },
+      ]);
+    }
   }, [paymentMethod]);
 };
 
