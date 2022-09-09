@@ -12,7 +12,7 @@
     "prepare": "husky install",
     "client:eslint": "cd client && npm run lint",
     "client:eslint:fix": "cd client && npm run lint:fix",
-    "heroku-postbuild": "cd client && npm i && npm run build"
+    "heroku-postbuild": "cd client && npm instal && npm run build"
   },
   "repository": {
     "type": "git",
