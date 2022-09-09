@@ -10,6 +10,7 @@ const Form = ({
   formArr,
   register,
   handleSubmit,
+  handleChange,
   errors,
   btnName,
   fieldArray,
@@ -139,6 +140,7 @@ const Form = ({
   return (
     <form
       onSubmit={handleSubmit((values) => actionWithForm(values))}
+      onChange={handleChange}
       className="form"
     >
       <ul className="form__box">
@@ -160,6 +162,7 @@ Form.propTypes = {
   formArr: PropTypes.array,
   register: PropTypes.func,
   handleSubmit: PropTypes.func,
+  handleChange: PropTypes.func,
   errors: PropTypes.object,
   btnName: PropTypes.string,
   fieldArray: PropTypes.object,
