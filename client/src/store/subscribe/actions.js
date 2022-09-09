@@ -1,4 +1,4 @@
-import getCustomers from "../../api/getCustomers";
+import { getSubscriberByEmail } from "../../api/subscribe";
 
 const getSubscribes = (sub) => {
   localStorage.setItem("subscribe", JSON.stringify(sub));
@@ -10,15 +10,14 @@ const delSubscribes = (sub) => {
   return { type: "DEL_SUBSCRIBE", payload: sub };
 };
 
-const fetchSubscribes = (userData, isAutoLog, nav) => {
+const fetchSubscriber = (userEmail, isAutoLog) => {
   return async (dispatch) => {
-    await getCustomers(userData)
+    await getSubscriberByEmail(userEmail)
       .then((response) => {
         const status = response.data.success;
-        status && getSuccess(response.data, dispatch);
-        status && nav("/my-account/user");
+        status && getSubscribes(response.data, dispatch);
         isAutoLog &&
-          localStorage.setItem("login", JSON.stringify(response.data.token));
+          localStorage.setItem("subscribe", JSON.stringify(response.data));
       })
       .catch((error) => {
         dispatch(setError(error.response.data));
@@ -26,4 +25,4 @@ const fetchSubscribes = (userData, isAutoLog, nav) => {
   };
 };
 
-export { fetchSubscribes, getSubscribes, delSubscribes };
+export { fetchSubscriber, getSubscribes, delSubscribes };
