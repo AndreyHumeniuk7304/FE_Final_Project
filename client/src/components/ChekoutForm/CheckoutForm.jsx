@@ -47,7 +47,7 @@ const CheckoutForm = () => {
       deliveryAdress: "",
     },
   });
-  console.log(paymentMethod.name);
+
   const getTotalPrice = () => {
     return cartList.length
       ? cartList.reduce(
@@ -115,9 +115,7 @@ const CheckoutForm = () => {
       <DataForm setCheckoutInputNames={setCheckoutInputNames} />
       <div className="form-wrapper">
         <Form
-          actionWithForm={(values) => {
-            console.log(values);
-          }}
+          actionWithForm={handleSubmitForm}
           formArr={checkoutInputNames}
           register={register}
           handleChange={handleChangeForm}
