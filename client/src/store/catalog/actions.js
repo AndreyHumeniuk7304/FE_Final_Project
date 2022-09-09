@@ -50,3 +50,22 @@ export const loadedCategorieProducts = (products) => {
 export const errorLoadedProducts = () => ({
   type: "ERROR_LOADED_PRODUCTS",
 });
+
+export const fetchAllProductsFilterPreloader =
+  (categoriesType) => (dispatch) => {
+    dispatch({ type: "SET_QUANTITY_PRODUCTS_ON_CHANGE_LOADING" });
+    getCategoryProductsToRender(categoriesType)
+      .then((data) => {
+        dispatch(loadedCategorieProductsOnChange(data.productsQuantity));
+      })
+      .catch(() => {
+        dispatch(errorLoadedProducts());
+      });
+  };
+
+export const loadedCategorieProductsOnChange = (products) => {
+  return {
+    type: "SET_QUANTITY_PRODUCTS_ON_CHANGE",
+    payload: products,
+  };
+};
