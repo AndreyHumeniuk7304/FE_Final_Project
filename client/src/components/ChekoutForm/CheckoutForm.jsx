@@ -53,6 +53,10 @@ const CheckoutForm = () => {
       : 0;
   };
 
+  const handleSubmitForm = (value) => {
+    console.log(value);
+  };
+
   const handleChangeForm = (e) => {
     shippingMethods.forEach((method) => {
       if (e.target.value === method.name) {
@@ -127,6 +131,7 @@ const CheckoutForm = () => {
       )}
       <div className="form-wrapper">
         <Form
+          actionWithForm={handleSubmitForm}
           formArr={checkoutInputNames === [] ? [] : checkoutInputNames}
           register={register}
           handleChange={handleChangeForm}
