@@ -4,18 +4,27 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import CheckboxItem from "./CheckboxItem";
-import { getFilterItem } from "./filterFunctions";
+import { filterCategoriesItem } from "./data";
+//import { getFilterItem } from "./filterFunctions";
 
-const CheckboxForm = ({ title, register, isItemChecked, setIsItemChecked }) => {
+const CheckboxForm = ({
+  title,
+  register,
+  isItemChecked,
+  setIsItemChecked,
+  itemCLicked,
+  setIdemCliked,
+}) => {
   const [isShow, setIsShow] = useState(false);
-  const [arr, setArr] = useState();
+
+  //const [arr, setArr] = useState();
   const productList = useSelector(
     (state) => state.catalog.categorieProductList
   );
 
   useEffect(() => {
-    setIsShow(true);
-    setArr(getFilterItem(title, productList));
+    setIsShow(false);
+    // setArr(getFilterItem(title, productList));
   }, [productList]);
 
   return (
@@ -25,7 +34,7 @@ const CheckboxForm = ({ title, register, isItemChecked, setIsItemChecked }) => {
         variant="h6"
         onClick={() => {
           setIsShow(!isShow);
-          setArr(getFilterItem(title, productList));
+          // setArr(getFilterItem(title, productList));
         }}
       >
         {title}
@@ -33,7 +42,7 @@ const CheckboxForm = ({ title, register, isItemChecked, setIsItemChecked }) => {
 
       {isShow && (
         <Stack component="ul">
-          {arr.map((itemName) => (
+          {filterCategoriesItem[title].map((itemName) => (
             <ol key={Math.random()}>
               <CheckboxItem
                 itemName={itemName}
@@ -41,6 +50,8 @@ const CheckboxForm = ({ title, register, isItemChecked, setIsItemChecked }) => {
                 register={register}
                 isItemChecked={isItemChecked}
                 setIsItemChecked={setIsItemChecked}
+                itemCLicked={itemCLicked}
+                setIdemCliked={setIdemCliked}
               />
             </ol>
           ))}
@@ -57,4 +68,6 @@ CheckboxForm.propTypes = {
   register: PropTypes.func,
   isItemChecked: PropTypes.array,
   setIsItemChecked: PropTypes.func,
+  itemCLicked: PropTypes.string,
+  setIdemCliked: PropTypes.func,
 };

@@ -1,5 +1,9 @@
 @import "../../ulits/styles/mixins";
 
+.form-wrapper .form__droplist {
+  background-color: transparent;
+  outline: none;
+}
 .label {
   font-family: "Open Sans";
   font-style: normal;
