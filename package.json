@@ -1,6 +1,9 @@
 {
   "name": "fe-final-backend",
   "version": "1.0.0",
+  "engines": {
+    "node": "16.x"
+  },
   "description": "Back End code for final projects of Front End groups\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[DDANIT\u001b[3~ Front End groups",
   "main": "server.js",
   "scripts": {
@@ -8,7 +11,8 @@
     "server": "nodemon server.js",
     "prepare": "husky install",
     "client:eslint": "cd client && npm run lint",
-    "client:eslint:fix": "cd client && npm run lint:fix"
+    "client:eslint:fix": "cd client && npm run lint:fix",
+    "heroku-postbuild": "npm instal --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",

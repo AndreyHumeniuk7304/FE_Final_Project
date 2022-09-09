@@ -1,5 +1,9 @@
 @import "../../ulits/styles/mixins";
 
+.form-wrapper .form__droplist {
+  background-color: transparent;
+  outline: none;
+}
 .label {
   font-family: "Open Sans";
   font-style: normal;
@@ -37,7 +41,22 @@
   &__pay-method {
     @include flex-container;
     justify-content: space-around;
-    margin-bottom: 30px;
+    // margin-bottom: 30px;
+  }
+  &__pay-method__item,
+  &__mobile-img {
+    cursor: pointer;
+  }
+  &__mobile-img {
+    display: inline-block;
+    padding-right: 30px;
+  }
+  &__mobile-img img {
+    width: 80px;
+  }
+  &__mobile-payment {
+    display: flex;
+    justify-content: center;
   }
 }
 

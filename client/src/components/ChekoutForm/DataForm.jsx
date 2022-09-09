@@ -1,21 +1,59 @@
 import { object, string, number } from "yup";
 import valid from "card-validator";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
-export const checkoutInputNames = [
-  { inputName: "cardNumber", formType: "input", label: "Card Number" },
-  {
-    inputName: "cardHolderName",
-    formType: "input",
-    label: "Card Holder Name",
-    className: "entry__checkbox",
-  },
-  {
-    inputName: "cardExpiryDate",
-    formType: "expiryDate",
-    label: "Card Expiry Date",
-  },
-  { inputName: "cvv", formType: "input", label: "CVC/CVV/CID" },
-];
+const DataForm = (props) => {
+  const paymentMethod = useSelector((state) => state.paymentMethod);
+  const { setCheckoutInputNames } = props;
+
+  useEffect(() => {
+    if (paymentMethod.name === "Cards") {
+      setCheckoutInputNames([
+        { inputName: "cardNumber", formType: "input", label: "Card Number" },
+        {
+          inputName: "cardHolderName",
+          formType: "input",
+          label: "Card Holder Name",
+          className: "entry__checkbox",
+        },
+        {
+          inputName: "cardExpiryDate",
+          formType: "expiryDate",
+          label: "Card Expiry Date",
+        },
+        { inputName: "cvv", formType: "input", label: "CVC/CVV/CID" },
+        {
+          inputName: "deliveryAdress",
+          formType: "input",
+          label: "Delivery adress",
+        },
+        {
+          inputName: "shippingMethod",
+          formType: "droplist",
+          label: "Shipping method",
+          formName: ["", "UkrPoshta", "Nova Poshta", "Meest"],
+        },
+      ]);
+    } else {
+      setCheckoutInputNames([
+        {
+          inputName: "deliveryAdress",
+          formType: "input",
+          label: "Delivery adress",
+        },
+        {
+          inputName: "shippingMethod",
+          formType: "droplist",
+          label: "Shipping method",
+          formName: ["", "UkrPoshta", "Nova Poshta", "Meest"],
+        },
+      ]);
+    }
+  }, [paymentMethod]);
+};
+
+export default DataForm;
 
 export const checkoutSchema = object({
   cardNumber: string()
@@ -80,4 +118,6 @@ export const checkoutSchema = object({
   cvv: string()
     .test("test-number", "Cvv is invalid", (value) => valid.cvv(value).isValid)
     .required("It's a required field"),
+  deliveryAdress: string().required("It's a required field"),
+  shippingMethod: string().required("It's a required field"),
 });
