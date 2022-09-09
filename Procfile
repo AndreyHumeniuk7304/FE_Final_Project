@@ -1,5 +1,5 @@
 worker: cd ./client/
 worker: npm i
-worker: npm build
+worker: npm run build
 worker: cd ..
 web: node server.js
