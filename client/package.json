@@ -2,6 +2,32 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "cross-env REACT_APP_MODE=development react-scripts start",
+    "build": "cross-env REACT_APP_MODE=production react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "dependencies": {
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
@@ -31,32 +57,6 @@
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11",
     "yup-phone": "^1.3.2"
-  },
-  "scripts": {
-    "start": "cross-env REACT_APP_MODE=development react-scripts start",
-    "build": "cross-env REACT_APP_MODE=production react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
