@@ -9,5 +9,5 @@ export const commentsInputName = [
 ];
 
 export const commentsSchema = object({
-  content: string().required("input some commnet"),
+  content: string().required("input some comment"),
 });

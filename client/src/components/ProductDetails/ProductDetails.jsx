@@ -16,7 +16,6 @@ import Comments from "../Comments/Comments";
 const ProductDetails = () => {
   const navigate = useNavigate();
   const [product, setProduct] = useState();
-  console.log(product);
   const [counter, setCounter] = useState(1);
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const isAdmin = useSelector((state) => state.userAccount.customer.isAdmin);
@@ -72,8 +71,8 @@ const ProductDetails = () => {
             paddingBottom: "100px",
             [theme.breakpoints.between("mobile", "desktop")]: {
               display: "block",
-              paddingTop: "50px",
-              paddingBottom: "50px",
+              paddingTop: "30px",
+              paddingBottom: "30px",
             },
           }}
         >
@@ -93,7 +92,12 @@ const ProductDetails = () => {
               },
             }}
           >
-            <Box sx={{ display: "flex" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
               <Typography
                 className="details__item-title"
                 variant="h5"
@@ -129,7 +133,7 @@ const ProductDetails = () => {
                 >
                   {product.currentPrice} $
                 </Typography>
-                {product.previousPrice && (
+                {product.previousPrice > product.currentPrice && (
                   <Typography
                     sx={{
                       minWidth: "max-content",
@@ -137,10 +141,11 @@ const ProductDetails = () => {
                       textAlign: "center",
                       textDecoration: "line-through",
                       fontWeight: "400",
+                      fontSize: "20px",
+                      opacity: "0.5",
                       [theme.breakpoints.between("mobile", "desktop")]: {
                         fontSize: "14px",
                         lineHeight: "19px",
-                        mt: "10px",
                         textAlign: "end",
                       },
                     }}

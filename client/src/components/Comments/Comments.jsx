@@ -17,10 +17,11 @@ import { Close } from "@mui/icons-material";
 const Comments = ({ id }) => {
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const user = useSelector((state) => state.userAccount.customer.id);
-  const [comments, setComments] = useState();
+  const [comments, setComments] = useState([]);
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(commentsSchema),
@@ -31,6 +32,7 @@ const Comments = ({ id }) => {
   const handleSubmitForm = async (value) => {
     await addNewComment(id, value.content);
     setComments(await getCommentOfProduct(id));
+    reset();
   };
   useEffect(() => {
     getCommentOfProduct(id).then((result) => setComments(result));
@@ -64,7 +66,12 @@ const Comments = ({ id }) => {
 
   return (
     <>
-      <p className="comments-title container">Comments:</p>
+      <p className="comments-title container">
+        {comments.length === 0
+          ? "There are no comments for this product"
+          : "Comments"}
+      </p>
+
       <ul className="container list">{comments && addCommentsList()}</ul>
       {isLogin && (
         <Form
