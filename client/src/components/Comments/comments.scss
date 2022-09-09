@@ -1,0 +1,32 @@
+.content {
+  border: 1px solid grey;
+  border-radius: 4px;
+  margin-bottom: 20px;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid grey;
+    padding: 0.625rem;
+
+    &-username {
+      text-transform: capitalize;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      font-weight: 700;
+    }
+  }
+
+  &__comment {
+    padding: 0.925rem;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+  }
+}
+
+.comments-title {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
