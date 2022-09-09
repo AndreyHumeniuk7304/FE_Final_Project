@@ -13,7 +13,8 @@ import {
   filterTitles,
 } from "./filterFunctions";
 import { useSearchParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllProductsFilterPreloader } from "../../../store/catalog/actions";
 
 const Filter = () => {
   const [currentPrice, setCurrentPrice] = useState([100, 1000]);
@@ -21,9 +22,12 @@ const Filter = () => {
   const [search, setSearch] = useSearchParams();
   const [categories, setCategories] = useState(getCategories(search));
   const [isItemChecked, setIsItemChecked] = useState([]);
-  const { categorieProductList, searchWord } = useSelector(
-    (state) => state.catalog
+  const [itemCLicked, setIdemCliked] = useState("");
+  const dispatch = useDispatch();
+  const categorieProductList = useSelector(
+    (state) => state.catalog.categorieProductList
   );
+
   const nightMode = useSelector((state) => state.nightMode);
 
   useEffect(() => {
@@ -47,11 +51,6 @@ const Filter = () => {
     const link = setFilterLink(values, currentPrice);
     setSearch(link);
     setIsFilterUsing(true);
-    // searchWord !== ""
-    //   ? dispatch(
-    //       fetchCategoriesProducts(`products/filter?${link}brand=${searchWord}`)
-    //     )
-    //   : dispatch(fetchCategoriesProducts(`products/filter?${link}`));
   };
 
   const resetFilter = () => {
@@ -60,6 +59,15 @@ const Filter = () => {
     setCurrentPrice(getMinMaxPrice(categorieProductList));
     setIsFilterUsing(false);
     setIsItemChecked([]);
+  };
+
+  const getLinkOnChange = (values) => {
+    dispatch(
+      fetchAllProductsFilterPreloader(
+        "/products/filter" + setFilterLink(values, currentPrice)
+      )
+    );
+    console.log("/products/filter" + setFilterLink(values, currentPrice));
   };
 
   return (
@@ -73,6 +81,7 @@ const Filter = () => {
             onSubmit={handleSubmit((data) => {
               submitFilter(data);
             })}
+            onChange={handleSubmit((values) => getLinkOnChange(values))}
             className="filter__form"
             id="filter"
           >
@@ -83,10 +92,11 @@ const Filter = () => {
                   register={register}
                   isItemChecked={isItemChecked}
                   setIsItemChecked={setIsItemChecked}
+                  itemCLicked={itemCLicked}
+                  setIdemCliked={setIdemCliked}
                 />
               </Box>
             ))}
-
             <MaterialSlider
               title={"currentPrice"}
               name="currentPrice"
