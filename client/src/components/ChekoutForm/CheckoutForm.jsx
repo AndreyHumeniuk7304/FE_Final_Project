@@ -1,7 +1,6 @@
 import { Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import { yupResolver } from "@hookform/resolvers/yup";
-// import { Form, Formik, Field, ErrorMessage } from "formik";
 import theme from "../../theme";
 import "./CheckoutForm.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,7 +31,6 @@ const CheckoutForm = () => {
   const {
     register,
     handleSubmit,
-    handleChange,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(checkoutSchema),
@@ -56,10 +54,6 @@ const CheckoutForm = () => {
       : 0;
   };
 
-  const handleSubmitForm = (value) => {
-    console.log(value);
-  };
-
   const handleChangeForm = (e) => {
     shippingMethods.forEach((method) => {
       if (e.target.value === method.name) {
@@ -78,7 +72,6 @@ const CheckoutForm = () => {
           },
           fontFamily: "fontFamily",
           textAlign: "center",
-          // color: "primary.dark",
           fontSize: 18,
           fontWeight: 700,
           paddingTop: "10px",
@@ -97,7 +90,6 @@ const CheckoutForm = () => {
           },
           fontSize: 18,
           fontFamily: "fontFamily",
-          // color: "primary.dark",
           fontWeight: 500,
           mb: "40px",
           textAlign: "center",
@@ -136,12 +128,7 @@ const CheckoutForm = () => {
       )}
       <div className="form-wrapper">
         <Form
-          actionWithForm={() => {
-            console.log("ok");
-          }}
           formArr={checkoutInputNames === [] ? [] : checkoutInputNames}
-          // formArr={[]}
-
           register={register}
           handleChange={handleChangeForm}
           handleSubmit={handleSubmit}
