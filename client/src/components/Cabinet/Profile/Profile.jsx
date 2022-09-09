@@ -1,24 +1,19 @@
 import Links from "../Links/Links";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrentCustomer } from "../../../store/cabinet/actions";
 import { useForm } from "react-hook-form";
 import Form from "../../Forms/Form";
-import { customerInputNames, customerSchema } from "./data";
+import { customerInputNames } from "./data";
 import updatedCustomer from "../../../api/updatedCustomer";
-import { Button } from "@mui/material";
 
 const Profile = () => {
-  // const open = useSelector((state) => state.cabinet.showModal);
-
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const token = useSelector((state) => state.userAccount.customer.token);
   const customer = useSelector((state) => state.cabinet.currentCustomer);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // console.log(isLogin);
-    // console.log("hi");
     dispatch(fetchCurrentCustomer(isLogin, token));
   }, [token]);
 
@@ -27,7 +22,6 @@ const Profile = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    // resolver: yupResolver(customerSchema),
     defaultValues: {
       firstName: customer?.firstName,
       lastName: customer?.lastName,
@@ -48,8 +42,6 @@ const Profile = () => {
         console.log(err);
       });
   };
-  // console.log(open);
-  // console.log(customer);
   return (
     <>
       <div className="profile">

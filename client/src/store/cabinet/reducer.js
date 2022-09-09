@@ -26,12 +26,6 @@ const cabinetReducer = (state = initialState, action) => {
         currentCustomer: action.payload,
       };
     }
-    // case "SET_NEW_DATA_CUSTOMER": {
-    //   return {
-    //     ...state,
-    //     currentCustomer: action.payload,
-    //   };
-    // }
     case "SHOW_MODAL": {
       return {
         ...state,

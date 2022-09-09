@@ -1,8 +1,5 @@
-import { Link } from "react-router-dom";
 import Links from "../Links/Links";
-import { Grid, Typography, IconButton, Container } from "@mui/material";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { useEffect, useState } from "react";
+import { Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
 import AdresModal from "./AdresModal";
@@ -19,10 +16,6 @@ const Address = () => {
   const openBilling = useSelector((state) => state.cabinet.showModalBilling);
   const dispatch = useDispatch();
 
-  const sayHi = () => {
-    console.log("hi");
-  };
-  // const [open, setOpen] = useState(false);
   const reopen = () => {
     dispatch(showModal(open));
   };
@@ -35,8 +28,6 @@ const Address = () => {
     dispatch(showBillingModal(openBilling));
     reopen();
   };
-
-  console.log(open);
 
   return (
     <>
@@ -58,7 +49,6 @@ const Address = () => {
             <div className="address__right-menu">
               <div className="address__billing">
                 <Typography variant="h4">BILLING ADDRESS</Typography>
-                {/* <a href="#">BILLING ADDRESS</a> */}
               </div>
               <input
                 onClick={openBillingModal}
