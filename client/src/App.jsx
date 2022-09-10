@@ -38,6 +38,11 @@ const App = () => {
     return () => dispatch(isNotLoaded());
   }, [isLogin]);
 
+  /* code review: NOT good
+    не обовʼязково тут отримувати список обраних
+    це можна зробити в компоненті, де відбувається рендеринг списку обраних
+  */
+
   useEffect(() => {
     isLogin && dispatch(getWishlistItem());
   }, [isLogin]);

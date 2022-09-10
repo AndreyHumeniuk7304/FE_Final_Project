@@ -11,6 +11,11 @@ import { switchThemeAction } from "../../store/switchTheme/action";
 
 const Header = (props) => {
   const { statusOpenBurger, handleBurger, closeBurger } = props;
+  /* code review: good, but could be better
+    почитати про селектори в редаксі, які можна використовувати для вибору даних зі стору
+    https://redux.js.org/style-guide/style-guide#use-selector-functions-to-read-from-store-state
+    і відповідно зберігати їх в одному місці, використовуючи по проекту
+  */
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const cartList = useSelector((state) => state.cart.list);
   const [isExpandInput, setIsExpandInput] = useState(true);
@@ -29,6 +34,12 @@ const Header = (props) => {
   });
 
   useEffect(() => {
+    /* code review: not good
+      в реакті дуже в рідких випадках потрібно використовувати класи, які додаються
+      таким чином, через document.activeElement.classList.add("class")
+      зазвичай у нас є якийсь стан і ми на основі нього додаємо класи уже в jsx
+    */
+
     if (JSON.parse(localStorage.getItem("nightMode")) === true) {
       document.activeElement.classList.remove("light");
       document.activeElement.classList.add("dark");

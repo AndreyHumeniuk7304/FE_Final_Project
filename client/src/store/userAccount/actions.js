@@ -13,6 +13,11 @@ const setError = (error) => {
   return { type: "GET_LOGIN_ERROR", payload: error };
 };
 
+/* code review: NOT good
+  тут можна було б dispatch не прокидувати параметром, а використати
+  з мідлвари thunk, як в прикладі знизу з fetchUser
+*/
+
 const getSuccess = (data, dispatch) => {
   dispatch(getIsLogin(data.success));
   dispatch(setLogin({ ...jwt_decode(data.token), token: data.token }));

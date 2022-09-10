@@ -23,6 +23,12 @@ const HomeNovelties = () => {
     (state) => state.catalog.categorieProductList
   );
 
+  /* code review: could be better
+    у випадку з новими та поплуярними товарами було б правильніше використовувати
+    якусь властивість для них, наприклад isNew, isPopular в базі даних, щоб по ній відбирати
+    товари, а не просто показувати перші 3 або 5 товарів, які попадуться в списку
+  */
+
   return (
     <>
       <Novelties className="novelties">

@@ -11,6 +11,11 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchAllProducts());
   }, [dispatch]);
+
+  /* code review: good
+    компонент розділений на логічні частини
+   */
+
   return (
     <>
       <ClockSlider />
