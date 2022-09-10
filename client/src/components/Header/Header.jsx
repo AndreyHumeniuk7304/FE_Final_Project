@@ -45,6 +45,10 @@ const Header = (props) => {
     dispatch(switchThemeAction(!value));
   };
 
+  const calculateCartQuantity = () => {
+    return cartList.reduce((sum, item) => sum + item.cartQuantity, 0);
+  };
+
   return (
     <header className={statusOpenBurger ? "header active-burger" : "header"}>
       <div className="container">
@@ -115,7 +119,7 @@ const Header = (props) => {
                 </div>
 
                 <p className="header__cart-quantity">
-                  {cartList && cartList.length}
+                  {cartList && calculateCartQuantity()}
                 </p>
               </Link>
 
