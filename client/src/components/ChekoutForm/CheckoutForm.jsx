@@ -28,6 +28,11 @@ const CheckoutForm = () => {
     getPaymentMethod().then((res) => setPaymentMethods(res));
   }, []);
 
+  useEffect(() => {
+    paymentMethods.length != 0 &&
+      dispatch(paymentMethodAction(paymentMethods[0]));
+  }, [paymentMethods]);
+
   const {
     register,
     handleSubmit,
@@ -39,12 +44,13 @@ const CheckoutForm = () => {
         ? yupResolver(checkoutSchema)
         : yupResolver(checkoutSchemaMinimize),
     defaultValues: {
-      paymentMethod: "",
+      paymentMethod: "Cards",
       cardNumber: "",
       cardHolderName: "",
       cardExpiryDate: "",
       cvv: "",
       deliveryAdress: "",
+      shippingMethod: "Nova Poshta",
     },
   });
 
