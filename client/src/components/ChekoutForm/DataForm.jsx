@@ -8,7 +8,7 @@ const DataForm = (props) => {
   const { setCheckoutInputNames } = props;
 
   useEffect(() => {
-    if (paymentMethod.name === "Cards" || paymentMethod.name === undefined) {
+    if (paymentMethod.name === "Cards") {
       setCheckoutInputNames([
         {
           inputName: "paymentMethod",
@@ -38,50 +38,29 @@ const DataForm = (props) => {
           inputName: "shippingMethod",
           formType: "droplist",
           label: "Shipping method",
-          formName: ["", "UkrPoshta", "Nova Poshta", "Meest"],
+          formName: ["Nova Poshta", "UkrPoshta", "Meest"],
         },
       ]);
     } else {
-      paymentMethod.name === "Mobile" &&
-        setCheckoutInputNames([
-          {
-            inputName: "paymentMethod",
-            formType: "droplist",
-            formName: ["Mobile", "Cards", "Cash"],
-            label: "Payment Method",
-          },
-          {
-            inputName: "deliveryAdress",
-            formType: "input",
-            label: "Delivery adress",
-          },
-          {
-            inputName: "shippingMethod",
-            formType: "droplist",
-            label: "Shipping method",
-            formName: ["", "UkrPoshta", "Nova Poshta", "Meest"],
-          },
-        ]);
-      paymentMethod.name === "Cash" &&
-        setCheckoutInputNames([
-          {
-            inputName: "paymentMethod",
-            formType: "droplist",
-            formName: ["Cash", "Cards", "Mobile"],
-            label: "Payment Method",
-          },
-          {
-            inputName: "deliveryAdress",
-            formType: "input",
-            label: "Delivery adress",
-          },
-          {
-            inputName: "shippingMethod",
-            formType: "droplist",
-            label: "Shipping method",
-            formName: ["", "UkrPoshta", "Nova Poshta", "Meest"],
-          },
-        ]);
+      setCheckoutInputNames([
+        {
+          inputName: "paymentMethod",
+          formType: "droplist",
+          formName: ["Mobile", "Cards", "Cash"],
+          label: "Payment Method",
+        },
+        {
+          inputName: "deliveryAdress",
+          formType: "input",
+          label: "Delivery adress",
+        },
+        {
+          inputName: "shippingMethod",
+          formType: "droplist",
+          label: "Shipping method",
+          formName: ["Nova Poshta", "UkrPoshta", "Meest"],
+        },
+      ]);
     }
   }, [paymentMethod]);
 };
@@ -157,4 +136,6 @@ export const checkoutSchema = object({
 
 export const checkoutSchemaMinimize = object({
   paymentMethod: string().required("It's a required field"),
+  deliveryAdress: string().required("It's a required field"),
+  shippingMethod: string().required("It's a required field"),
 });
