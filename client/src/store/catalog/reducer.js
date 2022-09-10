@@ -4,6 +4,8 @@ const initialState = {
   isLoading: false,
   hasError: false,
   isFilterOpenMobile: false,
+  productsQuntity: 0,
+  filterOnChange: { isLoading: false, productsQuntityOnChange: null },
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,7 +25,8 @@ const reducer = (state = initialState, action) => {
     case "LOADED_CATEGORIES_PRODUCTS": {
       return {
         ...state,
-        categorieProductList: action.payload,
+        categorieProductList: action.payload.products,
+        productsQuntity: action.payload.productsQuntity,
         isLoading: false,
         hasError: false,
       };
@@ -34,6 +37,24 @@ const reducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         hasError: true,
+      };
+    }
+    case "SET_QUANTITY_PRODUCTS_ON_CHANGE": {
+      return {
+        ...state,
+        filterOnChange: {
+          isLoading: false,
+          productsQuntityOnChange: action.payload,
+        },
+      };
+    }
+    case "SET_QUANTITY_PRODUCTS_ON_CHANGE_LOADING": {
+      return {
+        ...state,
+        filterOnChange: {
+          isLoading: true,
+          productsQuntityOnChange: null,
+        },
       };
     }
 

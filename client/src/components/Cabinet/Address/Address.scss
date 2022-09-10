@@ -18,7 +18,7 @@ body.light .address__btn {
     &__btn{
         border: 0ch;
         background-color: black;
-        color: white;
+        // color: white;
         width: 182px;
         height: 57px;
         font-size: 14px;
@@ -55,9 +55,6 @@ body.light .address__btn {
     border-bottom: 0px;
     width: auto;
     border-right: 1px solid gray;
-    // padding-right: 150px;
-
-    
         }
         &__right-menu{
             padding-bottom: 0;
@@ -80,9 +77,6 @@ body.light .address__btn {
     
         }
         &__btn{
-            // border: 0ch;
-            // background-color: black;
-            // color: white;
             width: 270px;
             height: 57px;
             font-size: 24px;
@@ -92,17 +86,14 @@ body.light .address__btn {
 }
 @media screen and (min-width: 1023px) {
     .address{
-        // display: flex;
         flex-direction: unset;
         align-items: flex-end;
         justify-content: center;
         height: 352px;
         padding-bottom: 70px;
         &__left-menu{
-    
     border-right: 1px solid gray;
     padding-right: 150px;
-    
         }
         &__right-menu{
             padding-left: 150px;
@@ -114,17 +105,12 @@ body.light .address__btn {
         &__delivery{
             font-size: 18px;
             margin-bottom: 30px;
-    
         }
         &__billing{
             font-size: 18px;
             margin-bottom: 30px;
-    
         }
         &__btn{
-            // border: 0ch;
-            // background-color: black;
-            // color: white;
             width: 270px;
             height: 57px;
             font-size: 24px;

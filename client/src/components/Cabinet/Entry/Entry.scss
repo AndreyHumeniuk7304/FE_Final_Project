@@ -27,10 +27,10 @@
     }
   }
   &__checkbox {
-    color: black;
     padding-top: 55px;
-    display: flex;
+    display: grid;
     align-items: center;
+    grid-template-columns: 40px 1fr;
 
     input {
       margin-right: 20px;

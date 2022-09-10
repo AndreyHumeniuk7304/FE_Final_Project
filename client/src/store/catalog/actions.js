@@ -4,8 +4,13 @@ import getAllProductsToRender from "../../api/getAllProductsToRender";
 export const fetchCategoriesProducts = (categoriesType) => (dispatch) => {
   dispatch({ type: "START_FETCH_PRODUCTS" });
   getCategoryProductsToRender(categoriesType)
-    .then((products) => {
-      dispatch(loadedCategorieProducts(products));
+    .then((data) => {
+      dispatch(
+        loadedCategorieProducts({
+          products: data.products,
+          productsQuntity: data.productsQuantity,
+        })
+      );
     })
     .catch(() => {
       dispatch(errorLoadedProducts());
@@ -23,7 +28,12 @@ export const fetchAllProducts = () => (dispatch) => {
   dispatch({ type: "START_FETCH_PRODUCTS" });
   getAllProductsToRender()
     .then((products) => {
-      dispatch(loadedCategorieProducts(products));
+      dispatch(
+        loadedCategorieProducts({
+          products: products,
+          productsQuntity: products.length,
+        })
+      );
     })
     .catch(() => {
       dispatch(errorLoadedProducts());
@@ -40,3 +50,22 @@ export const loadedCategorieProducts = (products) => {
 export const errorLoadedProducts = () => ({
   type: "ERROR_LOADED_PRODUCTS",
 });
+
+export const fetchAllProductsFilterPreloader =
+  (categoriesType) => (dispatch) => {
+    dispatch({ type: "SET_QUANTITY_PRODUCTS_ON_CHANGE_LOADING" });
+    getCategoryProductsToRender(categoriesType)
+      .then((data) => {
+        dispatch(loadedCategorieProductsOnChange(data.productsQuantity));
+      })
+      .catch(() => {
+        dispatch(errorLoadedProducts());
+      });
+  };
+
+export const loadedCategorieProductsOnChange = (products) => {
+  return {
+    type: "SET_QUANTITY_PRODUCTS_ON_CHANGE",
+    payload: products,
+  };
+};

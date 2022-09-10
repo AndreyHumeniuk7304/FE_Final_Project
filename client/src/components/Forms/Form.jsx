@@ -3,12 +3,14 @@ import { Button } from "@mui/material";
 import CustomInput from "../Forms/CastomInput";
 import CustomErrorMessage from "../Forms/CustomErrorMessage";
 import CustomDropList from "../Forms/CustomDropList";
+import CustomPaymantInput from "./CustomPaymantInput";
 
 const Form = ({
   actionWithForm,
   formArr,
   register,
   handleSubmit,
+  handleChange,
   errors,
   btnName,
   fieldArray,
@@ -37,6 +39,23 @@ const Form = ({
               camelizeDecode={camelizeDecode}
             />
             <CustomErrorMessage err={errors[inputName]?.message} />
+          </>
+        );
+      }
+      case "expiryDate": {
+        return (
+          <>
+            {label && <label className="form__label">Enter the {label}:</label>}
+            <CustomPaymantInput
+              register={register}
+              name={camelizeDecode(inputName)}
+              formName={inputName}
+              formType={formType}
+              label={label}
+            />
+            <CustomErrorMessage
+              err={errors[inputName]?.message || errors[inputName]}
+            />
           </>
         );
       }
@@ -117,10 +136,11 @@ const Form = ({
         );
     }
   };
-
+  console.log(errors);
   return (
     <form
       onSubmit={handleSubmit((values) => actionWithForm(values))}
+      onChange={handleChange}
       className="form"
     >
       <ul className="form__box">
@@ -142,6 +162,7 @@ Form.propTypes = {
   formArr: PropTypes.array,
   register: PropTypes.func,
   handleSubmit: PropTypes.func,
+  handleChange: PropTypes.func,
   errors: PropTypes.object,
   btnName: PropTypes.string,
   fieldArray: PropTypes.object,

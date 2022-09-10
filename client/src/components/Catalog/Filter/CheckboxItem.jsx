@@ -1,7 +1,7 @@
-import { FormLabel } from "@mui/material";
+import { CircularProgress, FormLabel, Tooltip } from "@mui/material";
 import PropTypes from "prop-types";
-import { useEffect } from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const CheckboxItem = ({
   itemName,
@@ -9,43 +9,71 @@ const CheckboxItem = ({
   register,
   isItemChecked,
   setIsItemChecked,
+  itemCLicked,
+  setIdemCliked,
 }) => {
-  const isChecked = isItemChecked.includes(itemName);
+  const [isChecked, setIsChecked] = useState();
 
-  const [nightMode, setNightMode] = useState(
-    JSON.parse(localStorage.getItem("nightMode"))
+  useState(() => {
+    setIsChecked(isItemChecked.includes(itemName));
+  }, []);
+
+  const { productsQuntityOnChange, isLoading } = useSelector(
+    (state) => state.catalog.filterOnChange
   );
+
+  const nightMode = useSelector((state) => state.nightMode);
+
   return (
-    <FormLabel
-      className="checkbox__lable"
-      style={{ textDecoration: isChecked ? "underline" : "none" }}
+    <Tooltip
+      title={
+        isLoading ? (
+          <CircularProgress size={10} color="inherit" />
+        ) : (
+          `${productsQuntityOnChange}pc
+            available`
+        )
+      }
+      open={itemName === itemCLicked}
+      placement={"right"}
     >
-      <input
-        type="checkbox"
-        name={title}
-        value={itemName}
-        defaultChecked={isChecked}
-        className={"custom-checkbox"}
-        onClick={(e) => {
-          setIsItemChecked([...isItemChecked, e.target.value]);
-          !isChecked
-            ? setIsItemChecked([...isItemChecked, e.target.value])
-            : setIsItemChecked(isItemChecked.filter((e) => e !== e));
+      <FormLabel
+        className="checkbox__lable"
+        style={{
+          textDecoration: isChecked ? "underline" : "none",
+          color: nightMode ? "#fff" : "#686868",
         }}
-        {...register(title)}
-      />
-      {title === "color" && (
-        <>
-          <span
-            className="checkbox__color"
-            style={{
-              backgroundColor: itemName === "steel" ? "silver" : itemName,
-            }}
-          ></span>
-        </>
-      )}
-      {itemName}
-    </FormLabel>
+      >
+        <input
+          type="checkbox"
+          name={title}
+          value={itemName}
+          defaultChecked={isChecked}
+          className={"custom-checkbox"}
+          onClick={(e) => {
+            setIdemCliked(e.target.value);
+            setIsChecked(!isChecked);
+            !isChecked
+              ? setIsItemChecked([...isItemChecked, e.target.value])
+              : setIsItemChecked(
+                  isItemChecked.filter((el) => el !== e.target.value)
+                );
+          }}
+          {...register(title)}
+        />
+        {title === "color" && (
+          <>
+            <span
+              className="checkbox__color"
+              style={{
+                backgroundColor: itemName === "steel" ? "silver" : itemName,
+              }}
+            ></span>
+          </>
+        )}
+        {itemName}
+      </FormLabel>
+    </Tooltip>
   );
 };
 
@@ -57,4 +85,6 @@ CheckboxItem.propTypes = {
   isItemChecked: PropTypes.array,
   setIsItemChecked: PropTypes.func,
   register: PropTypes.func,
+  itemCLicked: PropTypes.string,
+  setIdemCliked: PropTypes.func,
 };

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Logout from "./Logout/Logout";
 
@@ -33,7 +33,10 @@ const Cabinet = () => {
                 </div>
               </div>
             </Link>
-            <Link className="link-container" to="/my-account/update-product">
+            <Link
+              className="link-container"
+              to="/my-account/update-product/filter?perPage=10&startPage=1"
+            >
               <div className=" my-account__history my-account__section">
                 <div className="icon-container">
                   <img src="../images/update-product.png" alt="update card" />
@@ -42,19 +45,6 @@ const Cabinet = () => {
                   <h4 className="my-account__section--title">Update product</h4>
                   <span className="my-account__section--text">
                     You can change product information
-                  </span>
-                </div>
-              </div>
-            </Link>
-            <Link className="link-container" to="/my-account/delete-product">
-              <div className=" my-account__wishlist my-account__section">
-                <div className="icon-container">
-                  <img src="../images/delete-product.png" alt="delete card" />
-                </div>
-                <div>
-                  <h4 className="my-account__section--title">Delete product</h4>
-                  <span className="my-account__section--text">
-                    You can drop product
                   </span>
                 </div>
               </div>

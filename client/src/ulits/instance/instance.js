@@ -1,7 +1,8 @@
 import axios from "axios";
+import { API_URL } from "../../config/keys";
 
 const instance = axios.create({
-  baseURL: "https://fe-final-project.herokuapp.com/api",
+  baseURL: API_URL,
 });
 
 export const setAuthToken = (token) => {

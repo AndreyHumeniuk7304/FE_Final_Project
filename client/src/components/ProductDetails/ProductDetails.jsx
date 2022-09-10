@@ -6,7 +6,13 @@ import { Box, Button, Checkbox, Typography } from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import theme from "../../theme";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../store/cart/actions";
+import { addToCart, deleteCartItem } from "../../store/cart/actions";
+import Subscribe from "../Subscribe/Subscribe";
+import {
+  addToWishlist,
+  deleteWishlistItem,
+} from "../../store/wishlist/actions";
+import Comments from "../Comments/Comments";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -14,12 +20,16 @@ const ProductDetails = () => {
   const [counter, setCounter] = useState(1);
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const isAdmin = useSelector((state) => state.userAccount.customer.isAdmin);
+  const cart = useSelector((state) => state.cart.list);
   const nightMode = useSelector((state) => state.nightMode);
   const { itemNo } = useParams();
   const dispatch = useDispatch();
+  const wishlist = useSelector((state) => state.wishlist.list);
+  let isFavorite = wishlist.some((item) => item.itemNo === itemNo);
+  let isInCart = cart.some((item) => item.product.itemNo === itemNo);
   useEffect(() => {
     getOneProduct(itemNo).then((data) => setProduct(data));
-  }, []);
+  }, [itemNo]);
   const decrease = () => {
     if (counter > 1) {
       setCounter(counter - 1);
@@ -31,9 +41,20 @@ const ProductDetails = () => {
     }
   };
 
-  const addToCartClick = () => {
-    dispatch(addToCart(product._id, itemNo, counter, isLogin));
+  const handleCartClick = () => {
+    isInCart
+      ? dispatch(deleteCartItem(product._id, isLogin))
+      : dispatch(addToCart(product._id, itemNo, counter, isLogin));
+    isInCart = !isInCart;
   };
+
+  const handleWishlistClick = () => {
+    isFavorite
+      ? dispatch(deleteWishlistItem(product._id))
+      : dispatch(addToWishlist(product._id));
+    isFavorite = !isFavorite;
+  };
+
   const updateProductClick = () => {
     navigate(`/product/${itemNo}/update`);
   };
@@ -41,7 +62,7 @@ const ProductDetails = () => {
 
   return (
     <>
-      <Box className="background">
+      <Box className="background" sx={{ borderBottom: "1px solid lightgrey" }}>
         <Box
           className="details container"
           sx={{
@@ -51,21 +72,33 @@ const ProductDetails = () => {
             paddingBottom: "100px",
             [theme.breakpoints.between("mobile", "desktop")]: {
               display: "block",
-              paddingTop: "50px",
-              paddingBottom: "50px",
+              paddingTop: "30px",
+              paddingBottom: "30px",
             },
           }}
         >
           <Box>
-            <img className="details__img" src={product.imageUrls[0]} />
+            <img
+              className="details__img"
+              src={product.imageUrls[0]}
+              alt={product.name}
+            />
           </Box>
           <Box
             className="details__item"
             sx={{
               width: "100%",
+              [theme.breakpoints.between("mobile", "desktop")]: {
+                padding: "0",
+              },
             }}
           >
-            <Box sx={{ display: "flex" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
               <Typography
                 className="details__item-title"
                 variant="h5"
@@ -81,25 +114,51 @@ const ProductDetails = () => {
               >
                 {product.name}
               </Typography>
-              <Typography
-                sx={{
-                  minWidth: "max-content",
-                  width: "30%",
-                  textAlign: "center",
-                  [theme.breakpoints.between("mobile", "desktop")]: {
-                    fontSize: "14px",
-                    lineHeight: "19px",
-                    mt: "10px",
-                    textAlign: "end",
-                  },
-                }}
-                className="details__item-title"
-                variant="h5"
-                component="h5"
-                style={{ color: nightMode ? "#fff" : "#000" }}
-              >
-                {product.currentPrice} $
-              </Typography>
+              <Box className="price">
+                <Typography
+                  sx={{
+                    minWidth: "max-content",
+                    width: "30%",
+                    textAlign: "center",
+                    [theme.breakpoints.between("mobile", "desktop")]: {
+                      fontSize: "14px",
+                      lineHeight: "19px",
+                      mt: "10px",
+                      textAlign: "end",
+                    },
+                  }}
+                  className="details__item-title"
+                  variant="h5"
+                  component="h5"
+                  style={{ color: nightMode ? "#fff" : "#000" }}
+                >
+                  {product.currentPrice} $
+                </Typography>
+                {product.previousPrice > product.currentPrice && (
+                  <Typography
+                    sx={{
+                      minWidth: "max-content",
+                      width: "30%",
+                      textAlign: "center",
+                      textDecoration: "line-through",
+                      fontWeight: "400",
+                      fontSize: "20px",
+                      opacity: "0.5",
+                      [theme.breakpoints.between("mobile", "desktop")]: {
+                        fontSize: "14px",
+                        lineHeight: "19px",
+                        textAlign: "end",
+                      },
+                    }}
+                    className="details__item-title"
+                    variant="h5"
+                    component="h5"
+                    style={{ color: nightMode ? "#fff" : "#595959" }}
+                  >
+                    {product.previousPrice} $
+                  </Typography>
+                )}
+              </Box>
             </Box>
             <Box>
               <Typography
@@ -176,7 +235,13 @@ const ProductDetails = () => {
                   +
                 </button>
               </div>
-              <Box>
+              <Box
+                sx={{
+                  [theme.breakpoints.between("mobile", "desktop")]: {
+                    display: "flex",
+                  },
+                }}
+              >
                 {isAdmin ? (
                   <Button
                     onClick={updateProductClick}
@@ -198,11 +263,10 @@ const ProductDetails = () => {
                   </Button>
                 ) : (
                   <Button
-                    onClick={addToCartClick}
+                    onClick={handleCartClick}
                     variant="contained"
                     sx={{
                       [theme.breakpoints.between("mobile", "desktop")]: {
-                        padding: "12px 70px",
                         fontSize: "16px",
                         lineHeight: "25px",
                       },
@@ -213,32 +277,39 @@ const ProductDetails = () => {
                       lineHeight: "25px",
                     }}
                   >
-                    ADD TO CART
+                    {isInCart ? "REMOVE FROM CART" : "ADD TO CART"}
                   </Button>
                 )}
-                <Checkbox
-                  icon={
-                    <FavoriteBorder
-                      sx={{
-                        [theme.breakpoints.between("mobile", "desktop")]: {
+                {isLogin && (
+                  <Checkbox
+                    checked={isFavorite}
+                    onClick={handleWishlistClick}
+                    icon={
+                      <FavoriteBorder
+                        sx={{
+                          [theme.breakpoints.between("mobile", "desktop")]: {
+                            fontSize: "35px",
+                          },
+                          color: "primary.dark",
                           fontSize: "35px",
-                        },
-                        color: "primary.dark",
-                        fontSize: "35px",
-                      }}
-                    />
-                  }
-                  checkedIcon={
-                    <Favorite
-                      sx={{ color: "primary.dark", fontSize: "35px" }}
-                    />
-                  }
-                />
+                        }}
+                      />
+                    }
+                    checkedIcon={
+                      <Favorite
+                        sx={{ color: "primary.dark", fontSize: "35px" }}
+                      />
+                    }
+                  />
+                )}
               </Box>
+              <Box></Box>
             </Box>
+            <Subscribe itemNo={itemNo} />
           </Box>
         </Box>
       </Box>
+      <Comments id={product._id} />
     </>
   );
 };

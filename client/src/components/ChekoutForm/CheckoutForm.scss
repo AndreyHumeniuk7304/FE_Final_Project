@@ -1,5 +1,9 @@
 @import "../../ulits/styles/mixins";
 
+.form-wrapper .form__droplist {
+  background-color: transparent;
+  outline: none;
+}
 .label {
   font-family: "Open Sans";
   font-style: normal;
@@ -7,15 +11,24 @@
   font-size: 12px;
   line-height: 16px;
   margin-bottom: 5px;
-  color: rgb(0, 0, 0);
+  // color: rgb(0, 0, 0);
 
   &-sm {
     display: block;
   }
 }
 
+.form__expiry-date {
+  width: 20%;
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: transparent;
+  outline: none;
+  margin-right: 2px;
+  padding: 2px 10px;
+}
+
 .form {
-  background-color: #fff;
   padding: 22px 10px;
 
   &__inputs-item {
@@ -28,7 +41,22 @@
   &__pay-method {
     @include flex-container;
     justify-content: space-around;
-    margin-bottom: 30px;
+    // margin-bottom: 30px;
+  }
+  &__pay-method__item,
+  &__mobile-img {
+    cursor: pointer;
+  }
+  &__mobile-img {
+    display: inline-block;
+    padding-right: 30px;
+  }
+  &__mobile-img img {
+    width: 80px;
+  }
+  &__mobile-payment {
+    display: flex;
+    justify-content: center;
   }
 }
 
@@ -37,11 +65,14 @@
   border: none;
   border-bottom: 1px solid black;
   padding: 3px;
+  background-color: transparent;
+  outline: none;
 
   &-sm {
-    width: 60px;
+    width: 70px;
     display: inline-block;
     margin-right: 3px;
+    // color: transparent;
   }
 
   &-cvv {
@@ -87,7 +118,7 @@
     padding: 50px 20px;
     &__pay-method {
       margin-bottom: 60px;
-      justify-content: start;
+      justify-content: center;
       gap: 37px;
     }
 

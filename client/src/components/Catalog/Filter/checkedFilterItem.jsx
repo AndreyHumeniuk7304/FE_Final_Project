@@ -1,22 +1,22 @@
 import PropTypes from "prop-types";
-import { filterTitles } from "./Filter";
+import { useSelector } from "react-redux";
 
-export const CheckedFilterItem = ({ search }) => {
-  const getAllActiveFilter = () => {
-    let valuesArr = [];
-
-    filterTitles.map(
-      (title) =>
-        (valuesArr = [...valuesArr, ...search.getAll(title).join().split(",")])
-    );
-    return valuesArr.filter((a) => a);
-  };
-
+export const CheckedFilterItem = ({ isItemChecked }) => {
+  const nightMode = useSelector((state) => state.nightMode);
   return (
     <div>
-      <ul className="filter__checked">
-        {getAllActiveFilter().map((data) => (
-          <ol className="checked__item" key={Math.random()}>
+      <ul
+        className="filter__checked"
+        style={{
+          color: nightMode ? "#fff" : "#000",
+        }}
+      >
+        {isItemChecked.map((data) => (
+          <ol
+            className="checked__item"
+            key={Math.random()}
+            style={{ border: nightMode ? "1px solid #fff" : "1px solid #000" }}
+          >
             {data}
           </ol>
         ))}
@@ -26,5 +26,5 @@ export const CheckedFilterItem = ({ search }) => {
 };
 
 CheckedFilterItem.propTypes = {
-  search: PropTypes.object,
+  isItemChecked: PropTypes.array,
 };
