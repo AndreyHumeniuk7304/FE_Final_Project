@@ -1,0 +1,32 @@
+.subscribe {
+  width: 100%;
+  .form {
+    padding: 0;
+    width: 100%;
+
+    &__btn {
+      padding: 0;
+      text-align: start;
+      :hover {
+        text-decoration: underline;
+      }
+      button {
+        padding: 5px;
+      }
+    }
+    &__input {
+      width: 210px;
+    }
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .subscribe {
+    width: 350px;
+    .form {
+      display: flex;
+      &__btn {
+      }
+    }
+  }
+}
