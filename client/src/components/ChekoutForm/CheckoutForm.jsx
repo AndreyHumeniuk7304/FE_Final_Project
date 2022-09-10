@@ -5,35 +5,41 @@ import theme from "../../theme";
 import "./CheckoutForm.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import Payment from "./Payment/Payment.jsx";
 import Form from "../Forms/Form";
-import { useState } from "react";
-import DataForm, { checkoutSchema } from "./DataForm";
+import { useState, useEffect } from "react";
+import DataForm, { checkoutSchema, checkoutSchemaMinimize } from "./DataForm";
+import { getPaymentMethod } from "../../api/paymentMethod";
+import { paymentMethodAction } from "../../store/paymentMethod/action";
 import DeliveryInfo from "./Delivery/DeliveryInfo";
 import { getShippingMethods } from "../../api/shippingMethods";
-import { useEffect } from "react";
 import { shippingMethodAction } from "../../store/shippingMethod/action";
 
 const CheckoutForm = () => {
   const cartList = useSelector((state) => state.cart.list);
-  const [typeOfMobilePayment, setTypeOfMobilePayment] = useState();
   const paymentMethod = useSelector((state) => state.paymentMethod);
   const [checkoutInputNames, setCheckoutInputNames] = useState([]);
   const [shippingMethods, setShippingMethods] = useState([]);
+  const [paymentMethods, setPaymentMethods] = useState([]);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     getShippingMethods().then((data) => setShippingMethods(data));
+    getPaymentMethod().then((res) => setPaymentMethods(res));
   }, []);
 
   const {
     register,
     handleSubmit,
+    handleChange,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(checkoutSchema),
+    resolver:
+      paymentMethod.name == "Cards"
+        ? yupResolver(checkoutSchema)
+        : yupResolver(checkoutSchemaMinimize),
     defaultValues: {
+      paymentMethod: "",
       cardNumber: "",
       cardHolderName: "",
       cardExpiryDate: "",
@@ -58,12 +64,16 @@ const CheckoutForm = () => {
   };
 
   const handleChangeForm = (e) => {
+    paymentMethods.forEach((method) => {
+      e.target.value === method.name && dispatch(paymentMethodAction(method));
+    });
     shippingMethods.forEach((method) => {
       if (e.target.value === method.name) {
         dispatch(shippingMethodAction(method));
       }
     });
   };
+
   return (
     <Container sx={{ maxWidth: "lg" }}>
       <Typography
@@ -102,37 +112,11 @@ const CheckoutForm = () => {
       >
         Total payment amount $ {getTotalPrice()}
       </Typography>
-      <Payment />
       <DataForm setCheckoutInputNames={setCheckoutInputNames} />
-      {paymentMethod.name == "Mobile" && (
-        <div className="form__mobile-payment">
-          {paymentMethod.fromOfMobilePayment.map((method, index) => {
-            return (
-              <div
-                key={index}
-                className="form__mobile-img"
-                onClick={() => setTypeOfMobilePayment(method)}
-              >
-                <img
-                  style={{
-                    width:
-                      typeOfMobilePayment != undefined &&
-                      method.typePay === typeOfMobilePayment.typePay
-                        ? "120px"
-                        : "80px",
-                  }}
-                  src={method.imgPay}
-                  alt=""
-                />
-              </div>
-            );
-          })}
-        </div>
-      )}
       <div className="form-wrapper">
         <Form
           actionWithForm={handleSubmitForm}
-          formArr={checkoutInputNames === [] ? [] : checkoutInputNames}
+          formArr={checkoutInputNames}
           register={register}
           handleChange={handleChangeForm}
           handleSubmit={handleSubmit}
