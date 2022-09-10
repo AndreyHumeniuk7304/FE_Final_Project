@@ -1,9 +1,14 @@
 body.light .profile__button {
   background-color: #686868;
 }
-.form_container{
+body.light .form_container{
   background-color: white
 }
+
+body.dark .form_container {
+  background-color: #071a2f;
+}
+ 
 .profile {
   min-width: 320px;
   max-width: 1295px;
