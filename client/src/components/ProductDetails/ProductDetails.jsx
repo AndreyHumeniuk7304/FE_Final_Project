@@ -7,6 +7,7 @@ import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import theme from "../../theme";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, deleteCartItem } from "../../store/cart/actions";
+import Subscribe from "../Subscribe/Subscribe";
 import {
   addToWishlist,
   deleteWishlistItem,
@@ -302,7 +303,9 @@ const ProductDetails = () => {
                   />
                 )}
               </Box>
+              <Box></Box>
             </Box>
+            <Subscribe itemNo={itemNo} />
           </Box>
         </Box>
       </Box>

@@ -7,6 +7,7 @@ import nightModeReducer from "./switchTheme/reducer";
 import cabinetReducer from "./cabinet/reducer";
 import wishlistReducer from "./wishlist/reducer";
 import paymentMethodReducer from "./paymentMethod/reducer";
+import userSubscribe from "./subscribe/reducer";
 import shippingMethodReducer from "./shippingMethod/reducer";
 
 export const reducer = combineReducers({
@@ -18,6 +19,7 @@ export const reducer = combineReducers({
   cabinet: cabinetReducer,
   paymentMethod: paymentMethodReducer,
   shippingMethod: shippingMethodReducer,
+  subscribe: userSubscribe,
 });
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__
