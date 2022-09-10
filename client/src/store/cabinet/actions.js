@@ -15,12 +15,9 @@ const setPurchasesHistory = (history) => {
 };
 
 export const fetchCurrentCustomer = (isLogin, token) => (dispatch) => {
-  console.log(isLogin);
-  console.log(token);
   isLogin
     ? getCurrentCustomer(token)
         .then((response) => {
-          console.log(response);
           dispatch(setCurrentCustomer(response));
         })
         .catch(() => {
