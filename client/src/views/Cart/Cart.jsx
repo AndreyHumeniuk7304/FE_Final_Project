@@ -12,16 +12,10 @@ const Cart = () => {
   const isLoaded = useSelector((state) => state.cart.isLoaded);
 
   useEffect(() => {
-    if (!isLogin) {
-      const onUnload = () => {
-        localStorage.setItem("cart", JSON.stringify(cartList));
-      };
-
-      window.addEventListener("beforeunload", onUnload);
-
-      return () => window.removeEventListener("beforeunload", onUnload);
+    if (!isLogin && isLoaded) {
+      localStorage.setItem("cart", JSON.stringify(cartList));
     }
-  });
+  }, [cartList]);
 
   const createCartItemList = () => {
     return cartList.map((item) => {
