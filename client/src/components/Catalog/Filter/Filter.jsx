@@ -67,7 +67,6 @@ const Filter = () => {
         "/products/filter" + setFilterLink(values, currentPrice)
       )
     );
-    console.log("/products/filter" + setFilterLink(values, currentPrice));
   };
 
   return (
