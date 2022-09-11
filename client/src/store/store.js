@@ -8,6 +8,15 @@ import wishlistReducer from "./wishlist/reducer";
 import paymentMethodReducer from "./paymentMethod/reducer";
 import shippingMethodReducer from "./shippingMethod/reducer";
 
+/* code review: good
+  використання combineReducers для об'єднання редюсерів
+ */
+
+/* code review: good, but could be better
+  можна було б взяти redux-toolkit для організації стору
+  https://redux-toolkit.js.org/
+ */
+
 export const reducer = combineReducers({
   catalog: catalogReducer,
   cart: cartReducer,

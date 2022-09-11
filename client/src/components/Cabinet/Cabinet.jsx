@@ -3,6 +3,10 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Logout from "./Logout/Logout";
 
+/* code review: good, but could be better
+  svg іконки краще виносити в окремі компоненти
+ */
+
 const Cabinet = () => {
   const isAdmin = useSelector((state) => state.userAccount.customer.isAdmin);
   const isLogin = useSelector((state) => state.userAccount.isLogin);

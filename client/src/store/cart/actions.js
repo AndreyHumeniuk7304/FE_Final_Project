@@ -7,6 +7,12 @@ import {
 } from "../../api/cart";
 import getOneProduct from "../../api/getOneProduct";
 
+/* code review: NOT good
+    не звичний підхід, що в залежності по умові ми повертаємо
+    або об'єкт, або функцію (thunk).
+    краще цю умову перенсти всередину функції thunk
+ */
+
 export const getCartItem = (isLogin) =>
   isLogin
     ? async (dispatch) => {

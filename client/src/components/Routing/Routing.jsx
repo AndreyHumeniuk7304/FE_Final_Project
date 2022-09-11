@@ -17,6 +17,13 @@ import Checkout from "../../views/Checkout/Checkout";
 import UpdateProduct from "../UpdateProduct";
 import Error from "../Error/Error";
 
+/* code review: NOT good
+    роути для myaccount повинні бути захищені, тобто
+    якщо юзер не залогінений, то він не має мати доступу до цих роутів
+    можна зробити компонент PrivateRoute, який буде перевіряти чи юзер залогінений
+    і якщо ні, то редіректити на сторінку логіну 
+ */
+
 const Routing = () => {
   return (
     <Routes>

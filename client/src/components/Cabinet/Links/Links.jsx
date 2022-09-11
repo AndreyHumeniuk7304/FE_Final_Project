@@ -1,4 +1,10 @@
 import { Link } from "react-router-dom";
+
+/* code review: good, but could be better
+  для того, щоб не рендерити компонент Links у кожній вкладці
+  можна було б зробити ще один роутер всередині компонента Cabinet
+ */
+
 const Links = () => {
   return (
     <div className="links">

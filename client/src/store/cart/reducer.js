@@ -12,6 +12,12 @@ const cartReducer = (state = initialState, action) => {
         isLoaded: true,
       };
     }
+    /* code review: NOT good
+      редюсер повинна бути чистою функцією, тобто не залежати від зовнішніх змінних
+      (наприклад localStorage)
+      тому обовʼязково тут брати дані з payload або state і ні в якому разі не з localStorage
+      це суперечить принципам редакса
+     */
     case "DECREASE_PRODUCT_QUANTITY_LOCAL": {
       const cart = JSON.parse(localStorage.getItem("cart")).map((item) => {
         if (item.product._id === action.payload) {

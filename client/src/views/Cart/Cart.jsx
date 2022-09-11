@@ -11,6 +11,15 @@ const Cart = () => {
   const cartList = useSelector((state) => state.cart.list);
   const isLoaded = useSelector((state) => state.cart.isLoaded);
 
+  /* code review: NOT good
+    є випадки, коли івент beforeunload не спрацьовує
+    краще на зміні корзини зберігати її в localStorage
+    тобто додати в useEffect залежність від cartList
+
+    також цей useEffect зараз спрацьовує постійно, тому що в ньому не передано
+    масиву залежностей, але він має спрацьовувати лише при зміні cartList
+   */
+
   useEffect(() => {
     if (!isLogin) {
       const onUnload = () => {

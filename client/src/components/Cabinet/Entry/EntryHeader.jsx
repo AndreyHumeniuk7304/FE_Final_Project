@@ -1,5 +1,10 @@
 import PropTypes from "prop-types";
 
+/* code review: NOT good
+    є бібліотека classNames, яка дозволяє використовувати умовні класи
+    https://www.npmjs.com/package/classnames
+ */
+
 const EntryHeader = ({ isRegist, setIsRegist }) => {
   return (
     <div className="entry__header">

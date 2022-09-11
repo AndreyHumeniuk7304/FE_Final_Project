@@ -3,6 +3,10 @@ import EntryHeader from "../../components/Cabinet/Entry/EntryHeader";
 import Login from "../../components/Cabinet/Entry/Login";
 import Registration from "../../components/Cabinet/Entry/Registrations";
 
+/* code review: good, but could be better
+    краще не скорочувати назви змінних, адже це збільшує час на розуміння коду
+ */
+
 const Entry = () => {
   const [isRegist, setIsRegist] = useState(false);
 
