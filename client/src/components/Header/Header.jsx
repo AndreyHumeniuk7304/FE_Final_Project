@@ -13,6 +13,7 @@ const Header = (props) => {
   const { statusOpenBurger, handleBurger, closeBurger } = props;
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const cartList = useSelector((state) => state.cart.list);
+  const isLoaded = useSelector((state) => state.cart.isLoaded);
   const [isExpandInput, setIsExpandInput] = useState(true);
   const nightMode = useSelector((state) => state.nightMode);
   const dispatch = useDispatch();
@@ -39,6 +40,12 @@ const Header = (props) => {
       document.activeElement.classList.remove("dark");
     }
   }, [nightMode]);
+
+  useEffect(() => {
+    if (!isLogin && isLoaded) {
+      localStorage.setItem("cart", JSON.stringify(cartList));
+    }
+  }, [cartList]);
 
   const themeSwitcherLS = (value) => {
     localStorage.setItem("nightMode", JSON.stringify(!nightMode));

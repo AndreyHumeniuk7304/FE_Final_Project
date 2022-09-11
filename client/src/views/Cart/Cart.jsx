@@ -7,15 +7,8 @@ import { useNavigate } from "react-router";
 
 const Cart = () => {
   const navigate = useNavigate();
-  const isLogin = useSelector((state) => state.userAccount.isLogin);
   const cartList = useSelector((state) => state.cart.list);
   const isLoaded = useSelector((state) => state.cart.isLoaded);
-
-  useEffect(() => {
-    if (!isLogin && isLoaded) {
-      localStorage.setItem("cart", JSON.stringify(cartList));
-    }
-  }, [cartList]);
 
   const createCartItemList = () => {
     return cartList.map((item) => {

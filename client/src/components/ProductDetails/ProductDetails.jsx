@@ -21,7 +21,6 @@ const ProductDetails = () => {
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const isAdmin = useSelector((state) => state.userAccount.customer.isAdmin);
   const cart = useSelector((state) => state.cart.list);
-  const isLoaded = useSelector((state) => state.cart.isLoaded);
   const nightMode = useSelector((state) => state.nightMode);
   const { itemNo } = useParams();
   const dispatch = useDispatch();
@@ -41,12 +40,6 @@ const ProductDetails = () => {
       setCounter(counter + 1);
     }
   };
-
-  useEffect(() => {
-    if (!isLogin && isLoaded) {
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
-  }, [cart]);
 
   const handleCartClick = () => {
     isInCart
