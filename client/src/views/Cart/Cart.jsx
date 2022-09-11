@@ -1,6 +1,5 @@
 import CartItem from "../../components/CartItem";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import theme from "../../theme";
 import { useNavigate } from "react-router";
