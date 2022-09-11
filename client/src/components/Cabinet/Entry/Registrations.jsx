@@ -4,8 +4,10 @@ import addNewCustomers from "../../../api/addNewCustomer";
 import PropTypes from "prop-types";
 import Form from "../../Forms/Form";
 import { registInputNames, registSchema } from "./data";
+import { useState } from "react";
 
 const Registrations = ({ setIsRegist }) => {
+  const [error, setError] = useState({});
   const {
     register,
     handleSubmit,
@@ -31,7 +33,7 @@ const Registrations = ({ setIsRegist }) => {
         savedCustomer.status = 200 && setIsRegist(false);
       })
       .catch((err) => {
-        console.log(err.message);
+        setError(err.response.data);
       });
   };
   return (
@@ -41,7 +43,7 @@ const Registrations = ({ setIsRegist }) => {
         formArr={registInputNames}
         register={register}
         handleSubmit={handleSubmit}
-        errors={errors}
+        errors={Object.keys(error).length ? error : errors}
         btnName={"REGISTATION"}
       />
     </div>
