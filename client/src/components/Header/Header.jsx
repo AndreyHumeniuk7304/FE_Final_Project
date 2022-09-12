@@ -164,6 +164,7 @@ const Header = (props) => {
             <Link
               onClick={closeBurger}
               to="/products/filter?categories=ladies&perPage=10&startPage=1"
+              className="header__categories-container__link"
               state={{ categories: "ladies" }}
             >
               WOMEN
