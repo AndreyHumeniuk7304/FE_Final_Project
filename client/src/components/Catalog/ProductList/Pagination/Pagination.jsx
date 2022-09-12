@@ -31,11 +31,6 @@ const Paginations = () => {
 
   const nightMode = useSelector((state) => state.nightMode);
 
-  console.log(
-    nightMode
-      ? { ul: theme.pagination.ulDark }
-      : { ul: theme.pagination.ulWhite }
-  );
   return (
     <>
       <Pagination
