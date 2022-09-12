@@ -157,13 +157,14 @@ const Header = (props) => {
               onClick={closeBurger}
               to="/products/filter?categories=mens&perPage=10&startPage=1"
               className="header__categories-container__link"
+              state={{ categories: "mens" }}
             >
               MAN
             </Link>
             <Link
               onClick={closeBurger}
               to="/products/filter?categories=ladies&perPage=10&startPage=1"
-              className="header__categories-container__link"
+              state={{ categories: "ladies" }}
             >
               WOMEN
             </Link>
@@ -171,6 +172,7 @@ const Header = (props) => {
               onClick={closeBurger}
               to="/products/filter?categories=accessories&perPage=10&startPage=1"
               className="header__categories-container__link"
+              state={{ categories: "accessories" }}
             >
               ACCESSORY
             </Link>

@@ -53,7 +53,7 @@ const CheckboxItem = ({
           onClick={(e) => {
             setIdemCliked(e.target.value);
             setIsChecked(!isChecked);
-
+            console.log(isItemChecked);
             !isChecked
               ? setIsItemChecked([
                   ...isItemChecked,
