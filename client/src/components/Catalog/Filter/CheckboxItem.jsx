@@ -15,7 +15,7 @@ const CheckboxItem = ({
   const [isChecked, setIsChecked] = useState();
 
   useState(() => {
-    setIsChecked(isItemChecked.includes(itemName));
+    setIsChecked(isItemChecked.includes(itemName.toLowerCase()));
   }, []);
 
   const { productsQuntityOnChange, isLoading } = useSelector(
@@ -53,10 +53,16 @@ const CheckboxItem = ({
           onClick={(e) => {
             setIdemCliked(e.target.value);
             setIsChecked(!isChecked);
+            console.log(isItemChecked);
             !isChecked
-              ? setIsItemChecked([...isItemChecked, e.target.value])
+              ? setIsItemChecked([
+                  ...isItemChecked,
+                  e.target.value.toLowerCase(),
+                ])
               : setIsItemChecked(
-                  isItemChecked.filter((el) => el !== e.target.value)
+                  isItemChecked.filter(
+                    (el) => el.toLowerCase() !== e.target.value.toLowerCase()
+                  )
                 );
           }}
           {...register(title)}
