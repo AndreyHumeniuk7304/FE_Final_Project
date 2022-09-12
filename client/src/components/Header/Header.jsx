@@ -184,7 +184,13 @@ const Header = (props) => {
         <div className="container">
           <div className="burger-menu__wrapper">
             <div className="burger-menu__login">
-              <a className="burger-menu__login_link">Login / Register</a>
+              <Link
+                onClick={closeBurger}
+                className="burger-menu__login_link"
+                to="/my-account/entry"
+              >
+                Login / Register
+              </Link>
             </div>
             <div className="burger-menu__pages">
               <ul className="burger-menu__pages-list pages-list">
