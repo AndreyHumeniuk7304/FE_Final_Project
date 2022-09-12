@@ -3,17 +3,15 @@ import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 
-const useStylesDark = makeStyles(() => ({
-  ul: {
-    "& .MuiPaginationItem-root": {
-      color: "#fff",
-    },
-  },
-}));
-const useStylesWhite = makeStyles(() => ({
-  ul: {
+const useStyles = makeStyles(() => ({
+  ulWhite: {
     "& .MuiPaginationItem-root": {
       color: "#686868",
+    },
+  },
+  ulDark: {
+    "& .MuiPaginationItem-root": {
+      color: "#fff",
     },
   },
 }));
@@ -30,13 +28,12 @@ const Paginations = () => {
   };
 
   const nightMode = useSelector((state) => state.nightMode);
-  const classesDark = useStylesDark();
-  const classesWhite = useStylesWhite();
+  const classes = useStyles();
 
   return (
     <>
       <Pagination
-        classes={nightMode ? { ul: classesDark.ul } : { ul: classesWhite.ul }}
+        classes={nightMode ? { ul: classes.ulDark } : { ul: classes.ulWhite }}
         shape="rounded"
         onChange={(e, v) => {
           setPage(v);
