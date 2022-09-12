@@ -150,6 +150,7 @@ const Form = ({
           </li>
         ))}
       </ul>
+      <CustomErrorMessage err={errors.message} />
       <div className="form__btn">
         <Button type="submit">{btnName}</Button>
       </div>
