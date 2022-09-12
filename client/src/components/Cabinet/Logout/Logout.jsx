@@ -7,6 +7,7 @@ const Logout = () => {
   const nav = useNavigate();
   const getLogout = () => {
     localStorage.removeItem("login");
+    sessionStorage.removeItem("login");
     dispatch(getIsLogin(false));
     dispatch(setLogin({}));
     nav("/my-account/entry");
