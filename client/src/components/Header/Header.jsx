@@ -201,7 +201,8 @@ const Header = (props) => {
                 <li className="pages-list__item bottom-item">
                   <Link
                     onClick={closeBurger}
-                    to="/woman"
+                    to="/products/filter?categories=ladies&perPage=10&startPage=1"
+                    state={{ categories: "ladies" }}
                     className="pages-list__item-link"
                   >
                     WOMAN COLLECTION
@@ -210,7 +211,8 @@ const Header = (props) => {
                 <li className="pages-list__item bottom-item">
                   <Link
                     onClick={closeBurger}
-                    to="/man"
+                    to="/products/filter?categories=mens&perPage=10&startPage=1"
+                    state={{ categories: "mens" }}
                     className="pages-list__item-link"
                   >
                     MAN COLLECTION
@@ -219,7 +221,8 @@ const Header = (props) => {
                 <li className="pages-list__item bottom-item">
                   <Link
                     onClick={closeBurger}
-                    to="/accessory"
+                    to="/products/filter?categories=accessories&perPage=10&startPage=1"
+                    state={{ categories: "accessories" }}
                     className="pages-list__item-link"
                   >
                     ACCESSORY
