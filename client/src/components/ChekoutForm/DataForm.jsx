@@ -8,7 +8,7 @@ const DataForm = (props) => {
   const { setCheckoutInputNames } = props;
 
   useEffect(() => {
-    if (paymentMethod.name === "Cards") {
+    paymentMethod.name === "Cards" &&
       setCheckoutInputNames([
         {
           inputName: "paymentMethod",
@@ -41,7 +41,8 @@ const DataForm = (props) => {
           formName: ["Nova Poshta", "UkrPoshta", "Meest"],
         },
       ]);
-    } else {
+
+    paymentMethod.name === "Mobile" &&
       setCheckoutInputNames([
         {
           inputName: "paymentMethod",
@@ -61,7 +62,27 @@ const DataForm = (props) => {
           formName: ["Nova Poshta", "UkrPoshta", "Meest"],
         },
       ]);
-    }
+
+    paymentMethod.name === "Cash" &&
+      setCheckoutInputNames([
+        {
+          inputName: "paymentMethod",
+          formType: "droplist",
+          formName: ["Cash", "Mobile", "Cards"],
+          label: "Payment Method",
+        },
+        {
+          inputName: "deliveryAdress",
+          formType: "input",
+          label: "Delivery adress",
+        },
+        {
+          inputName: "shippingMethod",
+          formType: "droplist",
+          label: "Shipping method",
+          formName: ["Nova Poshta", "UkrPoshta", "Meest"],
+        },
+      ]);
   }, [paymentMethod]);
 };
 

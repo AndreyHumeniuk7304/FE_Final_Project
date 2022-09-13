@@ -35,9 +35,15 @@ export const registSchema = yup.object({
   login: yup
     .string()
     .required("Login is required.")
-    .min(5, "Login is too short - should be 5 chars minimum."),
+    .min(3, "Login is too short - should be 3 chars minimum.")
+    .max(10, "Login is too long - should be 10 chars maximum."),
   email: yup.string().required("Email is required.").email("Email not valid"),
-  telephone: yup.string().required("Telephone is required.").phone(),
+  telephone: yup
+    .string()
+    .required("Telephone is required.")
+    .min(13, "Telephone is to short")
+    .max(13, "Telephone is to long")
+    .phone(),
   password: yup
     .string()
     .required("Password is required.")

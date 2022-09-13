@@ -13,6 +13,7 @@ const Header = (props) => {
   const { statusOpenBurger, handleBurger, closeBurger } = props;
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const cartList = useSelector((state) => state.cart.list);
+  const isLoaded = useSelector((state) => state.cart.isLoaded);
   const [isExpandInput, setIsExpandInput] = useState(true);
   const nightMode = useSelector((state) => state.nightMode);
   const dispatch = useDispatch();
@@ -39,6 +40,12 @@ const Header = (props) => {
       document.activeElement.classList.remove("dark");
     }
   }, [nightMode]);
+
+  useEffect(() => {
+    if (!isLogin && isLoaded) {
+      localStorage.setItem("cart", JSON.stringify(cartList));
+    }
+  }, [cartList]);
 
   const themeSwitcherLS = (value) => {
     localStorage.setItem("nightMode", JSON.stringify(!nightMode));
@@ -157,6 +164,7 @@ const Header = (props) => {
               onClick={closeBurger}
               to="/products/filter?categories=mens&perPage=10&startPage=1"
               className="header__categories-container__link"
+              state={{ categories: "mens" }}
             >
               MAN
             </Link>
@@ -164,6 +172,7 @@ const Header = (props) => {
               onClick={closeBurger}
               to="/products/filter?categories=ladies&perPage=10&startPage=1"
               className="header__categories-container__link"
+              state={{ categories: "ladies" }}
             >
               WOMEN
             </Link>
@@ -171,6 +180,7 @@ const Header = (props) => {
               onClick={closeBurger}
               to="/products/filter?categories=accessories&perPage=10&startPage=1"
               className="header__categories-container__link"
+              state={{ categories: "accessories" }}
             >
               ACCESSORY
             </Link>
@@ -181,7 +191,13 @@ const Header = (props) => {
         <div className="container">
           <div className="burger-menu__wrapper">
             <div className="burger-menu__login">
-              <a className="burger-menu__login_link">Login / Register</a>
+              <Link
+                onClick={closeBurger}
+                className="burger-menu__login_link"
+                to="/my-account/entry"
+              >
+                Login / Register
+              </Link>
             </div>
             <div className="burger-menu__pages">
               <ul className="burger-menu__pages-list pages-list">
@@ -198,7 +214,8 @@ const Header = (props) => {
                 <li className="pages-list__item bottom-item">
                   <Link
                     onClick={closeBurger}
-                    to="/woman"
+                    to="/products/filter?categories=ladies&perPage=10&startPage=1"
+                    state={{ categories: "ladies" }}
                     className="pages-list__item-link"
                   >
                     WOMAN COLLECTION
@@ -207,7 +224,8 @@ const Header = (props) => {
                 <li className="pages-list__item bottom-item">
                   <Link
                     onClick={closeBurger}
-                    to="/man"
+                    to="/products/filter?categories=mens&perPage=10&startPage=1"
+                    state={{ categories: "mens" }}
                     className="pages-list__item-link"
                   >
                     MAN COLLECTION
@@ -216,7 +234,8 @@ const Header = (props) => {
                 <li className="pages-list__item bottom-item">
                   <Link
                     onClick={closeBurger}
-                    to="/accessory"
+                    to="/products/filter?categories=accessories&perPage=10&startPage=1"
+                    state={{ categories: "accessories" }}
                     className="pages-list__item-link"
                   >
                     ACCESSORY

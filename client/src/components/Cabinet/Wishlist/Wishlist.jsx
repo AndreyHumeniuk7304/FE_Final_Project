@@ -20,7 +20,7 @@ const Wishlist = () => {
 
   return (
     <>
-      <Links /> <ProductList className="wishlist-productlist" />
+      <Links /> <Catalog isFilterShow={false} />
     </>
   );
 };
