@@ -17,24 +17,11 @@ exports.placeOrder = async (req, res, next) => {
     order.orderNo = String(rand())
     let cartProducts = []
 
-    if (req.body.deliveryAddress) {
-      order.deliveryAddress = JSON.parse(req.body.deliveryAddress)
-    }
-
-    if (req.body.shipping) {
-      order.shipping = JSON.parse(req.body.shipping)
-    }
-
-    if (req.body.paymentInfo) {
-      order.paymentInfo = JSON.parse(req.body.paymentInfo)
-    }
-
     if (req.body.customerId) {
       order.customerId = req.body.customerId
 
       cartProducts = await subtractProductsFromCart(order.customerId)
     }
-    console.log(customerId)
 
     if (!req.body.products && cartProducts.length < 1) {
       res
@@ -44,8 +31,6 @@ exports.placeOrder = async (req, res, next) => {
 
     if (cartProducts.length > 0) {
       order.products = _.cloneDeep(cartProducts)
-    } else {
-      order.products = JSON.parse(req.body.products)
     }
 
     order.totalSum = order.products.reduce(

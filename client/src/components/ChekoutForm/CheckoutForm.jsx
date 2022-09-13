@@ -74,29 +74,28 @@ const CheckoutForm = () => {
   };
 
   const handleSubmitForm = async (value) => {
-    const { data } = await getCustomerData();
-    // const {
-    //   data: { customerNo, email, telephone, _id, firstName, lastName },
-    // } = await getCustomerData();
-    // const userInformation = {
-    //   customerId: customerNo,
-    //   products: cartProducts,
-    //   email: email,
-    //   telephone: telephone,
-    //   firstName: firstName,
-    //   lastName: lastName,
-    // };
-    // const newOrder = Object.assign(userInformation, value);
-    // // const result = await addShippingAndDeliveryInformation(
-    // //   JSON.stringify(newOrder)
-    // // );
-    // console.log(newOrder);
-    // if (error) {
-    //   navigate("*", { replace: true });
-    // } else {
-    //   navigate("/completed-order", { replace: true });
-    // }
-    navigate("/completed-order", { replace: true });
+    const {
+      data: { email, telephone, _id, firstName, lastName },
+    } = await getCustomerData();
+    const userInformation = {
+      customerId: _id,
+      email: email,
+      mobile: telephone,
+      firstName: firstName,
+      lastName: lastName,
+      letterSubject: "Thank you for order! You are welcome!",
+      letterHtml:
+        "<h1>Your order is placed. OrderNo is 023689452.</h1><p>{Other details about order in your HTML}</p>",
+    };
+    const newOrder = Object.assign(userInformation, value);
+    const { data, status } = await addShippingAndDeliveryInformation(
+      JSON.stringify(newOrder)
+    );
+    if (status === 200) {
+      navigate("/completed-order", { replace: true });
+    } else {
+      navigate("*", { replace: true });
+    }
   };
 
   const handleChangeForm = (e) => {
