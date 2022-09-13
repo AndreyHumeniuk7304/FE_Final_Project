@@ -72,6 +72,7 @@ const CheckoutForm = () => {
   };
 
   const handleSubmitForm = async (value) => {
+    const { data } = await getCustomerData();
     // const {
     //   data: { customerNo, email, telephone, _id, firstName, lastName },
     // } = await getCustomerData();
@@ -80,7 +81,6 @@ const CheckoutForm = () => {
     //   products: cartProducts,
     //   email: email,
     //   telephone: telephone,
-    //   _id: _id,
     //   firstName: firstName,
     //   lastName: lastName,
     // };
