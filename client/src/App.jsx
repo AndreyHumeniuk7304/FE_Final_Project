@@ -11,12 +11,19 @@ import { getWishlistItem } from "./store/wishlist/actions";
 
 const App = () => {
   const dispatch = useDispatch();
+
+  const getUser = (storageData) =>
+    getSuccess(
+      {
+        success: true,
+        token: JSON.parse(storageData),
+      },
+      dispatch
+    );
+
   useEffect(() => {
-    localStorage.getItem("login") &&
-      getSuccess(
-        { success: true, token: JSON.parse(localStorage.getItem("login")) },
-        dispatch
-      );
+    localStorage.getItem("login") && getUser(localStorage.getItem("login"));
+    sessionStorage.getItem("login") && getUser(sessionStorage.getItem("login"));
   }, []);
 
   const [statusOpenBurger, setStatusOpenBurger] = useState(false);

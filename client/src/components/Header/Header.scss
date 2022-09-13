@@ -58,7 +58,7 @@ a {
       transition: 0.2s;
       border-bottom: 1px solid transparent;
 
-      &:focus {
+      &_active {
         border-bottom: 1px solid white;
       }
     }
@@ -96,7 +96,7 @@ a {
     }
   }
 
-  &__cart-quantity{
+  &__cart-quantity {
     color: white;
     position: absolute;
     top: -6px;
@@ -108,7 +108,7 @@ a {
     border-radius: 50%;
     @include flex-container();
   }
-  .shopping-bag{
+  .shopping-bag {
     position: relative;
   }
 }
@@ -304,8 +304,7 @@ a {
         transition: 0.3s;
       }
 
-      &__link:hover,
-      :focus {
+      &__link:hover {
         border-bottom: 1px solid white;
       }
     }
