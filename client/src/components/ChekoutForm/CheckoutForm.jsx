@@ -33,7 +33,7 @@ const CheckoutForm = () => {
       dispatch(paymentMethodAction(paymentMethods[0]));
     shippingMethods.length != 0 &&
       dispatch(shippingMethodAction(shippingMethods[0]));
-  }, [paymentMethods]);
+  }, [paymentMethods, shippingMethods]);
 
   const {
     register,
@@ -76,9 +76,7 @@ const CheckoutForm = () => {
       e.target.value === method.name && dispatch(paymentMethodAction(method));
     });
     shippingMethods.forEach((method) => {
-      if (e.target.value === method.name) {
-        dispatch(shippingMethodAction(method));
-      }
+      e.target.value === method.name && dispatch(shippingMethodAction(method));
     });
   };
 
