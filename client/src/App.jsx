@@ -2,7 +2,7 @@ import "./App.scss";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { getSuccess } from "./store/userAccount/actions";
+import { getSuccess, setUserData } from "./store/userAccount/actions";
 import { useEffect, useState } from "react";
 import { setAuthToken } from "./ulits/instance/instance";
 import { getCartItem, isNotLoaded } from "./store/cart/actions";
@@ -12,7 +12,7 @@ import { getWishlistItem } from "./store/wishlist/actions";
 const App = () => {
   const dispatch = useDispatch();
 
-  const getUser = (storageData) =>
+  const getUser = (storageData) => {
     getSuccess(
       {
         success: true,
@@ -20,6 +20,7 @@ const App = () => {
       },
       dispatch
     );
+  };
 
   useEffect(() => {
     localStorage.getItem("login") && getUser(localStorage.getItem("login"));
@@ -28,7 +29,7 @@ const App = () => {
 
   const [statusOpenBurger, setStatusOpenBurger] = useState(false);
   const isLogin = useSelector((state) => state.userAccount.isLogin);
-  const token = useSelector((state) => state.userAccount.customer.token);
+  const token = useSelector((state) => state.userAccount.token);
 
   useEffect(() => {
     statusOpenBurger
@@ -46,7 +47,10 @@ const App = () => {
   }, [isLogin]);
 
   useEffect(() => {
-    isLogin && dispatch(getWishlistItem());
+    if (isLogin) {
+      dispatch(getWishlistItem());
+      dispatch(setUserData());
+    }
   }, [isLogin]);
 
   const handleBurger = () => {

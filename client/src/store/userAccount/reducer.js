@@ -3,6 +3,7 @@ const initialState = {
   error: {},
   customer: {},
   wishList: [],
+  token: "",
 };
 
 const userAccountReducer = (state = initialState, action) => {
@@ -15,6 +16,12 @@ const userAccountReducer = (state = initialState, action) => {
       };
     }
     case "GET_LOGIN_SUCCESS": {
+      return {
+        ...state,
+        token: action.payload,
+      };
+    }
+    case "SET_USER_DATA": {
       return {
         ...state,
         customer: action.payload,
