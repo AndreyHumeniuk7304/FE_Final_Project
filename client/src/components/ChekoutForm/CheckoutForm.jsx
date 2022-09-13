@@ -88,9 +88,8 @@ const CheckoutForm = () => {
         "<h1>Your order is placed.</h1><p>{Other details about order in your HTML}</p>",
     };
     const newOrder = Object.assign(userInformation, value);
-    const { data, status } = await addShippingAndDeliveryInformation(
-      JSON.stringify(newOrder)
-    );
+
+    const { data, status } = await addShippingAndDeliveryInformation(newOrder);
     if (status === 200) {
       navigate("/completed-order", { replace: true });
     } else {
