@@ -31,6 +31,8 @@ const CheckoutForm = () => {
   useEffect(() => {
     paymentMethods.length != 0 &&
       dispatch(paymentMethodAction(paymentMethods[0]));
+    shippingMethods.length != 0 &&
+      dispatch(shippingMethodAction(shippingMethods[0]));
   }, [paymentMethods]);
 
   const {
