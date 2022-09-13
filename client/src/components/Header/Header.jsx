@@ -8,6 +8,7 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import { useEffect } from "react";
 import { switchThemeAction } from "../../store/switchTheme/action";
+import { Container } from "@mui/system";
 
 const Header = (props) => {
   const { statusOpenBurger, handleBurger, closeBurger } = props;
@@ -66,7 +67,7 @@ const Header = (props) => {
 
   return (
     <header className={statusOpenBurger ? "header active-burger" : "header"}>
-      <div className="container">
+      <Container maxWidth={"desktop"}>
         <div className="container-header">
           <div className="header__top-content">
             <div className="header__logo-container">
@@ -203,7 +204,7 @@ const Header = (props) => {
             </Link>
           </div>
         </div>
-      </div>
+      </Container>
       <div className={!statusOpenBurger ? "burger-menu" : "burger-menu_active"}>
         <div className="container">
           <div className="burger-menu__wrapper">

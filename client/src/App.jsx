@@ -8,6 +8,7 @@ import { setAuthToken } from "./ulits/instance/instance";
 import { getCartItem, isNotLoaded } from "./store/cart/actions";
 import Routing from "./components/Routing/Routing";
 import { getWishlistItem } from "./store/wishlist/actions";
+import { Container } from "@mui/system";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -62,7 +63,11 @@ const App = () => {
   };
   return (
     <>
-      <div className="full-wrapper">
+      <Container
+        maxWidth={"desktop"}
+        sx={{ padding: 0 }}
+        className="full-wrapper"
+      >
         <Header
           statusOpenBurger={statusOpenBurger}
           handleBurger={handleBurger}
@@ -72,7 +77,7 @@ const App = () => {
           <Routing />
         </div>
         <Footer />
-      </div>
+      </Container>
     </>
   );
 };
