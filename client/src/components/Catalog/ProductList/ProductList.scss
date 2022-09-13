@@ -1,12 +1,10 @@
 .productlist-wrapper {
-  width: 100%;
   text-align: center;
   @include flex-container;
   align-items: flex-start;
   flex-wrap: wrap;
   padding-left: 6%;
   padding-right: 6%;
-  gap: 6%;
   position: relative;
 
   &__view {
@@ -43,8 +41,4 @@
   }
 }
 
-@include desktop {
-  .productlist-wrapper {
-    width: 75%;
-  }
-}
+

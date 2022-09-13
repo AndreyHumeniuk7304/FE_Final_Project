@@ -13,13 +13,19 @@ import { paymentMethodAction } from "../../store/paymentMethod/action";
 import DeliveryInfo from "./Delivery/DeliveryInfo";
 import { getShippingMethods } from "../../api/shippingMethods";
 import { shippingMethodAction } from "../../store/shippingMethod/action";
+import { addShippingAndDeliveryInformation } from "../../api/addShippingAndDeliveryInformation";
+import { getCustomerData } from "../../api/getCustomers";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = () => {
   const cartList = useSelector((state) => state.cart.list);
   const paymentMethod = useSelector((state) => state.paymentMethod);
+  const cartProducts = useSelector((state) => state.cart.list);
   const [checkoutInputNames, setCheckoutInputNames] = useState([]);
   const [shippingMethods, setShippingMethods] = useState([]);
   const [paymentMethods, setPaymentMethods] = useState([]);
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -65,8 +71,30 @@ const CheckoutForm = () => {
       : 0;
   };
 
-  const handleSubmitForm = (value) => {
-    console.log(value);
+  const handleSubmitForm = async (value) => {
+    // const {
+    //   data: { customerNo, email, telephone, _id, firstName, lastName },
+    // } = await getCustomerData();
+    // const userInformation = {
+    //   customerId: customerNo,
+    //   products: cartProducts,
+    //   email: email,
+    //   telephone: telephone,
+    //   _id: _id,
+    //   firstName: firstName,
+    //   lastName: lastName,
+    // };
+    // const newOrder = Object.assign(userInformation, value);
+    // // const result = await addShippingAndDeliveryInformation(
+    // //   JSON.stringify(newOrder)
+    // // );
+    // console.log(newOrder);
+    // if (error) {
+    //   navigate("*", { replace: true });
+    // } else {
+    //   navigate("/completed-order", { replace: true });
+    // }
+    navigate("/completed-order", { replace: true });
   };
 
   const handleChangeForm = (e) => {

@@ -16,6 +16,7 @@ import Address from "../Cabinet/Address/Address";
 import Checkout from "../../views/Checkout/Checkout";
 import UpdateProduct from "../UpdateProduct";
 import Error from "../Error/Error";
+import CompleteOrder from "../CompleteOrder/CompleteOrder";
 
 const Routing = () => {
   return (
@@ -40,6 +41,7 @@ const Routing = () => {
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/product/:itemNo/update" element={<UpdateProduct />} />
       <Route path="/update-products" element={<UpdateProducts />} />
+      <Route path="/completed-order" element={<CompleteOrder />} />
       <Route path="*" element={<Error />} />
     </Routes>
   );
