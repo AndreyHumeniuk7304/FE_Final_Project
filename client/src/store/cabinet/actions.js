@@ -1,9 +1,5 @@
 import getCustomerOrders from "../../api/getCustomerOrders";
 
-export const setCurrentCustomer = (currentCustomer) => {
-  return { type: "SET_CURRENT_CUSTOMER", payload: currentCustomer };
-};
-
 const setDeliveryAdress = (deliveryAddress) => {
   return { type: "SET_DELIVERY_ADDRESS", payload: deliveryAddress };
 };

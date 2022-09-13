@@ -2,7 +2,7 @@ import "./App.scss";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { getSuccess, setUserData } from "./store/userAccount/actions";
+import { getSuccess, getUserData } from "./store/userAccount/actions";
 import { useEffect, useState } from "react";
 import { setAuthToken } from "./ulits/instance/instance";
 import { getCartItem, isNotLoaded } from "./store/cart/actions";
@@ -49,7 +49,7 @@ const App = () => {
   useEffect(() => {
     if (isLogin) {
       dispatch(getWishlistItem());
-      dispatch(setUserData());
+      dispatch(getUserData());
     }
   }, [isLogin]);
 

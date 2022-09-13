@@ -12,15 +12,19 @@ const setError = (error) => {
   return { type: "GET_LOGIN_ERROR", payload: error };
 };
 
-const setUserData = () => async (dispatch) => {
+const getUserData = () => async (dispatch) => {
   try {
-    console.log("test2");
     const userData = await getCustomerData();
     dispatch({ type: "SET_USER_DATA", payload: userData });
   } catch (err) {
     console.log(err);
   }
 };
+
+const setUserData = (userData) => ({
+  type: "SET_USER_DATA",
+  payload: userData,
+});
 
 const getSuccess = (data, dispatch) => {
   dispatch(getIsLogin(data.success));
@@ -47,4 +51,12 @@ const fetchUser = (userData, isAutoLog, nav) => {
   };
 };
 
-export { fetchUser, setError, getSuccess, getIsLogin, setToken, setUserData };
+export {
+  fetchUser,
+  setError,
+  getSuccess,
+  getIsLogin,
+  setToken,
+  getUserData,
+  setUserData,
+};
