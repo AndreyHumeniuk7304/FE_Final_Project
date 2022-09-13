@@ -1,4 +1,5 @@
 .productlist-wrapper {
+  width: 100%;
   text-align: center;
   @include flex-container;
   align-items: flex-start;
@@ -38,5 +39,20 @@
   .active-button {
     background-color: rgb(197, 190, 190) !important;
     font-weight: bold !important;
+  }
+
+  &__pagination {
+    padding-top: 1%;
+    @include flex-container;
+  }
+}
+
+.list-width {
+  width: 100%;
+}
+
+@include desktop {
+  .list-width {
+    width: 100%;
   }
 }

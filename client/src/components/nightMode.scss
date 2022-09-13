@@ -9,11 +9,13 @@ body.light {
   .header__item--underline {
     border-bottom: 1px solid $color-night-mode;
   }
-  .filter__form {
-    background: $background-light-mode-1;
+  .filter__checked {
+    background-color: $color-light-mode;
   }
-  .entry__box,
-  .productlist-wrapper {
+  .filter__form {
+    background-color: $color-light-mode;
+  }
+  .entry__box {
     background-color: $color-light-mode;
   }
   .contact-card__icon {
@@ -39,10 +41,10 @@ body.dark {
   .footer {
     background-color: #071a2f;
   }
-  .filter__form {
-    background-color: $background-night-mode-1;
+  .filter__checked {
+    background-color: $background-night-mode-2;
   }
-  .productlist-wrapper {
+  .filter__form {
     background-color: $background-night-mode-2;
   }
   .entry__box {

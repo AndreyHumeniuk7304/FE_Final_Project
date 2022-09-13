@@ -85,7 +85,7 @@ const CheckoutForm = () => {
       lastName: lastName,
       letterSubject: "Thank you for order! You are welcome!",
       letterHtml:
-        "<h1>Your order is placed. OrderNo is 023689452.</h1><p>{Other details about order in your HTML}</p>",
+        "<h1>Your order is placed.</h1><p>{Other details about order in your HTML}</p>",
     };
     const newOrder = Object.assign(userInformation, value);
     const { data, status } = await addShippingAndDeliveryInformation(
@@ -115,7 +115,6 @@ const CheckoutForm = () => {
         sx={{
           [theme.breakpoints.between("mobile", "tablet")]: {
             fontSize: 14,
-
             mb: "28px",
           },
           fontFamily: "fontFamily",

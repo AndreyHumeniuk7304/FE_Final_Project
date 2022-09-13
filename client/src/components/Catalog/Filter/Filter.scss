@@ -1,6 +1,6 @@
 .filter-wrapper {
+  width: 100%;
   text-align: center;
-  padding-right: 4%;
   width: 100%;
 
   .filter {
@@ -97,7 +97,7 @@
 }
 @include desktop {
   .filter-wrapper {
-    width: 25%;
+    width: 34%;
   }
 }
 .custom-checkbox {
