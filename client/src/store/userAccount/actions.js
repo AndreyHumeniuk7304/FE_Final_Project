@@ -25,8 +25,12 @@ const fetchUser = (userData, isAutoLog, nav) => {
         const status = response.data.success;
         status && getSuccess(response.data, dispatch);
         status && nav("/my-account/user");
-        isAutoLog &&
-          localStorage.setItem("login", JSON.stringify(response.data.token));
+        isAutoLog
+          ? localStorage.setItem("login", JSON.stringify(response.data.token))
+          : sessionStorage.setItem(
+              "login",
+              JSON.stringify(response.data.token)
+            );
       })
       .catch((error) => {
         dispatch(setError(error.response.data));
