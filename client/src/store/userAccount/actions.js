@@ -18,13 +18,12 @@ const getSuccess = (data, dispatch) => {
   dispatch(setLogin({ ...jwt_decode(data.token), token: data.token }));
 };
 
-const fetchUser = (userData, isAutoLog, nav) => {
+const fetchUser = (userData, isAutoLog) => {
   return async (dispatch) => {
     await getCustomers(userData)
       .then((response) => {
         const status = response.data.success;
         status && getSuccess(response.data, dispatch);
-        status && nav("/my-account/user");
         isAutoLog
           ? localStorage.setItem("login", JSON.stringify(response.data.token))
           : sessionStorage.setItem(
