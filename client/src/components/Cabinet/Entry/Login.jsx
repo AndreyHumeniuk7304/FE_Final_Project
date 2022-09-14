@@ -6,7 +6,6 @@ import { useLocation, useNavigate } from "react-router";
 import Form from "../../Forms/Form";
 import { loginInputNames, loginSchema } from "./data";
 import { useEffect } from "react";
-import { replace } from "lodash";
 
 const Login = () => {
   const dispatch = useDispatch();
