@@ -2,24 +2,26 @@ import "./App.scss";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { getSuccess } from "./store/userAccount/actions";
+import { getIsLogin, setLogin } from "./store/userAccount/actions";
 import { useEffect, useState } from "react";
 import { setAuthToken } from "./ulits/instance/instance";
 import { getCartItem, isNotLoaded } from "./store/cart/actions";
 import Routing from "./components/Routing/Routing";
 import { getWishlistItem } from "./store/wishlist/actions";
+import jwt_decode from "jwt-decode";
 
 const App = () => {
   const dispatch = useDispatch();
 
-  const getUser = (storageData) =>
-    getSuccess(
-      {
-        success: true,
+  const getUser = (storageData) => {
+    dispatch(getIsLogin(true));
+    dispatch(
+      setLogin({
+        ...jwt_decode(JSON.parse(storageData)),
         token: JSON.parse(storageData),
-      },
-      dispatch
+      })
     );
+  };
 
   useEffect(() => {
     localStorage.getItem("login") && getUser(localStorage.getItem("login"));

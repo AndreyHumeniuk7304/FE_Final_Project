@@ -1,5 +1,4 @@
 import getCustomers from "../../api/getCustomers";
-
 import jwt_decode from "jwt-decode";
 
 const getIsLogin = (isLogin) => {
@@ -13,17 +12,20 @@ const setError = (error) => {
   return { type: "GET_LOGIN_ERROR", payload: error };
 };
 
-const getSuccess = (data, dispatch) => {
-  dispatch(getIsLogin(data.success));
-  dispatch(setLogin({ ...jwt_decode(data.token), token: data.token }));
-};
-
 const fetchUser = (userData, isAutoLog) => {
   return async (dispatch) => {
     await getCustomers(userData)
       .then((response) => {
         const status = response.data.success;
-        status && getSuccess(response.data, dispatch);
+        status && dispatch(getIsLogin(response.data.success));
+        status &&
+          dispatch(
+            setLogin({
+              ...jwt_decode(response.data.token),
+              token: response.data.token,
+            })
+          );
+
         isAutoLog
           ? localStorage.setItem("login", JSON.stringify(response.data.token))
           : sessionStorage.setItem(
@@ -37,4 +39,4 @@ const fetchUser = (userData, isAutoLog) => {
   };
 };
 
-export { fetchUser, setError, getSuccess, getIsLogin, setLogin };
+export { fetchUser, setError, getIsLogin, setLogin };
