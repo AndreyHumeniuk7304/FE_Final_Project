@@ -13,12 +13,11 @@ const Login = () => {
   const nav = useNavigate();
   const error = useSelector((state) => state.userAccount.error);
   const location = useLocation();
-  const fromPage = location.state?.from?.pathname;
+  const fromPage = location.state?.from?.pathname || "/my-account/user";
   const authUser = useSelector((state) => state.userAccount.isLogin);
 
   useEffect(() => {
-    authUser &&
-      nav(fromPage ? fromPage : "/my-account/user", { replace: true });
+    authUser && nav(fromPage);
   }, [authUser]);
 
   const {
