@@ -67,21 +67,17 @@ const App = () => {
   };
   return (
     <>
-      <Container
-        maxWidth={"desktop"}
-        sx={{ padding: 0 }}
-        className="full-wrapper"
-      >
+      <div className="full-wrapper">
         <Header
           statusOpenBurger={statusOpenBurger}
           handleBurger={handleBurger}
           closeBurger={closeBurger}
         />
-        <div className="main">
+        <Container maxWidth={"lgDesktop"} sx={{ padding: 0 }} className="main">
           <Routing />
-        </div>
+        </Container>
         <Footer />
-      </Container>
+      </div>
     </>
   );
 };

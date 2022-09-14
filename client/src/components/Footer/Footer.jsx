@@ -1,4 +1,4 @@
-import { Box } from "@mui/system";
+import { Box, Container } from "@mui/system";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -10,7 +10,7 @@ const Footer = () => {
   };
   return (
     <footer className="footer">
-      <div className="container">
+      <Container maxWidth={"lgDesktop"}>
         <div className="footer-container">
           <div className="footer__item">
             <Box
@@ -118,7 +118,7 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 };
