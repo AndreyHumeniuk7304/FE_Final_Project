@@ -2,7 +2,7 @@ import "./App.scss";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { getIsLogin, setLogin, getUserData } from "./store/userAccount/actions";
+import { getIsLogin, setToken, getUserData } from "./store/userAccount/actions";
 import { useEffect, useState } from "react";
 import { setAuthToken } from "./ulits/instance/instance";
 import { getCartItem, isNotLoaded } from "./store/cart/actions";
@@ -17,7 +17,7 @@ const App = () => {
   const getUser = (storageData) => {
     dispatch(getIsLogin(true));
     dispatch(
-      setLogin({
+      setToken({
         ...jwt_decode(JSON.parse(storageData)),
         token: JSON.parse(storageData),
       })

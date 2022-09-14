@@ -26,11 +26,6 @@ const setUserData = (userData) => ({
   payload: userData,
 });
 
-const getSuccess = (data, dispatch) => {
-  dispatch(getIsLogin(data.success));
-  dispatch(setToken(data.token));
-};
-
 const fetchUser = (userData, isAutoLog, nav) => {
   return async (dispatch) => {
     await getCustomers(userData)
@@ -39,7 +34,7 @@ const fetchUser = (userData, isAutoLog, nav) => {
         status && dispatch(getIsLogin(response.data.success));
         status &&
           dispatch(
-            setLogin({
+            setToken({
               ...jwt_decode(response.data.token),
               token: response.data.token,
             })
@@ -58,12 +53,4 @@ const fetchUser = (userData, isAutoLog, nav) => {
   };
 };
 
-export {
-  fetchUser,
-  setError,
-  getSuccess,
-  getIsLogin,
-  setToken,
-  getUserData,
-  setUserData,
-};
+export { fetchUser, setError, getIsLogin, setToken, getUserData, setUserData };
