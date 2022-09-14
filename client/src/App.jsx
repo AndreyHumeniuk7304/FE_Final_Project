@@ -16,12 +16,7 @@ const App = () => {
 
   const getUser = (storageData) => {
     dispatch(getIsLogin(true));
-    dispatch(
-      setToken({
-        ...jwt_decode(JSON.parse(storageData)),
-        token: JSON.parse(storageData),
-      })
-    );
+    dispatch(setToken(JSON.parse(storageData)));
   };
 
   useEffect(() => {

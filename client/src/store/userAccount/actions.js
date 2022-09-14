@@ -26,19 +26,13 @@ const setUserData = (userData) => ({
   payload: userData,
 });
 
-const fetchUser = (userData, isAutoLog, nav) => {
+const fetchUser = (userData, isAutoLog) => {
   return async (dispatch) => {
     await getCustomers(userData)
       .then((response) => {
         const status = response.data.success;
         status && dispatch(getIsLogin(response.data.success));
-        status &&
-          dispatch(
-            setToken({
-              ...jwt_decode(response.data.token),
-              token: response.data.token,
-            })
-          );
+        status && dispatch(setToken(response.data.token));
 
         isAutoLog
           ? localStorage.setItem("login", JSON.stringify(response.data.token))
@@ -48,6 +42,7 @@ const fetchUser = (userData, isAutoLog, nav) => {
             );
       })
       .catch((error) => {
+        console.log(error);
         dispatch(setError(error.response.data));
       });
   };
