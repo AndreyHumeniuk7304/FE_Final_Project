@@ -1,21 +1,34 @@
-import getCustomers from "../../api/getCustomers";
-
-import jwt_decode from "jwt-decode";
+import { getCustomerData, getCustomers } from "../../api/getCustomers";
 
 const getIsLogin = (isLogin) => {
   return { type: "SET_IS_LOGIN", payload: isLogin };
 };
 
-const setLogin = (login) => {
-  return { type: "GET_LOGIN_SUCCESS", payload: login };
+const setToken = (token) => {
+  return { type: "GET_LOGIN_SUCCESS", payload: token };
 };
+
 const setError = (error) => {
   return { type: "GET_LOGIN_ERROR", payload: error };
 };
 
+const getUserData = () => async (dispatch) => {
+  try {
+    const userData = await getCustomerData();
+    dispatch({ type: "SET_USER_DATA", payload: userData });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const setUserData = (userData) => ({
+  type: "SET_USER_DATA",
+  payload: userData,
+});
+
 const getSuccess = (data, dispatch) => {
   dispatch(getIsLogin(data.success));
-  dispatch(setLogin({ ...jwt_decode(data.token), token: data.token }));
+  dispatch(setToken(data.token));
 };
 
 const fetchUser = (userData, isAutoLog, nav) => {
@@ -38,4 +51,12 @@ const fetchUser = (userData, isAutoLog, nav) => {
   };
 };
 
-export { fetchUser, setError, getSuccess, getIsLogin, setLogin };
+export {
+  fetchUser,
+  setError,
+  getSuccess,
+  getIsLogin,
+  setToken,
+  getUserData,
+  setUserData,
+};
