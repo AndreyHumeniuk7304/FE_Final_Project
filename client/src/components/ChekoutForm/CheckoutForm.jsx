@@ -13,13 +13,19 @@ import { paymentMethodAction } from "../../store/paymentMethod/action";
 import DeliveryInfo from "./Delivery/DeliveryInfo";
 import { getShippingMethods } from "../../api/shippingMethods";
 import { shippingMethodAction } from "../../store/shippingMethod/action";
+import { addShippingAndDeliveryInformation } from "../../api/addShippingAndDeliveryInformation";
+import { getCustomerData } from "../../api/getCustomers";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = () => {
   const cartList = useSelector((state) => state.cart.list);
   const paymentMethod = useSelector((state) => state.paymentMethod);
+  const cartProducts = useSelector((state) => state.cart.list);
   const [checkoutInputNames, setCheckoutInputNames] = useState([]);
   const [shippingMethods, setShippingMethods] = useState([]);
   const [paymentMethods, setPaymentMethods] = useState([]);
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -31,7 +37,9 @@ const CheckoutForm = () => {
   useEffect(() => {
     paymentMethods.length != 0 &&
       dispatch(paymentMethodAction(paymentMethods[0]));
-  }, [paymentMethods]);
+    shippingMethods.length != 0 &&
+      dispatch(shippingMethodAction(shippingMethods[0]));
+  }, [paymentMethods, shippingMethods]);
 
   const {
     register,
@@ -65,8 +73,28 @@ const CheckoutForm = () => {
       : 0;
   };
 
-  const handleSubmitForm = (value) => {
-    console.log(value);
+  const handleSubmitForm = async (value) => {
+    const {
+      data: { email, telephone, _id, firstName, lastName },
+    } = await getCustomerData();
+    const userInformation = {
+      customerId: _id,
+      email: email,
+      mobile: telephone,
+      firstName: firstName,
+      lastName: lastName,
+      letterSubject: "Thank you for order! You are welcome!",
+      letterHtml:
+        "<h1>Your order is placed.</h1><p>{Other details about order in your HTML}</p>",
+    };
+    const newOrder = Object.assign(userInformation, value);
+
+    const { data, status } = await addShippingAndDeliveryInformation(newOrder);
+    if (status === 200) {
+      navigate("/completed-order", { replace: true });
+    } else {
+      navigate("*", { replace: true });
+    }
   };
 
   const handleChangeForm = (e) => {
@@ -74,9 +102,7 @@ const CheckoutForm = () => {
       e.target.value === method.name && dispatch(paymentMethodAction(method));
     });
     shippingMethods.forEach((method) => {
-      if (e.target.value === method.name) {
-        dispatch(shippingMethodAction(method));
-      }
+      e.target.value === method.name && dispatch(shippingMethodAction(method));
     });
   };
 
@@ -86,7 +112,6 @@ const CheckoutForm = () => {
         sx={{
           [theme.breakpoints.between("mobile", "tablet")]: {
             fontSize: 14,
-
             mb: "28px",
           },
           fontFamily: "fontFamily",

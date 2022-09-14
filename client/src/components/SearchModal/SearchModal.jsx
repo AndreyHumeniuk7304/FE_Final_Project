@@ -14,7 +14,7 @@ const SearchModal = ({ value, activeFocus, setActiveFocus, clearInput }) => {
 
   useEffect(() => {
     getFilterProducts("products/search", {
-      query: value,
+      query: value.toLowerCase(),
     }).then((products) => {
       setFoundProducts(products);
       products.length >= 1 && setActiveFocus(true);
@@ -32,7 +32,10 @@ const SearchModal = ({ value, activeFocus, setActiveFocus, clearInput }) => {
           <div className="modal__content">
             {foundProducts.map((product) => {
               count++;
-              if (product.name.toLowerCase().includes(value) && count <= 4) {
+              if (
+                product.name.toLowerCase().includes(value.toLowerCase()) &&
+                count <= 4
+              ) {
                 return (
                   <Link
                     to={product.productUrl}

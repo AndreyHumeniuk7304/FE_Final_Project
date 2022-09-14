@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,6 +8,7 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import { useEffect } from "react";
 import { switchThemeAction } from "../../store/switchTheme/action";
+import { Container } from "@mui/system";
 
 const Header = (props) => {
   const { statusOpenBurger, handleBurger, closeBurger } = props;
@@ -15,8 +16,10 @@ const Header = (props) => {
   const cartList = useSelector((state) => state.cart.list);
   const isLoaded = useSelector((state) => state.cart.isLoaded);
   const [isExpandInput, setIsExpandInput] = useState(true);
+  const [categories, setCategories] = useState("");
   const nightMode = useSelector((state) => state.nightMode);
   const dispatch = useDispatch();
+  const location = useLocation();
 
   useEffect(() => {
     if (localStorage.getItem("nightMode")) {
@@ -47,6 +50,12 @@ const Header = (props) => {
     }
   }, [cartList]);
 
+  useEffect(() => {
+    location.state
+      ? setCategories(location.state.categories)
+      : setCategories("");
+  }, [location]);
+
   const themeSwitcherLS = (value) => {
     localStorage.setItem("nightMode", JSON.stringify(!nightMode));
     dispatch(switchThemeAction(!value));
@@ -58,11 +67,15 @@ const Header = (props) => {
 
   return (
     <header className={statusOpenBurger ? "header active-burger" : "header"}>
-      <div className="container">
+      <Container maxWidth={"desktop"}>
         <div className="container-header">
           <div className="header__top-content">
             <div className="header__logo-container">
-              <Link to="/" className="header__logo-container_link">
+              <Link
+                onClick={closeBurger}
+                to="/"
+                className="header__logo-container_link"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="128"
@@ -110,9 +123,9 @@ const Header = (props) => {
                     alt="my-account"
                   />
                 </div>
-                {/* <p className="header__account-container__text">My account</p> */}
               </Link>
               <Link
+                onClick={closeBurger}
                 to="/cart"
                 className="header__account-container__link shopping-bag"
                 style={{ display: isExpandInput ? "flex" : "none" }}
@@ -124,7 +137,6 @@ const Header = (props) => {
                     alt="my-account"
                   />
                 </div>
-
                 <p className="header__cart-quantity">
                   {cartList && calculateCartQuantity()}
                 </p>
@@ -134,12 +146,6 @@ const Header = (props) => {
                 href="#!"
                 onClick={handleBurger}
                 className="header__account-container__link burger"
-                // style={{
-                //   display:
-                //     isExpandInput && window.screen.width < 1023
-                //       ? "flex"
-                //       : "none",
-                // }}
               >
                 <div className="header__account-container__ico">
                   {!statusOpenBurger ? (
@@ -163,7 +169,11 @@ const Header = (props) => {
             <Link
               onClick={closeBurger}
               to="/products/filter?categories=mens&perPage=10&startPage=1"
-              className="header__categories-container__link"
+              className={
+                categories == "mens"
+                  ? "header__categories-container__link_active"
+                  : "header__categories-container__link"
+              }
               state={{ categories: "mens" }}
             >
               MAN
@@ -171,7 +181,11 @@ const Header = (props) => {
             <Link
               onClick={closeBurger}
               to="/products/filter?categories=ladies&perPage=10&startPage=1"
-              className="header__categories-container__link"
+              className={
+                categories == "ladies"
+                  ? "header__categories-container__link_active"
+                  : "header__categories-container__link"
+              }
               state={{ categories: "ladies" }}
             >
               WOMEN
@@ -179,14 +193,18 @@ const Header = (props) => {
             <Link
               onClick={closeBurger}
               to="/products/filter?categories=accessories&perPage=10&startPage=1"
-              className="header__categories-container__link"
+              className={
+                categories == "accessories"
+                  ? "header__categories-container__link_active"
+                  : "header__categories-container__link"
+              }
               state={{ categories: "accessories" }}
             >
               ACCESSORY
             </Link>
           </div>
         </div>
-      </div>
+      </Container>
       <div className={!statusOpenBurger ? "burger-menu" : "burger-menu_active"}>
         <div className="container">
           <div className="burger-menu__wrapper">

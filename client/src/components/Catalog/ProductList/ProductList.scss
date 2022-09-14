@@ -6,7 +6,6 @@
   flex-wrap: wrap;
   padding-left: 6%;
   padding-right: 6%;
-  gap: 6%;
   position: relative;
 
   &__view {
@@ -41,10 +40,19 @@
     background-color: rgb(197, 190, 190) !important;
     font-weight: bold !important;
   }
+
+  &__pagination {
+    padding-top: 1%;
+    @include flex-container;
+  }
+}
+
+.list-width {
+  width: 100%;
 }
 
 @include desktop {
-  .productlist-wrapper {
-    width: 75%;
+  .list-width {
+    width: 100%;
   }
 }

@@ -2,12 +2,13 @@ import "./App.scss";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { getIsLogin, setLogin } from "./store/userAccount/actions";
+import { getIsLogin, setLogin, getUserData } from "./store/userAccount/actions";
 import { useEffect, useState } from "react";
 import { setAuthToken } from "./ulits/instance/instance";
 import { getCartItem, isNotLoaded } from "./store/cart/actions";
 import Routing from "./components/Routing/Routing";
 import { getWishlistItem } from "./store/wishlist/actions";
+import { Container } from "@mui/system";
 import jwt_decode from "jwt-decode";
 
 const App = () => {
@@ -30,7 +31,7 @@ const App = () => {
 
   const [statusOpenBurger, setStatusOpenBurger] = useState(false);
   const isLogin = useSelector((state) => state.userAccount.isLogin);
-  const token = useSelector((state) => state.userAccount.customer.token);
+  const token = useSelector((state) => state.userAccount.token);
 
   useEffect(() => {
     statusOpenBurger
@@ -48,7 +49,10 @@ const App = () => {
   }, [isLogin]);
 
   useEffect(() => {
-    isLogin && dispatch(getWishlistItem());
+    if (isLogin) {
+      dispatch(getWishlistItem());
+      dispatch(getUserData());
+    }
   }, [isLogin]);
 
   const handleBurger = () => {
@@ -64,7 +68,11 @@ const App = () => {
   };
   return (
     <>
-      <div className="full-wrapper">
+      <Container
+        maxWidth={"desktop"}
+        sx={{ padding: 0 }}
+        className="full-wrapper"
+      >
         <Header
           statusOpenBurger={statusOpenBurger}
           handleBurger={handleBurger}
@@ -74,7 +82,7 @@ const App = () => {
           <Routing />
         </div>
         <Footer />
-      </div>
+      </Container>
     </>
   );
 };

@@ -1,29 +1,10 @@
-import getCurrentCustomer from "../../api/getCurrentCustomer";
 import getCustomerOrders from "../../api/getCustomerOrders";
 
-export const setCurrentCustomer = (currentCustomer) => {
-  return { type: "SET_CURRENT_CUSTOMER", payload: currentCustomer };
-};
-export const errorLoadCurrentCustomer = () => ({
-  type: "LOADED_CURRENT_CUSTOMER",
-});
 const setDeliveryAdress = (deliveryAddress) => {
   return { type: "SET_DELIVERY_ADDRESS", payload: deliveryAddress };
 };
 const setPurchasesHistory = (history) => {
   return { type: "LOADED_PURCHASES_HISTORY", payload: history };
-};
-
-export const fetchCurrentCustomer = (isLogin, token) => (dispatch) => {
-  isLogin
-    ? getCurrentCustomer(token)
-        .then((response) => {
-          dispatch(setCurrentCustomer(response));
-        })
-        .catch(() => {
-          dispatch(errorLoadCurrentCustomer());
-        })
-    : null;
 };
 
 export const fetchCustomerOrders = () => (dispatch) => {

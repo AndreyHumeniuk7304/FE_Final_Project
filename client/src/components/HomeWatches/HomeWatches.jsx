@@ -25,7 +25,7 @@ const HomeCategory = () => {
           {categorieProductList !== undefined &&
             categorieProductList.map((product, index) => {
               return (
-                index < 5 && (
+                product.isPopular && (
                   <div key={product._id} className="homeCategory__type">
                     <Link to={product.productUrl}>
                       <Root className="homeCategory__text-wrapper">

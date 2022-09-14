@@ -1,5 +1,4 @@
 .entry {
-  padding: 50px 0;
   &__box {
     margin: auto;
     min-width: 320px;
@@ -54,4 +53,7 @@
 }
 
 @media screen and (min-width: 720px) {
+  .entry {
+    padding: 50px 0;
+  }
 }

@@ -16,6 +16,7 @@ import Address from "../Cabinet/Address/Address";
 import Checkout from "../../views/Checkout/Checkout";
 import UpdateProduct from "../UpdateProduct";
 import Error from "../Error/Error";
+import CompleteOrder from "../CompleteOrder/CompleteOrder";
 import PrivateRoute from "./PrivateRoute";
 
 const setPrivateElement = (element) => <PrivateRoute>{element}</PrivateRoute>;
@@ -61,6 +62,7 @@ const Routing = () => {
       <Route path="/contact" element={<Contact />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/update-products" element={<UpdateProducts />} />
+      <Route path="/completed-order" element={<CompleteOrder />} />
       <Route path="*" element={<Error />} />
     </Routes>
   );
