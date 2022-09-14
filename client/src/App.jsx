@@ -73,7 +73,11 @@ const App = () => {
           handleBurger={handleBurger}
           closeBurger={closeBurger}
         />
-        <Container maxWidth={"lgDesktop"} sx={{ padding: 0 }} className="main">
+        <Container
+          maxWidth={"lgDesktop"}
+          sx={{ padding: { desktop: "75px 0" } }}
+          className="main"
+        >
           <Routing />
         </Container>
         <Footer />
