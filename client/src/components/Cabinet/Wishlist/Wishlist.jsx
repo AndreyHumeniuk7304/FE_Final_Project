@@ -3,6 +3,7 @@ import Catalog from "../../Catalog/Catalog";
 import { useEffect } from "react";
 import { loadedCategorieProducts } from "../../../store/catalog/actions";
 import { useDispatch, useSelector } from "react-redux";
+import ProductList from "../../Catalog/ProductList/ProductList";
 
 const Wishlist = () => {
   const dispatch = useDispatch();
