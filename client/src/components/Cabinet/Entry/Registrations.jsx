@@ -6,7 +6,7 @@ import Form from "../../Forms/Form";
 import { registInputNames, registSchema } from "./data";
 import { useState } from "react";
 
-const Registrations = ({ setIsRegist }) => {
+const Registrations = ({ setActiveTitle }) => {
   const [error, setError] = useState({});
   const {
     register,
@@ -30,7 +30,7 @@ const Registrations = ({ setIsRegist }) => {
   const addNewUser = (values) => {
     addNewCustomers(values)
       .then((savedCustomer) => {
-        savedCustomer.status = 200 && setIsRegist(false);
+        savedCustomer.status = 200 && setActiveTitle("Login");
       })
       .catch((err) => {
         setError(err.response.data);
@@ -49,8 +49,9 @@ const Registrations = ({ setIsRegist }) => {
     </div>
   );
 };
-Registrations.propTypes = {
-  setIsRegist: PropTypes.func,
-};
 
 export default Registrations;
+
+Registrations.propTypes = {
+  setActiveTitle: PropTypes.func,
+};
