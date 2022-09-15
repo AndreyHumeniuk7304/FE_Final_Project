@@ -2,14 +2,22 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { fetchUser } from "../../../store/userAccount/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import Form from "../../Forms/Form";
 import { loginInputNames, loginSchema } from "./data";
+import { useEffect } from "react";
 
 const Login = () => {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const error = useSelector((state) => state.userAccount.error);
+  const location = useLocation();
+  const fromPage = location.state?.from?.pathname || "/my-account/user";
+  const authUser = useSelector((state) => state.userAccount.isLogin);
+
+  useEffect(() => {
+    authUser && nav(fromPage);
+  }, [authUser]);
 
   const {
     register,
@@ -27,7 +35,7 @@ const Login = () => {
   const setValidation = (values) => {
     const isAutoLog = values.isSignedAutomatically;
     delete values.isSignedAutomatically;
-    dispatch(fetchUser(values, isAutoLog, nav));
+    dispatch(fetchUser(values, isAutoLog));
   };
 
   return (
