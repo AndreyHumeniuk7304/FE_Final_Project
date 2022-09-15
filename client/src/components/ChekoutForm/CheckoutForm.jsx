@@ -14,11 +14,12 @@ import DeliveryInfo from "./Delivery/DeliveryInfo";
 import { getShippingMethods } from "../../api/shippingMethods";
 import { shippingMethodAction } from "../../store/shippingMethod/action";
 import { addShippingAndDeliveryInformation } from "../../api/addShippingAndDeliveryInformation";
-import { getCustomerData } from "../../api/getCustomers";
 import { useNavigate } from "react-router-dom";
+import { deleteCart } from "../../store/cart/actions";
 
 const CheckoutForm = () => {
   const cartList = useSelector((state) => state.cart.list);
+  const isLogin = useSelector((state) => state.userAccount.isLogin);
   const paymentMethod = useSelector((state) => state.paymentMethod);
   const customerInformation = useSelector(
     (state) => state.userAccount.customer
@@ -37,20 +38,19 @@ const CheckoutForm = () => {
   }, []);
 
   useEffect(() => {
-    paymentMethods.length != 0 &&
+    paymentMethods.length !== 0 &&
       dispatch(paymentMethodAction(paymentMethods[0]));
-    shippingMethods.length != 0 &&
+    shippingMethods.length !== 0 &&
       dispatch(shippingMethodAction(shippingMethods[0]));
   }, [paymentMethods, shippingMethods]);
 
   const {
     register,
     handleSubmit,
-    handleChange,
     formState: { errors },
   } = useForm({
     resolver:
-      paymentMethod.name == "Cards"
+      paymentMethod.name === "Cards"
         ? yupResolver(checkoutSchema)
         : yupResolver(checkoutSchemaMinimize),
     defaultValues: {
@@ -95,6 +95,7 @@ const CheckoutForm = () => {
       const { data, status } = await addShippingAndDeliveryInformation(
         newOrder
       );
+      dispatch(deleteCart(isLogin));
       navigate("/completed-order", { replace: true });
     }
   };

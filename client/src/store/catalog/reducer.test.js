@@ -60,7 +60,9 @@ describe("product reducer", () => {
       expect(
         reducer(
           {
-            categorieProductList: [{ name: "asus", title: "laptop 1", vendorCode: 111111 }], //in future
+            categorieProductList: [
+              { name: "asus", title: "laptop 1", vendorCode: 111111 },
+            ], //in future
             searchWord: "",
             isLoading: false,
             hasError: false,
@@ -86,7 +88,6 @@ describe("product reducer", () => {
       });
     });
   });
-
 
   describe("for ERROR_LOADED_PRODUCTS action", () => {
     it("should show error", () => {
