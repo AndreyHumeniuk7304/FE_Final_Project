@@ -305,7 +305,7 @@ const ProductDetails = () => {
               </Box>
               <Box></Box>
             </Box>
-            <Subscribe itemNo={itemNo} />
+            <Subscribe product={product} />
           </Box>
         </Box>
       </Box>

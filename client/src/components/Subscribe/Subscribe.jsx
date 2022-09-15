@@ -7,7 +7,7 @@ import Form from "../Forms/Form";
 import { productSchema, setMessage, subscribeInputName } from "./data";
 import { addNewSubscriber, updateSubscriberByEmail } from "../../api/subscribe";
 import { useEffect } from "react";
-import getOneProduct from "../../api/getOneProduct";
+
 import {
   delSubscribes,
   fetchSubscriber,
@@ -15,10 +15,9 @@ import {
 } from "../../store/subscribe/actions";
 import { useDispatch, useSelector } from "react-redux";
 
-const Subscribe = ({ itemNo }) => {
+const Subscribe = ({ product }) => {
   const [isSubscribeOpen, setISSubscribeOpen] = useState(false);
   const [subscribeSuccess, setSubscribeSuccess] = useState(false);
-  const [product, setProduct] = useState({});
   const [error, setError] = useState();
   const dispatch = useDispatch();
   const subscribe = useSelector((state) => state.subscribe);
@@ -52,11 +51,6 @@ const Subscribe = ({ itemNo }) => {
   });
 
   const subscribeUser = (values) => {
-    getOneProduct(itemNo).then((data) => setProduct(data));
-    product && setSubscribeValue(values);
-  };
-
-  const setSubscribeValue = (values) => {
     const letterHtml = setMessage(product);
 
     values.letterHtml = letterHtml.replace(/\s/g, "");
@@ -113,5 +107,5 @@ const Subscribe = ({ itemNo }) => {
 export default Subscribe;
 
 Subscribe.propTypes = {
-  itemNo: PropTypes.string,
+  product: PropTypes.object,
 };
