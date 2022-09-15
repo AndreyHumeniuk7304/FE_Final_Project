@@ -33,8 +33,7 @@ const Subscribe = ({ itemNo }) => {
   }, [email]);
 
   useEffect(() => {
-    console.log(subscribe);
-    setSubscribeSuccess(subscribe.isSubscribe);
+    setSubscribeSuccess(subscribe.enabled);
   }, [subscribe]);
 
   const {
@@ -67,7 +66,7 @@ const Subscribe = ({ itemNo }) => {
     });
     setSubscribeSuccess(true);
     setISSubscribeOpen(false);
-    dispatch(getSubscribes({ isSubscribe: true, email: values.email }));
+    dispatch(getSubscribes({ enabled: true, email: values.email }));
   };
 
   const unsubscribeUser = () => {

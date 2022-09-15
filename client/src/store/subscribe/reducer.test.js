@@ -5,14 +5,14 @@ describe("subscribe reducer", () => {
     expect(
       reducer(
         {
-          isSubscribe: false,
+          enabled: false,
           email: null,
           error: {},
         },
         {}
       )
     ).toEqual({
-      isSubscribe: false,
+      enabled: false,
       email: null,
       error: {},
     });
@@ -22,7 +22,7 @@ describe("subscribe reducer", () => {
     expect(
       reducer(
         {
-          isSubscribe: true,
+          enabled: true,
           email: "test@gmail.com",
           error: {},
         },
@@ -32,7 +32,7 @@ describe("subscribe reducer", () => {
         }
       )
     ).toEqual({
-      isSubscribe: true,
+      enabled: true,
       email: "test@gmail.com",
       error: {},
     });
@@ -41,7 +41,7 @@ describe("subscribe reducer", () => {
     expect(
       reducer(
         {
-          isSubscribe: false,
+          enabled: false,
           email: null,
           error: {},
         },
@@ -51,7 +51,7 @@ describe("subscribe reducer", () => {
         }
       )
     ).toEqual({
-      isSubscribe: false,
+      enabled: false,
       email: null,
       error: {},
     });
@@ -60,7 +60,7 @@ describe("subscribe reducer", () => {
     expect(
       reducer(
         {
-          isSubscribe: false,
+          enabled: false,
           email: null,
           error: { message: "error" },
         },
@@ -70,7 +70,7 @@ describe("subscribe reducer", () => {
         }
       )
     ).toEqual({
-      isSubscribe: false,
+      enabled: false,
       email: null,
       error: { message: "error" },
     });
