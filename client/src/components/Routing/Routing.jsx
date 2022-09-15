@@ -64,7 +64,6 @@ const Routing = () => {
       <Route path="/cart" element={<Cart />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/checkout" element={<Checkout />} />
-      {/* <Route path="/update-products" element={<UpdateProducts />} /> */}
       <Route path="/completed-order" element={<CompleteOrder />} />
       <Route path="*" element={<Error />} />
     </Routes>
