@@ -10,6 +10,10 @@ const setPurchasesHistory = (history) => {
 export const fetchCustomerOrders = () => (dispatch) => {
   getCustomerOrders().then((data) => dispatch(setPurchasesHistory(data)));
 };
+// export const fetchCustomerOrders = () => (dispatch) => {
+//   getCustomerOrders().then((data) =>
+//   let orders = data.map());
+// };
 
 export const addDeliveryAdress = (updateCustomer) => (dispatch) => {
   dispatch(setDeliveryAdress(updateCustomer));
