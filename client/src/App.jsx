@@ -2,7 +2,7 @@ import "./App.scss";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { getSuccess, getUserData } from "./store/userAccount/actions";
+import { getIsLogin, setToken, getUserData } from "./store/userAccount/actions";
 import { useEffect, useState, useRef } from "react";
 import { setAuthToken } from "./ulits/instance/instance";
 import { getCartItem, isNotLoaded } from "./store/cart/actions";
@@ -10,6 +10,7 @@ import Routing from "./components/Routing/Routing";
 import { getWishlistItem } from "./store/wishlist/actions";
 import { Container } from "@mui/system";
 import { switchThemeAction } from "./store/switchTheme/action";
+import jwt_decode from "jwt-decode";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -24,13 +25,8 @@ const App = () => {
   }, [nightMode]);
 
   const getUser = (storageData) => {
-    getSuccess(
-      {
-        success: true,
-        token: JSON.parse(storageData),
-      },
-      dispatch
-    );
+    dispatch(getIsLogin(true));
+    dispatch(setToken(JSON.parse(storageData)));
   };
 
   useEffect(() => {
