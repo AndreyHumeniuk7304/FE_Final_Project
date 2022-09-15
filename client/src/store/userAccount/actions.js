@@ -26,18 +26,14 @@ const setUserData = (userData) => ({
   payload: userData,
 });
 
-const getSuccess = (data, dispatch) => {
-  dispatch(getIsLogin(data.success));
-  dispatch(setToken(data.token));
-};
-
-const fetchUser = (userData, isAutoLog, nav) => {
+const fetchUser = (userData, isAutoLog) => {
   return async (dispatch) => {
     await getCustomers(userData)
       .then((response) => {
         const status = response.data.success;
-        status && getSuccess(response.data, dispatch);
-        status && nav("/my-account/user");
+        status && dispatch(getIsLogin(response.data.success));
+        status && dispatch(setToken(response.data.token));
+
         isAutoLog
           ? localStorage.setItem("login", JSON.stringify(response.data.token))
           : sessionStorage.setItem(
@@ -46,17 +42,10 @@ const fetchUser = (userData, isAutoLog, nav) => {
             );
       })
       .catch((error) => {
+        console.log(error);
         dispatch(setError(error.response.data));
       });
   };
 };
 
-export {
-  fetchUser,
-  setError,
-  getSuccess,
-  getIsLogin,
-  setToken,
-  getUserData,
-  setUserData,
-};
+export { fetchUser, setError, getIsLogin, setToken, getUserData, setUserData };

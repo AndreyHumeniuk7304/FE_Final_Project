@@ -4,15 +4,28 @@ import Login from "../../components/Cabinet/Entry/Login";
 import Registration from "../../components/Cabinet/Entry/Registrations";
 
 const Entry = () => {
-  const [isRegist, setIsRegist] = useState(false);
+  const [activeTitle, setActiveTitle] = useState("login");
 
   return (
     <div className="entry">
       <div className="entry__box">
-        <EntryHeader isRegist={isRegist} setIsRegist={setIsRegist} />
+        <div className="entry__header">
+          <EntryHeader
+            activeTitle={activeTitle}
+            setActiveTitle={setActiveTitle}
+            title={"Login"}
+          />
+          <EntryHeader
+            activeTitle={activeTitle}
+            setActiveTitle={setActiveTitle}
+            title={"Registration"}
+          />
+        </div>
         <div className="entry__content">
-          {!isRegist && <Login />}
-          {isRegist && <Registration setIsRegist={setIsRegist} />}
+          {activeTitle === "login" && <Login />}
+          {activeTitle === "registration" && (
+            <Registration setActiveTitle={setActiveTitle} />
+          )}
         </div>
       </div>
     </div>

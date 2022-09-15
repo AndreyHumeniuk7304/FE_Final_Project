@@ -4,7 +4,7 @@ import { Box, Button } from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Form from "../Forms/Form";
-import { productSchema, subscribeInputName, defaultValues } from "./data";
+import { productSchema, subscribeInputName } from "./data";
 import { addNewSubscriber, updateSubscriberByEmail } from "../../api/subscribe";
 import { useEffect } from "react";
 import getOneProduct from "../../api/getOneProduct";
@@ -18,6 +18,7 @@ const Subscribe = ({ itemNo }) => {
   const [error, setError] = useState();
   const dispatch = useDispatch();
   const subscribe = useSelector((state) => state.subscribe);
+  const email = useSelector((state) => state.userAccount.customer.email);
 
   useEffect(() => {
     const isSubscribe = JSON.parse(localStorage.getItem("subscribe"));
@@ -26,7 +27,6 @@ const Subscribe = ({ itemNo }) => {
 
   useEffect(() => {
     setSubscribeSuccess(subscribe.isSubscribe);
-    setISSubscribeOpen(!subscribe.isSubscribe);
   }, [subscribe]);
 
   const {
@@ -35,7 +35,13 @@ const Subscribe = ({ itemNo }) => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(productSchema),
-    defaultValues: defaultValues,
+    defaultValues: {
+      email: email || "",
+      letterSubject:
+        "You received this email because you were subscribed to the newsletter",
+      letterHtml: "",
+      enabled: true,
+    },
   });
 
   const subscribeUser = (values) => {
@@ -75,9 +81,10 @@ const Subscribe = ({ itemNo }) => {
 
     values.letterHtml = letterHtml.replace(/\s/g, "");
 
-    addNewSubscriber(values)
-      .then((response) => {})
-      .catch((err) => setError({ email: JSON.parse(err.request.response) }));
+    addNewSubscriber(values).catch((err) => {
+      console.log(err.request);
+      setError({ email: JSON.parse(err.request.response) });
+    });
     setSubscribeSuccess(true);
     setISSubscribeOpen(false);
     dispatch(getSubscribes({ isSubscribe: true, email: values.email }));

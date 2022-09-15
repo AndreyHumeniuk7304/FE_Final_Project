@@ -74,6 +74,18 @@ export const productInputNames = [
   { inputName: "name", formType: "text", label: "full descriptions" },
   { inputName: "currentPrice", formType: "number", label: "current price" },
   { inputName: "previousPrice", formType: "number", label: "previous price" },
+  {
+    inputName: "isNewProduct",
+    formType: "droplist",
+    formName: ["true", "false"],
+    label: "product is new or not",
+  },
+  {
+    inputName: "isPopularProduct",
+    formType: "droplist",
+    formName: ["true", "false"],
+    label: "product is popular or not",
+  },
 ];
 
 export const productSchema = yup.object({
@@ -87,4 +99,6 @@ export const productSchema = yup.object({
   quantity: yup.number().required("Quantity is required."),
   name: yup.string().min(20, "Name is full description of product, min 20."),
   currentPrice: yup.number().required("CurrentPrice is required."),
+  isNewProduct: yup.bool().required("isNewProduct is required"),
+  isPopularProduct: yup.bool().required("isPopularProduct is required"),
 });
