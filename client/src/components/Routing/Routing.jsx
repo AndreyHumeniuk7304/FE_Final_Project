@@ -17,6 +17,7 @@ import Checkout from "../../views/Checkout/Checkout";
 import UpdateProduct from "../UpdateProduct";
 import Error from "../Error/Error";
 import CompleteOrder from "../CompleteOrder/CompleteOrder";
+import RegistrationForOrder from "../RegistrationForOrder/RegistrationForOrder";
 
 const Routing = () => {
   return (
@@ -42,6 +43,7 @@ const Routing = () => {
       <Route path="/product/:itemNo/update" element={<UpdateProduct />} />
       <Route path="/update-products" element={<UpdateProducts />} />
       <Route path="/completed-order" element={<CompleteOrder />} />
+      <Route path="/registration-order" element={<RegistrationForOrder />} />
       <Route path="*" element={<Error />} />
     </Routes>
   );
