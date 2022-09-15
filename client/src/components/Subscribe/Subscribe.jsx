@@ -8,7 +8,11 @@ import { productSchema, setMessage, subscribeInputName } from "./data";
 import { addNewSubscriber, updateSubscriberByEmail } from "../../api/subscribe";
 import { useEffect } from "react";
 import getOneProduct from "../../api/getOneProduct";
-import { delSubscribes, getSubscribes } from "../../store/subscribe/actions";
+import {
+  delSubscribes,
+  fetchSubscriber,
+  getSubscribes,
+} from "../../store/subscribe/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const Subscribe = ({ itemNo }) => {
@@ -24,6 +28,9 @@ const Subscribe = ({ itemNo }) => {
     const isSubscribe = JSON.parse(localStorage.getItem("subscribe"));
     isSubscribe && dispatch(getSubscribes(isSubscribe));
   }, []);
+  useEffect(() => {
+    email && dispatch(fetchSubscriber(email));
+  }, [email]);
 
   useEffect(() => {
     setSubscribeSuccess(subscribe.isSubscribe);
@@ -47,11 +54,6 @@ const Subscribe = ({ itemNo }) => {
   const subscribeUser = (values) => {
     getOneProduct(itemNo).then((data) => setProduct(data));
     product && setSubscribeValue(values);
-
-    //   setError({
-    //     email: { message: "Something went wrong please try again later." },
-    //   })
-    // );
   };
 
   const setSubscribeValue = (values) => {
@@ -60,7 +62,6 @@ const Subscribe = ({ itemNo }) => {
     values.letterHtml = letterHtml.replace(/\s/g, "");
 
     addNewSubscriber(values).catch((err) => {
-      console.log(err.request);
       setError({ email: JSON.parse(err.request.response) });
     });
     setSubscribeSuccess(true);

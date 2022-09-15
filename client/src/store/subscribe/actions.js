@@ -7,18 +7,19 @@ const getSubscribes = (sub) => {
 
 const delSubscribes = (sub) => {
   localStorage.removeItem("subscribe");
-
   return { type: "DELETE_SUBSCRIBE", payload: sub };
 };
+const setError = (err) => {
+  return { type: "SET_SUBSCRIBE_ERROR", payload: err };
+};
 
-const fetchSubscriber = (userEmail, isAutoLog) => {
+const fetchSubscriber = (userEmail) => {
   return async (dispatch) => {
     await getSubscriberByEmail(userEmail)
       .then((response) => {
         const status = response.data.success;
         status && getSubscribes(response.data, dispatch);
-        isAutoLog &&
-          localStorage.setItem("subscribe", JSON.stringify(response.data));
+        localStorage.setItem("subscribe", JSON.stringify(response.data));
       })
       .catch((error) => {
         dispatch(setError(error.response.data));
