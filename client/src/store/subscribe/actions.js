@@ -18,7 +18,7 @@ const fetchSubscriber = (userEmail) => {
     await getSubscriberByEmail(userEmail)
       .then((response) => {
         const status = response.data.success;
-        status && getSubscribes(response.data, dispatch);
+        status && getSubscribes(response.data);
         localStorage.setItem("subscribe", JSON.stringify(response.data));
       })
       .catch((error) => {

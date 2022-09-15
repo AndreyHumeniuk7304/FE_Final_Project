@@ -7,11 +7,7 @@ const initialState = {
 const userSubscribe = (state = initialState, action) => {
   switch (action.type) {
     case "GET_SUBSCRIBE": {
-      return {
-        ...state,
-        isSubscribe: action.payload.enabled,
-        email: action.payload.email,
-      };
+      return action.payload;
     }
     case "DELETE_SUBSCRIBE": {
       return initialState;

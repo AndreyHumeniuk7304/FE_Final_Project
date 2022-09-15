@@ -33,6 +33,7 @@ const Subscribe = ({ itemNo }) => {
   }, [email]);
 
   useEffect(() => {
+    console.log(subscribe);
     setSubscribeSuccess(subscribe.isSubscribe);
   }, [subscribe]);
 
