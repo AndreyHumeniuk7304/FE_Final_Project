@@ -4,7 +4,7 @@ import { Box, Button } from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Form from "../Forms/Form";
-import { productSchema, subscribeInputName } from "./data";
+import { productSchema, setMessage, subscribeInputName } from "./data";
 import { addNewSubscriber, updateSubscriberByEmail } from "../../api/subscribe";
 import { useEffect } from "react";
 import getOneProduct from "../../api/getOneProduct";
@@ -55,29 +55,7 @@ const Subscribe = ({ itemNo }) => {
   };
 
   const setSubscribeValue = (values) => {
-    const letterHtml = `<div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          maxWidth: 420,
-        }}
-      >
-        <div>
-          <img
-            style={{ width: "120px" }}
-            src={product.imageUrls[0]}
-            alt="image"
-          />
-        </div>
-        <div>
-          <p>Brand: {product.brand}</p>
-          <p>Color: {product.color}</p>
-          <p>Current Price: {product.currentPrice}</p>
-          <p>Material: {product.material}</p>
-          <p>Mechanism: {product.mechanism}</p> <p>{product.description}</p>
-        </div>
-      </div>
-    `;
+    const letterHtml = setMessage(product);
 
     values.letterHtml = letterHtml.replace(/\s/g, "");
 
