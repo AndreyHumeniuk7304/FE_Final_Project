@@ -21,7 +21,7 @@ const ProductForm = ({ initialValue, onSubmit }) => {
       color: "",
       material: "",
       enabled: true,
-      imageUrls: [" "],
+      imageUrls: [""],
       quantity: 1,
       name: "",
       currentPrice: "",
@@ -37,7 +37,7 @@ const ProductForm = ({ initialValue, onSubmit }) => {
   useEffect(() => reset(initialValue), [initialValue]);
 
   const setValidation = (values) => {
-    onSubmit(values);
+    onSubmit(values, reset);
   };
 
   return (
