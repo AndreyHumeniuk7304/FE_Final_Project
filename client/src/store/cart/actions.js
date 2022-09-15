@@ -4,6 +4,7 @@ import {
   decreaseQuantity,
   deleteProduct,
   updateCart,
+  deleteCart as deleteCartAPI,
 } from "../../api/cart";
 import getOneProduct from "../../api/getOneProduct";
 
@@ -201,5 +202,25 @@ export const addToCart =
       }
     }
   };
+
+export const deleteCart = (isLogin) => async (dispatch) => {
+  if (isLogin) {
+    try {
+      await deleteCartAPI();
+      dispatch({
+        type: "SET_CART_LIST",
+        payload: [],
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  } else {
+    localStorage.removeItem("cart");
+    dispatch({
+      type: "SET_CART_LIST",
+      payload: [],
+    });
+  }
+};
 
 export const isNotLoaded = () => ({ type: "IS_NOT_LOADED" });
