@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const FilterMobileHeader = () => {
   const [isClickedOnFilter, setIsClickedOnFilter] = useState(false);
+  const nightMode = useSelector((state) => state.nightMode);
 
   return (
     <div className="filter__mob-title">
@@ -17,6 +19,7 @@ const FilterMobileHeader = () => {
       </p>
       {isClickedOnFilter && (
         <button
+          style={{ color: nightMode ? "white" : "black" }}
           onClick={() => {
             setIsClickedOnFilter(false);
             document
