@@ -1,5 +1,5 @@
 //---------- light mode ----------
-body.light {
+.light-mode {
   background-color: $background-light-mode-1 !important;
   color: $color-night-mode !important;
   .header,
@@ -34,7 +34,7 @@ body.light {
   }
 }
 //---------- night mode ----------
-body.dark {
+.dark-mode {
   background-color: $background-night-mode-1 !important;
   color: $color-light-mode !important;
   .header,
