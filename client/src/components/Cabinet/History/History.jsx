@@ -11,6 +11,7 @@ const History = () => {
   useEffect(() => {
     dispatch(fetchCustomerOrders());
   }, []);
+  console.log();
 
   return (
     <div className="profile">
