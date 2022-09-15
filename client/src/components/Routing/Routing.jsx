@@ -56,12 +56,15 @@ const Routing = () => {
       </Route>
 
       <Route path="/product/:itemNo" element={<ProductDetails />} />
-      <Route path="/product/:itemNo/update" element={<UpdateProduct />} />
+      <Route
+        path="/product/:itemNo/update"
+        element={setPrivateElement(<UpdateProduct />)}
+      />
 
       <Route path="/cart" element={<Cart />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/checkout" element={<Checkout />} />
-      <Route path="/update-products" element={<UpdateProducts />} />
+      {/* <Route path="/update-products" element={<UpdateProducts />} /> */}
       <Route path="/completed-order" element={<CompleteOrder />} />
       <Route path="*" element={<Error />} />
     </Routes>
