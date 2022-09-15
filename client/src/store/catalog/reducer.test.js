@@ -1,27 +1,56 @@
 import reducer from "./reducer";
 
 describe("product reducer", () => {
-  const state = [
-    {
-      productList: [],
+  it("should return default value", () => {
+    expect(
+      reducer(
+        {
+          categorieProductList: [],
+          searchWord: "",
+          isLoading: false,
+          hasError: false,
+          isFilterOpenMobile: false,
+          productsQuntity: 0,
+          filterOnChange: { isLoading: false, productsQuntityOnChange: null },
+        },
+        {}
+      )
+    ).toEqual({
+      categorieProductList: [],
+      searchWord: "",
       isLoading: false,
       hasError: false,
-    },
-  ];
-
-  it("should return default value", () => {
-    expect(reducer(undefined, {})).toEqual({});
+      isFilterOpenMobile: false,
+      productsQuntity: 0,
+      filterOnChange: { isLoading: false, productsQuntityOnChange: null },
+    });
   });
 
   describe("for START_FETCH_PRODUCTS action", () => {
     it("should show loading...", () => {
       expect(
-        reducer(state, {
-          type: "START_FETCH_PRODUCTS",
-        })
+        reducer(
+          {
+            categorieProductList: [],
+            searchWord: "",
+            isLoading: false,
+            hasError: false,
+            isFilterOpenMobile: false,
+            productsQuntity: 0,
+            filterOnChange: { isLoading: false, productsQuntityOnChange: null },
+          },
+          {
+            type: "START_FETCH_PRODUCTS",
+          }
+        )
       ).toEqual({
-        ...state,
+        categorieProductList: [],
+        searchWord: "",
         isLoading: true,
+        hasError: false,
+        isFilterOpenMobile: false,
+        productsQuntity: 0,
+        filterOnChange: { isLoading: false, productsQuntityOnChange: null },
       });
     });
   });
@@ -29,37 +58,61 @@ describe("product reducer", () => {
   describe("for LOADED_PRODUCTS action", () => {
     it("should add products", () => {
       expect(
-        reducer(state, {
-          type: "LOADED_PRODUCTS",
-          payload: {
-            name: "asus",
-            title: "laptop 1",
-            vendorCode: 111111,
+        reducer(
+          {
+            categorieProductList: [{ name: "asus", title: "laptop 1", vendorCode: 111111 }], //in future
+            searchWord: "",
+            isLoading: false,
+            hasError: false,
+            isFilterOpenMobile: false,
+            productsQuntity: 0,
+            filterOnChange: { isLoading: false, productsQuntityOnChange: null },
           },
-        })
+          {
+            type: "LOADED_PRODUCTS",
+            payload: [{ name: "asus", title: "laptop 1", vendorCode: 111111 }],
+          }
+        )
       ).toEqual({
-        ...state,
-        productList: {
-          name: "asus",
-          title: "laptop 1",
-          vendorCode: 111111,
-        },
+        categorieProductList: [
+          { name: "asus", title: "laptop 1", vendorCode: 111111 },
+        ],
+        searchWord: "",
         isLoading: false,
         hasError: false,
+        isFilterOpenMobile: false,
+        productsQuntity: 0,
+        filterOnChange: { isLoading: false, productsQuntityOnChange: null },
       });
     });
   });
 
+
   describe("for ERROR_LOADED_PRODUCTS action", () => {
     it("should show error", () => {
       expect(
-        reducer(state, {
-          type: "ERROR_LOADED_PRODUCTS",
-        })
+        reducer(
+          {
+            categorieProductList: [],
+            searchWord: "",
+            isLoading: false,
+            hasError: false,
+            isFilterOpenMobile: false,
+            productsQuntity: 0,
+            filterOnChange: { isLoading: false, productsQuntityOnChange: null },
+          },
+          {
+            type: "ERROR_LOADED_PRODUCTS",
+          }
+        )
       ).toEqual({
-        ...state,
+        categorieProductList: [],
+        searchWord: "",
         isLoading: false,
         hasError: true,
+        isFilterOpenMobile: false,
+        productsQuntity: 0,
+        filterOnChange: { isLoading: false, productsQuntityOnChange: null },
       });
     });
   });

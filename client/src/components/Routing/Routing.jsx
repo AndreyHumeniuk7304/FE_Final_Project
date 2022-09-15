@@ -17,6 +17,7 @@ import Checkout from "../../views/Checkout/Checkout";
 import UpdateProduct from "../UpdateProduct";
 import Error from "../Error/Error";
 import CompleteOrder from "../CompleteOrder/CompleteOrder";
+import RegistrationForOrder from "../RegistrationForOrder/RegistrationForOrder";
 import PrivateRoute from "./PrivateRoute";
 
 const setPrivateElement = (element) => <PrivateRoute>{element}</PrivateRoute>;
@@ -65,6 +66,7 @@ const Routing = () => {
       <Route path="/contact" element={<Contact />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/completed-order" element={<CompleteOrder />} />
+      <Route path="/registration-order" element={<RegistrationForOrder />} />
       <Route path="*" element={<Error />} />
     </Routes>
   );
