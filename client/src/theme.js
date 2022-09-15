@@ -18,6 +18,7 @@ const theme = createTheme({
       mobile: 0,
       tablet: 720,
       desktop: 1024,
+      lgDesktop: 1280,
     },
     keys: ["mobile", "desktop"],
   },

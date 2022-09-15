@@ -32,7 +32,7 @@ const Cart = () => {
 
   return (
     <>
-      <Container maxWidth={"desktop"} sx={{ marginTop: 3 }}>
+      <Container maxWidth={"lgDesktop"} sx={{ marginTop: 3 }}>
         <Typography
           variant={"subtitle1"}
           component={"h2"}

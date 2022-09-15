@@ -67,7 +67,7 @@ const Header = (props) => {
 
   return (
     <header className={statusOpenBurger ? "header active-burger" : "header"}>
-      <Container maxWidth={"desktop"}>
+      <Container maxWidth={"lgDesktop"}>
         <div className="container-header">
           <div className="header__top-content">
             <div className="header__logo-container">
