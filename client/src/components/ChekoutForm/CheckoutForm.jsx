@@ -14,13 +14,16 @@ import DeliveryInfo from "./Delivery/DeliveryInfo";
 import { getShippingMethods } from "../../api/shippingMethods";
 import { shippingMethodAction } from "../../store/shippingMethod/action";
 import { addShippingAndDeliveryInformation } from "../../api/addShippingAndDeliveryInformation";
-import { getCustomerData } from "../../api/getCustomers";
 import { useNavigate } from "react-router-dom";
+import { deleteCart } from "../../store/cart/actions";
 
 const CheckoutForm = () => {
   const cartList = useSelector((state) => state.cart.list);
+  const isLogin = useSelector((state) => state.userAccount.isLogin);
   const paymentMethod = useSelector((state) => state.paymentMethod);
-  const cartProducts = useSelector((state) => state.cart.list);
+  const customerInformation = useSelector(
+    (state) => state.userAccount.customer
+  );
   const [checkoutInputNames, setCheckoutInputNames] = useState([]);
   const [shippingMethods, setShippingMethods] = useState([]);
   const [paymentMethods, setPaymentMethods] = useState([]);
@@ -35,20 +38,19 @@ const CheckoutForm = () => {
   }, []);
 
   useEffect(() => {
-    paymentMethods.length != 0 &&
+    paymentMethods.length !== 0 &&
       dispatch(paymentMethodAction(paymentMethods[0]));
-    shippingMethods.length != 0 &&
+    shippingMethods.length !== 0 &&
       dispatch(shippingMethodAction(shippingMethods[0]));
   }, [paymentMethods, shippingMethods]);
 
   const {
     register,
     handleSubmit,
-    handleChange,
     formState: { errors },
   } = useForm({
     resolver:
-      paymentMethod.name == "Cards"
+      paymentMethod.name === "Cards"
         ? yupResolver(checkoutSchema)
         : yupResolver(checkoutSchemaMinimize),
     defaultValues: {
@@ -74,26 +76,27 @@ const CheckoutForm = () => {
   };
 
   const handleSubmitForm = async (value) => {
-    const {
-      data: { email, telephone, _id, firstName, lastName },
-    } = await getCustomerData();
-    const userInformation = {
-      customerId: _id,
-      email: email,
-      mobile: telephone,
-      firstName: firstName,
-      lastName: lastName,
-      letterSubject: "Thank you for order! You are welcome!",
-      letterHtml:
-        "<h1>Your order is placed.</h1><p>{Other details about order in your HTML}</p>",
-    };
-    const newOrder = Object.assign(userInformation, value);
-
-    const { data, status } = await addShippingAndDeliveryInformation(newOrder);
-    if (status === 200) {
-      navigate("/completed-order", { replace: true });
+    const { email, telephone, _id, firstName, lastName } = customerInformation;
+    if (_id === undefined) {
+      navigate("/registration-order", { replace: true });
     } else {
-      navigate("*", { replace: true });
+      const userInformation = {
+        customerId: _id,
+        email: email,
+        mobile: telephone,
+        firstName: firstName,
+        lastName: lastName,
+        letterSubject: "Thank you for order! You are welcome!",
+        letterHtml:
+          "<h1>Your order is placed.</h1><p>{Other details about order in your HTML}</p>",
+      };
+      const newOrder = Object.assign(userInformation, value);
+      console.log(newOrder);
+      const { data, status } = await addShippingAndDeliveryInformation(
+        newOrder
+      );
+      dispatch(deleteCart(isLogin));
+      navigate("/completed-order", { replace: true });
     }
   };
 
