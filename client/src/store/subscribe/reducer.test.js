@@ -5,14 +5,16 @@ describe("subscribe reducer", () => {
     expect(
       reducer(
         {
-          isSubscribe: false,
+          enabled: false,
           email: null,
+          error: {},
         },
         {}
       )
     ).toEqual({
-      isSubscribe: false,
+      enabled: false,
       email: null,
+      error: {},
     });
   });
 
@@ -20,25 +22,28 @@ describe("subscribe reducer", () => {
     expect(
       reducer(
         {
-          isSubscribe: true,
+          enabled: true,
           email: "test@gmail.com",
+          error: {},
         },
         {
           type: "GET_SUBSCRIBE",
-          payload: { isSubscribe: true, email: "test@gmail.com" },
+          payload: { enabled: true, email: "test@gmail.com" },
         }
       )
     ).toEqual({
-      isSubscribe: true,
+      enabled: true,
       email: "test@gmail.com",
+      error: {},
     });
   });
   it("should to dellete subscribe", () => {
     expect(
       reducer(
         {
-          isSubscribe: false,
+          enabled: false,
           email: null,
+          error: {},
         },
         {
           type: "DELETE_SUBSCRIBE",
@@ -46,8 +51,28 @@ describe("subscribe reducer", () => {
         }
       )
     ).toEqual({
-      isSubscribe: false,
+      enabled: false,
       email: null,
+      error: {},
+    });
+  });
+  it("should to set error", () => {
+    expect(
+      reducer(
+        {
+          enabled: false,
+          email: null,
+          error: { message: "error" },
+        },
+        {
+          type: "SET_SUBSCRIBE_ERROR",
+          payload: { message: "error" },
+        }
+      )
+    ).toEqual({
+      enabled: false,
+      email: null,
+      error: { message: "error" },
     });
   });
 });
