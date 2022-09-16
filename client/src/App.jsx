@@ -9,10 +9,24 @@ import { getCartItem, isNotLoaded } from "./store/cart/actions";
 import Routing from "./components/Routing/Routing";
 import { getWishlistItem } from "./store/wishlist/actions";
 import { Container } from "@mui/system";
+import { switchThemeAction } from "./store/switchTheme/action";
+import classNames from "classnames";
 import jwt_decode from "jwt-decode";
 
 const App = () => {
   const dispatch = useDispatch();
+  const nightMode = useSelector((state) => state.nightMode);
+  const wrapperClass = classNames(
+    "full-wrapper",
+    {
+      "dark-mode":
+        JSON.parse(localStorage.getItem("nightMode")) === true ||
+        JSON.parse(localStorage.getItem("nightMode")) === null,
+    },
+    {
+      "light-mode": JSON.parse(localStorage.getItem("nightMode")) === false,
+    }
+  );
 
   const getUser = (storageData) => {
     dispatch(getIsLogin(true));
@@ -22,7 +36,12 @@ const App = () => {
   useEffect(() => {
     localStorage.getItem("login") && getUser(localStorage.getItem("login"));
     sessionStorage.getItem("login") && getUser(sessionStorage.getItem("login"));
-  }, []);
+
+    localStorage.getItem("nightMode") &&
+      dispatch(
+        switchThemeAction(!JSON.parse(localStorage.getItem("nightMode")))
+      );
+  }, [nightMode]);
 
   const [statusOpenBurger, setStatusOpenBurger] = useState(false);
   const isLogin = useSelector((state) => state.userAccount.isLogin);
@@ -63,7 +82,7 @@ const App = () => {
   };
   return (
     <>
-      <div className="full-wrapper">
+      <div className={wrapperClass}>
         <Header
           statusOpenBurger={statusOpenBurger}
           handleBurger={handleBurger}

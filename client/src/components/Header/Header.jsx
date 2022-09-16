@@ -22,29 +22,6 @@ const Header = (props) => {
   const location = useLocation();
 
   useEffect(() => {
-    if (localStorage.getItem("nightMode")) {
-      dispatch(
-        switchThemeAction(!JSON.parse(localStorage.getItem("nightMode")))
-      );
-    } else {
-      document.activeElement.classList.remove("light");
-      document.activeElement.classList.add("dark");
-    }
-  });
-
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem("nightMode")) === true) {
-      document.activeElement.classList.remove("light");
-      document.activeElement.classList.add("dark");
-    }
-
-    if (JSON.parse(localStorage.getItem("nightMode")) === false) {
-      document.activeElement.classList.add("light");
-      document.activeElement.classList.remove("dark");
-    }
-  }, [nightMode]);
-
-  useEffect(() => {
     if (!isLogin && isLoaded) {
       localStorage.setItem("cart", JSON.stringify(cartList));
     }
