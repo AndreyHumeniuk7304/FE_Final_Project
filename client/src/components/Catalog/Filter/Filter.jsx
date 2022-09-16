@@ -24,6 +24,7 @@ const Filter = () => {
   const [isItemChecked, setIsItemChecked] = useState([]);
   const [itemCLicked, setIdemCliked] = useState("");
   const dispatch = useDispatch();
+  const [isMobileFilterBtnShow, setIsMobileFilterBtnShow] = useState(false);
   const categorieProductList = useSelector(
     (state) => state.catalog.categorieProductList
   );
@@ -52,6 +53,8 @@ const Filter = () => {
     const link = setFilterLink(values, currentPrice);
     setSearch(link);
     setIsFilterUsing(true);
+    setIsMobileFilterBtnShow(false);
+    document.getElementById("filter").classList.remove("filter__form--active");
   };
 
   const resetFilter = () => {
@@ -73,7 +76,10 @@ const Filter = () => {
   return (
     <>
       <div className="filter-wrapper filter">
-        <FilterMobileHeader />
+        <FilterMobileHeader
+          isMobileFilterBtnShow={isMobileFilterBtnShow}
+          setIsMobileFilterBtnShow={setIsMobileFilterBtnShow}
+        />
         <Stack>
           <CheckedFilterItem isItemChecked={isItemChecked} />
 
