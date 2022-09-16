@@ -6,6 +6,8 @@ import Logout from "./Logout/Logout";
 const Cabinet = () => {
   const isAdmin = useSelector((state) => state.userAccount.customer.isAdmin);
   const isLogin = useSelector((state) => state.userAccount.isLogin);
+  const customer = useSelector((state) => state.userAccount.customer);
+
   const nav = useNavigate();
 
   useEffect(() => {
@@ -57,7 +59,10 @@ const Cabinet = () => {
           <div className="my-account__welcome">
             <h3 className="my-account__welcome--title">
               Welcome{" "}
-              <span className="my-account__welcome--name"> NAME NAME</span>
+              <span className="my-account__welcome--name">
+                {" "}
+                {customer?.firstName} {customer?.lastName}
+              </span>
             </h3>
           </div>
           <div className="my-account__block">

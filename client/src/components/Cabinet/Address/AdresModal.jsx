@@ -45,7 +45,6 @@ const AdresModal = () => {
   };
 
   const addDeliveryAddress = (values) => {
-    console.log("active");
     if (openDelivery) {
       const deliveryAddress = values;
       let updatedCustomer = { ...currentCustomer, ...deliveryAddress };

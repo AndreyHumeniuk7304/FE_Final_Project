@@ -8,7 +8,17 @@ body.light .form_container{
 body.dark .form_container {
   background-color: #071a2f;
 }
- 
+ .form_container{
+  // margin: 50px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-basis: 25vw;
+  padding: 15px;
+  font-size: 20px;
+  position: relative;
+ }
 .profile {
   min-width: 320px;
   max-width: 1295px;
@@ -21,6 +31,7 @@ body.dark .form_container {
     display: flex;
     justify-content: center;
     max-width: 1295px;
+    
   }
   &__input {
     display: flex;
