@@ -15,6 +15,7 @@ import jwt_decode from "jwt-decode";
 
 const App = () => {
   const dispatch = useDispatch();
+  const nightMode = useSelector((state) => state.nightMode);
   const wrapperClass = classNames(
     "full-wrapper",
     {
@@ -40,7 +41,7 @@ const App = () => {
       dispatch(
         switchThemeAction(!JSON.parse(localStorage.getItem("nightMode")))
       );
-  }, []);
+  }, [nightMode]);
 
   const [statusOpenBurger, setStatusOpenBurger] = useState(false);
   const isLogin = useSelector((state) => state.userAccount.isLogin);
