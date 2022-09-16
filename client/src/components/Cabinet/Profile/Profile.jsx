@@ -1,12 +1,14 @@
 import Links from "../Links/Links";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import Form from "../../Forms/Form";
 import { customerInputNames } from "./data";
 import updatedCustomer from "../../../api/updatedCustomer";
+import { getUserData } from "../../../store/userAccount/actions";
 
 const Profile = () => {
   const customer = useSelector((state) => state.userAccount.customer);
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -24,10 +26,9 @@ const Profile = () => {
   });
 
   const updatedCurrentCustomer = (values) => {
-    console.log(values);
     updatedCustomer(values)
       .then((newCustomerData) => {
-        console.log(newCustomerData);
+        dispatch(getUserData());
       })
       .catch((err) => {
         console.log(err);
