@@ -124,10 +124,17 @@
     }
     .slider {
       &__element {
-        color: $color-desktop;
-        .MuiSlider-thumb,
-        .MuiSlider-track {
-          color: $color-desktop;
+        &--night {
+          .MuiSlider-thumb,
+          .MuiSlider-track {
+            color: black;
+          }
+        }
+        &--white {
+          .MuiSlider-thumb,
+          .MuiSlider-track {
+            color: white;
+          }
         }
 
         .MuiSlider-rail {
