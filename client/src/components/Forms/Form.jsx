@@ -4,6 +4,7 @@ import CustomInput from "../Forms/CastomInput";
 import CustomErrorMessage from "../Forms/CustomErrorMessage";
 import CustomDropList from "../Forms/CustomDropList";
 import CustomPaymantInput from "./CustomPaymantInput";
+import CastomMultiInput from "./CastomMultiInput";
 
 const Form = ({
   actionWithForm,
@@ -82,33 +83,13 @@ const Form = ({
               const err = errors[inputName];
 
               return (
-                <li key={item.id}>
-                  <div className="form__input-add">
-                    <input
-                      {...register(`${inputName}.${index}`)}
-                      type="text"
-                      className={"form__input"}
-                    />
-                    <button
-                      style={{ marginRight: 20 }}
-                      type="btn"
-                      onClick={() => {
-                        fieldArray.append([" "]);
-                      }}
-                    >
-                      ADD
-                    </button>
-                    {index ? (
-                      <button
-                        type="btn"
-                        onClick={() => fieldArray.remove(index)}
-                      >
-                        DEL
-                      </button>
-                    ) : (
-                      ""
-                    )}
-                  </div>
+                <li key={item.id} className="form__multi-input">
+                  <CastomMultiInput
+                    inputName={inputName}
+                    index={index}
+                    fieldArray={fieldArray}
+                    register={register}
+                  />
                   <CustomErrorMessage err={err ? err[index]?.message : ""} />
                 </li>
               );
