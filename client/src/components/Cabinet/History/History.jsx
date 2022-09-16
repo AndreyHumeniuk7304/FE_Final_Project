@@ -7,7 +7,8 @@ import { fetchCustomerOrders } from "../../../store/cabinet/actions";
 
 const History = () => {
   const dispatch = useDispatch();
-  const orders = useSelector((state) => state.cabinet.purchasesHistory);
+  const stateOrders = useSelector((state) => state.cabinet.purchasesHistory);
+  const orders = [...stateOrders].reverse();
 
   useEffect(() => {
     dispatch(fetchCustomerOrders());
@@ -20,6 +21,7 @@ const History = () => {
       </div>
     );
   }
+  // console.log(orders);
 
   return (
     <div className="profile">
@@ -48,7 +50,7 @@ const History = () => {
               <Typography style={{ paddingBottom: 15 }} variant="h6">
                 OrderNo: {order?.orderNo}
               </Typography>
-              {order.products.map((product, key) => (
+              {order.products.reverse().map((product, key) => (
                 <Typography key={key} style={{ paddingLeft: 10 }}>
                   <Grid
                     alignItems="center"
@@ -76,7 +78,7 @@ const History = () => {
                       {product.product.name.slice(0, 35)}...
                     </Grid>
                     <Grid item style={{ display: "inline-block" }}>
-                      Quantity: {product.product.quantity}
+                      Quantity: {product.cartQuantity}
                     </Grid>
                     <Grid item style={{ display: "inline-block" }}>
                       Price: {product.product.currentPrice}$
