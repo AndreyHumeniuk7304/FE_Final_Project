@@ -1,0 +1,28 @@
+.complete-order-container {
+  @include flex-container;
+  flex-direction: column;
+  margin-top: -15%;
+
+  &__thanks {
+    font-size: 2.5vw !important;
+  }
+
+  &__placed {
+    font-size: 2.5vw !important;
+  }
+
+  &__home-button {
+    margin-top: 5% !important;
+    font-size: 1.5vw !important;
+  }
+}
+
+@include desktop {
+  &__thanks {
+    font-size: 3vw !important;
+  }
+
+  &__placed {
+    font-size: 3vw !important;
+  }
+}

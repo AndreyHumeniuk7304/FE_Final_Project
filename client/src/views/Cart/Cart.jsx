@@ -1,27 +1,13 @@
 import CartItem from "../../components/CartItem";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import theme from "../../theme";
 import { useNavigate } from "react-router";
 
 const Cart = () => {
   const navigate = useNavigate();
-  const isLogin = useSelector((state) => state.userAccount.isLogin);
   const cartList = useSelector((state) => state.cart.list);
   const isLoaded = useSelector((state) => state.cart.isLoaded);
-
-  useEffect(() => {
-    if (!isLogin) {
-      const onUnload = () => {
-        localStorage.setItem("cart", JSON.stringify(cartList));
-      };
-
-      window.addEventListener("beforeunload", onUnload);
-
-      return () => window.removeEventListener("beforeunload", onUnload);
-    }
-  });
 
   const createCartItemList = () => {
     return cartList.map((item) => {
@@ -46,7 +32,7 @@ const Cart = () => {
 
   return (
     <>
-      <Container maxWidth={"desktop"} sx={{ marginTop: 3 }}>
+      <Container maxWidth={"lgDesktop"} sx={{ marginTop: 3 }}>
         <Typography
           variant={"subtitle1"}
           component={"h2"}

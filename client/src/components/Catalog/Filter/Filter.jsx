@@ -12,7 +12,7 @@ import {
   getItemInFilter,
   filterTitles,
 } from "./filterFunctions";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProductsFilterPreloader } from "../../../store/catalog/actions";
 
@@ -24,14 +24,16 @@ const Filter = () => {
   const [isItemChecked, setIsItemChecked] = useState([]);
   const [itemCLicked, setIdemCliked] = useState("");
   const dispatch = useDispatch();
+  const [isMobileFilterBtnShow, setIsMobileFilterBtnShow] = useState(false);
   const categorieProductList = useSelector(
     (state) => state.catalog.categorieProductList
   );
+  const location = useLocation();
 
   const nightMode = useSelector((state) => state.nightMode);
 
   useEffect(() => {
-    setCategories(getCategories(search));
+    location.state && setCategories(location.state.categories);
     setCurrentPrice(getMinMaxPrice(categorieProductList));
     getItemInFilter(search, setIsItemChecked);
   }, [categorieProductList]);
@@ -51,6 +53,8 @@ const Filter = () => {
     const link = setFilterLink(values, currentPrice);
     setSearch(link);
     setIsFilterUsing(true);
+    setIsMobileFilterBtnShow(false);
+    document.getElementById("filter").classList.remove("filter__form--active");
   };
 
   const resetFilter = () => {
@@ -67,13 +71,15 @@ const Filter = () => {
         "/products/filter" + setFilterLink(values, currentPrice)
       )
     );
-    console.log("/products/filter" + setFilterLink(values, currentPrice));
   };
 
   return (
     <>
       <div className="filter-wrapper filter">
-        <FilterMobileHeader />
+        <FilterMobileHeader
+          isMobileFilterBtnShow={isMobileFilterBtnShow}
+          setIsMobileFilterBtnShow={setIsMobileFilterBtnShow}
+        />
         <Stack>
           <CheckedFilterItem isItemChecked={isItemChecked} />
 

@@ -1,21 +1,14 @@
 import Links from "../Links/Links";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCurrentCustomer } from "../../../store/cabinet/actions";
 import { useForm } from "react-hook-form";
 import Form from "../../Forms/Form";
 import { customerInputNames } from "./data";
 import updatedCustomer from "../../../api/updatedCustomer";
+import { getUserData } from "../../../store/userAccount/actions";
 
 const Profile = () => {
-  const isLogin = useSelector((state) => state.userAccount.isLogin);
-  const token = useSelector((state) => state.userAccount.customer.token);
-  const customer = useSelector((state) => state.cabinet.currentCustomer);
+  const customer = useSelector((state) => state.userAccount.customer);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchCurrentCustomer(isLogin, token));
-  }, [token]);
 
   const {
     register,
@@ -33,10 +26,9 @@ const Profile = () => {
   });
 
   const updatedCurrentCustomer = (values) => {
-    console.log(values);
     updatedCustomer(values)
       .then((newCustomerData) => {
-        console.log(newCustomerData);
+        dispatch(getUserData());
       })
       .catch((err) => {
         console.log(err);

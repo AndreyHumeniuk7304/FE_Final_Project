@@ -17,8 +17,8 @@ const ProductList = () => {
   const [isOneCartView, setIsOneCartView] = useState(true);
 
   return (
-    <div className="productlist-wrapper">
-      <div>
+    <div className="list-width">
+      <div className="productlist-wrapper">
         {!hasError && !isLoading && productsQuntity > 0 && (
           <Box
             sx={{
@@ -126,9 +126,11 @@ const ProductList = () => {
           })
         )}
       </div>
-      <Box sx={{ pb: 3 }}>
-        {productsQuntity > 10 && !isLoading && <Paginations />}
-      </Box>
+      <div className="productlist-wrapper__pagination">
+        <Box sx={{ pb: 3 }}>
+          {productsQuntity > 10 && !isLoading && <Paginations />}
+        </Box>
+      </div>
     </div>
   );
 };

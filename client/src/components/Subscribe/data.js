@@ -11,10 +11,15 @@ export const subscribeInputName = [
     formType: "input",
   },
 ];
-export const defaultValues = {
-  email: "",
-  letterSubject:
-    "You received this email because you were subscribed to the newsletter",
-  letterHtml: "",
-  enabled: true,
-};
+
+export const setMessage = (product) => `
+      <div>
+        <p>Brand: ${product.brand}</p>
+        <p>Color: ${product.color}</p>
+        <p>Current Price: ${product.currentPrice}</p>
+        <p>Material: ${product.material}</p>
+        <p>Mechanism: ${product.mechanism}</p>
+        <p>${product.description}</p>
+      </div>
+  
+`;

@@ -4,29 +4,35 @@ import { Box, Button } from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Form from "../Forms/Form";
-import { productSchema, subscribeInputName, defaultValues } from "./data";
+import { productSchema, setMessage, subscribeInputName } from "./data";
 import { addNewSubscriber, updateSubscriberByEmail } from "../../api/subscribe";
 import { useEffect } from "react";
-import getOneProduct from "../../api/getOneProduct";
-import { delSubscribes, getSubscribes } from "../../store/subscribe/actions";
+
+import {
+  delSubscribes,
+  fetchSubscriber,
+  getSubscribes,
+} from "../../store/subscribe/actions";
 import { useDispatch, useSelector } from "react-redux";
 
-const Subscribe = ({ itemNo }) => {
+const Subscribe = ({ product }) => {
   const [isSubscribeOpen, setISSubscribeOpen] = useState(false);
   const [subscribeSuccess, setSubscribeSuccess] = useState(false);
-  const [product, setProduct] = useState({});
   const [error, setError] = useState();
   const dispatch = useDispatch();
   const subscribe = useSelector((state) => state.subscribe);
+  const email = useSelector((state) => state.userAccount.customer.email);
 
   useEffect(() => {
     const isSubscribe = JSON.parse(localStorage.getItem("subscribe"));
     isSubscribe && dispatch(getSubscribes(isSubscribe));
   }, []);
+  useEffect(() => {
+    email && dispatch(fetchSubscriber(email));
+  }, [email]);
 
   useEffect(() => {
-    setSubscribeSuccess(subscribe.isSubscribe);
-    setISSubscribeOpen(!subscribe.isSubscribe);
+    setSubscribeSuccess(subscribe.enabled);
   }, [subscribe]);
 
   const {
@@ -35,52 +41,26 @@ const Subscribe = ({ itemNo }) => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(productSchema),
-    defaultValues: defaultValues,
+    defaultValues: {
+      email: email || "",
+      letterSubject:
+        "You received this email because you were subscribed to the newsletter",
+      letterHtml: "",
+      enabled: true,
+    },
   });
 
   const subscribeUser = (values) => {
-    getOneProduct(itemNo).then((data) => setProduct(data));
-    product && setSubscribeValue(values);
-
-    //   setError({
-    //     email: { message: "Something went wrong please try again later." },
-    //   })
-    // );
-  };
-
-  const setSubscribeValue = (values) => {
-    const letterHtml = `<div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          maxWidth: 420,
-        }}
-      >
-        <div>
-          <img
-            style={{ width: "120px" }}
-            src={product.imageUrls[0]}
-            alt="image"
-          />
-        </div>
-        <div>
-          <p>Brand: {product.brand}</p>
-          <p>Color: {product.color}</p>
-          <p>Current Price: {product.currentPrice}</p>
-          <p>Material: {product.material}</p>
-          <p>Mechanism: {product.mechanism}</p> <p>{product.description}</p>
-        </div>
-      </div>
-    `;
+    const letterHtml = setMessage(product);
 
     values.letterHtml = letterHtml.replace(/\s/g, "");
 
-    addNewSubscriber(values)
-      .then((response) => {})
-      .catch((err) => setError({ email: JSON.parse(err.request.response) }));
+    addNewSubscriber(values).catch((err) => {
+      setError({ email: JSON.parse(err.request.response) });
+    });
     setSubscribeSuccess(true);
     setISSubscribeOpen(false);
-    dispatch(getSubscribes({ isSubscribe: true, email: values.email }));
+    dispatch(getSubscribes({ enabled: true, email: values.email }));
   };
 
   const unsubscribeUser = () => {
@@ -127,5 +107,5 @@ const Subscribe = ({ itemNo }) => {
 export default Subscribe;
 
 Subscribe.propTypes = {
-  itemNo: PropTypes.string,
+  product: PropTypes.object,
 };

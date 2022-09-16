@@ -1,14 +1,23 @@
-import { date } from "yup";
-
-const initialState = {};
+const initialState = {
+  enabled: false,
+  email: null,
+  error: {},
+};
 
 const userSubscribe = (state = initialState, action) => {
   switch (action.type) {
-    case "SET_SUBSCRIBE": {
-      return action.payload;
+    case "GET_SUBSCRIBE": {
+      return {
+        ...state,
+        enabled: action.payload.enabled,
+        email: action.payload.email,
+      };
     }
-    case "DEL_SUBSCRIBE": {
-      return {};
+    case "DELETE_SUBSCRIBE": {
+      return initialState;
+    }
+    case "SET_SUBSCRIBE_ERROR": {
+      return { ...state, error: action.payload };
     }
 
     default:

@@ -19,7 +19,7 @@ const Wishlist = () => {
 
   return (
     <>
-      <Links /> <Catalog />
+      <Links /> <Catalog isFilterShow={false} />
     </>
   );
 };

@@ -1,4 +1,5 @@
 .filter-wrapper {
+  width: 100%;
   text-align: center;
   width: 100%;
 
@@ -96,7 +97,7 @@
 }
 @include desktop {
   .filter-wrapper {
-    width: 25%;
+    width: 34%;
   }
 }
 .custom-checkbox {
@@ -123,10 +124,17 @@
     }
     .slider {
       &__element {
-        color: $color-desktop;
-        .MuiSlider-thumb,
-        .MuiSlider-track {
-          color: $color-desktop;
+        &--night {
+          .MuiSlider-thumb,
+          .MuiSlider-track {
+            color: black;
+          }
+        }
+        &--white {
+          .MuiSlider-thumb,
+          .MuiSlider-track {
+            color: white;
+          }
         }
 
         .MuiSlider-rail {

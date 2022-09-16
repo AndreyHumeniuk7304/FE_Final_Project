@@ -1,29 +1,24 @@
 import PropTypes from "prop-types";
+import classNames from "classnames";
 
-const EntryHeader = ({ isRegist, setIsRegist }) => {
+const EntryHeader = ({ activeTitle, setActiveTitle, title }) => {
+  const titleClass = classNames("header__item", {
+    "header__item--underline": activeTitle === title.toLowerCase(),
+  });
+
+  const getTitleName = (e) => setActiveTitle(e.target.id);
+
   return (
-    <div className="entry__header">
-      <h6
-        className={`header__item ${!isRegist && "header__item--underline"}`}
-        id="login"
-        onClick={() => setIsRegist(false)}
-      >
-        Login
-      </h6>
-      <h6
-        className={`header__item ${isRegist && "header__item--underline"}`}
-        id="regist"
-        onClick={() => setIsRegist(true)}
-      >
-        Registration
-      </h6>
-    </div>
+    <h6 className={titleClass} id={title.toLowerCase()} onClick={getTitleName}>
+      {title}
+    </h6>
   );
 };
 
 export default EntryHeader;
 
 EntryHeader.propTypes = {
-  isRegist: PropTypes.bool,
-  setIsRegist: PropTypes.func,
+  activeTitle: PropTypes.string,
+  title: PropTypes.string,
+  setActiveTitle: PropTypes.func,
 };

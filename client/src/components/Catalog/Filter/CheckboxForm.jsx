@@ -15,7 +15,7 @@ const CheckboxForm = ({
   itemCLicked,
   setIdemCliked,
 }) => {
-  const [isShow, setIsShow] = useState(false);
+  const [isShow, setIsShow] = useState(true);
 
   //const [arr, setArr] = useState();
   const productList = useSelector(
@@ -23,7 +23,7 @@ const CheckboxForm = ({
   );
 
   useEffect(() => {
-    setIsShow(false);
+    //setIsShow(false);
     // setArr(getFilterItem(title, productList));
   }, [productList]);
 
