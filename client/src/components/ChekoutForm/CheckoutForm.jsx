@@ -77,9 +77,12 @@ const CheckoutForm = () => {
 
   const handleSubmitForm = async (value) => {
     const { email, telephone, _id, firstName, lastName } = customerInformation;
-    if (_id === undefined) {
-      navigate("/registration-order", { replace: true });
-    } else {
+    const { shippingMethod, paymentMethod, deliveryAdress } = value;
+    let count = 0;
+    const quantity = cartList.map((quantity) => {
+      count += quantity.cartQuantity;
+    });
+    if (isLogin) {
       const userInformation = {
         customerId: _id,
         email: email,
@@ -87,16 +90,18 @@ const CheckoutForm = () => {
         firstName: firstName,
         lastName: lastName,
         letterSubject: "Thank you for order! You are welcome!",
-        letterHtml:
-          "<h1>Your order is placed.</h1><p>{Other details about order in your HTML}</p>",
+        letterHtml: `<h1>Your order is placed.</h1>
+        <p>Delivery method is ${shippingMethod} to adress ${deliveryAdress}</p>
+        <p>Payment method is ${paymentMethod} </p>
+        <p>You bought ${count} items</p>
+        <p>All price: ${getTotalPrice()}</p>`,
       };
       const newOrder = Object.assign(userInformation, value);
-      console.log(newOrder);
-      const { data, status } = await addShippingAndDeliveryInformation(
-        newOrder
-      );
+      addShippingAndDeliveryInformation(newOrder);
       dispatch(deleteCart(isLogin));
       navigate("/completed-order", { replace: true });
+    } else {
+      navigate("/registration-order", { replace: true });
     }
   };
 
