@@ -13,15 +13,14 @@ const CheckboxItem = ({
   itemName,
   title,
   register,
-  isItemChecked,
-  setIsItemChecked,
+  arrOfCheckedItem,
+  setArrOfCheckedItem,
   itemCLicked,
   setIdemCliked,
 }) => {
-  const [isChecked, setIsChecked] = useState();
-
+  const [isChecked, setIsChecked] = useState(false);
   useState(() => {
-    setIsChecked(isItemChecked.includes(itemName.toLowerCase()));
+    setIsChecked(arrOfCheckedItem.includes(itemName.toLowerCase()));
   }, []);
 
   const { productsQuntityOnChange, isLoading } = useSelector(
@@ -32,11 +31,11 @@ const CheckboxItem = ({
 
   const toggleChecked = (e) => {
     setIdemCliked(e.target.value);
-    setIsChecked(!isChecked);
+    setArrOfCheckedItem(!isChecked);
     !isChecked
-      ? setIsItemChecked([...isItemChecked, e.target.value.toLowerCase()])
-      : setIsItemChecked(
-          isItemChecked.filter(
+      ? setArrOfCheckedItem([...arrOfCheckedItem, e.target.value.toLowerCase()])
+      : setArrOfCheckedItem(
+          arrOfCheckedItem.filter(
             (el) => el.toLowerCase() !== e.target.value.toLowerCase()
           )
         );
@@ -52,7 +51,7 @@ const CheckboxItem = ({
             available`
         )
       }
-      open={itemName === itemCLicked}
+      open={itemName.toLowerCase() === itemCLicked.toLowerCase()}
       placement={"right"}
     >
       <FormLabel
@@ -64,7 +63,7 @@ const CheckboxItem = ({
       >
         <Checkbox
           name={title}
-          value={itemName}
+          value={itemName.toLowerCase()}
           sx={{
             display: "none",
           }}
@@ -94,8 +93,8 @@ export default CheckboxItem;
 CheckboxItem.propTypes = {
   itemName: PropTypes.string,
   title: PropTypes.string,
-  isItemChecked: PropTypes.array,
-  setIsItemChecked: PropTypes.func,
+  arrOfCheckedItem: PropTypes.array,
+  setArrOfCheckedItem: PropTypes.func,
   register: PropTypes.func,
   itemCLicked: PropTypes.string,
   setIdemCliked: PropTypes.func,

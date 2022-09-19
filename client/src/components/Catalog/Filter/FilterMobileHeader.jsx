@@ -12,7 +12,12 @@ const FilterMobileHeader = ({
   };
 
   return (
-    <Stack direction="row" display={{ mobile: "block", desktop: "none" }}>
+    <Stack
+      direction="row"
+      display={{ mobile: "flex", desktop: "none" }}
+      alignItems="center"
+      justifyContent="space-evenly"
+    >
       <Typography onClick={(e) => toggleFilterInMobilte(e, true, "block")}>
         Filter
       </Typography>

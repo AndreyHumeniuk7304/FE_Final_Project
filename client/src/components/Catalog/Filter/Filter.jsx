@@ -1,4 +1,4 @@
-import { Box, Button, Stack } from "@mui/material";
+import { Box, Button, Grid, Stack } from "@mui/material";
 import CheckboxForm from "./FilterItems/CheckboxForm";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -9,19 +9,19 @@ import {
   setFilterLink,
   getCategories,
   getItemInFilter,
-  filterTitles,
 } from "./filterFunctions";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProductsFilterPreloader } from "../../../store/catalog/actions";
-import CheckedFilterItem from "./FilterItems/CheckboxItem";
+import CheckedFilterItem from "./CheckedFilterItem";
+import { filterTitles } from "./data";
 
 const Filter = () => {
   const [currentPrice, setCurrentPrice] = useState([100, 1000]);
   const [isFilterUsing, setIsFilterUsing] = useState(false);
   const [search, setSearch] = useSearchParams();
   const [categories, setCategories] = useState(getCategories(search));
-  const [isItemChecked, setIsItemChecked] = useState([]);
+  const [arrOfCheckedItem, setArrOfCheckedItem] = useState([]);
   const [itemCLicked, setItemCliked] = useState("");
   const dispatch = useDispatch();
   const [isMobileFilterBtnShow, setIsMobileFilterBtnShow] = useState(false);
@@ -35,12 +35,12 @@ const Filter = () => {
   useEffect(() => {
     location.state && setCategories(location.state.categories);
     setCurrentPrice(getMinMaxPrice(categorieProductList));
-    getItemInFilter(search, setIsItemChecked);
+    getItemInFilter(search, setArrOfCheckedItem);
   }, [categorieProductList]);
 
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
-      categories: categories.length ? categories : [],
+      categories: [],
       brand: [],
       mechanism: [],
       material: [],
@@ -60,10 +60,12 @@ const Filter = () => {
 
   const resetFilter = () => {
     reset();
-    setSearch(categories.length ? `categories=${categories}` : "");
+    setSearch(
+      categories.length ? `categories=${categories}&perPage=10&startPage=1` : ""
+    );
     setCurrentPrice(getMinMaxPrice(categorieProductList));
     setIsFilterUsing(false);
-    setIsItemChecked([]);
+    setArrOfCheckedItem([]);
     setIsMobileFilterBtnShow(false);
     setItemCliked("");
   };
@@ -77,14 +79,14 @@ const Filter = () => {
   };
 
   return (
-    <Box p={2} maxWidth={320}>
+    <Box p={2} width={{ mobile: "100%", desktop: 280 }} textAlign="center">
       <FilterMobileHeader
         isMobileFilterBtnShow={isMobileFilterBtnShow}
         setIsMobileFilterBtnShow={setIsMobileFilterBtnShow}
       />
 
       <Stack>
-        <CheckedFilterItem isItemChecked={isItemChecked} />
+        <CheckedFilterItem arrOfCheckedItem={arrOfCheckedItem} />
 
         <Box display={{ mobile: "none", desktop: "block" }} id="filter">
           <form
@@ -93,18 +95,20 @@ const Filter = () => {
             })}
             onChange={handleSubmit((values) => getLinkOnChange(values))}
           >
-            {filterTitles.map((title) => (
-              <Box key={title}>
-                <CheckboxForm
-                  title={title}
-                  register={register}
-                  isItemChecked={isItemChecked}
-                  setIsItemChecked={setIsItemChecked}
-                  itemCLicked={itemCLicked}
-                  setIdemCliked={setItemCliked}
-                />
-              </Box>
-            ))}
+            <Box textAlign="start">
+              {filterTitles.map((title) => (
+                <Box key={title}>
+                  <CheckboxForm
+                    title={title}
+                    register={register}
+                    arrOfCheckedItem={arrOfCheckedItem}
+                    setArrOfCheckedItem={setArrOfCheckedItem}
+                    itemCLicked={itemCLicked}
+                    setIdemCliked={setItemCliked}
+                  />
+                </Box>
+              ))}
+            </Box>
             <MaterialSlider
               title={"currentPrice"}
               name="currentPrice"
@@ -113,7 +117,7 @@ const Filter = () => {
               currentPrice={currentPrice}
               setCurrentPrice={setCurrentPrice}
             />
-            <Stack direction="row">
+            <Stack direction="row" justifyContent="space-evenly">
               <Button sx={{ color: nightMode ? "#fff" : "#000" }} type="submit">
                 Apply
               </Button>
