@@ -1,9 +1,8 @@
 import { Box, Button, Stack } from "@mui/material";
-import CheckboxForm from "./CheckboxForm";
+import CheckboxForm from "./FilterItems/CheckboxForm";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { MaterialSlider } from "./MaterialSlider";
-import { CheckedFilterItem } from "./checkedFilterItem";
+import MaterialSlider from "./FilterItems/MaterialSlider";
 import FilterMobileHeader from "./FilterMobileHeader";
 import {
   getMinMaxPrice,
@@ -15,6 +14,7 @@ import {
 import { useLocation, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProductsFilterPreloader } from "../../../store/catalog/actions";
+import CheckedFilterItem from "./FilterItems/CheckboxItem";
 
 const Filter = () => {
   const [currentPrice, setCurrentPrice] = useState([100, 1000]);
@@ -22,7 +22,7 @@ const Filter = () => {
   const [search, setSearch] = useSearchParams();
   const [categories, setCategories] = useState(getCategories(search));
   const [isItemChecked, setIsItemChecked] = useState([]);
-  const [itemCLicked, setIdemCliked] = useState("");
+  const [itemCLicked, setItemCliked] = useState("");
   const dispatch = useDispatch();
   const [isMobileFilterBtnShow, setIsMobileFilterBtnShow] = useState(false);
   const categorieProductList = useSelector(
@@ -40,7 +40,7 @@ const Filter = () => {
 
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
-      categories: [],
+      categories: categories.length ? categories : [],
       brand: [],
       mechanism: [],
       material: [],
@@ -51,10 +51,11 @@ const Filter = () => {
 
   const submitFilter = (values) => {
     const link = setFilterLink(values, currentPrice);
-    setSearch(link);
+    setSearch(link + "&perPage=10&startPage=1");
     setIsFilterUsing(true);
     setIsMobileFilterBtnShow(false);
-    document.getElementById("filter").classList.remove("filter__form--active");
+    document.getElementById("filter").style = "none";
+    setItemCliked("");
   };
 
   const resetFilter = () => {
@@ -63,6 +64,8 @@ const Filter = () => {
     setCurrentPrice(getMinMaxPrice(categorieProductList));
     setIsFilterUsing(false);
     setIsItemChecked([]);
+    setIsMobileFilterBtnShow(false);
+    setItemCliked("");
   };
 
   const getLinkOnChange = (values) => {
@@ -74,32 +77,31 @@ const Filter = () => {
   };
 
   return (
-    <>
-      <div className="filter-wrapper filter">
-        <FilterMobileHeader
-          isMobileFilterBtnShow={isMobileFilterBtnShow}
-          setIsMobileFilterBtnShow={setIsMobileFilterBtnShow}
-        />
-        <Stack>
-          <CheckedFilterItem isItemChecked={isItemChecked} />
+    <Box p={2} maxWidth={320}>
+      <FilterMobileHeader
+        isMobileFilterBtnShow={isMobileFilterBtnShow}
+        setIsMobileFilterBtnShow={setIsMobileFilterBtnShow}
+      />
 
+      <Stack>
+        <CheckedFilterItem isItemChecked={isItemChecked} />
+
+        <Box display={{ mobile: "none", desktop: "block" }} id="filter">
           <form
             onSubmit={handleSubmit((data) => {
               submitFilter(data);
             })}
             onChange={handleSubmit((values) => getLinkOnChange(values))}
-            className="filter__form"
-            id="filter"
           >
             {filterTitles.map((title) => (
-              <Box className="checkbox" key={title}>
+              <Box key={title}>
                 <CheckboxForm
                   title={title}
                   register={register}
                   isItemChecked={isItemChecked}
                   setIsItemChecked={setIsItemChecked}
                   itemCLicked={itemCLicked}
-                  setIdemCliked={setIdemCliked}
+                  setIdemCliked={setItemCliked}
                 />
               </Box>
             ))}
@@ -111,24 +113,23 @@ const Filter = () => {
               currentPrice={currentPrice}
               setCurrentPrice={setCurrentPrice}
             />
-            <Button
-              style={{ color: nightMode ? "#fff" : "#000" }}
-              type="submit"
-            >
-              Apply
-            </Button>
-            <Button
-              type="button"
-              onClick={resetFilter}
-              disabled={!isFilterUsing}
-              style={{ color: nightMode ? "#fff" : "#000" }}
-            >
-              Reset
-            </Button>
+            <Stack direction="row">
+              <Button sx={{ color: nightMode ? "#fff" : "#000" }} type="submit">
+                Apply
+              </Button>
+              <Button
+                type="button"
+                onClick={resetFilter}
+                disabled={!isFilterUsing}
+                sx={{ color: nightMode ? "#fff" : "#000" }}
+              >
+                Reset
+              </Button>
+            </Stack>
           </form>
-        </Stack>
-      </div>
-    </>
+        </Box>
+      </Stack>
+    </Box>
   );
 };
 

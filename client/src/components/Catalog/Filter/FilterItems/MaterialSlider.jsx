@@ -1,47 +1,38 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { Slider, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import classNames from "classnames";
-import { useSelector } from "react-redux";
 
-export const MaterialSlider = ({
+const MaterialSlider = ({
   title,
   defaultValues,
   register,
   currentPrice,
   setCurrentPrice,
 }) => {
-  const [isShow, setIsShow] = useState(false);
-  const nightMode = useSelector((state) => state.nightMode);
-  const sliderClasses = classNames(
-    {
-      "slider__element--black": !nightMode,
-    },
-    {
-      "slider__element--white": nightMode,
-    }
-  );
+  const [isShow, setIsShow] = useState(true);
 
   return (
-    <Box className="filter__slider">
+    <Box>
       <Typography
-        className="slider__title"
-        variant="h6"
+        p={1}
+        fontWeight="bold"
+        textTransform="uppercase"
+        sx={{ cursor: "pointer" }}
         onClick={() => setIsShow(!isShow)}
       >
         Price
       </Typography>
       {isShow && (
         <>
-          <Box className="slider__title">
+          <Box pt={1}>
             <span>$</span> <span>{currentPrice[0]}</span>
             <span> - </span>
             <span>{currentPrice[1]}</span>
           </Box>
           <Slider
-            className={sliderClasses}
             defaultValue={defaultValues}
+            /* eslint-disable react/jsx-props-no-spreading */
             {...register(title)}
             value={currentPrice}
             onChange={(e, v) => setCurrentPrice(v)}
@@ -53,6 +44,7 @@ export const MaterialSlider = ({
     </Box>
   );
 };
+export default MaterialSlider;
 
 MaterialSlider.propTypes = {
   title: PropTypes.string,

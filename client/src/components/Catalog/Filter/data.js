@@ -1,5 +1,5 @@
 const filterCategoriesItem = {
-  categories: ["mens", "ladies", "accessories"],
+  categories: ["Mens", "Ladies", "Accessories"],
   brand: [
     "Certina",
     "Casio",
@@ -9,24 +9,14 @@ const filterCategoriesItem = {
     "Gucci",
     "Frederique",
     "Morellato",
-    "hirsch",
+    "Hirsch",
   ],
 
   mechanism: ["Mechanics", "Quartz"],
 
   material: ["Steel", "Nylon", "Polymer", "Leather"],
 
-  color: [
-    "steel",
-    "blue",
-    "grey",
-    "black",
-    "green",
-    "brown",
-    "gold",
-    "white",
-    "red",
-  ],
+  color: ["Blue", "Grey", "Black", "Green", "Brown", "Gold", "White", "Red"],
 };
 
 export { filterCategoriesItem };

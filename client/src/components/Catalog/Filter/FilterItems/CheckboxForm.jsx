@@ -1,11 +1,8 @@
-import { Typography, Stack } from "@mui/material";
+import { Typography, ListItem, List } from "@mui/material";
 import PropTypes from "prop-types";
-import { useEffect } from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import CheckboxItem from "./CheckboxItem";
-import { filterCategoriesItem } from "./data";
-//import { getFilterItem } from "./filterFunctions";
+import { filterCategoriesItem } from "../data";
 
 const CheckboxForm = ({
   title,
@@ -17,33 +14,22 @@ const CheckboxForm = ({
 }) => {
   const [isShow, setIsShow] = useState(true);
 
-  //const [arr, setArr] = useState();
-  const productList = useSelector(
-    (state) => state.catalog.categorieProductList
-  );
-
-  useEffect(() => {
-    //setIsShow(false);
-    // setArr(getFilterItem(title, productList));
-  }, [productList]);
-
   return (
     <>
       <Typography
-        className="checkbox__title"
-        variant="h6"
-        onClick={() => {
-          setIsShow(!isShow);
-          // setArr(getFilterItem(title, productList));
-        }}
+        p={1}
+        fontWeight="bold"
+        textTransform="uppercase"
+        sx={{ cursor: "pointer" }}
+        onClick={() => setIsShow(!isShow)}
       >
         {title}
       </Typography>
 
       {isShow && (
-        <Stack component="ul">
+        <List sx={{ p: 0 }}>
           {filterCategoriesItem[title].map((itemName) => (
-            <ol key={Math.random()}>
+            <ListItem key={Math.random()} sx={{ pt: 0.5, pb: 0.5 }}>
               <CheckboxItem
                 itemName={itemName}
                 title={title}
@@ -53,9 +39,9 @@ const CheckboxForm = ({
                 itemCLicked={itemCLicked}
                 setIdemCliked={setIdemCliked}
               />
-            </ol>
+            </ListItem>
           ))}
-        </Stack>
+        </List>
       )}
     </>
   );
@@ -70,4 +56,5 @@ CheckboxForm.propTypes = {
   setIsItemChecked: PropTypes.func,
   itemCLicked: PropTypes.string,
   setIdemCliked: PropTypes.func,
+  categories: PropTypes.string,
 };

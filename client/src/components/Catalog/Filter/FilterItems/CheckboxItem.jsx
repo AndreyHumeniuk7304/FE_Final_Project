@@ -1,4 +1,10 @@
-import { CircularProgress, FormLabel, Tooltip } from "@mui/material";
+import {
+  Checkbox,
+  CircularProgress,
+  FormLabel,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -24,6 +30,18 @@ const CheckboxItem = ({
 
   const nightMode = useSelector((state) => state.nightMode);
 
+  const toggleChecked = (e) => {
+    setIdemCliked(e.target.value);
+    setIsChecked(!isChecked);
+    !isChecked
+      ? setIsItemChecked([...isItemChecked, e.target.value.toLowerCase()])
+      : setIsItemChecked(
+          isItemChecked.filter(
+            (el) => el.toLowerCase() !== e.target.value.toLowerCase()
+          )
+        );
+  };
+
   return (
     <Tooltip
       title={
@@ -38,43 +56,31 @@ const CheckboxItem = ({
       placement={"right"}
     >
       <FormLabel
-        className="checkbox__lable"
         style={{
           textDecoration: isChecked ? "underline" : "none",
           color: nightMode ? "#fff" : "#686868",
+          cursor: "pointer",
         }}
       >
-        <input
-          type="checkbox"
+        <Checkbox
           name={title}
           value={itemName}
-          defaultChecked={isChecked}
-          className={"custom-checkbox"}
-          onClick={(e) => {
-            setIdemCliked(e.target.value);
-            setIsChecked(!isChecked);
-            console.log(isItemChecked);
-            !isChecked
-              ? setIsItemChecked([
-                  ...isItemChecked,
-                  e.target.value.toLowerCase(),
-                ])
-              : setIsItemChecked(
-                  isItemChecked.filter(
-                    (el) => el.toLowerCase() !== e.target.value.toLowerCase()
-                  )
-                );
+          sx={{
+            display: "none",
           }}
+          defaultChecked={isChecked}
+          onClick={toggleChecked}
+          /* eslint-disable react/jsx-props-no-spreading */
           {...register(title)}
         />
         {title === "color" && (
           <>
-            <span
-              className="checkbox__color"
+            <Typography
+              component="span"
               style={{
-                backgroundColor: itemName === "steel" ? "silver" : itemName,
+                textTransform: "capitalize",
               }}
-            ></span>
+            ></Typography>
           </>
         )}
         {itemName}
