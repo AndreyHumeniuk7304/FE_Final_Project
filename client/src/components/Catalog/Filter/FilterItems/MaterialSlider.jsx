@@ -20,8 +20,9 @@ const MaterialSlider = ({
         textTransform="uppercase"
         sx={{ cursor: "pointer" }}
         onClick={() => setIsShow(!isShow)}
+        textAlign="start"
       >
-        Price
+        {!isShow ? "+ " : "- "} Price
       </Typography>
       {isShow && (
         <>
