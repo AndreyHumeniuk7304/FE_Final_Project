@@ -1,5 +1,6 @@
 import { MenuItem, Select } from "@mui/material";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 
 export default function CustomDropList({
   name,
@@ -8,12 +9,18 @@ export default function CustomDropList({
   camelizeDecode,
   handleChange,
 }) {
+  const nightMode = useSelector((state) => state.nightMode);
   return (
     <>
       <Select
         {...register(name)}
         defaultValue={camelizeDecode(name)}
         onChange={handleChange}
+        sx={{
+          "& .MuiSelect-select": {
+            backgroundColor: !nightMode ? "initial" : "#fff",
+          },
+        }}
       >
         <MenuItem disabled value={camelizeDecode(name)}>
           {camelizeDecode(name)}

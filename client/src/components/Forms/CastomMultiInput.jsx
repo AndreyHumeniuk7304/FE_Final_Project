@@ -1,7 +1,9 @@
 import { Box, Button, TextField } from "@mui/material";
 import PropTypes from "prop-types";
 import { Controller } from "react-hook-form";
+import { useSelector } from "react-redux";
 const CastomMultiInput = ({ inputName, index, fieldArray, control }) => {
+  const nightMode = useSelector((state) => state.nightMode);
   return (
     <>
       <Controller
@@ -12,7 +14,15 @@ const CastomMultiInput = ({ inputName, index, fieldArray, control }) => {
             onChange={onChange}
             value={value}
             label={`Past url image #${index + 1}`}
-            sx={{ width: "85%" }}
+            sx={{
+              width: "85%",
+              "& .MuiInputBase-root": {
+                backgroundColor: !nightMode ? "initial" : "#fff",
+              },
+              "& .MuiInputBase-input": {
+                color: nightMode ? "#000" : "initial",
+              },
+            }}
           />
         )}
       />
