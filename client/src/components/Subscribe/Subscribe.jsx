@@ -83,7 +83,7 @@ const Subscribe = ({ product }) => {
           Subscribe for new products &#8595;
         </Button>
       )}
-      <Box className="subscribe">
+      <Box width="fit-content">
         {isSubscribeOpen && (
           <Form
             actionWithForm={subscribeUser}
