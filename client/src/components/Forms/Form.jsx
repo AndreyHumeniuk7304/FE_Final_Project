@@ -90,12 +90,14 @@ const Form = ({
               {fieldArray.fields.map((item, index) => {
                 const err = errors[inputName];
                 return (
-                  <Box
-                    component="ul"
+                  <Stack
+                    component="li"
                     key={item.id}
                     pt={1}
                     pb={1}
                     className="form__multi-input"
+                    direction="row"
+                    justifyContent="space-between"
                   >
                     <CastomMultiInput
                       inputName={inputName}
@@ -105,7 +107,7 @@ const Form = ({
                       control={control}
                     />
                     <CustomErrorMessage err={err ? err[index]?.message : ""} />
-                  </Box>
+                  </Stack>
                 );
               })}
             </List>
@@ -138,7 +140,7 @@ const Form = ({
       <Stack pt={2} pb={2} maxWidth={500} m="auto">
         <List>
           {formArr.map((formData) => (
-            <Box key={formData.inputName} component="ul" pt={1} pb={1}>
+            <Box key={formData.inputName} component="li" pt={1} pb={1}>
               {renderFormType(formData)}
             </Box>
           ))}

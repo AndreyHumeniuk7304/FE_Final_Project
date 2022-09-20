@@ -1,9 +1,10 @@
-import { Button, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import PropTypes from "prop-types";
 import { Controller } from "react-hook-form";
 import { useSelector } from "react-redux";
 const CastomMultiInput = ({ inputName, index, fieldArray, control }) => {
   const nightMode = useSelector((state) => state.nightMode);
+  console.log(fieldArray);
   return (
     <>
       <Controller
@@ -15,7 +16,7 @@ const CastomMultiInput = ({ inputName, index, fieldArray, control }) => {
             value={value}
             label={`Past url image #${index + 1}`}
             sx={{
-              width: "85%",
+              width: "70%",
               "& .MuiInputBase-root": {
                 backgroundColor: !nightMode ? "initial" : "#fff",
               },
@@ -26,23 +27,23 @@ const CastomMultiInput = ({ inputName, index, fieldArray, control }) => {
           />
         )}
       />
-      <Button
-        style={{ marginRight: 20 }}
-        type="btn"
-        onClick={(e) => {
-          e.preventDefault();
-          fieldArray.append([" "]);
-        }}
-      >
-        ADD
-      </Button>
+
       {index ? (
-        <Button type="btn" onClick={() => fieldArray.remove(index)}>
+        <Button
+          sx={{ backgroundColor: "#686868", color: "#fff" }}
+          onClick={() => fieldArray.remove(index)}
+        >
           DEL
         </Button>
       ) : (
         ""
       )}
+      <Button
+        sx={{ backgroundColor: "#686868", color: "#fff" }}
+        onClick={() => fieldArray.append([" "])}
+      >
+        ADD
+      </Button>
     </>
   );
 };
