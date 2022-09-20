@@ -138,7 +138,13 @@ const Form = ({
       onSubmit={handleSubmit((values) => actionWithForm(values))}
       onChange={handleChange}
     >
-      <Stack pt={2} pb={2} maxWidth={500} m="auto">
+      <Stack
+        pt={2}
+        pb={2}
+        maxWidth={500}
+        minwidth={{ mobile: 320, desktop: 320 }}
+        m="auto"
+      >
         <List>
           {formArr.map((formData) => (
             <Box key={formData.inputName} component="li" pt={1} pb={1}>

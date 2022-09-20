@@ -13,6 +13,7 @@ const Profile = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     defaultValues: {

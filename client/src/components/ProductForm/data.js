@@ -115,6 +115,6 @@ export const productFormDefaultValues = {
   name: "",
   currentPrice: "",
   previousPrice: "",
-  isNewProduct: true,
-  isPopularProduct: false,
+  isNewProduct: "",
+  isPopularProduct: "",
 };
