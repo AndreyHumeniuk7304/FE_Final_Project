@@ -13,6 +13,7 @@ export default function CustomDropList({
   return (
     <>
       <Select
+        /* eslint-disable react/jsx-props-no-spreading */
         {...register(name)}
         defaultValue={camelizeDecode(name)}
         onChange={handleChange}

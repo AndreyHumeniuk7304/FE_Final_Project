@@ -102,3 +102,17 @@ export const productSchema = yup.object({
   isNewProduct: yup.bool().required("isNewProduct is required"),
   isPopularProduct: yup.bool().required("isPopularProduct is required"),
 });
+
+export const productFormDefaultValues = {
+  brand: "",
+  categories: "",
+  mechanism: "",
+  color: "",
+  material: "",
+  enabled: true,
+  imageUrls: [""],
+  quantity: 1,
+  name: "",
+  currentPrice: "",
+  previousPrice: "",
+};

@@ -74,6 +74,7 @@ const Form = ({
                 name={inputName}
                 label={label}
                 control={control}
+                /* eslint-disable react/jsx-props-no-spreading */
                 render={({ field }) => <Checkbox {...field} />}
               />
               {label}
