@@ -12,21 +12,29 @@ export default function CustomDropList({
 }) {
   const nightMode = useSelector((state) => state.nightMode);
   return (
-    <Controller
-      render={({ field }) => (
-        <>
-          <InputLabel sx={{ pl: 1, color: !nightMode ? "#686868" : "#fff" }}>
-            {camelizeDecode(name)}
-          </InputLabel>
+    <>
+      <InputLabel sx={{ width: "150px" }}>{camelizeDecode(name)}:</InputLabel>
+
+      <Controller
+        control={control}
+        name={name}
+        render={({ field: { value, name, onChange } }) => (
           <Select
-            onChange={handleChange}
+            variant="standard"
+            onChange={(e) => {
+              handleChange(e);
+              onChange(e);
+            }}
+            value={value}
             sx={{
+              flexGrow: "1",
               "& .MuiSelect-select": {
-                backgroundColor: !nightMode ? "initial" : "#fff",
+                color: !nightMode ? "#000" : "#fff",
               },
             }}
             /* eslint-disable react/jsx-props-no-spreading */
-            {...field}
+
+            control={control}
           >
             <MenuItem disabled value={camelizeDecode(name)}>
               {camelizeDecode(name)}
@@ -37,12 +45,9 @@ export default function CustomDropList({
               </MenuItem>
             ))}
           </Select>
-        </>
-      )}
-      control={control}
-      name={name}
-      defaultValue={camelizeDecode(name)}
-    />
+        )}
+      />
+    </>
   );
 }
 

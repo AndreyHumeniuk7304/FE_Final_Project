@@ -1,5 +1,13 @@
 import PropTypes from "prop-types";
-import { Box, Button, Checkbox, InputLabel, List, Stack } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  createTheme,
+  InputLabel,
+  List,
+  Stack,
+} from "@mui/material";
 
 import CustomErrorMessage from "../Forms/CustomErrorMessage";
 import CustomDropList from "../Forms/CustomDropList";
@@ -24,13 +32,24 @@ const Form = ({
     const result = str.replace(/([A-Z])/g, " $1");
     return result.charAt(0).toUpperCase() + result.slice(1);
   };
+
   const nightMode = useSelector((state) => state.nightMode);
+  createTheme({
+    root: {
+      color: !nightMode ? "#000" : "#fff",
+      background: "inherit",
+    },
+  });
 
   const renderFormType = ({ inputName, formType, formName, label }) => {
     switch (formType) {
       case "droplist": {
         return (
-          <Stack>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
             <CustomDropList
               name={inputName}
               arr={formName}
@@ -63,14 +82,7 @@ const Form = ({
       case "checkbox": {
         return (
           <Stack>
-            <InputLabel
-              sx={{
-                color: nightMode ? "#fff" : "initial",
-                "& .MuiButtonBase-root": {
-                  color: nightMode ? "#fff" : "initial",
-                },
-              }}
-            >
+            <InputLabel sx={{ "& .MuiButtonBase-root": { color: "white" } }}>
               <Controller
                 name={inputName}
                 label={label}
@@ -96,9 +108,9 @@ const Form = ({
                     key={item.id}
                     pt={1}
                     pb={1}
-                    className="form__multi-input"
                     direction="row"
                     justifyContent="space-between"
+                    spacing={4}
                   >
                     <CastomMultiInput
                       inputName={inputName}
@@ -139,8 +151,8 @@ const Form = ({
       onChange={handleChange}
     >
       <Stack
-        pt={2}
-        pb={2}
+        pt={5}
+        pb={5}
         maxWidth={500}
         minwidth={{ mobile: 320, desktop: 320 }}
         m="auto"

@@ -24,7 +24,7 @@ const Registrations = ({ setActiveTitle }) => {
       telephone: "",
       password: "",
       confirmPassword: "",
-      gender: "Male",
+      gender: "",
       isAdmin: false,
     },
   });

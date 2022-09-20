@@ -17,17 +17,12 @@ const CastomInput = ({ inputName, control, label, formType }) => {
       control={control}
       render={({ field: { onChange, value } }) => (
         <TextField
+          autoComplete="off"
+          variant="standard"
+          color="secondary"
           onChange={onChange}
           value={value}
           label={label}
-          sx={{
-            "& .MuiInputBase-root": {
-              backgroundColor: !nightMode ? "initial" : "#fff",
-            },
-            "& .MuiInputBase-input": {
-              color: nightMode ? "#000" : "initial",
-            },
-          }}
         />
       )}
     />
@@ -37,18 +32,15 @@ const CastomInput = ({ inputName, control, label, formType }) => {
       control={control}
       render={({ field: { onChange, value } }) => (
         <TextField
-          autoComplete="on"
+          autoComplete="off"
           onChange={onChange}
           value={value}
-          label="Some label"
-          variant="outlined"
+          label={label}
+          variant="standard"
           type={showPassword ? "text" : "password"}
           sx={{
-            "& .MuiInputBase-root": {
-              backgroundColor: !nightMode ? "initial" : "#fff",
-            },
-            "& .MuiInputBase-input": {
-              color: nightMode ? "#000" : "initial",
+            "& .MuiSvgIcon-root": {
+              fill: !nightMode ? "#000" : "#fff",
             },
           }}
           InputProps={{

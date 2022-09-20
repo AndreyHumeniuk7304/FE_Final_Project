@@ -42,7 +42,7 @@ const Login = () => {
 
   return (
     <>
-      <Typography pt={6} pb={4}>
+      <Typography pt={6}>
         Please enter your account details to log in
       </Typography>
       <Form

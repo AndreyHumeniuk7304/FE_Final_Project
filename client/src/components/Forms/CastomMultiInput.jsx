@@ -12,17 +12,12 @@ const CastomMultiInput = ({ inputName, index, fieldArray, control }) => {
         control={control}
         render={({ field: { onChange, value } }) => (
           <TextField
+            variant="standard"
             onChange={onChange}
             value={value}
             label={`Past url image #${index + 1}`}
             sx={{
-              width: "70%",
-              "& .MuiInputBase-root": {
-                backgroundColor: !nightMode ? "initial" : "#fff",
-              },
-              "& .MuiInputBase-input": {
-                color: nightMode ? "#000" : "initial",
-              },
+              flex: "1",
             }}
           />
         )}
@@ -30,7 +25,7 @@ const CastomMultiInput = ({ inputName, index, fieldArray, control }) => {
 
       {index ? (
         <Button
-          sx={{ backgroundColor: "#686868", color: "#fff" }}
+          sx={{ backgroundColor: "#686868", color: "#fff", width: 60 }}
           onClick={() => fieldArray.remove(index)}
         >
           DEL
@@ -39,7 +34,7 @@ const CastomMultiInput = ({ inputName, index, fieldArray, control }) => {
         ""
       )}
       <Button
-        sx={{ backgroundColor: "#686868", color: "#fff" }}
+        sx={{ backgroundColor: "#686868", color: "#fff", width: 60 }}
         onClick={() => fieldArray.append([" "])}
       >
         ADD
