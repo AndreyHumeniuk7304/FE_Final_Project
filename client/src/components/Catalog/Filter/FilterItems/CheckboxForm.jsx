@@ -11,20 +11,27 @@ const CheckboxForm = ({
   setArrOfCheckedItem,
   itemCLicked,
   setIdemCliked,
+  categories,
 }) => {
   const [isShow, setIsShow] = useState(false);
 
+  const filterTitle = (
+    <Typography
+      p={1}
+      fontWeight="bold"
+      textTransform="uppercase"
+      sx={{ cursor: "pointer" }}
+      onClick={() => setIsShow(!isShow)}
+    >
+      {!isShow ? "+ " : "- "} {title}
+    </Typography>
+  );
+
   return (
     <>
-      <Typography
-        p={1}
-        fontWeight="bold"
-        textTransform="uppercase"
-        sx={{ cursor: "pointer" }}
-        onClick={() => setIsShow(!isShow)}
-      >
-        {!isShow ? "+ " : "- "} {title}
-      </Typography>
+      {categories.length
+        ? title.toLowerCase() !== "categories" && filterTitle
+        : filterTitle}
       <List sx={{ p: 0 }}>
         {filterCategoriesItem[title].map((itemName) => (
           <ListItem

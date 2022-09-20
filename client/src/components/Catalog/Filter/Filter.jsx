@@ -105,6 +105,7 @@ const Filter = () => {
                     setArrOfCheckedItem={setArrOfCheckedItem}
                     itemCLicked={itemCLicked}
                     setIdemCliked={setItemCliked}
+                    categories={categories}
                   />
                 </Box>
               ))}
