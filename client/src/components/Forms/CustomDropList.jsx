@@ -15,7 +15,7 @@ export default function CustomDropList({
     <Controller
       render={({ field }) => (
         <>
-          <InputLabel sx={{ color: !nightMode ? "initial" : "#fff" }}>
+          <InputLabel sx={{ pl: 1, color: !nightMode ? "#686868" : "#fff" }}>
             {camelizeDecode(name)}
           </InputLabel>
           <Select
