@@ -36,8 +36,14 @@ export const registInputNames = [
 ];
 
 export const registSchema = yup.object({
-  firstName: yup.string().required("First name is required."),
-  lastName: yup.string().required("Second name is required."),
+  firstName: yup
+    .string()
+    .required("First name is required.")
+    .matches(/^[A-Za-z ]*$/, "Please enter valid name"),
+  lastName: yup
+    .string()
+    .required("Second name is required.")
+    .matches(/^[A-Za-z ]*$/, "Please enter valid last name"),
   login: yup
     .string()
     .required("Login is required.")
