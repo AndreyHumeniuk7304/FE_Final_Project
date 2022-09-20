@@ -63,5 +63,5 @@ CheckboxForm.propTypes = {
   setArrOfCheckedItem: PropTypes.func,
   itemCLicked: PropTypes.string,
   setIdemCliked: PropTypes.func,
-  categories: PropTypes.array,
+  categories: PropTypes.any,
 };
