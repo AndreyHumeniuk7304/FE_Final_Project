@@ -24,6 +24,7 @@ const Form = ({
     const result = str.replace(/([A-Z])/g, " $1");
     return result.charAt(0).toUpperCase() + result.slice(1);
   };
+  const nightMode = useSelector((state) => state.nightMode);
 
   const renderFormType = ({ inputName, formType, formName, label }) => {
     switch (formType) {
@@ -61,7 +62,14 @@ const Form = ({
       case "checkbox": {
         return (
           <Stack>
-            <InputLabel>
+            <InputLabel
+              sx={{
+                color: nightMode ? "#fff" : "initial",
+                "& .MuiButtonBase-root": {
+                  color: nightMode ? "#fff" : "initial",
+                },
+              }}
+            >
               <Controller
                 name={inputName}
                 label={label}
@@ -136,7 +144,12 @@ const Form = ({
         </List>
         <CustomErrorMessage err={errors.message} />
 
-        <Button type="submit">{btnName}</Button>
+        <Button
+          type="submit"
+          sx={{ background: "#686868", height: 50, color: "#fff" }}
+        >
+          {btnName}
+        </Button>
       </Stack>
     </form>
   );
