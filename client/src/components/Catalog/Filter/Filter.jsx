@@ -78,6 +78,52 @@ const Filter = () => {
     );
   };
 
+  const filterForm = (
+    <form
+      onSubmit={handleSubmit((data) => {
+        submitFilter(data);
+      })}
+      onChange={handleSubmit((values) => getLinkOnChange(values))}
+    >
+      <Box textAlign="start">
+        {filterTitles.map((title) => (
+          <Box key={title}>
+            <CheckboxForm
+              title={title}
+              register={register}
+              arrOfCheckedItem={arrOfCheckedItem}
+              setArrOfCheckedItem={setArrOfCheckedItem}
+              itemCLicked={itemCLicked}
+              setIdemCliked={setItemCliked}
+              categories={categories}
+            />
+          </Box>
+        ))}
+      </Box>
+      <MaterialSlider
+        title={"currentPrice"}
+        name="currentPrice"
+        defaultValues={getMinMaxPrice(categorieProductList)}
+        register={register}
+        currentPrice={currentPrice}
+        setCurrentPrice={setCurrentPrice}
+      />
+      <Stack direction="row" justifyContent="space-evenly">
+        <Button sx={{ color: nightMode ? "#fff" : "#000" }} type="submit">
+          Apply
+        </Button>
+        <Button
+          type="button"
+          onClick={resetFilter}
+          disabled={!isFilterUsing}
+          sx={{ color: nightMode ? "#fff" : "#000" }}
+        >
+          Reset
+        </Button>
+      </Stack>
+    </form>
+  );
+
   return (
     <Box p={2} width={{ mobile: "100%", desktop: 280 }} textAlign="center">
       <FilterMobileHeader
@@ -87,52 +133,8 @@ const Filter = () => {
 
       <Stack>
         <CheckedFilterItem arrOfCheckedItem={arrOfCheckedItem} />
-
-        <Box display={{ mobile: "none", desktop: "block" }} id="filter">
-          <form
-            onSubmit={handleSubmit((data) => {
-              submitFilter(data);
-            })}
-            onChange={handleSubmit((values) => getLinkOnChange(values))}
-          >
-            <Box textAlign="start">
-              {filterTitles.map((title) => (
-                <Box key={title}>
-                  <CheckboxForm
-                    title={title}
-                    register={register}
-                    arrOfCheckedItem={arrOfCheckedItem}
-                    setArrOfCheckedItem={setArrOfCheckedItem}
-                    itemCLicked={itemCLicked}
-                    setIdemCliked={setItemCliked}
-                    categories={categories}
-                  />
-                </Box>
-              ))}
-            </Box>
-            <MaterialSlider
-              title={"currentPrice"}
-              name="currentPrice"
-              defaultValues={getMinMaxPrice(categorieProductList)}
-              register={register}
-              currentPrice={currentPrice}
-              setCurrentPrice={setCurrentPrice}
-            />
-            <Stack direction="row" justifyContent="space-evenly">
-              <Button sx={{ color: nightMode ? "#fff" : "#000" }} type="submit">
-                Apply
-              </Button>
-              <Button
-                type="button"
-                onClick={resetFilter}
-                disabled={!isFilterUsing}
-                sx={{ color: nightMode ? "#fff" : "#000" }}
-              >
-                Reset
-              </Button>
-            </Stack>
-          </form>
-        </Box>
+        {filterForm}
+        <Box display={{ mobile: "none", desktop: "block" }} id="filter"></Box>
       </Stack>
     </Box>
   );
