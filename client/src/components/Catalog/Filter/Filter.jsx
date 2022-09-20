@@ -85,9 +85,9 @@ const Filter = () => {
       })}
       onChange={handleSubmit((values) => getLinkOnChange(values))}
     >
-      <Box textAlign="start">
+      <Box textAlign="start" component="ul">
         {filterTitles.map((title) => (
-          <Box key={title}>
+          <Box key={title} component="li">
             <CheckboxForm
               title={title}
               register={register}
@@ -99,15 +99,18 @@ const Filter = () => {
             />
           </Box>
         ))}
+        <Box component="li">
+          <MaterialSlider
+            title={"currentPrice"}
+            name="currentPrice"
+            defaultValues={getMinMaxPrice(categorieProductList)}
+            register={register}
+            currentPrice={currentPrice}
+            setCurrentPrice={setCurrentPrice}
+          />
+        </Box>
       </Box>
-      <MaterialSlider
-        title={"currentPrice"}
-        name="currentPrice"
-        defaultValues={getMinMaxPrice(categorieProductList)}
-        register={register}
-        currentPrice={currentPrice}
-        setCurrentPrice={setCurrentPrice}
-      />
+
       <Stack direction="row" justifyContent="space-evenly">
         <Button sx={{ color: nightMode ? "#fff" : "#000" }} type="submit">
           Apply

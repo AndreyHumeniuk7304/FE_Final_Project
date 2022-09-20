@@ -13,7 +13,7 @@ const MaterialSlider = ({
   const [isShow, setIsShow] = useState(true);
 
   return (
-    <Box>
+    <>
       <Typography
         p={1}
         fontWeight="bold"
@@ -42,7 +42,7 @@ const MaterialSlider = ({
           />
         </>
       )}
-    </Box>
+    </>
   );
 };
 export default MaterialSlider;
