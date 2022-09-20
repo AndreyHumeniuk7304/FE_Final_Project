@@ -47,6 +47,7 @@ const Profile = () => {
               handleSubmit={handleSubmit}
               errors={errors}
               btnName={"SAVE"}
+              control={control}
             />
           </div>
         </div>

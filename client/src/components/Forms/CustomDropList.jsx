@@ -1,3 +1,4 @@
+import { MenuItem, Select } from "@mui/material";
 import PropTypes from "prop-types";
 
 export default function CustomDropList({
@@ -5,17 +6,24 @@ export default function CustomDropList({
   arr,
   register,
   camelizeDecode,
+  handleChange,
 }) {
   return (
     <>
-      <select {...register(name)} className="form__droplist">
-        <option disabled>{camelizeDecode(name)}</option>
+      <Select
+        {...register(name)}
+        defaultValue={camelizeDecode(name)}
+        onChange={handleChange}
+      >
+        <MenuItem disabled value={camelizeDecode(name)}>
+          {camelizeDecode(name)}
+        </MenuItem>
         {arr.map((data) => (
-          <option key={Math.random()} value={data}>
+          <MenuItem key={Math.random()} value={data}>
             {camelizeDecode(data)}
-          </option>
+          </MenuItem>
         ))}
-      </select>
+      </Select>
     </>
   );
 }
@@ -25,4 +33,5 @@ CustomDropList.propTypes = {
   arr: PropTypes.array,
   register: PropTypes.func,
   camelizeDecode: PropTypes.func,
+  handleChange: PropTypes.func,
 };

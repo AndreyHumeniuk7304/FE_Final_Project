@@ -1,10 +1,20 @@
 import PropTypes from "prop-types";
-import { Button } from "@mui/material";
-import CustomInput from "../Forms/CastomInput";
+import {
+  Box,
+  Button,
+  Checkbox,
+  InputLabel,
+  List,
+  Stack,
+  TextField,
+} from "@mui/material";
+
 import CustomErrorMessage from "../Forms/CustomErrorMessage";
 import CustomDropList from "../Forms/CustomDropList";
 import CustomPaymantInput from "./CustomPaymantInput";
 import CastomMultiInput from "./CastomMultiInput";
+import { Controller } from "react-hook-form";
+import CastomInput from "./CastomInput";
 
 const Form = ({
   actionWithForm,
@@ -15,38 +25,33 @@ const Form = ({
   errors,
   btnName,
   fieldArray,
+  control,
 }) => {
   const camelizeDecode = (str) => {
     const result = str.replace(/([A-Z])/g, " $1");
     return result.charAt(0).toUpperCase() + result.slice(1);
   };
 
-  const renderFormType = ({
-    inputName,
-    formType,
-    formName,
-    label,
-    className,
-  }) => {
+  const renderFormType = ({ inputName, formType, formName, label }) => {
     switch (formType) {
       case "droplist": {
         return (
-          <>
-            {label && <label className="form__label">Select {label}:</label>}
+          <Stack>
             <CustomDropList
               name={inputName}
               arr={formName}
               register={register}
               camelizeDecode={camelizeDecode}
+              handleChange={handleChange}
             />
             <CustomErrorMessage err={errors[inputName]?.message} />
-          </>
+          </Stack>
         );
       }
       case "expiryDate": {
         return (
-          <>
-            {label && <label className="form__label">Enter the {label}:</label>}
+          <Stack>
+            {label && <InputLabel>Enter the {label}:</InputLabel>}
             <CustomPaymantInput
               register={register}
               name={camelizeDecode(inputName)}
@@ -57,84 +62,89 @@ const Form = ({
             <CustomErrorMessage
               err={errors[inputName]?.message || errors[inputName]}
             />
-          </>
+          </Stack>
         );
       }
       case "checkbox": {
         return (
-          <>
-            <label className={className ? className : "form__label"}>
-              <CustomInput
-                register={register}
-                formName={inputName}
-                formType={"checkbox"}
+          <Stack>
+            <InputLabel>
+              <Controller
+                name={inputName}
                 label={label}
+                control={control}
+                render={({ field }) => <Checkbox {...field} />}
               />
               {label}
-            </label>
-          </>
+            </InputLabel>
+          </Stack>
         );
       }
 
       case "multiInput": {
         return (
-          <ul>
-            {fieldArray.fields.map((item, index) => {
-              const err = errors[inputName];
-
-              return (
-                <li key={item.id} className="form__multi-input">
-                  <CastomMultiInput
-                    inputName={inputName}
-                    index={index}
-                    fieldArray={fieldArray}
-                    register={register}
-                  />
-                  <CustomErrorMessage err={err ? err[index]?.message : ""} />
-                </li>
-              );
-            })}
-          </ul>
+          <Stack>
+            <List>
+              {fieldArray.fields.map((item, index) => {
+                const err = errors[inputName];
+                return (
+                  <Box
+                    component="ul"
+                    key={item.id}
+                    pt={1}
+                    pb={1}
+                    className="form__multi-input"
+                  >
+                    <CastomMultiInput
+                      inputName={inputName}
+                      index={index}
+                      fieldArray={fieldArray}
+                      register={register}
+                      control={control}
+                    />
+                    <CustomErrorMessage err={err ? err[index]?.message : ""} />
+                  </Box>
+                );
+              })}
+            </List>
+          </Stack>
         );
       }
 
       default:
-        errors.isEmpty && console.log(errors);
         return (
-          <>
-            {label && <label className="form__label">Enter the {label}:</label>}
-            <CustomInput
-              register={register}
-              name={camelizeDecode(inputName)}
-              formName={inputName}
-              formType={formType}
+          <Stack>
+            <CastomInput
+              inputName={inputName}
+              control={control}
               label={label}
+              formType={formType}
             />
             <CustomErrorMessage
               err={errors[inputName]?.message || errors[inputName]}
             />
-          </>
+          </Stack>
         );
     }
   };
-  // console.log(errors);
+
   return (
     <form
       onSubmit={handleSubmit((values) => actionWithForm(values))}
       onChange={handleChange}
-      className="form"
     >
-      <ul className="form__box">
-        {formArr.map((formData) => (
-          <li className={"form__item"} key={formData.inputName}>
-            {renderFormType(formData)}
-          </li>
-        ))}
-      </ul>
-      <CustomErrorMessage err={errors.message} />
-      <div className="form__btn">
+      <Stack pt={2} pb={2} maxWidth={500} m="auto">
+        <List>
+          {formArr.map((formData) => (
+            <Box key={formData.inputName} component="ul" pt={1} pb={1}>
+              {renderFormType(formData)}
+            </Box>
+          ))}
+        </List>
+        <CustomErrorMessage err={errors.message} />
+
         <Button type="submit">{btnName}</Button>
-      </div>
+      </Stack>
     </form>
   );
 };
@@ -148,6 +158,7 @@ Form.propTypes = {
   errors: PropTypes.object,
   btnName: PropTypes.string,
   fieldArray: PropTypes.object,
+  control: PropTypes.object,
 };
 
 export default Form;

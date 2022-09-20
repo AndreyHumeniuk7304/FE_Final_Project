@@ -21,6 +21,7 @@ const AdresModal = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -67,11 +68,11 @@ const AdresModal = () => {
   };
 
   const customerInputNames = [
-    { inputName: "Street", formType: "input" },
-    { inputName: "City", formType: "input" },
-    { inputName: "House", formType: "input" },
-    { inputName: "Flat", formType: "input" },
-    { inputName: "Postal code", formType: "input" },
+    { inputName: "Street", formType: "input", label: "Street" },
+    { inputName: "City", formType: "input", label: "City" },
+    { inputName: "House", formType: "input", label: "House" },
+    { inputName: "Flat", formType: "input", label: "Flat" },
+    { inputName: "Postal code", formType: "input", label: "Postal code" },
   ];
 
   return (
@@ -93,6 +94,7 @@ const AdresModal = () => {
               handleSubmit={handleSubmit}
               errors={errors}
               btnName={"Add Address"}
+              control={control}
             />
           ) : (
             <Form
@@ -102,6 +104,7 @@ const AdresModal = () => {
               handleSubmit={handleSubmit}
               errors={errors}
               btnName={"Add Address"}
+              control={control}
             />
           )}
         </div>

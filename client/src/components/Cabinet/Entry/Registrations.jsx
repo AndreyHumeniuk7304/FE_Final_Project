@@ -5,12 +5,14 @@ import PropTypes from "prop-types";
 import Form from "../../Forms/Form";
 import { registInputNames, registSchema } from "./data";
 import { useState } from "react";
+import { Box } from "@mui/material";
 
 const Registrations = ({ setActiveTitle }) => {
   const [error, setError] = useState({});
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(registSchema),
@@ -37,7 +39,7 @@ const Registrations = ({ setActiveTitle }) => {
       });
   };
   return (
-    <div>
+    <Box>
       <Form
         actionWithForm={addNewUser}
         formArr={registInputNames}
@@ -45,8 +47,9 @@ const Registrations = ({ setActiveTitle }) => {
         handleSubmit={handleSubmit}
         errors={Object.keys(error).length ? error : errors}
         btnName={"REGISTATION"}
+        control={control}
       />
-    </div>
+    </Box>
   );
 };
 

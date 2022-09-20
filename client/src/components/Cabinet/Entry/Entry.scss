@@ -1,59 +1,59 @@
-.entry {
-  &__box {
-    margin: auto;
-    min-width: 320px;
-    max-width: 450px;
-    padding: 30px 0;
-    border-radius: 20px;
-  }
-  &__text {
-    padding-bottom: 70px;
-    text-align: center;
-  }
+// .entry {
+//   &__box {
+//     margin: auto;
+//     min-width: 320px;
+//     max-width: 450px;
+//     padding: 30px 0;
+//     border-radius: 20px;
+//   }
+//   &__text {
+//     padding-bottom: 70px;
+//     text-align: center;
+//   }
 
-  &__header {
-    display: flex;
-    flex-direction: row;
-    .header {
-      &__item {
-        padding: 5px;
-        &--underline {
-          border-bottom: 1px solid white;
-        }
-      }
-      #login {
-        border-bottom: 1px solid white;
-      }
-    }
-  }
-  &__checkbox {
-    padding-top: 55px;
-    display: grid;
-    align-items: center;
-    grid-template-columns: 40px 1fr;
+//   &__header {
+//     display: flex;
+//     flex-direction: row;
+//     .header {
+//       &__item {
+//         padding: 5px;
+//         &--underline {
+//           border-bottom: 1px solid white;
+//         }
+//       }
+//       #login {
+//         border-bottom: 1px solid white;
+//       }
+//     }
+//   }
+//   &__checkbox {
+//     padding-top: 55px;
+//     display: grid;
+//     align-items: center;
+//     grid-template-columns: 40px 1fr;
 
-    input {
-      margin-right: 20px;
-      accent-color: black;
-      width: 22px;
-      height: 22px;
-    }
-  }
+//     input {
+//       margin-right: 20px;
+//       accent-color: black;
+//       width: 22px;
+//       height: 22px;
+//     }
+//   }
 
-  .header {
-    &__item {
-      width: 100%;
-      text-align: center;
-      cursor: pointer;
-    }
-  }
-  &__content {
-    padding: 70px 20px;
-  }
-}
+//   .header {
+//     &__item {
+//       width: 100%;
+//       text-align: center;
+//       cursor: pointer;
+//     }
+//   }
+//   &__content {
+//     padding: 70px 20px;
+//   }
+// }
 
-@media screen and (min-width: 720px) {
-  .entry {
-    padding: 50px 0;
-  }
-}
+// @media screen and (min-width: 720px) {
+//   .entry {
+//     padding: 50px 0;
+//   }
+// }

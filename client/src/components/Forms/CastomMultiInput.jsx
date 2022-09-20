@@ -1,14 +1,22 @@
+import { Box, Button, TextField } from "@mui/material";
 import PropTypes from "prop-types";
-const CastomMultiInput = ({ inputName, index, fieldArray, register }) => {
+import { Controller } from "react-hook-form";
+const CastomMultiInput = ({ inputName, index, fieldArray, control }) => {
   return (
-    <div className="form__input-add">
-      <input
-        /* eslint-disable-next-line react/jsx-props-no-spreading */
-        {...register(`${inputName}.${index}`)}
-        type="text"
-        className={"form__input"}
+    <>
+      <Controller
+        name={`${inputName}.${index}`}
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <TextField
+            onChange={onChange}
+            value={value}
+            label={`Past url image #${index + 1}`}
+            sx={{ width: "85%" }}
+          />
+        )}
       />
-      <button
+      <Button
         style={{ marginRight: 20 }}
         type="btn"
         onClick={(e) => {
@@ -17,15 +25,15 @@ const CastomMultiInput = ({ inputName, index, fieldArray, register }) => {
         }}
       >
         ADD
-      </button>
+      </Button>
       {index ? (
-        <button type="btn" onClick={() => fieldArray.remove(index)}>
+        <Button type="btn" onClick={() => fieldArray.remove(index)}>
           DEL
-        </button>
+        </Button>
       ) : (
         ""
       )}
-    </div>
+    </>
   );
 };
 
@@ -36,4 +44,5 @@ CastomMultiInput.propTypes = {
   index: PropTypes.number,
   fieldArray: PropTypes.object,
   register: PropTypes.func,
+  control: PropTypes.object,
 };

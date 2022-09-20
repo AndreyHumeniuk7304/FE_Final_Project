@@ -1,3 +1,4 @@
+import { Box, Stack } from "@mui/material";
 import { useState } from "react";
 import EntryHeader from "../../components/Cabinet/Entry/EntryHeader";
 import Login from "../../components/Cabinet/Entry/Login";
@@ -7,28 +8,26 @@ const Entry = () => {
   const [activeTitle, setActiveTitle] = useState("login");
 
   return (
-    <div className="entry">
-      <div className="entry__box">
-        <div className="entry__header">
-          <EntryHeader
-            activeTitle={activeTitle}
-            setActiveTitle={setActiveTitle}
-            title={"Login"}
-          />
-          <EntryHeader
-            activeTitle={activeTitle}
-            setActiveTitle={setActiveTitle}
-            title={"Registration"}
-          />
-        </div>
-        <div className="entry__content">
-          {activeTitle === "login" && <Login />}
-          {activeTitle === "registration" && (
-            <Registration setActiveTitle={setActiveTitle} />
-          )}
-        </div>
-      </div>
-    </div>
+    <Box maxWidth={400} p={2} m="auto">
+      <Stack direction="row" justifyContent="space-around">
+        <EntryHeader
+          activeTitle={activeTitle}
+          setActiveTitle={setActiveTitle}
+          title={"Login"}
+        />
+        <EntryHeader
+          activeTitle={activeTitle}
+          setActiveTitle={setActiveTitle}
+          title={"Registration"}
+        />
+      </Stack>
+      <Box>
+        {activeTitle === "login" && <Login />}
+        {activeTitle === "registration" && (
+          <Registration setActiveTitle={setActiveTitle} />
+        )}
+      </Box>
+    </Box>
   );
 };
 

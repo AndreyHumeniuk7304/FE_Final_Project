@@ -1,61 +1,57 @@
+import { IconButton, InputAdornment, TextField } from "@mui/material";
+import { Controller } from "react-hook-form";
 import PropTypes from "prop-types";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useState } from "react";
 
-export default function CustomInput({
-  name,
-  formName,
-  register,
-  formType,
-  label,
-}) {
-  const togglePassword = (e) => {
-    let input = e.target.parentElement.children[0];
-    input.type === "password"
-      ? (input.type = "text") &&
-        (e.target.src =
-          "../images/eye_visible_hide_hidden_show_icon_145988.svg")
-      : (input.type = "password") &&
-        (e.target.src =
-          "../images/eye_slash_visible_hide_hidden_show_icon_145987.svg");
-  };
-  return (
-    <>
-      {formType !== "text" ? (
-        <div className="form__box">
-          <input
-            placeholder={label ? "" : name}
-            className={"form__input"}
-            type={formType && formType}
-            /* eslint-disable-next-line react/jsx-props-no-spreading */
-            {...register(formName)}
-            autoComplete={"off"}
-          />
-          {formType === "password" && (
-            <img
-              className="form__show-password"
-              src="../images/eye_slash_visible_hide_hidden_show_icon_145987.svg"
-              alt="show password"
-              onClick={togglePassword}
-            />
-          )}
-        </div>
-      ) : (
-        <textarea
-          placeholder={label ? "" : name}
-          className={"form__input"}
-          type={formType && formType}
-          /* eslint-disable-next-line react/jsx-props-no-spreading */
-          {...register(formName)}
-          autoComplete={"off"}
+const CastomInput = ({ inputName, control, label, formType }) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
+
+  return formType.toLowerCase() !== "password" ? (
+    <Controller
+      name={inputName}
+      control={control}
+      render={({ field: { onChange, value } }) => (
+        <TextField onChange={onChange} value={value} label={label} />
+      )}
+    />
+  ) : (
+    <Controller
+      name={inputName}
+      control={control}
+      render={({ field: { onChange, value } }) => (
+        <TextField
+          autoComplete="on"
+          onChange={onChange}
+          value={value}
+          label="Some label"
+          variant="outlined"
+          type={showPassword ? "text" : "password"}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
       )}
-    </>
+    />
   );
-}
+};
+export default CastomInput;
 
-CustomInput.propTypes = {
-  name: PropTypes.string,
-  formName: PropTypes.string,
-  register: PropTypes.func,
-  formType: PropTypes.string,
+CastomInput.propTypes = {
+  control: PropTypes.object,
+  inputName: PropTypes.string,
   label: PropTypes.string,
+  formType: PropTypes.string,
 };
