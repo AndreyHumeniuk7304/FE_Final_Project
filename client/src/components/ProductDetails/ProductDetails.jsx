@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import getOneProduct from "../../api/getOneProduct";
-import "./ProductDetails.scss";
-import { Box, Button, Checkbox, Typography } from "@mui/material";
-import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import { Box, Button, Checkbox, IconButton, Typography } from "@mui/material";
+import { Add, Favorite, FavoriteBorder, Remove } from "@mui/icons-material";
 import theme from "../../theme";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, deleteCartItem } from "../../store/cart/actions";
@@ -64,30 +63,31 @@ const ProductDetails = () => {
     <>
       <Box className="background" sx={{ borderBottom: "1px solid lightgrey" }}>
         <Box
-          className="details container"
+          className="container"
           sx={{
             display: "flex",
             justifyContent: "space-around",
-            paddingTop: "100px",
-            paddingBottom: "100px",
+            pt: "100px",
+            pb: "100px",
             [theme.breakpoints.between("mobile", "desktop")]: {
               display: "block",
-              paddingTop: "30px",
-              paddingBottom: "30px",
+              pt: "30px",
+              pb: "30px",
             },
           }}
         >
           <Box>
-            <img
-              className="details__img"
+            <Box
+              component="img"
+              sx={{ maxWidth: "100%", minWidth: "100%" }}
               src={product.imageUrls[0]}
               alt={product.name}
-            />
+            ></Box>
           </Box>
           <Box
-            className="details__item"
             sx={{
               width: "100%",
+              pl: "20px",
               [theme.breakpoints.between("mobile", "desktop")]: {
                 padding: "0",
               },
@@ -100,10 +100,11 @@ const ProductDetails = () => {
               }}
             >
               <Typography
-                className="details__item-title"
                 variant="h5"
                 component="h5"
                 sx={{
+                  textTransform: "uppercase",
+                  pr: "10px",
                   [theme.breakpoints.between("mobile", "desktop")]: {
                     fontSize: "14px",
                     lineHeight: "19px",
@@ -114,20 +115,19 @@ const ProductDetails = () => {
               >
                 {product.name}
               </Typography>
-              <Box className="price">
+              <Box>
                 <Typography
                   sx={{
                     minWidth: "max-content",
                     width: "30%",
                     textAlign: "center",
                     [theme.breakpoints.between("mobile", "desktop")]: {
-                      fontSize: "14px",
+                      fontSize: "25px",
                       lineHeight: "19px",
                       mt: "10px",
                       textAlign: "end",
                     },
                   }}
-                  className="details__item-title"
                   variant="h5"
                   component="h5"
                   style={{ color: nightMode ? "#fff" : "#000" }}
@@ -150,7 +150,6 @@ const ProductDetails = () => {
                         textAlign: "end",
                       },
                     }}
-                    className="details__item-title"
                     variant="h5"
                     component="h5"
                     style={{ color: nightMode ? "#fff" : "#595959" }}
@@ -161,9 +160,7 @@ const ProductDetails = () => {
               </Box>
             </Box>
             <Box>
-              <Typography
-                sx={{ paddingBottom: "20px", color: "secondary.dark" }}
-              >
+              <Typography sx={{ pb: "20px", color: "secondary.dark" }}>
                 REF: {product.itemNo}
               </Typography>
               <Typography
@@ -173,31 +170,22 @@ const ProductDetails = () => {
                 }}
               >
                 Color:{" "}
-                <span
-                  className="details__item-color"
-                  style={{ color: nightMode ? "#fff" : "#000" }}
-                >
+                <span style={{ color: nightMode ? "#fff" : "#000" }}>
                   {product.color}
                 </span>
               </Typography>
               <Typography variant="h6" sx={{ color: "secondary.dark" }}>
                 Material:{" "}
-                <span
-                  className="details__item-color"
-                  style={{ color: nightMode ? "#fff" : "#000" }}
-                >
+                <span style={{ color: nightMode ? "#fff" : "#000" }}>
                   {product.material}
                 </span>
               </Typography>
               <Typography
                 variant="h6"
-                sx={{ color: "secondary.dark", paddingBottom: "20px" }}
+                sx={{ color: "secondary.dark", pb: "20px" }}
               >
                 Mechanism:{" "}
-                <span
-                  className="details__item-color"
-                  style={{ color: nightMode ? "#fff" : "#000" }}
-                >
+                <span style={{ color: nightMode ? "#fff" : "#000" }}>
                   {product.mechanism}
                 </span>
               </Typography>
@@ -221,20 +209,38 @@ const ProductDetails = () => {
                   fontSize: "12px",
                   color: "secondary.dark",
                   lineHeight: "20px",
-                  paddingBottom: "20px",
+                  pb: "20px",
                 }}
               >
                 {product.description}
               </Typography>
-              <div className="counter">
-                <button onClick={decrease} className="counter__button">
-                  -
-                </button>
-                <span className="counter__span">{counter}</span>
-                <button onClick={increase} className="counter__button">
-                  +
-                </button>
-              </div>
+              <Box sx={{ pb: "20px" }}>
+                <Typography
+                  variable={"body2"}
+                  component={"span"}
+                  sx={{
+                    p: "5px",
+                    border: "1px solid grey",
+                    borderRadius: "4px",
+                  }}
+                >
+                  <IconButton
+                    onClick={decrease}
+                    sx={{ p: "5px" }}
+                    color={"secondary"}
+                  >
+                    <Remove fontSize="small" />
+                  </IconButton>
+                  {counter}
+                  <IconButton
+                    onClick={increase}
+                    sx={{ p: "5px" }}
+                    color={"secondary"}
+                  >
+                    <Add fontSize="small" />
+                  </IconButton>
+                </Typography>
+              </Box>
               <Box
                 sx={{
                   [theme.breakpoints.between("mobile", "desktop")]: {
@@ -271,7 +277,7 @@ const ProductDetails = () => {
                         lineHeight: "25px",
                       },
                       backgroundColor: "primary.dark",
-                      padding: "16px 60px",
+                      padding: "16px 30px",
                       mr: "40px",
                       fontSize: "18px",
                       lineHeight: "25px",

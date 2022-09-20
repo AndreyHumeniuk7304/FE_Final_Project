@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { commentsInputName, commentsSchema } from "./dataComments";
 import Form from "../Forms/Form";
-import "./comments.scss";
 import {
   addNewComment,
   deleteComment,
@@ -11,12 +10,12 @@ import {
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { IconButton } from "@mui/material";
+import { IconButton, List, Box, Typography } from "@mui/material";
 import { Close } from "@mui/icons-material";
 
 const Comments = ({ id }) => {
   const isLogin = useSelector((state) => state.userAccount.isLogin);
-  const user = useSelector((state) => state.userAccount.customer.id);
+  const user = useSelector((state) => state.userAccount.customer._id);
   const [comments, setComments] = useState([]);
   const {
     register,
@@ -43,12 +42,34 @@ const Comments = ({ id }) => {
   };
   const addCommentsList = () => {
     return comments.map((comment) => (
-      <li key={comment._id} className="content">
-        <div className="content__item">
-          <p className="content__item-username">{comment.customer.firstName}</p>
+      <List
+        key={comment._id}
+        sx={{
+          border: "1px solid grey",
+          borderRadius: "4px",
+          mb: "20px",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            p: "0.625rem",
+            borderBottom: "1px solid grey",
+          }}
+        >
+          <Typography
+            sx={{
+              fontWeight: "700",
+              textTransform: "capitalize",
+              fontSize: "1.05rem",
+              lineHeight: "1.6rem",
+            }}
+          >
+            {comment.customer.firstName}
+          </Typography>
           {user === comment.customer._id && (
             <IconButton
-              className="content__item-close"
               onClick={deleteCommentClick.bind(this, comment._id, id)}
               color={"secondary"}
               sx={{
@@ -58,21 +79,37 @@ const Comments = ({ id }) => {
               <Close fontSize="small" />
             </IconButton>
           )}
-        </div>
-        <p className="content__comment">{comment.content}</p>
-      </li>
+        </Box>
+        <Typography
+          sx={{
+            p: "0.925rem",
+            fontSize: "0.75rem",
+            lineHeight: "1.25rem",
+          }}
+        >
+          {comment.content}
+        </Typography>
+      </List>
     ));
   };
 
   return (
     <>
-      <p className="comments-title container">
+      <Typography
+        className="container"
+        sx={{
+          mt: "1.25rem",
+          mb: " 1.25rem",
+          fontWeight: "600",
+          fontSize: "1.25rem",
+        }}
+      >
         {comments.length === 0
           ? "There are no comments for this product"
           : "Comments"}
-      </p>
+      </Typography>
 
-      <ul className="container list">{comments && addCommentsList()}</ul>
+      <Box className="container">{comments && addCommentsList()}</Box>
       {isLogin && (
         <Form
           actionWithForm={handleSubmitForm}
