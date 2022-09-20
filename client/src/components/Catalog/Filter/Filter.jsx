@@ -13,7 +13,7 @@ import {
 import { useLocation, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProductsFilterPreloader } from "../../../store/catalog/actions";
-import CheckedFilterItem from "./CheckedFilterItem";
+import CheckedFilterItem from "./checkedFilterItem";
 import { filterTitles } from "./data";
 
 const Filter = () => {

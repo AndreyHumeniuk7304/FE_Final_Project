@@ -10,7 +10,7 @@ const MaterialSlider = ({
   currentPrice,
   setCurrentPrice,
 }) => {
-  const [isShow, setIsShow] = useState(true);
+  const [isShow, setIsShow] = useState(false);
 
   return (
     <>

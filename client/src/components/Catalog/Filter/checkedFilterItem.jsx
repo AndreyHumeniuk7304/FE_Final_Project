@@ -3,7 +3,14 @@ import PropTypes from "prop-types";
 
 const CheckedFilterItem = ({ arrOfCheckedItem }) => {
   return (
-    <List sx={{ display: "flex", flexWrap: "wrap" }}>
+    <List
+      sx={{
+        display: "flex",
+        justifyContent: { mobile: "space-around", desktop: "start" },
+        flexWrap: "wrap",
+      }}
+      // justifyContent={{ mobile: "space-around", desktop: "space-between" }}
+    >
       {arrOfCheckedItem.map(
         (data) =>
           data && (
