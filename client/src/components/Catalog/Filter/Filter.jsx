@@ -133,8 +133,10 @@ const Filter = () => {
 
       <Stack>
         <CheckedFilterItem arrOfCheckedItem={arrOfCheckedItem} />
-        {filterForm}
-        <Box display={{ mobile: "none", desktop: "block" }} id="filter"></Box>
+
+        <Box display={{ mobile: "none", desktop: "block" }} id="filter">
+          {filterForm}
+        </Box>
       </Stack>
     </Box>
   );
