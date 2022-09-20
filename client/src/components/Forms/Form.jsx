@@ -37,6 +37,7 @@ const Form = ({
               register={register}
               camelizeDecode={camelizeDecode}
               handleChange={handleChange}
+              control={control}
             />
             <CustomErrorMessage err={errors[inputName]?.message} />
           </Stack>
