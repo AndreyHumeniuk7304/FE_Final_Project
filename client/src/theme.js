@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, createStyles } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
@@ -33,5 +33,44 @@ const theme = createTheme({
     },
   },
 });
+
+// export const useStyles = makeStyles(() => ({
+//   Typography: {
+//     fontFamily: "Open Sans",
+//     fontStyle: "normal",
+//     fontWeight: "700",
+//     fontSize: "14px",
+//     lineHeight: "19px",
+//     "&:after": {
+//       content: "''",
+//       display: "block",
+//       height: "1px",
+//       width: "80%",
+//       marginTop: "21px",
+//       marginBottom: "32px",
+//       backgroundColor: rgba(130, 128, 128, 1),
+//     },
+//   },
+// }));
+
+export const styles = () =>
+  createStyles({
+    h: {
+      fontFamily: "Open Sans",
+      fontStyle: "normal",
+      fontWeight: "700",
+      fontSize: "14px",
+      lineHeight: "19px",
+      "&:after": {
+        content: "''",
+        display: "block",
+        height: "1px",
+        width: "80%",
+        marginTop: "21px",
+        marginBottom: "32px",
+        backgroundColor: "rgba(130, 128, 128, 1)",
+      },
+    },
+  });
 
 export default theme;

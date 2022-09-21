@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import SearchInput from "../SearchInput/SearchInput";
@@ -8,6 +8,8 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import { useEffect } from "react";
 import { switchThemeAction } from "../../store/switchTheme/action";
+import BurgerMenu from "./BurgerMenu";
+import { height } from "@mui/system";
 
 const Header = (props) => {
   const { statusOpenBurger, handleBurger, closeBurger } = props;
@@ -65,15 +67,48 @@ const Header = (props) => {
   };
 
   return (
-    <header className={statusOpenBurger ? "header active-burger" : "header"}>
-      <div className="container">
-        <div className="container-header">
-          <div className="header__top-content">
-            <div className="header__logo-container">
+    <Box
+      sx={{
+        position: "fixed",
+        top: "0",
+        left: "0",
+        color: "white",
+        width: "100%",
+        zIndex: statusOpenBurger ? "10" : "2",
+        overflow: "hidden",
+        overflowY: "auto",
+        height: statusOpenBurger ? "100%" : "auto",
+      }}
+      // className={statusOpenBurger ? "header active-burger" : "header"}
+    >
+      <Container sx={{ maxWidth: "lg" }}>
+        <Box
+          sx={{
+            display: { desktop: "flex" },
+            flexDirection: "row-reverse",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: { mobile: "wrap", desktop: "nowrap" },
+              width: "100%",
+              justifyContent: "space-between",
+              padding: "12px 0 9px",
+              alignItems: "center",
+              position: "relative",
+            }}
+            // className="header__top-content"
+          >
+            <Box
+              sx={{ width: "100%", textAlign: "center" }}
+              // className="header__logo-container"
+            >
               <Link
                 onClick={closeBurger}
                 to="/"
-                className="header__logo-container_link"
+                // className="header__logo-container_link"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +123,7 @@ const Header = (props) => {
                   />
                 </svg>
               </Link>
-            </div>
+            </Box>
             {nightMode === true ? (
               <LightModeOutlinedIcon
                 style={{ cursor: "pointer", marginRight: "30px" }}
@@ -101,7 +136,14 @@ const Header = (props) => {
               />
             )}
 
-            <div className="header__account-container">
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              //  className="header__account-container"
+            >
               {window.screen.width < 720 ? (
                 <SearchInput
                   isExpandInput={isExpandInput}
@@ -115,56 +157,97 @@ const Header = (props) => {
                 className="header__account-container__link account"
                 style={{ display: isExpandInput ? "flex" : "none" }}
               >
-                <div className="header__account-container__ico">
-                  <img
-                    className="header__account-container__ico-img"
-                    src="../images/account-ico.svg"
-                    alt="my-account"
-                  />
-                </div>
+                <Box
+                  component={"img"}
+                  src={"../images/account-ico.svg"}
+                  alt={"my-account"}
+                  sx={{ width: "14px", height: "14px" }}
+                  // className="header__account-container__ico"
+                />
               </Link>
-              <Link
-                onClick={closeBurger}
-                to="/cart"
-                className="header__account-container__link shopping-bag"
-                style={{ display: isExpandInput ? "flex" : "none" }}
+              <Box
+                sx={{
+                  position: "relative",
+                  display: isExpandInput ? "flex" : "none",
+                  cursor: "pointer",
+                  marginRight: "30px",
+                }}
               >
-                <div className="header__account-container__ico">
-                  <img
-                    className="header__account-container__ico-img"
-                    src="../images/shopping-bag-ico.svg"
-                    alt="my-account"
+                <Link onClick={closeBurger} to="/cart">
+                  <Box
+                    component={"img"}
+                    src={"../images/shopping-bag-ico.svg"}
+                    alt={"shopping bag"}
+                    sx={{ width: "14px", height: "14px" }}
+                    // className="header__account-container__ico"
                   />
-                </div>
-                <p className="header__cart-quantity">
-                  {cartList && calculateCartQuantity()}
-                </p>
-              </Link>
-
-              <a
-                href="#!"
+                  <Box
+                    component={"p"}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      color: "white",
+                      position: "absolute",
+                      top: "-6px",
+                      right: "-6px",
+                      fontSize: "8px",
+                      backgroundColor: "#f00",
+                      height: "12px",
+                      width: "12px",
+                      borderRadius: "50%",
+                    }}
+                    //  className="header__cart-quantity"
+                  >
+                    {cartList && calculateCartQuantity()}
+                  </Box>
+                </Link>
+              </Box>
+              <Box
+                component={"span"}
+                sx={{
+                  display: { mobile: "inline-block", desktop: "none" },
+                  cursor: "pointer",
+                }}
                 onClick={handleBurger}
-                className="header__account-container__link burger"
+                // className="header__account-container__link burger"
               >
-                <div className="header__account-container__ico">
-                  {!statusOpenBurger ? (
-                    <img
-                      className="header__account-container__ico-img"
-                      src="../images/burger-ico.svg"
-                      alt="my-account"
-                    />
-                  ) : (
-                    <img
-                      className="header__account-container__ico-img btn-close"
-                      src="../images/close-button.png"
-                      alt="cross"
-                    />
-                  )}
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="header__categories-container">
+                {!statusOpenBurger ? (
+                  <Box
+                    component={"img"}
+                    src={"../images/burger-ico.svg"}
+                    alt={"menu"}
+                    sx={{ width: "14px", height: "14px" }}
+                  />
+                ) : (
+                  <Box
+                    component={"img"}
+                    src={"../images/close-button.png"}
+                    alt={"close menu"}
+                    sx={{ width: "14px", height: "14px" }}
+                  />
+                )}
+              </Box>
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: {
+                mobile: "space-between",
+                desktop: "flex-start",
+              },
+              alignItems: { desktop: "center" },
+              gap: { desktop: "38px" },
+              padding: { mobile: "22px 0", tablet: "25px 0", desktop: "0" },
+              fontFamily: "Josefin Sans",
+              fontStyle: "normal",
+              fontWeight: "400",
+              fontSize: { mobile: "12px", tablet: "16px" },
+              lineHeight: "12px",
+            }}
+            // className="header__categories-container"
+          >
             <Link
               onClick={closeBurger}
               to="/products/filter?categories=mens&perPage=10&startPage=1"
@@ -201,136 +284,11 @@ const Header = (props) => {
             >
               ACCESSORY
             </Link>
-          </div>
-        </div>
-      </div>
-      <div className={!statusOpenBurger ? "burger-menu" : "burger-menu_active"}>
-        <div className="container">
-          <div className="burger-menu__wrapper">
-            <div className="burger-menu__login">
-              <Link
-                onClick={closeBurger}
-                className="burger-menu__login_link"
-                to="/my-account/entry"
-              >
-                Login / Register
-              </Link>
-            </div>
-            <div className="burger-menu__pages">
-              <ul className="burger-menu__pages-list pages-list">
-                <li className="pages-list__item top-item">
-                  <a href="" className="pages-list__item-link">
-                    New collection
-                  </a>
-                </li>
-                <li className="pages-list__item top-item">
-                  <a href="" className="pages-list__item-link">
-                    New arrivals
-                  </a>
-                </li>
-                <li className="pages-list__item bottom-item">
-                  <Link
-                    onClick={closeBurger}
-                    to="/products/filter?categories=ladies&perPage=10&startPage=1"
-                    state={{ categories: "ladies" }}
-                    className="pages-list__item-link"
-                  >
-                    WOMAN COLLECTION
-                  </Link>
-                </li>
-                <li className="pages-list__item bottom-item">
-                  <Link
-                    onClick={closeBurger}
-                    to="/products/filter?categories=mens&perPage=10&startPage=1"
-                    state={{ categories: "mens" }}
-                    className="pages-list__item-link"
-                  >
-                    MAN COLLECTION
-                  </Link>
-                </li>
-                <li className="pages-list__item bottom-item">
-                  <Link
-                    onClick={closeBurger}
-                    to="/products/filter?categories=accessories&perPage=10&startPage=1"
-                    state={{ categories: "accessories" }}
-                    className="pages-list__item-link"
-                  >
-                    ACCESSORY
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="burger-menu__footer">
-              <Box component="h3" className="burger-menu__footer_title">
-                HELP
-              </Box>
-              <ul className="burger-menu__footer_list">
-                <li className="burger-menu__footer_list-item">
-                  <a href="#!"> Frequently asked questions</a>
-                </li>
-                <li className="burger-menu__footer_list-item">
-                  <Link onClick={closeBurger} to="/contact">
-                    Contact
-                  </Link>
-                </li>
-                <li className="burger-menu__footer_list-item">
-                  <a href="#!">How to purchase</a>
-                </li>
-                <li className="burger-menu__footer_list-item">
-                  <a href="!#">Payment</a>
-                </li>
-              </ul>
-              <Box component="h3" className="burger-menu__footer_title">
-                COMPANY
-              </Box>
-              <ul className="burger-menu__footer_list">
-                <li className="burger-menu__footer_list-item">
-                  <a href="#!">History of the brande</a>
-                </li>
-                <li className="burger-menu__footer_list-item">
-                  <a href="#!">Policy</a>
-                </li>
-                <li className="burger-menu__footer_list-item">
-                  <a href="#!">Work with Us</a>
-                </li>
-              </ul>
-              <Box
-                component="h3"
-                className="burger-menu__footer_title_lst-title"
-              >
-                FOLLOW US
-              </Box>
-              <Box
-                component="div"
-                className="burger-menu__footer_icons footer_icons"
-              >
-                <a href="#!" className="footer_icons__item">
-                  <img
-                    className="footer_icons__item_img"
-                    src="./images/facebok-logo.png"
-                    alt=""
-                  />
-                </a>
-                <a href="!#" className="footer_icons__item">
-                  <img
-                    className="footer_icons__item_img"
-                    src="./images/inst-logo.png"
-                    alt=""
-                  />
-                </a>
-                <a href="#!" className="footer_icons__item">
-                  <img
-                    className="footer_icons__item_img"
-                    src="./images/pint-logo.png"
-                    alt=""
-                  />
-                </a>
-              </Box>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
+          </Box>
+        </Box>
+      </Container>
+      {statusOpenBurger && <BurgerMenu closeBurger={closeBurger} />}
+    </Box>
   );
 };
 
