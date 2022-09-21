@@ -39,17 +39,15 @@ const Registrations = ({ setActiveTitle }) => {
       });
   };
   return (
-    <Box>
-      <Form
-        actionWithForm={addNewUser}
-        formArr={registInputNames}
-        register={register}
-        handleSubmit={handleSubmit}
-        errors={Object.keys(error).length ? error : errors}
-        btnName={"REGISTATION"}
-        control={control}
-      />
-    </Box>
+    <Form
+      actionWithForm={addNewUser}
+      formArr={registInputNames}
+      register={register}
+      handleSubmit={handleSubmit}
+      errors={Object.keys(error).length ? error : errors}
+      btnName={"REGISTATION"}
+      control={control}
+    />
   );
 };
 

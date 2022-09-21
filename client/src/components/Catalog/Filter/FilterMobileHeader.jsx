@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, IconButton, Stack, Typography } from "@mui/material";
+import { Close } from "@mui/icons-material";
 
 const FilterMobileHeader = ({
   isMobileFilterBtnShow,
@@ -7,8 +8,9 @@ const FilterMobileHeader = ({
 }) => {
   const toggleFilterInMobilte = (e, bool, display) => {
     setIsMobileFilterBtnShow(bool);
-    e.target.parentNode.parentNode.childNodes[1].childNodes[1].style.display =
-      display;
+    e.target &&
+      (e.target.parentNode.parentNode.childNodes[1].childNodes[1].style.display =
+        display);
   };
 
   return (
@@ -22,9 +24,9 @@ const FilterMobileHeader = ({
         Filter
       </Typography>
       {isMobileFilterBtnShow && (
-        <Button onClick={(e) => toggleFilterInMobilte(e, false, "none")}>
-          X
-        </Button>
+        <IconButton onClick={(e) => toggleFilterInMobilte(e, false, "none")}>
+          <Close />
+        </IconButton>
       )}
     </Stack>
   );
