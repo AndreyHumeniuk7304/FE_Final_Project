@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Stack } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import CheckboxForm from "./FilterItems/CheckboxForm";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -40,7 +40,6 @@ const Filter = () => {
   }, [categorieProductList]);
 
   useEffect(() => {
-    console.log(defaultPrice);
     setDefaultPrice(getMinMaxPrice(categorieProductList));
   }, [categories]);
 

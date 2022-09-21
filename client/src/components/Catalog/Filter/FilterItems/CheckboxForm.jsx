@@ -1,4 +1,4 @@
-import { Typography, ListItem, List, Box } from "@mui/material";
+import { Typography, ListItem, List } from "@mui/material";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import CheckboxItem from "./CheckboxItem";
