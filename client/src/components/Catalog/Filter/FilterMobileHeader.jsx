@@ -8,9 +8,8 @@ const FilterMobileHeader = ({
 }) => {
   const toggleFilterInMobilte = (e, bool, display) => {
     setIsMobileFilterBtnShow(bool);
-    e.target &&
-      (e.target.parentNode.parentNode.childNodes[1].childNodes[1].style.display =
-        display);
+    const filter = e.target.parentNode.parentNode.childNodes[1].childNodes[1];
+    filter && (filter.style.display = display);
   };
 
   return (
