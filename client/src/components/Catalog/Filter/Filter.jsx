@@ -28,6 +28,7 @@ const Filter = () => {
   const categorieProductList = useSelector(
     (state) => state.catalog.categorieProductList
   );
+  const [defaultPrice, setDefaultPrice] = useState([0, 1000]);
   const location = useLocation();
 
   const nightMode = useSelector((state) => state.nightMode);
@@ -38,6 +39,11 @@ const Filter = () => {
     getItemInFilter(search, setArrOfCheckedItem);
   }, [categorieProductList]);
 
+  useEffect(() => {
+    console.log(defaultPrice);
+    setDefaultPrice(getMinMaxPrice(categorieProductList));
+  }, [categories]);
+
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
       categories: [],
@@ -45,7 +51,7 @@ const Filter = () => {
       mechanism: [],
       material: [],
       color: [],
-      currentPrice: getMinMaxPrice(categorieProductList),
+      currentPrice: defaultPrice,
     },
   });
 
@@ -103,7 +109,7 @@ const Filter = () => {
           <MaterialSlider
             title={"currentPrice"}
             name="currentPrice"
-            defaultValues={getMinMaxPrice(categorieProductList)}
+            defaultValues={defaultPrice}
             register={register}
             currentPrice={currentPrice}
             setCurrentPrice={setCurrentPrice}
