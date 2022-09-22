@@ -23,6 +23,7 @@ body.light .address__btn {
         height: 57px;
         font-size: 14px;
         margin-left: 19%;
+        cursor: pointer;
     }
     &__left-menu{
         padding-bottom: 48px;
@@ -111,9 +112,14 @@ body.light .address__btn {
             margin-bottom: 30px;
         }
         &__btn{
-            width: 270px;
+            width: 320px;
             height: 57px;
             font-size: 24px;
+            color: #fff;
+    // border: 3px solid black;
+    // background-color: #030033;
+    // border-radius: 10px;
+
         }
     }
 }

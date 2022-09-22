@@ -13,6 +13,7 @@
     &__style{
         padding: 0 15px 10px 15px ;
         color: gray;
+        
     }
     &__style:hover{
         color: black;
@@ -22,6 +23,13 @@
     &__text{
         text-align: center;
     }
+  
+  
+}
+.active{
+    color: black;
+    border-bottom: 1px solid gray;
+    font-weight: 700;
 }
 
 .link-container{

@@ -5,8 +5,8 @@ import {
   showModal,
   showBillingModal,
   showDeliveryModal,
-  setCurrentCustomer,
 } from "../../../store/cabinet/actions";
+import { setUserData as setCurrentCustomer } from "../../../store/userAccount/actions";
 import updatedCustomer from "../../../api/updatedCustomer";
 
 const AdresModal = () => {
@@ -45,7 +45,6 @@ const AdresModal = () => {
   };
 
   const addDeliveryAddress = (values) => {
-    console.log("active");
     if (openDelivery) {
       const deliveryAddress = values;
       let updatedCustomer = { ...currentCustomer, ...deliveryAddress };

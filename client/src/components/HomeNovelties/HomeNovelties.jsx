@@ -22,6 +22,7 @@ const HomeNovelties = () => {
   const categorieProductList = useSelector(
     (state) => state.catalog.categorieProductList
   );
+  let count = 0;
 
   return (
     <>
@@ -31,10 +32,10 @@ const HomeNovelties = () => {
           {categorieProductList !== undefined &&
             categorieProductList.map((product, index, array) => {
               return (
-                index < 3 && (
+                product.isNew && (
                   <Box
                     key={product._id}
-                    className={`novelties__type item-${index + 1}`}
+                    className={`novelties__type item-${++count}`}
                   >
                     <Link to={product.productUrl}>
                       <img src={product.imageUrls[0]} alt="" />

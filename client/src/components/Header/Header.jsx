@@ -9,7 +9,6 @@ import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import { useEffect } from "react";
 import { switchThemeAction } from "../../store/switchTheme/action";
 import BurgerMenu from "./BurgerMenu";
-import { height } from "@mui/system";
 
 const Header = (props) => {
   const { statusOpenBurger, handleBurger, closeBurger } = props;
@@ -21,29 +20,6 @@ const Header = (props) => {
   const nightMode = useSelector((state) => state.nightMode);
   const dispatch = useDispatch();
   const location = useLocation();
-
-  useEffect(() => {
-    if (localStorage.getItem("nightMode")) {
-      dispatch(
-        switchThemeAction(!JSON.parse(localStorage.getItem("nightMode")))
-      );
-    } else {
-      document.activeElement.classList.remove("light");
-      document.activeElement.classList.add("dark");
-    }
-  });
-
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem("nightMode")) === true) {
-      document.activeElement.classList.remove("light");
-      document.activeElement.classList.add("dark");
-    }
-
-    if (JSON.parse(localStorage.getItem("nightMode")) === false) {
-      document.activeElement.classList.add("light");
-      document.activeElement.classList.remove("dark");
-    }
-  }, [nightMode]);
 
   useEffect(() => {
     if (!isLogin && isLoaded) {
@@ -79,6 +55,7 @@ const Header = (props) => {
         overflowY: "auto",
         height: statusOpenBurger ? "100%" : "auto",
       }}
+      className="header"
       // className={statusOpenBurger ? "header active-burger" : "header"}
     >
       <Container sx={{ maxWidth: "lg" }}>
@@ -95,9 +72,10 @@ const Header = (props) => {
               flexWrap: { mobile: "wrap", desktop: "nowrap" },
               width: "100%",
               justifyContent: "space-between",
-              padding: "12px 0 9px",
+              padding: "12px 0 10px",
               alignItems: "center",
               position: "relative",
+              borderBottom: { mobile: "1px solid grey", desktop: "none" },
             }}
             // className="header__top-content"
           >
@@ -152,19 +130,24 @@ const Header = (props) => {
               ) : (
                 <SearchInput />
               )}
-              <Link
-                to={isLogin ? "/my-account/user" : "/my-account/entry"}
-                className="header__account-container__link account"
-                style={{ display: isExpandInput ? "flex" : "none" }}
+              <Box
+                sx={{
+                  display: isExpandInput ? "flex" : "none",
+                  cursor: "pointer",
+                  marginRight: "30px",
+                }}
               >
-                <Box
-                  component={"img"}
-                  src={"../images/account-ico.svg"}
-                  alt={"my-account"}
-                  sx={{ width: "14px", height: "14px" }}
-                  // className="header__account-container__ico"
-                />
-              </Link>
+                <Link to={isLogin ? "/my-account/user" : "/my-account/entry"}>
+                  <Box
+                    component={"img"}
+                    src={"../images/account-ico.svg"}
+                    alt={"my-account"}
+                    sx={{ width: "14px", height: "14px" }}
+                    // className="header__account-container__ico"
+                  />
+                </Link>
+              </Box>
+
               <Box
                 sx={{
                   position: "relative",
@@ -248,42 +231,73 @@ const Header = (props) => {
             }}
             // className="header__categories-container"
           >
-            <Link
-              onClick={closeBurger}
-              to="/products/filter?categories=mens&perPage=10&startPage=1"
-              className={
-                categories == "mens"
-                  ? "header__categories-container__link_active"
-                  : "header__categories-container__link"
-              }
-              state={{ categories: "mens" }}
+            <Box
+              sx={{
+                transition: "0.2s",
+                borderBottom:
+                  categories == "mens"
+                    ? "1px solid white"
+                    : "1px solid transparent",
+              }}
             >
-              MAN
-            </Link>
-            <Link
-              onClick={closeBurger}
-              to="/products/filter?categories=ladies&perPage=10&startPage=1"
-              className={
-                categories == "ladies"
-                  ? "header__categories-container__link_active"
-                  : "header__categories-container__link"
-              }
-              state={{ categories: "ladies" }}
+              <Link
+                onClick={closeBurger}
+                to="/products/filter?categories=mens&perPage=10&startPage=1"
+                // className={
+                //   categories == "mens"
+                //     ? "header__categories-container__link_active"
+                //     : "header__categories-container__link"
+                // }
+                state={{ categories: "mens" }}
+              >
+                MAN
+              </Link>
+            </Box>
+            <Box
+              sx={{
+                transition: "0.2s",
+                borderBottom:
+                  categories == "ladies"
+                    ? "1px solid white"
+                    : "1px solid transparent",
+              }}
             >
-              WOMEN
-            </Link>
-            <Link
-              onClick={closeBurger}
-              to="/products/filter?categories=accessories&perPage=10&startPage=1"
-              className={
-                categories == "accessories"
-                  ? "header__categories-container__link_active"
-                  : "header__categories-container__link"
-              }
-              state={{ categories: "accessories" }}
+              <Link
+                onClick={closeBurger}
+                to="/products/filter?categories=ladies&perPage=10&startPage=1"
+                // className={
+                //   categories == "ladies"
+                //     ? "header__categories-container__link_active"
+                //     : "header__categories-container__link"
+                // }
+                state={{ categories: "ladies" }}
+              >
+                WOMEN
+              </Link>
+            </Box>
+
+            <Box
+              sx={{
+                transition: "0.2s",
+                borderBottom:
+                  categories == "accessories"
+                    ? "1px solid white"
+                    : "1px solid transparent",
+              }}
             >
-              ACCESSORY
-            </Link>
+              <Link
+                onClick={closeBurger}
+                to="/products/filter?categories=accessories&perPage=10&startPage=1"
+                // className={
+                //   categories == "accessories"
+                //     ? "header__categories-container__link_active"
+                //     : "header__categories-container__link"
+                // }
+                state={{ categories: "accessories" }}
+              >
+                ACCESSORY
+              </Link>
+            </Box>
           </Box>
         </Box>
       </Container>

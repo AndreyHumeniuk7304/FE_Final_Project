@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Slider, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import classNames from "classnames";
+import { useSelector } from "react-redux";
 
 export const MaterialSlider = ({
   title,
@@ -11,6 +13,15 @@ export const MaterialSlider = ({
   setCurrentPrice,
 }) => {
   const [isShow, setIsShow] = useState(false);
+  const nightMode = useSelector((state) => state.nightMode);
+  const sliderClasses = classNames(
+    {
+      "slider__element--black": !nightMode,
+    },
+    {
+      "slider__element--white": nightMode,
+    }
+  );
 
   return (
     <Box className="filter__slider">
@@ -29,7 +40,7 @@ export const MaterialSlider = ({
             <span>{currentPrice[1]}</span>
           </Box>
           <Slider
-            className="slider__element"
+            className={sliderClasses}
             defaultValue={defaultValues}
             {...register(title)}
             value={currentPrice}

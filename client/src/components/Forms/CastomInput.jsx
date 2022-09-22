@@ -1,6 +1,4 @@
-import { Box, IconButton } from "@mui/material";
 import PropTypes from "prop-types";
-import { useState } from "react";
 
 export default function CustomInput({
   name,
@@ -27,6 +25,7 @@ export default function CustomInput({
             placeholder={label ? "" : name}
             className={"form__input"}
             type={formType && formType}
+            /* eslint-disable-next-line react/jsx-props-no-spreading */
             {...register(formName)}
             autoComplete={"off"}
           />
@@ -44,6 +43,7 @@ export default function CustomInput({
           placeholder={label ? "" : name}
           className={"form__input"}
           type={formType && formType}
+          /* eslint-disable-next-line react/jsx-props-no-spreading */
           {...register(formName)}
           autoComplete={"off"}
         />
