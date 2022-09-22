@@ -25,6 +25,7 @@ export default function CustomDropList({
               handleChange(e);
               onChange(e);
             }}
+            MenuProps={{ disableScrollLock: true }}
             value={value}
             sx={{
               flexGrow: "1",
