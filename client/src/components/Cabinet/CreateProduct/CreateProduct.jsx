@@ -9,21 +9,22 @@ const CreateProduct = () => {
   const [isProductAdded, setIsProductAdded] = useState(false);
 
   const onSubmit = (values, reset) => {
-    values = {
-      ...values,
-      productUrl: `/product/${Math.floor(Math.random() * 100000)}`,
-    };
+    // values = {
+    //   ...values,
+    //   productUrl: `/product/${Math.floor(Math.random() * 100000)}`,
+    // };
     addNewProduct(values).then((resp) => {
       reset();
       setIsProductAdded(true);
       window.scrollTo(0, 0);
     });
   };
+  const hideModal = () => setIsProductAdded(false);
 
   const title = "The product has been added.";
   const btnAction = (
     <>
-      <Button onClick={() => setIsProductAdded(false)}>Add product</Button>
+      <Button onClick={hideModal}>Add product</Button>
       <Link to="/my-account/user">
         <Button>Go to my account</Button>
       </Link>

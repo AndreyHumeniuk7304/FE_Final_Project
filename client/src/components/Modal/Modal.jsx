@@ -16,12 +16,10 @@ const modalBoxStyle = {
   p: 4,
 };
 
-const BasicModal = ({ title, isOpen, setIsOpen, btnAction }) => {
-  const handleClose = () => setIsOpen(false);
-
+const BasicModal = ({ title, btnAction, isOpen }) => {
   return (
     <Box>
-      <Modal open={isOpen} onClose={handleClose}>
+      <Modal open={isOpen}>
         <Box sx={modalBoxStyle}>
           <Typography variant="h6" component="h2" textAlign="center" p={2}>
             {title}
@@ -40,6 +38,5 @@ export default BasicModal;
 BasicModal.propTypes = {
   title: PropTypes.string,
   isOpen: PropTypes.bool,
-  setIsOpen: PropTypes.func,
   btnAction: PropTypes.object,
 };
