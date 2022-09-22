@@ -95,7 +95,7 @@ export const productSchema = yup.object({
   color: yup.string().required("Color is required."),
   material: yup.string().required("Material is required."),
   enabled: yup.string().required("Enabled is required."),
-  imageUrls: yup.array().of(yup.string().url()),
+  imageUrls: yup.array().of(yup.string().url()).required("Image is required."),
   quantity: yup.number().required("Quantity is required."),
   name: yup.string().min(20, "Name is full description of product, min 20."),
   currentPrice: yup.number().required("CurrentPrice is required."),
