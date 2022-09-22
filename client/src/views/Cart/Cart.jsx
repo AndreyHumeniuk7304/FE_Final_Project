@@ -1,13 +1,13 @@
 import CartItem from "../../components/CartItem";
 import { useSelector } from "react-redux";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
-import theme from "../../theme";
 import { useNavigate } from "react-router";
 
 const Cart = () => {
   const navigate = useNavigate();
   const cartList = useSelector((state) => state.cart.list);
   const isLoaded = useSelector((state) => state.cart.isLoaded);
+  const isError = useSelector((state) => state.cart.isError);
 
   const createCartItemList = () => {
     return cartList.map((item) => {
@@ -32,7 +32,7 @@ const Cart = () => {
 
   return (
     <>
-      <Container maxWidth={"lgDesktop"} sx={{ marginTop: 3 }}>
+      <Container maxWidth="lgDesktop" sx={{ marginTop: 3 }}>
         <Typography
           variant={"subtitle1"}
           component={"h2"}
@@ -62,7 +62,16 @@ const Cart = () => {
             spacing={2}
             sx={{ flexGrow: 1 }}
           >
-            {isLoaded && cartList ? (
+            {isError ? (
+              <Typography
+                variant={"subtitle1"}
+                component={"p"}
+                className="cart-title"
+              >
+                Something going wrong, and your cart not loaded. Try to update
+                page.
+              </Typography>
+            ) : isLoaded && cartList ? (
               cartList.length === 0 ? (
                 <Typography
                   variant={"subtitle1"}
@@ -87,7 +96,7 @@ const Cart = () => {
               bgcolor: "secondary.main",
               padding: 2,
               color: "primary.dark",
-              paddingTop: "10 px",
+              paddingTop: 1,
             }}
           >
             <Typography
@@ -139,16 +148,11 @@ const Cart = () => {
                 onClick={checkout}
                 variant="contained"
                 sx={{
-                  [theme.breakpoints.between("mobile", "desktop")]: {
-                    padding: "12px 70px",
-                    fontSize: "16px",
-                    lineHeight: "25px",
-                  },
                   backgroundColor: "primary.dark",
-                  padding: "16px 60px",
-                  mr: "40px",
                   fontSize: "18px",
                   lineHeight: "25px",
+                  fontWeight: 700,
+                  letterSpacing: 1.5,
                 }}
               >
                 Checkout
