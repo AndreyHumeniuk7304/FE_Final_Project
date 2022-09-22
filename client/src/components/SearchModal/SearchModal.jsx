@@ -38,7 +38,7 @@ const SearchModal = ({ value, activeFocus, setActiveFocus, clearInput }) => {
               ) {
                 return (
                   <Link
-                    to={product.productUrl}
+                    to={`/product/${product.itemNo}`}
                     className="modal__product"
                     key={product._id}
                     onClick={() => clearInput()}
