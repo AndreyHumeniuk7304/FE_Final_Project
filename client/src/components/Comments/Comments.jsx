@@ -10,7 +10,14 @@ import {
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { IconButton, List, Box, Typography, Container } from "@mui/material";
+import {
+  IconButton,
+  List,
+  Box,
+  Typography,
+  Container,
+  Stack,
+} from "@mui/material";
 import { Close } from "@mui/icons-material";
 
 const Comments = ({ id }) => {
@@ -53,9 +60,8 @@ const Comments = ({ id }) => {
           mb: "20px",
         }}
       >
-        <Box
+        <Stack
           sx={{
-            display: "flex",
             justifyContent: "space-between",
             p: "0.625rem",
             borderBottom: "1px solid grey",
@@ -83,7 +89,7 @@ const Comments = ({ id }) => {
               <Close fontSize="small" />
             </IconButton>
           )}
-        </Box>
+        </Stack>
         <Typography
           sx={{
             p: "0.925rem",

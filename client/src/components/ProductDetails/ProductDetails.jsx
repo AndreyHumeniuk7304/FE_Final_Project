@@ -112,6 +112,7 @@ const ProductDetails = () => {
                   sx={{
                     textTransform: "uppercase",
                     pr: "10px",
+                    fontWeight: "400",
                     [theme.breakpoints.between("mobile", "desktop")]: {
                       fontSize: "14px",
                       lineHeight: "19px",
