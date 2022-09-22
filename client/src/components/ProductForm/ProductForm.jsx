@@ -1,7 +1,11 @@
 import { useFieldArray, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Form from "../Forms/Form";
-import { productInputNames, productSchema } from "./data";
+import {
+  productFormDefaultValues,
+  productInputNames,
+  productSchema,
+} from "./data";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 
@@ -14,19 +18,7 @@ const ProductForm = ({ initialValue, onSubmit }) => {
     reset,
   } = useForm({
     resolver: yupResolver(productSchema),
-    defaultValues: {
-      brand: "",
-      categories: "",
-      mechanism: "",
-      color: "",
-      material: "",
-      enabled: true,
-      imageUrls: [""],
-      quantity: 1,
-      name: "",
-      currentPrice: "",
-      previousPrice: "",
-    },
+    defaultValues: productFormDefaultValues,
   });
 
   const fieldArray = useFieldArray({

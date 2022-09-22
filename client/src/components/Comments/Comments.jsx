@@ -22,6 +22,7 @@ const Comments = ({ id }) => {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(commentsSchema),
@@ -81,6 +82,7 @@ const Comments = ({ id }) => {
           handleSubmit={handleSubmit}
           errors={errors}
           btnName={"Add comment"}
+          control={control}
         />
       )}
     </>

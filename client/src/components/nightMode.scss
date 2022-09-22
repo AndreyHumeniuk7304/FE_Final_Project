@@ -23,11 +23,9 @@
   }
   input {
     color: $color-night-mode;
-    border-bottom: 1px solid $color-night-mode !important;
   }
   select {
     background-color: inherit !important;
-    border-bottom: 1px solid $color-night-mode !important ;
   }
   option {
     color: #000;
@@ -63,7 +61,8 @@
   option {
     color: #000;
   }
-  input {
+  input,
+  label {
     color: $color-light-mode;
   }
 }

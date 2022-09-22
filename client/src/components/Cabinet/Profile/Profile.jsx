@@ -13,6 +13,7 @@ const Profile = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -47,6 +48,7 @@ const Profile = () => {
               handleSubmit={handleSubmit}
               errors={errors}
               btnName={"SAVE"}
+              control={control}
             />
           </div>
         </div>
