@@ -61,6 +61,7 @@ const Comments = ({ id }) => {
         }}
       >
         <Stack
+          direction="row"
           sx={{
             justifyContent: "space-between",
             p: "0.625rem",

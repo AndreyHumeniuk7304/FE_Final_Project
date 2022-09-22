@@ -8,6 +8,7 @@ import {
   IconButton,
   Typography,
   Container,
+  Stack,
 } from "@mui/material";
 import { Add, Favorite, FavoriteBorder, Remove } from "@mui/icons-material";
 import theme from "../../theme";
@@ -100,12 +101,7 @@ const ProductDetails = () => {
                 },
               }}
             >
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
+              <Stack direction="row" justifyContent="space-between">
                 <Typography
                   variant="h5"
                   component="h5"
@@ -167,7 +163,7 @@ const ProductDetails = () => {
                     </Typography>
                   )}
                 </Box>
-              </Box>
+              </Stack>
               <Box>
                 <Typography sx={{ pb: "20px", color: "secondary.dark" }}>
                   REF: {product.itemNo}
