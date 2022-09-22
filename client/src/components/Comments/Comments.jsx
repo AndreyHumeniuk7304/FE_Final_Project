@@ -16,6 +16,8 @@ import { Close } from "@mui/icons-material";
 const Comments = ({ id }) => {
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const user = useSelector((state) => state.userAccount.customer._id);
+  const nightMode = useSelector((state) => state.nightMode);
+
   const [comments, setComments] = useState([]);
   const {
     register,
@@ -75,6 +77,7 @@ const Comments = ({ id }) => {
               sx={{
                 padding: 0,
               }}
+              style={{ color: nightMode ? "#fff" : "#000" }}
             >
               <Close fontSize="small" />
             </IconButton>

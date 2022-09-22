@@ -121,6 +121,7 @@ const ProductDetails = () => {
                     minWidth: "max-content",
                     width: "30%",
                     textAlign: "center",
+                    pb: "5px",
                     [theme.breakpoints.between("mobile", "desktop")]: {
                       fontSize: "25px",
                       lineHeight: "19px",
@@ -145,7 +146,7 @@ const ProductDetails = () => {
                       fontSize: "20px",
                       opacity: "0.5",
                       [theme.breakpoints.between("mobile", "desktop")]: {
-                        fontSize: "14px",
+                        fontSize: "20px",
                         lineHeight: "19px",
                         textAlign: "end",
                       },
@@ -170,24 +171,33 @@ const ProductDetails = () => {
                 }}
               >
                 Color:{" "}
-                <span style={{ color: nightMode ? "#fff" : "#000" }}>
+                <Typography
+                  component="span"
+                  style={{ color: nightMode ? "#fff" : "#000" }}
+                >
                   {product.color}
-                </span>
+                </Typography>
               </Typography>
               <Typography variant="h6" sx={{ color: "secondary.dark" }}>
                 Material:{" "}
-                <span style={{ color: nightMode ? "#fff" : "#000" }}>
+                <Typography
+                  component="span"
+                  style={{ color: nightMode ? "#fff" : "#000" }}
+                >
                   {product.material}
-                </span>
+                </Typography>
               </Typography>
               <Typography
                 variant="h6"
                 sx={{ color: "secondary.dark", pb: "20px" }}
               >
                 Mechanism:{" "}
-                <span style={{ color: nightMode ? "#fff" : "#000" }}>
+                <Typography
+                  component="span"
+                  style={{ color: nightMode ? "#fff" : "#000" }}
+                >
                   {product.mechanism}
-                </span>
+                </Typography>
               </Typography>
               <Typography
                 variant="h6"
