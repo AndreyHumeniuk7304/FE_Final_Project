@@ -112,7 +112,6 @@ const Comments = ({ id }) => {
             ? "There are no comments for this product"
             : "Comments"}
         </Typography>
-
         <Box>{comments && addCommentsList()}</Box>
         {isLogin && (
           <Form
