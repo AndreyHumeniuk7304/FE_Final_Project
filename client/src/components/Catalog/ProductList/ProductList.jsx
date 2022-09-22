@@ -17,15 +17,28 @@ const ProductList = () => {
   const [isOneCartView, setIsOneCartView] = useState(true);
 
   return (
-    <div className="list-width">
-      <div className="productlist-wrapper">
+    <Box sx={{ width: "100%" }}>
+      <Box
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "flex-start",
+          flexWrap: "wrap",
+          width: "100%",
+          position: "relative",
+          gap: "4%",
+        }}
+      >
         {!hasError && !isLoading && productsQuntity > 0 && (
           <Box
             sx={{
+              width: "10%",
               display: "flex",
               margin: 1,
+              position: "absolute",
+              top: "0%",
+              left: "0%",
             }}
-            className="productlist-wrapper__view"
           >
             <ButtonGroup
               variant="outlined"
@@ -41,10 +54,10 @@ const ProductList = () => {
                   !isOneCartView ? "active-button view-btn" : "view-btn"
                 }
               >
-                <img
-                  className="productlist-wrapper__img"
-                  src="../images/square.png"
+                <Box
+                  component="img"
                   alt="one card view"
+                  src="../images/square.png"
                 />
               </Button>
               <Button
@@ -56,10 +69,10 @@ const ProductList = () => {
                   isOneCartView ? "active-button view-btn" : "view-btn"
                 }
               >
-                <img
-                  className="productlist-wrapper__img"
-                  src="../images/squares.png"
+                <Box
+                  component="img"
                   alt="two cards view"
+                  src="../images/squares.png"
                 />
               </Button>
             </ButtonGroup>
@@ -113,6 +126,14 @@ const ProductList = () => {
                     ? "productlist-wrapper__card-two"
                     : "productlist-wrapper__card-one"
                 }
+                sx={{
+                  height: "90vh",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  // width: isOneCartView ? "43%" : "85%",
+                }}
+                
                 key={card._id}
               >
                 <ProductCard
@@ -125,13 +146,21 @@ const ProductList = () => {
             );
           })
         )}
-      </div>
-      <div className="productlist-wrapper__pagination">
-        <Box sx={{ pb: 3 }}>
+      </Box>
+      <Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            paddingTop: "1%",
+            pb: 3,
+          }}
+        >
           {productsQuntity > 10 && !isLoading && <Paginations />}
         </Box>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

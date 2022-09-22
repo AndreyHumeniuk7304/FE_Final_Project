@@ -1,27 +1,4 @@
 .productlist-wrapper {
-  width: 100%;
-  text-align: center;
-  @include flex-container;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  padding-left: 6%;
-  padding-right: 6%;
-  position: relative;
-
-  &__view {
-    width: 10%;
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 2%;
-  }
-
-  &__message {
-    height: 90vh;
-    font-size: 5vw !important;
-    @include flex-container;
-  }
-
   &__card-two {
     width: 43%;
   }
@@ -39,20 +16,5 @@
   .active-button {
     background-color: rgb(197, 190, 190) !important;
     font-weight: bold !important;
-  }
-
-  &__pagination {
-    padding-top: 1%;
-    @include flex-container;
-  }
-}
-
-.list-width {
-  width: 100%;
-}
-
-@include desktop {
-  .list-width {
-    width: 100%;
   }
 }
