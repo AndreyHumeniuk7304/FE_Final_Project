@@ -9,10 +9,6 @@ const CreateProduct = () => {
   const [isProductAdded, setIsProductAdded] = useState(false);
 
   const onSubmit = (values, reset) => {
-    // values = {
-    //   ...values,
-    //   productUrl: `/product/${Math.floor(Math.random() * 100000)}`,
-    // };
     addNewProduct(values).then((resp) => {
       reset();
       setIsProductAdded(true);

@@ -27,7 +27,7 @@ const HomeCategory = () => {
               return (
                 product.isPopular && (
                   <div key={product._id} className="homeCategory__type">
-                    <Link to={product.productUrl}>
+                    <Link to={`/products/${product.itemNo}`}>
                       <Root className="homeCategory__text-wrapper">
                         <Box className="homeCategory__text">
                           {product.name.split(" ").slice(0, 2).join(" ")}

@@ -37,7 +37,7 @@ const HomeNovelties = () => {
                     key={product._id}
                     className={`novelties__type item-${++count}`}
                   >
-                    <Link to={product.productUrl}>
+                    <Link to={`/products/${product.itemNo}`}>
                       <img src={product.imageUrls[0]} alt="" />
                       <TextWrapper className="novelties__text-wrapper">
                         <Box className="novelties__text">

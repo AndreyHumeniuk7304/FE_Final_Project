@@ -107,7 +107,7 @@ const ProductList = () => {
           categorieProductList.map((card) => {
             return (
               <Link
-                to={card.productUrl}
+                to={`/products/${card.itemNo}`}
                 className={
                   isOneCartView
                     ? "productlist-wrapper__card-two"
