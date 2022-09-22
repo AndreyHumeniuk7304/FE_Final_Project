@@ -8,6 +8,7 @@ import {
 } from "../../../store/cabinet/actions";
 import { setUserData as setCurrentCustomer } from "../../../store/userAccount/actions";
 import updatedCustomer from "../../../api/updatedCustomer";
+import { Typography, Container, Grid, Box } from "@mui/material";
 
 const AdresModal = () => {
   const currentCustomer = useSelector((state) => state.cabinet.currentCustomer);
@@ -15,9 +16,9 @@ const AdresModal = () => {
   const openDelivery = useSelector((state) => state.cabinet.showModalDelivery);
   const openBilling = useSelector((state) => state.cabinet.showModalBilling);
   const dispatch = useDispatch();
-  const reopen = () => {
-    dispatch(showModal(open));
-  };
+  // const reopen = () => {
+  //   dispatch(showModal(open));
+  // };
   const {
     register,
     handleSubmit,
@@ -76,7 +77,11 @@ const AdresModal = () => {
 
   return (
     <>
-      <div className="modal-container">
+      <Box>
+        <Typography>Add Address</Typography>
+      </Box>
+
+      {/* <div className="modal-container">
         <div className="modal_content">
           <p>Add Address</p>
           <span
@@ -105,7 +110,7 @@ const AdresModal = () => {
             />
           )}
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
