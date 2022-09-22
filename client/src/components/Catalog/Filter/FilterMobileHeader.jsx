@@ -1,38 +1,33 @@
-import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
+import { Button, IconButton, Stack, Typography } from "@mui/material";
+import { Close } from "@mui/icons-material";
 
 const FilterMobileHeader = ({
   isMobileFilterBtnShow,
   setIsMobileFilterBtnShow,
 }) => {
-  const nightMode = useSelector((state) => state.nightMode);
+  const toggleFilterInMobilte = (e, bool, display) => {
+    setIsMobileFilterBtnShow(bool);
+    const filter = e.target.parentNode.parentNode.childNodes[1].childNodes[1];
+    filter && (filter.style.display = display);
+  };
 
   return (
-    <div className="filter__mob-title">
-      <p
-        onClick={(e) => {
-          setIsMobileFilterBtnShow(true);
-          document
-            .getElementById("filter")
-            .classList.add("filter__form--active");
-        }}
-      >
+    <Stack
+      direction="row"
+      display={{ mobile: "flex", desktop: "none" }}
+      alignItems="center"
+      justifyContent="space-evenly"
+    >
+      <Typography onClick={(e) => toggleFilterInMobilte(e, true, "block")}>
         Filter
-      </p>
+      </Typography>
       {isMobileFilterBtnShow && (
-        <button
-          style={{ color: nightMode ? "white" : "black" }}
-          onClick={() => {
-            setIsMobileFilterBtnShow(false);
-            document
-              .getElementById("filter")
-              .classList.remove("filter__form--active");
-          }}
-        >
-          X
-        </button>
+        <IconButton onClick={(e) => toggleFilterInMobilte(e, false, "none")}>
+          <Close />
+        </IconButton>
       )}
-    </div>
+    </Stack>
   );
 };
 

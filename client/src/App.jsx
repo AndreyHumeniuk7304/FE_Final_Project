@@ -11,7 +11,6 @@ import { getWishlistItem } from "./store/wishlist/actions";
 import { Container } from "@mui/system";
 import { switchThemeAction } from "./store/switchTheme/action";
 import classNames from "classnames";
-import jwt_decode from "jwt-decode";
 
 const App = () => {
   const dispatch = useDispatch();

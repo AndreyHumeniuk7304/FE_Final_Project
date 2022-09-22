@@ -19,12 +19,17 @@ import "yup-phone";
 // ];
 
 export const customerInputNames = [
-  { inputName: "firstName", value: "1", formType: "input" },
-  { inputName: "lastName", formType: "input" },
+  {
+    inputName: "firstName",
+    value: "1",
+    formType: "input",
+    label: "First name",
+  },
+  { inputName: "lastName", formType: "input", label: "First name" },
   // { inputName: "email", formType: "input" },
-  { inputName: "telephone", formType: "input" },
+  { inputName: "telephone", formType: "input", label: "Phone number" },
   { inputName: "gender", formName: ["Male", "Female"], formType: "droplist" },
-  { inputName: "birthday", formType: "date" },
+  { inputName: "birthday", formType: "date", label: "Birthday" },
   // { inputName: "password", formType: "password" },
   // { inputName: "confirmPassword", formType: "password" },
 ];

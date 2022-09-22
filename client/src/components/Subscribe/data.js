@@ -9,6 +9,7 @@ export const subscribeInputName = [
     inputName: "email",
     formName: "email",
     formType: "input",
+    label: "Email",
   },
 ];
 
