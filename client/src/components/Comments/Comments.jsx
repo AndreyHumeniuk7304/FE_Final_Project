@@ -10,7 +10,7 @@ import {
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { IconButton, List, Box, Typography } from "@mui/material";
+import { IconButton, List, Box, Typography, Container } from "@mui/material";
 import { Close } from "@mui/icons-material";
 
 const Comments = ({ id }) => {
@@ -98,31 +98,32 @@ const Comments = ({ id }) => {
 
   return (
     <>
-      <Typography
-        className="container"
-        sx={{
-          mt: "1.25rem",
-          mb: " 1.25rem",
-          fontWeight: "600",
-          fontSize: "1.25rem",
-        }}
-      >
-        {comments.length === 0
-          ? "There are no comments for this product"
-          : "Comments"}
-      </Typography>
+      <Container maxWidth={"lgDesktop"}>
+        <Typography
+          sx={{
+            mt: "1.25rem",
+            mb: " 1.25rem",
+            fontWeight: "600",
+            fontSize: "1.25rem",
+          }}
+        >
+          {comments.length === 0
+            ? "There are no comments for this product"
+            : "Comments"}
+        </Typography>
 
-      <Box className="container">{comments && addCommentsList()}</Box>
-      {isLogin && (
-        <Form
-          actionWithForm={handleSubmitForm}
-          formArr={commentsInputName}
-          register={register}
-          handleSubmit={handleSubmit}
-          errors={errors}
-          btnName={"Add comment"}
-        />
-      )}
+        <Box>{comments && addCommentsList()}</Box>
+        {isLogin && (
+          <Form
+            actionWithForm={handleSubmitForm}
+            formArr={commentsInputName}
+            register={register}
+            handleSubmit={handleSubmit}
+            errors={errors}
+            btnName={"Add comment"}
+          />
+        )}
+      </Container>
     </>
   );
 };

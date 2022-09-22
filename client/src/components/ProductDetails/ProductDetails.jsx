@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import getOneProduct from "../../api/getOneProduct";
-import { Box, Button, Checkbox, IconButton, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  IconButton,
+  Typography,
+  Container,
+} from "@mui/material";
 import { Add, Favorite, FavoriteBorder, Remove } from "@mui/icons-material";
 import theme from "../../theme";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,271 +68,272 @@ const ProductDetails = () => {
 
   return (
     <>
-      <Box className="background" sx={{ borderBottom: "1px solid lightgrey" }}>
-        <Box
-          className="container"
-          sx={{
-            display: "flex",
-            justifyContent: "space-around",
-            pt: "100px",
-            pb: "100px",
-            [theme.breakpoints.between("mobile", "desktop")]: {
-              display: "block",
-              pt: "30px",
-              pb: "30px",
-            },
-          }}
-        >
-          <Box>
-            <Box
-              component="img"
-              sx={{ maxWidth: "100%", minWidth: "100%" }}
-              src={product.imageUrls[0]}
-              alt={product.name}
-            ></Box>
-          </Box>
+      <Container maxwidth="lgDesktop">
+        <Box sx={{ borderBottom: "1px solid lightgrey" }}>
           <Box
             sx={{
-              width: "100%",
-              pl: "20px",
+              display: "flex",
+              justifyContent: "space-around",
+              pt: "100px",
+              pb: "100px",
               [theme.breakpoints.between("mobile", "desktop")]: {
-                padding: "0",
+                display: "block",
+                pt: "30px",
+                pb: "30px",
               },
             }}
           >
+            <Box>
+              <Box
+                component="img"
+                sx={{ maxWidth: "100%", minWidth: "100%" }}
+                src={product.imageUrls[0]}
+                alt={product.name}
+              ></Box>
+            </Box>
             <Box
               sx={{
-                display: "flex",
-                justifyContent: "space-between",
+                width: "100%",
+                pl: "20px",
+                [theme.breakpoints.between("mobile", "desktop")]: {
+                  padding: "0",
+                },
               }}
             >
-              <Typography
-                variant="h5"
-                component="h5"
+              <Box
                 sx={{
-                  textTransform: "uppercase",
-                  pr: "10px",
-                  [theme.breakpoints.between("mobile", "desktop")]: {
-                    fontSize: "14px",
-                    lineHeight: "19px",
-                    mt: "10px",
-                  },
+                  display: "flex",
+                  justifyContent: "space-between",
                 }}
-                style={{ color: nightMode ? "#fff" : "#000" }}
               >
-                {product.name}
-              </Typography>
-              <Box>
                 <Typography
-                  sx={{
-                    minWidth: "max-content",
-                    width: "30%",
-                    textAlign: "center",
-                    pb: "5px",
-                    [theme.breakpoints.between("mobile", "desktop")]: {
-                      fontSize: "25px",
-                      lineHeight: "19px",
-                      mt: "10px",
-                      textAlign: "end",
-                    },
-                  }}
                   variant="h5"
                   component="h5"
+                  sx={{
+                    textTransform: "uppercase",
+                    pr: "10px",
+                    [theme.breakpoints.between("mobile", "desktop")]: {
+                      fontSize: "14px",
+                      lineHeight: "19px",
+                      mt: "10px",
+                    },
+                  }}
                   style={{ color: nightMode ? "#fff" : "#000" }}
                 >
-                  {product.currentPrice} $
+                  {product.name}
                 </Typography>
-                {product.previousPrice > product.currentPrice && (
+                <Box>
                   <Typography
                     sx={{
                       minWidth: "max-content",
                       width: "30%",
                       textAlign: "center",
-                      textDecoration: "line-through",
-                      fontWeight: "400",
-                      fontSize: "20px",
-                      opacity: "0.5",
+                      pb: "5px",
                       [theme.breakpoints.between("mobile", "desktop")]: {
-                        fontSize: "20px",
+                        fontSize: "25px",
                         lineHeight: "19px",
+                        mt: "10px",
                         textAlign: "end",
                       },
                     }}
                     variant="h5"
                     component="h5"
-                    style={{ color: nightMode ? "#fff" : "#595959" }}
+                    style={{ color: nightMode ? "#fff" : "#000" }}
                   >
-                    {product.previousPrice} $
+                    {product.currentPrice} $
                   </Typography>
-                )}
+                  {product.previousPrice > product.currentPrice && (
+                    <Typography
+                      sx={{
+                        minWidth: "max-content",
+                        width: "30%",
+                        textAlign: "center",
+                        textDecoration: "line-through",
+                        fontWeight: "400",
+                        fontSize: "20px",
+                        opacity: "0.5",
+                        [theme.breakpoints.between("mobile", "desktop")]: {
+                          fontSize: "20px",
+                          lineHeight: "19px",
+                          textAlign: "end",
+                        },
+                      }}
+                      variant="h5"
+                      component="h5"
+                      style={{ color: nightMode ? "#fff" : "#595959" }}
+                    >
+                      {product.previousPrice} $
+                    </Typography>
+                  )}
+                </Box>
               </Box>
-            </Box>
-            <Box>
-              <Typography sx={{ pb: "20px", color: "secondary.dark" }}>
-                REF: {product.itemNo}
-              </Typography>
-              <Typography
-                variant="h6"
-                sx={{
-                  color: "secondary.dark",
-                }}
-              >
-                Color:{" "}
-                <Typography
-                  component="span"
-                  style={{ color: nightMode ? "#fff" : "#000" }}
-                >
-                  {product.color}
+              <Box>
+                <Typography sx={{ pb: "20px", color: "secondary.dark" }}>
+                  REF: {product.itemNo}
                 </Typography>
-              </Typography>
-              <Typography variant="h6" sx={{ color: "secondary.dark" }}>
-                Material:{" "}
                 <Typography
-                  component="span"
-                  style={{ color: nightMode ? "#fff" : "#000" }}
-                >
-                  {product.material}
-                </Typography>
-              </Typography>
-              <Typography
-                variant="h6"
-                sx={{ color: "secondary.dark", pb: "20px" }}
-              >
-                Mechanism:{" "}
-                <Typography
-                  component="span"
-                  style={{ color: nightMode ? "#fff" : "#000" }}
-                >
-                  {product.mechanism}
-                </Typography>
-              </Typography>
-              <Typography
-                variant="h6"
-                sx={{
-                  [theme.breakpoints.between("mobile", "desktop")]: {
-                    lineHeight: "19px",
-                    fontSize: "14px",
-                  },
-                  fontWeight: "700",
-                }}
-              >
-                Details
-              </Typography>
-              <Typography
-                sx={{
-                  [theme.breakpoints.between("mobile", "desktop")]: {
-                    lineHeight: "16px",
-                  },
-                  fontSize: "12px",
-                  color: "secondary.dark",
-                  lineHeight: "20px",
-                  pb: "20px",
-                }}
-              >
-                {product.description}
-              </Typography>
-              <Box sx={{ pb: "20px" }}>
-                <Typography
-                  variable={"body2"}
-                  component={"span"}
+                  variant="h6"
                   sx={{
-                    p: "5px",
-                    border: "1px solid grey",
-                    borderRadius: "4px",
+                    color: "secondary.dark",
                   }}
                 >
-                  <IconButton
-                    onClick={decrease}
-                    sx={{ p: "5px" }}
-                    color={"secondary"}
+                  Color:{" "}
+                  <Typography
+                    component="span"
+                    style={{ color: nightMode ? "#fff" : "#000" }}
                   >
-                    <Remove fontSize="small" />
-                  </IconButton>
-                  {counter}
-                  <IconButton
-                    onClick={increase}
-                    sx={{ p: "5px" }}
-                    color={"secondary"}
-                  >
-                    <Add fontSize="small" />
-                  </IconButton>
+                    {product.color}
+                  </Typography>
                 </Typography>
-              </Box>
-              <Box
-                sx={{
-                  [theme.breakpoints.between("mobile", "desktop")]: {
-                    display: "flex",
-                  },
-                }}
-              >
-                {isAdmin ? (
-                  <Button
-                    onClick={updateProductClick}
-                    variant="contained"
+                <Typography variant="h6" sx={{ color: "secondary.dark" }}>
+                  Material:{" "}
+                  <Typography
+                    component="span"
+                    style={{ color: nightMode ? "#fff" : "#000" }}
+                  >
+                    {product.material}
+                  </Typography>
+                </Typography>
+                <Typography
+                  variant="h6"
+                  sx={{ color: "secondary.dark", pb: "20px" }}
+                >
+                  Mechanism:{" "}
+                  <Typography
+                    component="span"
+                    style={{ color: nightMode ? "#fff" : "#000" }}
+                  >
+                    {product.mechanism}
+                  </Typography>
+                </Typography>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    [theme.breakpoints.between("mobile", "desktop")]: {
+                      lineHeight: "19px",
+                      fontSize: "14px",
+                    },
+                    fontWeight: "700",
+                  }}
+                >
+                  Details
+                </Typography>
+                <Typography
+                  sx={{
+                    [theme.breakpoints.between("mobile", "desktop")]: {
+                      lineHeight: "16px",
+                    },
+                    fontSize: "12px",
+                    color: "secondary.dark",
+                    lineHeight: "20px",
+                    pb: "20px",
+                  }}
+                >
+                  {product.description}
+                </Typography>
+                <Box sx={{ pb: "20px" }}>
+                  <Typography
+                    variable={"body2"}
+                    component={"span"}
                     sx={{
-                      [theme.breakpoints.between("mobile", "desktop")]: {
-                        padding: "12px 70px",
-                        fontSize: "16px",
-                        lineHeight: "25px",
-                      },
-                      backgroundColor: "primary.dark",
-                      padding: "16px 60px",
-                      mr: "40px",
-                      fontSize: "18px",
-                      lineHeight: "25px",
+                      p: "5px",
+                      border: "1px solid grey",
+                      borderRadius: "4px",
                     }}
                   >
-                    Update Product
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={handleCartClick}
-                    variant="contained"
-                    sx={{
-                      [theme.breakpoints.between("mobile", "desktop")]: {
-                        fontSize: "16px",
+                    <IconButton
+                      onClick={decrease}
+                      sx={{ p: "5px" }}
+                      color={"secondary"}
+                    >
+                      <Remove fontSize="small" />
+                    </IconButton>
+                    {counter}
+                    <IconButton
+                      onClick={increase}
+                      sx={{ p: "5px" }}
+                      color={"secondary"}
+                    >
+                      <Add fontSize="small" />
+                    </IconButton>
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    [theme.breakpoints.between("mobile", "desktop")]: {
+                      display: "flex",
+                    },
+                  }}
+                >
+                  {isAdmin ? (
+                    <Button
+                      onClick={updateProductClick}
+                      variant="contained"
+                      sx={{
+                        [theme.breakpoints.between("mobile", "desktop")]: {
+                          padding: "12px 70px",
+                          fontSize: "16px",
+                          lineHeight: "25px",
+                        },
+                        backgroundColor: "primary.dark",
+                        padding: "16px 60px",
+                        mr: "40px",
+                        fontSize: "18px",
                         lineHeight: "25px",
-                      },
-                      backgroundColor: "primary.dark",
-                      padding: "16px 30px",
-                      mr: "40px",
-                      fontSize: "18px",
-                      lineHeight: "25px",
-                    }}
-                  >
-                    {isInCart ? "REMOVE FROM CART" : "ADD TO CART"}
-                  </Button>
-                )}
-                {isLogin && (
-                  <Checkbox
-                    checked={isFavorite}
-                    onClick={handleWishlistClick}
-                    icon={
-                      <FavoriteBorder
-                        sx={{
-                          [theme.breakpoints.between("mobile", "desktop")]: {
+                      }}
+                    >
+                      Update Product
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={handleCartClick}
+                      variant="contained"
+                      sx={{
+                        [theme.breakpoints.between("mobile", "desktop")]: {
+                          fontSize: "16px",
+                          lineHeight: "25px",
+                        },
+                        backgroundColor: "primary.dark",
+                        padding: "16px 30px",
+                        mr: "40px",
+                        fontSize: "18px",
+                        lineHeight: "25px",
+                      }}
+                    >
+                      {isInCart ? "REMOVE FROM CART" : "ADD TO CART"}
+                    </Button>
+                  )}
+                  {isLogin && (
+                    <Checkbox
+                      checked={isFavorite}
+                      onClick={handleWishlistClick}
+                      icon={
+                        <FavoriteBorder
+                          sx={{
+                            [theme.breakpoints.between("mobile", "desktop")]: {
+                              fontSize: "35px",
+                            },
+                            color: "primary.dark",
                             fontSize: "35px",
-                          },
-                          color: "primary.dark",
-                          fontSize: "35px",
-                        }}
-                      />
-                    }
-                    checkedIcon={
-                      <Favorite
-                        sx={{ color: "primary.dark", fontSize: "35px" }}
-                      />
-                    }
-                  />
-                )}
+                          }}
+                        />
+                      }
+                      checkedIcon={
+                        <Favorite
+                          sx={{ color: "primary.dark", fontSize: "35px" }}
+                        />
+                      }
+                    />
+                  )}
+                </Box>
+                <Box></Box>
               </Box>
-              <Box></Box>
+              <Subscribe product={product} />
             </Box>
-            <Subscribe product={product} />
           </Box>
         </Box>
-      </Box>
-      <Comments id={product._id} />
+        <Comments id={product._id} />
+      </Container>
     </>
   );
 };
