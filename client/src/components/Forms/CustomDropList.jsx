@@ -11,6 +11,7 @@ export default function CustomDropList({
   control,
 }) {
   const nightMode = useSelector((state) => state.nightMode);
+
   return (
     <>
       <InputLabel sx={{ width: "150px" }}>{camelizeDecode(name)}:</InputLabel>
@@ -22,7 +23,7 @@ export default function CustomDropList({
           <Select
             variant="standard"
             onChange={(e) => {
-              handleChange(e);
+              handleChange && handleChange(e);
               onChange(e);
             }}
             MenuProps={{ disableScrollLock: true }}
