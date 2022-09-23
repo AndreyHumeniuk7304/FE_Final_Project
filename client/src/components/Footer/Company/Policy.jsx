@@ -2,7 +2,7 @@ import { Box, List, Typography } from "@mui/material";
 
 const PolicyWebSite = () => {
   return (
-    <Box p={5}>
+    <Box p={{ mobile: 1, desktop: 5 }}>
       <Box
         component="h5"
         textTransform="uppercase"
@@ -13,7 +13,7 @@ const PolicyWebSite = () => {
       >
         PRIVACY POLICY
       </Box>
-      <Typography p={1}>
+      <Typography pb={1}>
         Welcome to Originalite. As used in these service terms, “we” or
         “Originalite” means ACI Gift Cards LLC and “you” means the individual or
         entity submitting digital images, videos, audio, text or other content
@@ -26,7 +26,7 @@ const PolicyWebSite = () => {
         AND ALL CONTENT GUIDELINES.
       </Typography>
       <List>
-        <Typography p={1} component="li">
+        <Typography pb={1} component="li">
           Customization. You can submit your own materials, including
           photographs, illustrations, graphics, audio, video and text, and
           select from a gallery of images to create customized Originalite.com
@@ -34,7 +34,7 @@ const PolicyWebSite = () => {
           You may only submit materials for which you own all rights or you must
           have the authorization of the person who does own those rights.
         </Typography>
-        <Typography p={1} component="li">
+        <Typography pb={1} component="li">
           License Grant for Your Materials. You hereby grant to Originalite, its
           affiliates and sublicensees (including third-parties who provide the
           Service and related services) a worldwide, nonexclusive, royalty-free,
@@ -47,7 +47,7 @@ const PolicyWebSite = () => {
           or those materials, in any manner and media; and (c) sublicense the
           foregoing rights to any third party, with or without a fee.
         </Typography>
-        <Typography p={1} component="li">
+        <Typography pb={1} component="li">
           Guidelines and Restrictions. You agree to submit materials to us in
           accordance with all guidelines for use posted on the Originalite.com
           web site or of which you are otherwise notified (“Guidelines”). In
@@ -59,7 +59,7 @@ const PolicyWebSite = () => {
           or materials that we deem to be in violation of these service terms,
           applicable laws or our community standards in our sole discretion.
         </Typography>
-        <Typography p={1} component="li">
+        <Typography pb={1} component="li">
           Representations, Warranties and Indemnities. You represent and warrant
           to Originalite and its affiliates and sublicensees that (a) you have
           the right to grant the licenses set forth in these service terms,
@@ -77,7 +77,7 @@ const PolicyWebSite = () => {
           attorneys fees and expenses) arising from any breach of these service
           terms.
         </Typography>
-        <Typography p={1} component="li">
+        <Typography pb={1} component="li">
           Originalite Intellectual Property. Without our prior written consent,
           you may not use our or our affiliates intellectual property including,
           without limitation, any of our trademarks, trade names, trade dress,
@@ -86,7 +86,7 @@ const PolicyWebSite = () => {
           intellectual property, except the opportunity to use the Service
           featuring such intellectual property.
         </Typography>
-        <Typography p={1} component="li">
+        <Typography pb={1} component="li">
           Other Terms. The Originalite.com Privacy Notice and Conditions of Use
           and the Guidelines for the Service, including in each case all future
           changes, are incorporated by reference into these service terms.
