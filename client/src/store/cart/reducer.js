@@ -13,7 +13,7 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         list: action.payload,
         isLoaded: true,
-        isError: "",
+        isError: false,
       };
     }
     case IS_NOT_LOADED: {
