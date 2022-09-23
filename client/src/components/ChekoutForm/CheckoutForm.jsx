@@ -47,6 +47,7 @@ const CheckoutForm = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     resolver:
@@ -161,6 +162,7 @@ const CheckoutForm = () => {
           handleSubmit={handleSubmit}
           errors={errors}
           btnName={"Pay"}
+          control={control}
         />
       </div>
       <DeliveryInfo />
