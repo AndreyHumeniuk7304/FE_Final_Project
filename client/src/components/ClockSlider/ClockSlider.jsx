@@ -6,6 +6,7 @@ import SwiperCore, {
   Pagination,
   Scrollbar,
 } from "swiper";
+import { Box } from "@mui/material";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Link } from "react-router-dom";
@@ -17,6 +18,22 @@ const ClockSlider = () => {
   useEffect(() => {
     getSliders().then((res) => setSliders(res));
   }, []);
+
+  const getSlides = () => {
+    return sliders.map((slide) => {
+      return (
+        <SwiperSlide key={slide._id}>
+          <Link to="/">
+            <Box
+              component={"img"}
+              sx={{ width: "100%" }}
+              src={slide.imageUrl}
+            />
+          </Link>
+        </SwiperSlide>
+      );
+    });
+  };
 
   return (
     <>
@@ -37,16 +54,7 @@ const ClockSlider = () => {
           clickable: true,
         }}
       >
-        {sliders.map((slide) => {
-          return (
-            <SwiperSlide key={slide._id} className="swiper__slider">
-              <Link to="/" className="">
-                <div className="swiper__wrapper"></div>
-                <img src={slide.imageUrl} />
-              </Link>
-            </SwiperSlide>
-          );
-        })}
+        {getSlides()}
       </Swiper>
     </>
   );
