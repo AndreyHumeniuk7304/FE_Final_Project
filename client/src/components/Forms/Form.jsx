@@ -49,6 +49,7 @@ const Form = ({
             direction="row"
             justifyContent="space-between"
             alignItems="center"
+            pt={2}
           >
             <CustomDropList
               name={inputName}
@@ -83,7 +84,13 @@ const Form = ({
       case "checkbox": {
         return (
           <Stack>
-            <InputLabel sx={{ "& .MuiButtonBase-root": { color: "white" } }}>
+            <InputLabel
+              sx={{
+                "& .MuiButtonBase-root": {
+                  color: nightMode ? "#fff" : "#686868",
+                },
+              }}
+            >
               <Controller
                 name={inputName}
                 label={label}

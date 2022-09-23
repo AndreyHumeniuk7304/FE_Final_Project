@@ -15,8 +15,19 @@ export default function CustomDropList({
 
   return (
     <>
-      <InputLabel sx={{ width: "fit-content" }}>{label}</InputLabel>
-
+      {label && (
+        <InputLabel
+          sx={{
+            width: "fit-content",
+            borderBottom: "1px solid",
+            borderColor: !nightMode ? "#686868" : "#000",
+            pb: 1,
+            pr: 4,
+          }}
+        >
+          {label}
+        </InputLabel>
+      )}
       <Controller
         control={control}
         name={name}
