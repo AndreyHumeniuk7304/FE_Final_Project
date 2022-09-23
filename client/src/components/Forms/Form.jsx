@@ -166,12 +166,14 @@ const Form = ({
         </List>
         <CustomErrorMessage err={errors.message} />
 
-        <Button
-          type="submit"
-          sx={{ background: "#686868", height: 50, color: "#fff" }}
-        >
-          {btnName}
-        </Button>
+        {btnName && (
+          <Button
+            type="submit"
+            sx={{ background: "#686868", height: 50, color: "#fff" }}
+          >
+            {btnName}
+          </Button>
+        )}
       </Stack>
     </form>
   );
