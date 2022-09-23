@@ -1,4 +1,4 @@
-import { Box, Button, Stack } from "@mui/material";
+import { Box, Button, List, ListItem, Stack } from "@mui/material";
 import CheckboxForm from "./FilterItems/CheckboxForm";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -14,10 +14,15 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProductsFilterPreloader } from "../../../store/catalog/actions";
 import CheckedFilterItem from "./checkedFilterItem";
-import { filterTitles } from "./data";
+import { defaultFilterData, filterTitles } from "./data";
 
+const filterTitleStyle = {
+  flexDirection: "column",
+  alignItems: "start",
+  pl: 0,
+};
 const Filter = () => {
-  const [currentPrice, setCurrentPrice] = useState([100, 1000]);
+  const [currentPrice, setCurrentPrice] = useState([]);
   const [isFilterUsing, setIsFilterUsing] = useState(false);
   const [search, setSearch] = useSearchParams();
   const [categories, setCategories] = useState(getCategories(search));
@@ -37,21 +42,11 @@ const Filter = () => {
     location.state && setCategories(location.state.categories);
     setCurrentPrice(getMinMaxPrice(categorieProductList));
     getItemInFilter(search, setArrOfCheckedItem);
+    setDefaultPrice(getMinMaxPrice(categorieProductList));
   }, [categorieProductList]);
 
-  useEffect(() => {
-    setDefaultPrice(getMinMaxPrice(categorieProductList));
-  }, [categories]);
-
   const { register, handleSubmit, reset } = useForm({
-    defaultValues: {
-      categories: [],
-      brand: [],
-      mechanism: [],
-      material: [],
-      color: [],
-      currentPrice: defaultPrice,
-    },
+    defaultValues: defaultFilterData,
   });
 
   const submitFilter = (values) => {
@@ -70,7 +65,7 @@ const Filter = () => {
     );
     setCurrentPrice(getMinMaxPrice(categorieProductList));
     setIsFilterUsing(false);
-    setArrOfCheckedItem([]);
+    setArrOfCheckedItem(!categories ? [] : categories);
     setIsMobileFilterBtnShow(false);
     setItemCliked("");
   };
@@ -90,9 +85,9 @@ const Filter = () => {
       })}
       onChange={handleSubmit((values) => getLinkOnChange(values))}
     >
-      <Box textAlign="start" component="ul">
+      <List>
         {filterTitles.map((title) => (
-          <Box key={title} component="li">
+          <ListItem key={title} sx={filterTitleStyle}>
             <CheckboxForm
               title={title}
               register={register}
@@ -102,9 +97,9 @@ const Filter = () => {
               setIdemCliked={setItemCliked}
               categories={categories}
             />
-          </Box>
+          </ListItem>
         ))}
-        <Box component="li">
+        <ListItem sx={filterTitleStyle}>
           <MaterialSlider
             title={"currentPrice"}
             name="currentPrice"
@@ -113,8 +108,8 @@ const Filter = () => {
             currentPrice={currentPrice}
             setCurrentPrice={setCurrentPrice}
           />
-        </Box>
-      </Box>
+        </ListItem>
+      </List>
 
       <Stack direction="row" justifyContent="space-evenly">
         <Button sx={{ color: nightMode ? "#fff" : "#000" }} type="submit">

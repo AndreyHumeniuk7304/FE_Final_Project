@@ -24,24 +24,23 @@ const MaterialSlider = ({
       >
         {!isShow ? "+ " : "- "} Price
       </Typography>
-      {isShow && (
-        <>
-          <Box pt={1}>
-            <span>$</span> <span>{currentPrice[0]}</span>
-            <span> - </span>
-            <span>{currentPrice[1]}</span>
-          </Box>
-          <Slider
-            defaultValue={defaultValues}
-            /* eslint-disable react/jsx-props-no-spreading */
-            {...register(title)}
-            value={currentPrice}
-            onChange={(e, v) => setCurrentPrice(v)}
-            min={defaultValues[0]}
-            max={defaultValues[1]}
-          />
-        </>
-      )}
+
+      <Box sx={{ display: isShow ? "block" : "none", width: "100%", p: 1 }}>
+        <Box pt={1}>
+          <span>$</span> <span>{currentPrice[0]}</span>
+          <span> - </span>
+          <span>{currentPrice[1]}</span>
+        </Box>
+        <Slider
+          /* eslint-disable react/jsx-props-no-spreading */
+          {...register(title)}
+          value={currentPrice}
+          onChange={(e, v) => setCurrentPrice(v)}
+          min={defaultValues[0]}
+          max={defaultValues[1]}
+          valueLabelDisplay="auto"
+        />
+      </Box>
     </>
   );
 };
