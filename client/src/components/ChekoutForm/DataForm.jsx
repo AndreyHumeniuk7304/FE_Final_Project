@@ -25,10 +25,10 @@ const DataForm = (props) => {
         },
         {
           inputName: "cardExpiryDate",
-          formType: "expiryDate",
+          formType: "inputSM",
           label: "Card Expiry Date",
         },
-        { inputName: "cvv", formType: "input", label: "CVC/CVV/CID" },
+        { inputName: "cvv", formType: "inputSM", label: "CVC/CVV/CID" },
         {
           inputName: "deliveryAdress",
           formType: "input",

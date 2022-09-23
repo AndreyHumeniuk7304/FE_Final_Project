@@ -22,11 +22,8 @@ const Footer = () => {
             justifyContent: "space-between",
             alignItems: "baseline",
           }}
-          //  className="footer-container"
         >
-          <Box
-          //  className="footer__item"
-          >
+          <Box>
             <Box
               onClick={handleFooter}
               component="h3"
@@ -40,7 +37,6 @@ const Footer = () => {
                 marginBottom: { mobile: "19px", desktop: "39px" },
                 cursor: "pointer",
               }}
-              // className="footer__item__title"
             >
               help
               <Box
@@ -61,11 +57,6 @@ const Footer = () => {
                   desktop: "block",
                 },
               }}
-              // className={
-              //   !statusOpenFooter
-              //     ? "footer__item__list"
-              //     : "footer__item__list open_footer-items"
-              // }
             >
               <Box
                 sx={{
@@ -73,7 +64,6 @@ const Footer = () => {
                   fontSize: { mobile: "10px", desktop: "18px" },
                   marginBottom: { mobile: "10px", desktop: "19px" },
                 }}
-                // className="footer__item__list-item"
               >
                 <Link to="/Facebook">Frequently questions</Link>
               </Box>
@@ -83,7 +73,6 @@ const Footer = () => {
                   fontSize: { mobile: "10px", desktop: "18px" },
                   marginBottom: { mobile: "10px", desktop: "19px" },
                 }}
-                // className="footer__item__list-item"
               >
                 <Link to="contact">Contact</Link>
               </Box>
@@ -93,7 +82,6 @@ const Footer = () => {
                   fontSize: { mobile: "10px", desktop: "18px" },
                   marginBottom: { mobile: "10px", desktop: "19px" },
                 }}
-                // className="footer__item__list-item"
               >
                 <Link to="/Purchase"> How to Purchase</Link>
               </Box>
@@ -103,15 +91,12 @@ const Footer = () => {
                   fontSize: { mobile: "10px", desktop: "18px" },
                   marginBottom: { mobile: "10px", desktop: "19px" },
                 }}
-                // className="footer__item__list-item"
               >
                 <Link to="/Payment"> Payment</Link>
               </Box>
             </Stack>
           </Box>
-          <Box
-          // className="footer__item"
-          >
+          <Box>
             <Box
               component="h3"
               onClick={handleFooter}
@@ -125,7 +110,6 @@ const Footer = () => {
                 marginBottom: { mobile: "19px", desktop: "39px" },
                 cursor: "pointer",
               }}
-              // className="footer__item__title"
             >
               follow us
               <Box
@@ -146,12 +130,6 @@ const Footer = () => {
                   desktop: "block",
                 },
               }}
-
-              // className={
-              //   !statusOpenFooter
-              //     ? "footer__item__list"
-              //     : "footer__item__list open_footer-items"
-              // }
             >
               <Box
                 sx={{
@@ -159,7 +137,6 @@ const Footer = () => {
                   fontSize: { mobile: "10px", desktop: "18px" },
                   marginBottom: { mobile: "10px", desktop: "19px" },
                 }}
-                // className="footer__item__list-item"
               >
                 <Link to="/Facebook">Facebook</Link>
               </Box>
@@ -169,7 +146,6 @@ const Footer = () => {
                   fontSize: { mobile: "10px", desktop: "18px" },
                   marginBottom: { mobile: "10px", desktop: "19px" },
                 }}
-                // className="footer__item__list-item"
               >
                 <Link to="/Facebook">Instagram</Link>
               </Box>
@@ -179,15 +155,12 @@ const Footer = () => {
                   fontSize: { mobile: "10px", desktop: "18px" },
                   marginBottom: { mobile: "10px", desktop: "19px" },
                 }}
-                // className="footer__item__list-item"
               >
                 <Link to="/Facebook">Pinterest</Link>
               </Box>
             </Stack>
           </Box>
-          <Box
-          //  className="footer__item"
-          >
+          <Box>
             <Box
               onClick={handleFooter}
               component="h3"
@@ -201,7 +174,6 @@ const Footer = () => {
                 marginBottom: { mobile: "19px", desktop: "39px" },
                 cursor: "pointer",
               }}
-              // className="footer__item__title"
             >
               company
               <Box
@@ -222,11 +194,6 @@ const Footer = () => {
                   desktop: "block",
                 },
               }}
-              // className={
-              //   !statusOpenFooter
-              //     ? "footer__item__list"
-              //     : "footer__item__list open_footer-items"
-              // }
             >
               <Box
                 sx={{
@@ -234,7 +201,6 @@ const Footer = () => {
                   fontSize: { mobile: "10px", desktop: "18px" },
                   marginBottom: { mobile: "10px", desktop: "19px" },
                 }}
-                // className="footer__item__list-item"
               >
                 <Link to="/History">History of the brand</Link>
               </Box>
@@ -244,7 +210,6 @@ const Footer = () => {
                   fontSize: { mobile: "10px", desktop: "18px" },
                   marginBottom: { mobile: "10px", desktop: "19px" },
                 }}
-                // className="footer__item__list-item"
               >
                 <Link to="/Facebook">Policy</Link>
               </Box>
@@ -254,7 +219,6 @@ const Footer = () => {
                   fontSize: { mobile: "10px", desktop: "18px" },
                   marginBottom: { mobile: "10px", desktop: "19px" },
                 }}
-                // className="footer__item__list-item"
               >
                 <Link to="/Facebook">Work with us</Link>
               </Box>
