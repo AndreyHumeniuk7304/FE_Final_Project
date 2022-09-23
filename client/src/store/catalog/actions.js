@@ -1,5 +1,5 @@
 import getCategoryProductsToRender from "../../api/getCategoryProductsToRender";
-import getAllProductsToRender from "../../api/getAllProductsToRender";
+
 import {
   ERROR_LOADED_PRODUCTS,
   LOADED_CATEGORIES_PRODUCTS,
@@ -11,11 +11,11 @@ import {
 
 export const fetchCategoriesProducts = (categoriesType) => (dispatch) => {
   dispatch({ type: START_FETCH_PRODUCTS });
-  getCategoryProductsToRender(categoriesType.length ? categoriesType : "")
+  getCategoryProductsToRender(!categoriesType ? "/products" : categoriesType)
     .then((data) => {
       dispatch(
         loadedCategorieProducts({
-          products: data.products,
+          products: !categoriesType ? data : data.products,
           productsQuntity: data.productsQuantity,
         })
       );
@@ -31,22 +31,6 @@ export const writeSearchWord = (payload) => {
     payload,
   };
 };
-
-// export const fetchAllProducts = () => (dispatch) => {
-//   dispatch({ type: START_FETCH_PRODUCTS });
-//   getAllProductsToRender()
-//     .then((products) => {
-//       dispatch(
-//         loadedCategorieProducts({
-//           products: products,
-//           productsQuntity: products.productsQuantity,
-//         })
-//       );
-//     })
-//     .catch(() => {
-//       dispatch(errorLoadedProducts());
-//     });
-// };
 
 export const loadedCategorieProducts = (products) => {
   return {
