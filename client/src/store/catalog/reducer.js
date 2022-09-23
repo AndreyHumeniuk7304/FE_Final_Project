@@ -1,3 +1,12 @@
+import {
+  ERROR_LOADED_PRODUCTS,
+  LOADED_CATEGORIES_PRODUCTS,
+  SAVE_SEARCH_WORD,
+  SET_QUANTITY_PRODUCTS_ON_CHANGE,
+  SET_QUANTITY_PRODUCTS_ON_CHANGE_LOADING,
+  START_FETCH_PRODUCTS,
+} from "./type";
+
 const initialState = {
   categorieProductList: [],
   searchWord: "",
@@ -10,19 +19,19 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "START_FETCH_PRODUCTS": {
+    case START_FETCH_PRODUCTS: {
       return {
         ...state,
         isLoading: true,
       };
     }
-    case "SAVE_SEARCH_WORD": {
+    case SAVE_SEARCH_WORD: {
       return {
         ...state,
         searchWord: action.payload,
       };
     }
-    case "LOADED_CATEGORIES_PRODUCTS": {
+    case LOADED_CATEGORIES_PRODUCTS: {
       return {
         ...state,
         categorieProductList: action.payload.products,
@@ -32,14 +41,14 @@ const reducer = (state = initialState, action) => {
       };
     }
 
-    case "ERROR_LOADED_PRODUCTS": {
+    case ERROR_LOADED_PRODUCTS: {
       return {
         ...state,
         isLoading: false,
         hasError: true,
       };
     }
-    case "SET_QUANTITY_PRODUCTS_ON_CHANGE": {
+    case SET_QUANTITY_PRODUCTS_ON_CHANGE: {
       return {
         ...state,
         filterOnChange: {
@@ -48,7 +57,7 @@ const reducer = (state = initialState, action) => {
         },
       };
     }
-    case "SET_QUANTITY_PRODUCTS_ON_CHANGE_LOADING": {
+    case SET_QUANTITY_PRODUCTS_ON_CHANGE_LOADING: {
       return {
         ...state,
         filterOnChange: {
