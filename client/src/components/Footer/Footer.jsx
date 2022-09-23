@@ -67,17 +67,23 @@ const Footer = () => {
               }
             >
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="#!">
+                <a className="list-item__link" href="https://www.facebook.com/">
                   <Box sx={{ fontFamily: "fontFamily" }}>Facebook</Box>
                 </a>
               </li>
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="#!">
+                <a
+                  className="list-item__link"
+                  href="https://www.instagram.com/"
+                >
                   <Box sx={{ fontFamily: "fontFamily" }}>Instagram</Box>
                 </a>
               </li>
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="#!">
+                <a
+                  className="list-item__link"
+                  href="https://www.pinterest.com/"
+                >
                   <Box sx={{ fontFamily: "fontFamily" }}>Pinterest</Box>
                 </a>
               </li>
