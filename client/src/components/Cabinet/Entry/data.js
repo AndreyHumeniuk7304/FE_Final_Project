@@ -5,10 +5,12 @@ export const loginInputNames = [
   {
     inputName: "loginOrEmail",
     formType: "input",
+    label: "Login or Email",
   },
   {
     inputName: "password",
     formType: "password",
+    label: "Password",
   },
   {
     inputName: "isSignedAutomatically",
@@ -19,19 +21,29 @@ export const loginInputNames = [
 ];
 
 export const registInputNames = [
-  { inputName: "firstName", formType: "input" },
-  { inputName: "lastName", formType: "input" },
-  { inputName: "login", formType: "input" },
-  { inputName: "email", formType: "input" },
-  { inputName: "telephone", formType: "input" },
+  { inputName: "firstName", formType: "input", label: "First name" },
+  { inputName: "lastName", formType: "input", label: "last name" },
+  { inputName: "login", formType: "input", label: "Login" },
+  { inputName: "email", formType: "input", label: "Email" },
+  { inputName: "telephone", formType: "input", label: "Phone number" },
   { inputName: "gender", formName: ["Male", "Female"], formType: "droplist" },
-  { inputName: "password", formType: "password" },
-  { inputName: "confirmPassword", formType: "password" },
+  { inputName: "password", formType: "password", label: "Password" },
+  {
+    inputName: "confirmPassword",
+    formType: "password",
+    label: "Confirm password",
+  },
 ];
 
 export const registSchema = yup.object({
-  firstName: yup.string().required("First name is required."),
-  lastName: yup.string().required("Second name is required."),
+  firstName: yup
+    .string()
+    .required("First name is required.")
+    .matches(/^[A-Za-z ]*$/, "Please enter valid name"),
+  lastName: yup
+    .string()
+    .required("Second name is required.")
+    .matches(/^[A-Za-z ]*$/, "Please enter valid last name"),
   login: yup
     .string()
     .required("Login is required.")

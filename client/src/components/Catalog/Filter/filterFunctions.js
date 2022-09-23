@@ -1,3 +1,5 @@
+import { filterTitles } from "./data";
+
 export const getFilterItem = (caregory, productList) => {
   let newList = productList.map(
     (listItem) => listItem[caregory] && listItem[caregory].trim()
@@ -47,7 +49,7 @@ export const getCategories = (search) => {
     : [];
 };
 
-export const getItemInFilter = (search, setIsItemChecked) => {
+export const getItemInFilter = (search, setArrOfCheckedItem) => {
   let arr = [];
   filterTitles.forEach(
     (title) =>
@@ -62,13 +64,17 @@ export const getItemInFilter = (search, setIsItemChecked) => {
   );
   arr = arr.filter((data) => data);
   arr = [...new Set(arr)];
-  setIsItemChecked(arr);
+
+  setArrOfCheckedItem(arr);
 };
 
-export const filterTitles = [
-  "categories",
-  "brand",
-  "mechanism",
-  "material",
-  "color",
-];
+export const getDefaulteValues = (categorieProductList, categories) => {
+  return {
+    categories: categories.length ? categories : [],
+    brand: [],
+    mechanism: [],
+    material: [],
+    color: [],
+    currentPrice: getMinMaxPrice(categorieProductList),
+  };
+};

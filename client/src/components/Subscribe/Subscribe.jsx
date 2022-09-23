@@ -38,6 +38,7 @@ const Subscribe = ({ product }) => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(productSchema),
@@ -82,7 +83,7 @@ const Subscribe = ({ product }) => {
           Subscribe for new products &#8595;
         </Button>
       )}
-      <Box className="subscribe">
+      <Box width="fit-content">
         {isSubscribeOpen && (
           <Form
             actionWithForm={subscribeUser}
@@ -91,6 +92,7 @@ const Subscribe = ({ product }) => {
             handleSubmit={handleSubmit}
             errors={error || errors}
             btnName={"SUBSCRIBE"}
+            control={control}
           />
         )}
       </Box>
