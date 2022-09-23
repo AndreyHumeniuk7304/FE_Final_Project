@@ -2,19 +2,20 @@ import { InputLabel, MenuItem, Select } from "@mui/material";
 import PropTypes from "prop-types";
 import { Controller } from "react-hook-form";
 import { useSelector } from "react-redux";
+import { camelizeDecode } from "./functions";
 
 export default function CustomDropList({
   name,
   arr,
-  camelizeDecode,
   handleChange,
   control,
+  label,
 }) {
   const nightMode = useSelector((state) => state.nightMode);
 
   return (
     <>
-      <InputLabel sx={{ width: "150px" }}>{camelizeDecode(name)}:</InputLabel>
+      <InputLabel sx={{ width: "fit-content" }}>{label}</InputLabel>
 
       <Controller
         control={control}
@@ -55,8 +56,8 @@ export default function CustomDropList({
 
 CustomDropList.propTypes = {
   name: PropTypes.string,
+  label: PropTypes.string,
   arr: PropTypes.array,
-  camelizeDecode: PropTypes.func,
   handleChange: PropTypes.func,
   control: PropTypes.object,
 };

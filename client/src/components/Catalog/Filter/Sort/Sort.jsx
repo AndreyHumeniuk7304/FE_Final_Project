@@ -1,21 +1,16 @@
+import { Box, Stack } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import Form from "../../../Forms/Form";
-const sortDropList = [
-  {
-    inputName: "sort",
-    formName: ["Low price", "High price"],
-    formType: "droplist",
-    label: "Sort",
-  },
-];
+import { useLocation, useNavigate } from "react-router-dom";
+import { sortDropList } from "./index";
 
-const Sort = () => {
+import Form from "../../../Forms/Form";
+import { Sort } from "@mui/icons-material";
+
+const SortProduct = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [search, setSearch] = useSearchParams();
   const { handleSubmit, control } = useForm({
-    defaultValues: { sort: "" },
+    defaultValues: { sort: "Recommendation" },
   });
 
   const setLink = (queryParam) => {
@@ -31,17 +26,25 @@ const Sort = () => {
     const value = e.target.value;
     value === "Low price" && navigate(setLink("+currentPrice"));
     value === "High price" && navigate(setLink("-currentPrice"));
+    value === "Recommendation" && navigate(setLink(""));
   };
 
   return (
-    <Form
-      control={control}
-      handleSubmit={handleSubmit}
-      handleChange={setValidation}
-      formArr={sortDropList}
-      errors={{}}
-    />
+    <Stack
+      direction="row"
+      alignItems="center"
+      sx={{ div: { p: 0, textAlign: "start" } }}
+    >
+      <Sort />
+      <Form
+        control={control}
+        handleSubmit={handleSubmit}
+        handleChange={setValidation}
+        formArr={sortDropList}
+        errors={{}}
+      />
+    </Stack>
   );
 };
 
-export default Sort;
+export default SortProduct;
