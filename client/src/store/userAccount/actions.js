@@ -48,4 +48,10 @@ const fetchUser = (userData, isAutoLog) => {
   };
 };
 
+export const logout = () => {
+  localStorage.removeItem("login");
+  sessionStorage.removeItem("login");
+  return { type: "LOGOUT" };
+};
+
 export { fetchUser, setError, getIsLogin, setToken, getUserData, setUserData };
