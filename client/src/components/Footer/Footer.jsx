@@ -28,11 +28,11 @@ const Footer = () => {
               }
             >
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="/help/quastions">
+                <Link className="list-item__link" to="/help/quastions">
                   <Box sx={{ fontFamily: "fontFamily" }}>
                     Frequently asked questions
                   </Box>
-                </a>
+                </Link>
               </li>
               <li className="footer__item__list-item">
                 <Link className="list-item__link" to="/help/contact">
@@ -40,14 +40,14 @@ const Footer = () => {
                 </Link>
               </li>
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="/help/purchase">
+                <Link className="list-item__link" to="/help/purchase">
                   <Box sx={{ fontFamily: "fontFamily" }}>How to Purchase</Box>
-                </a>
+                </Link>
               </li>
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="/help/payment">
+                <Link className="list-item__link" to="/help/payment">
                   <Box sx={{ fontFamily: "fontFamily" }}>Payment</Box>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -105,21 +105,21 @@ const Footer = () => {
               }
             >
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="/company/history">
+                <Link className="list-item__link" to="/company/history">
                   <Box sx={{ fontFamily: "fontFamily" }}>
                     History of the brand
                   </Box>
-                </a>
+                </Link>
               </li>
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="/company/policy">
+                <Link className="list-item__link" to="/company/policy">
                   <Box sx={{ fontFamily: "fontFamily" }}>Policy</Box>
-                </a>
+                </Link>
               </li>
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="/company/collaborations">
+                <Link className="list-item__link" to="/company/collaborations">
                   <Box sx={{ fontFamily: "fontFamily" }}>Work with Us </Box>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
