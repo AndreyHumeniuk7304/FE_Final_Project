@@ -45,7 +45,7 @@ const Footer = () => {
               >
                 <Box
                   component={"img"}
-                  src="images/arrow-drop-down.svg"
+                  src="../images/arrow-drop-down.svg"
                   alt="drop-down"
                 ></Box>
               </Box>
@@ -118,7 +118,7 @@ const Footer = () => {
               >
                 <Box
                   component={"img"}
-                  src="images/arrow-drop-down.svg"
+                  src="../images/arrow-drop-down.svg"
                   alt="drop-down"
                 ></Box>
               </Box>
@@ -182,7 +182,7 @@ const Footer = () => {
               >
                 <Box
                   component={"img"}
-                  src="images/arrow-drop-down.svg"
+                  src="../images/arrow-drop-down.svg"
                   alt="drop-down"
                 ></Box>
               </Box>
