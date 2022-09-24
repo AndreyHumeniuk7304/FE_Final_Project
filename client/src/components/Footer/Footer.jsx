@@ -67,12 +67,17 @@ const Footer = () => {
               }
             >
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="https://www.facebook.com/">
+                <a
+                  target="blank"
+                  className="list-item__link"
+                  href="https://www.facebook.com/"
+                >
                   <Box sx={{ fontFamily: "fontFamily" }}>Facebook</Box>
                 </a>
               </li>
               <li className="footer__item__list-item">
                 <a
+                  target="blank"
                   className="list-item__link"
                   href="https://www.instagram.com/"
                 >
@@ -81,6 +86,7 @@ const Footer = () => {
               </li>
               <li className="footer__item__list-item">
                 <a
+                  target="blank"
                   className="list-item__link"
                   href="https://www.pinterest.com/"
                 >
