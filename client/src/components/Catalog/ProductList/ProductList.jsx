@@ -45,36 +45,40 @@ const ProductList = () => {
               aria-label="outlined button group"
               orientation="vertical"
             >
-              <Button
+              <Box
                 type="submit"
                 onClick={() => {
                   setIsOneCartView(false);
                 }}
-                className={
-                  !isOneCartView ? "active-button view-btn" : "view-btn"
-                }
+                sx={{
+                  pd: "18% 0%",
+                  minWidth: "10%",
+                  backgroundColor: !isOneCartView && "rgb(197, 190, 190)",
+                }}
               >
                 <Box
                   component="img"
                   alt="one card view"
                   src="../images/square.png"
                 />
-              </Button>
-              <Button
+              </Box>
+              <Box
                 type="submit"
                 onClick={() => {
                   setIsOneCartView(true);
                 }}
-                className={
-                  isOneCartView ? "active-button view-btn" : "view-btn"
-                }
+                sx={{
+                  pd: "18% 0%",
+                  minWidth: "10%",
+                  backgroundColor: isOneCartView && "rgb(197, 190, 190)",
+                }}
               >
                 <Box
                   component="img"
                   alt="two cards view"
                   src="../images/squares.png"
                 />
-              </Button>
+              </Box>
             </ButtonGroup>
           </Box>
         )}
@@ -121,19 +125,7 @@ const ProductList = () => {
             return (
               <Link
                 to={`/product/${card.itemNo}`}
-                className={
-                  isOneCartView
-                    ? "productlist-wrapper__card-two"
-                    : "productlist-wrapper__card-one"
-                }
-                sx={{
-                  height: "90vh",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  // width: isOneCartView ? "43%" : "85%",
-                }}
-                
+                style={{ width: isOneCartView ? "43%" : "70%" }}
                 key={card._id}
               >
                 <ProductCard
