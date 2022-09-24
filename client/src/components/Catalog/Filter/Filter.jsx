@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProductsFilterPreloader } from "../../../store/catalog/actions";
 import CheckedFilterItem from "./checkedFilterItem";
 import { defaultFilterData, filterTitles } from "./data";
+import SortProduct from "./Sort/Sort";
 
 const filterTitleStyle = {
   flexDirection: "column",
@@ -136,7 +137,7 @@ const Filter = () => {
 
       <Stack>
         <CheckedFilterItem arrOfCheckedItem={arrOfCheckedItem} />
-
+        <SortProduct />
         <Box display={{ mobile: "none", desktop: "block" }} id="filter">
           {filterForm}
         </Box>

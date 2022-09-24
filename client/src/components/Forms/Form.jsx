@@ -49,6 +49,7 @@ const Form = ({
             direction="row"
             justifyContent="space-between"
             alignItems="center"
+            pt={2}
           >
             <CustomDropList
               name={inputName}
@@ -57,6 +58,7 @@ const Form = ({
               camelizeDecode={camelizeDecode}
               handleChange={handleChange}
               control={control}
+              label={label}
             />
             <CustomErrorMessage err={errors[inputName]?.message} />
           </Stack>
@@ -82,7 +84,13 @@ const Form = ({
       case "checkbox": {
         return (
           <Stack>
-            <InputLabel sx={{ "& .MuiButtonBase-root": { color: "white" } }}>
+            <InputLabel
+              sx={{
+                "& .MuiButtonBase-root": {
+                  color: nightMode ? "#fff" : "#686868",
+                },
+              }}
+            >
               <Controller
                 name={inputName}
                 label={label}
@@ -166,12 +174,14 @@ const Form = ({
         </List>
         <CustomErrorMessage err={errors.message} />
 
-        <Button
-          type="submit"
-          sx={{ background: "#686868", height: 50, color: "#fff" }}
-        >
-          {btnName}
-        </Button>
+        {btnName && (
+          <Button
+            type="submit"
+            sx={{ background: "#686868", height: 50, color: "#fff" }}
+          >
+            {btnName}
+          </Button>
+        )}
       </Stack>
     </form>
   );
