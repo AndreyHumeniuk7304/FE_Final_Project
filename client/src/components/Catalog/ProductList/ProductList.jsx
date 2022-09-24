@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import { Box } from "@mui/system";
 import Paginations from "./Pagination/Pagination";
+import Sort from "../Filter/Sort/Sort";
 
 const ProductList = () => {
   const { categorieProductList, isLoading, hasError, productsQuntity } =
@@ -107,7 +108,7 @@ const ProductList = () => {
           categorieProductList.map((card) => {
             return (
               <Link
-                to={card.productUrl}
+                to={`/product/${card.itemNo}`}
                 className={
                   isOneCartView
                     ? "productlist-wrapper__card-two"

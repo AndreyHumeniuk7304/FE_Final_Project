@@ -1,46 +1,85 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Box } from "@mui/system";
-import { styled } from "@mui/material/styles";
+import { Box, Typography, Stack } from "@mui/material";
 import { useSelector } from "react-redux";
-
-const Root = styled("div")(({ theme }) => ({
-  [theme.breakpoints.down("desktop")]: {
-    padding: "15px 0px 15px",
-    fontSize: "12px",
-    width: "80%",
-  },
-}));
+import theme from "../../theme";
 
 const HomeCategory = () => {
   const categorieProductList = useSelector(
     (state) => state.catalog.categorieProductList
   );
 
+  const getPopularProducts = () => {
+    let count = 0;
+
+    return categorieProductList.map((product) => {
+      return (
+        product.isPopular && (
+          <Box
+            key={product._id}
+            sx={{
+              position: "relative",
+              flex: ++count < 4 ? "0 1 33.333%" : "0 1 50%",
+              boxSizing: "border-box",
+              padding: "10px",
+            }}
+          >
+            <Link to={product.productUrl} style={{ width: "100%" }}>
+              <Box
+                sx={{
+                  position: "absolute",
+                  bottom: "12.5px",
+                  left: "10px",
+                  padding: "20px 30px 20px",
+                  backgroundColor: "rgba(0, 0, 0, 0.5)",
+                  [theme.breakpoints.down("desktop")]: {
+                    padding: "15px 0px 15px",
+                    fontSize: "12px",
+                    width: "80%",
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    position: "relative",
+                  }}
+                >
+                  {product.name.split(" ").slice(0, 2).join(" ")}
+                </Box>
+              </Box>
+              <Box
+                component={"img"}
+                sx={{ width: "100%", height: "300px", objectFit: "cover" }}
+                src={product.imageUrls[0]}
+                alt={product.name.split(" ").slice(0, 2).join(" ")}
+              />
+            </Link>
+          </Box>
+        )
+      );
+    });
+  };
+
   return (
     <>
-      <div className="homeCategory">
-        <Box className="homeCategory__title">POPULAR WATCHES</Box>
-        <div className="homeCategory__wrapper">
-          {categorieProductList !== undefined &&
-            categorieProductList.map((product, index) => {
-              return (
-                product.isPopular && (
-                  <div key={product._id} className="homeCategory__type">
-                    <Link to={product.productUrl}>
-                      <Root className="homeCategory__text-wrapper">
-                        <Box className="homeCategory__text">
-                          {product.name.split(" ").slice(0, 2).join(" ")}
-                        </Box>
-                      </Root>
-                      <img src={product.imageUrls[0]} alt="" />
-                    </Link>
-                  </div>
-                )
-              );
-            })}
-        </div>
-      </div>
+      <Box sx={{ maxWidth: "1220px", margin: "0 auto" }}>
+        <Typography
+          sx={{
+            position: "relative",
+            display: "inline-block",
+            margin: "0 0 0px 50px",
+            fontSize: "18px",
+            fontWeight: "bold",
+          }}
+        >
+          POPULAR WATCHES
+        </Typography>
+        <Stack direction="row" sx={{ flexWrap: "wrap", margin: "20px 0 0 0" }}>
+          {getPopularProducts()}
+        </Stack>
+      </Box>
     </>
   );
 };

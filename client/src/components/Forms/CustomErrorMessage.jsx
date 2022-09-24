@@ -1,13 +1,8 @@
+import { Alert } from "@mui/material";
 import PropTypes from "prop-types";
 
 export default function CustomErrorMessage({ err }) {
-  return (
-    <>
-      <span className="form__error" role="alert">
-        {err}
-      </span>
-    </>
-  );
+  return err && <Alert severity="error">{err}</Alert>;
 }
 
 CustomErrorMessage.propTypes = {

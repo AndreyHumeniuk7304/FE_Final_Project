@@ -1,31 +1,45 @@
+import { Button, TextField } from "@mui/material";
 import PropTypes from "prop-types";
-const CastomMultiInput = ({ inputName, index, fieldArray, register }) => {
+import { Controller } from "react-hook-form";
+import { useSelector } from "react-redux";
+const CastomMultiInput = ({ inputName, index, fieldArray, control }) => {
+  const nightMode = useSelector((state) => state.nightMode);
+
   return (
-    <div className="form__input-add">
-      <input
-        /* eslint-disable-next-line react/jsx-props-no-spreading */
-        {...register(`${inputName}.${index}`)}
-        type="text"
-        className={"form__input"}
+    <>
+      <Controller
+        name={`${inputName}.${index}`}
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <TextField
+            variant="standard"
+            onChange={onChange}
+            value={value}
+            label={`Past url image #${index + 1}`}
+            sx={{
+              flex: "1",
+            }}
+          />
+        )}
       />
-      <button
-        style={{ marginRight: 20 }}
-        type="btn"
-        onClick={(e) => {
-          e.preventDefault();
-          fieldArray.append([" "]);
-        }}
-      >
-        ADD
-      </button>
+
       {index ? (
-        <button type="btn" onClick={() => fieldArray.remove(index)}>
+        <Button
+          sx={{ backgroundColor: "#686868", color: "#fff", width: 60 }}
+          onClick={() => fieldArray.remove(index)}
+        >
           DEL
-        </button>
+        </Button>
       ) : (
         ""
       )}
-    </div>
+      <Button
+        sx={{ backgroundColor: "#686868", color: "#fff", width: 60 }}
+        onClick={() => fieldArray.append([" "])}
+      >
+        ADD
+      </Button>
+    </>
   );
 };
 
@@ -36,4 +50,5 @@ CastomMultiInput.propTypes = {
   index: PropTypes.number,
   fieldArray: PropTypes.object,
   register: PropTypes.func,
+  control: PropTypes.object,
 };

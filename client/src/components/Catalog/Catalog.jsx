@@ -1,13 +1,14 @@
 import Filter from "./Filter/Filter";
 import ProductList from "./ProductList/ProductList";
 import PropTypes from "prop-types";
+import { Stack } from "@mui/material";
 
 const Catalog = ({ isFilterShow = true }) => {
   return (
-    <div className="catalog-container">
+    <Stack direction={{ mobile: "column", desktop: "row" }}>
       {isFilterShow && <Filter />}
       <ProductList />
-    </div>
+    </Stack>
   );
 };
 
