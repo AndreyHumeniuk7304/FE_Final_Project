@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import { Box } from "@mui/system";
 import Paginations from "./Pagination/Pagination";
+import Sort from "../Filter/Sort/Sort";
 
 const ProductList = () => {
   const { categorieProductList, isLoading, hasError, productsQuntity } =
