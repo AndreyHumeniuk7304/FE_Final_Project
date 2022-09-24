@@ -2,7 +2,6 @@ const initialState = {
   isLogin: false,
   error: {},
   customer: {},
-  wishList: [],
   token: "",
 };
 
@@ -31,6 +30,15 @@ const userAccountReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload,
+      };
+    }
+    case "LOGOUT": {
+      return {
+        ...state,
+        isLogin: false,
+        error: {},
+        customer: {},
+        token: "",
       };
     }
 

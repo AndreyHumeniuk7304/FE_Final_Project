@@ -25,8 +25,17 @@ export const registInputNames = [
   { inputName: "lastName", formType: "input", label: "last name" },
   { inputName: "login", formType: "input", label: "Login" },
   { inputName: "email", formType: "input", label: "Email" },
-  { inputName: "telephone", formType: "input", label: "Phone number" },
-  { inputName: "gender", formName: ["Male", "Female"], formType: "droplist" },
+  {
+    inputName: "telephone",
+    formType: "input",
+    label: "Phone number",
+  },
+  {
+    inputName: "gender",
+    formName: ["Male", "Female"],
+    formType: "droplist",
+    label: "Gender",
+  },
   { inputName: "password", formType: "password", label: "Password" },
   {
     inputName: "confirmPassword",
