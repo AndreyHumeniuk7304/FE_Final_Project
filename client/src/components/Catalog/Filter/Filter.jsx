@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProductsFilterPreloader } from "../../../store/catalog/actions";
 import CheckedFilterItem from "./checkedFilterItem";
 import { filterTitles } from "./data";
+import SortProduct from "./Sort/Sort";
 
 const Filter = () => {
   const [currentPrice, setCurrentPrice] = useState([100, 1000]);
@@ -141,7 +142,7 @@ const Filter = () => {
 
       <Stack>
         <CheckedFilterItem arrOfCheckedItem={arrOfCheckedItem} />
-
+        <SortProduct />
         <Box display={{ mobile: "none", desktop: "block" }} id="filter">
           {filterForm}
         </Box>
