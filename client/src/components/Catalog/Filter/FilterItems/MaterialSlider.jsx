@@ -27,9 +27,10 @@ const MaterialSlider = ({
 
       <Box sx={{ display: isShow ? "block" : "none", width: "100%", p: 1 }}>
         <Box pt={1}>
-          <span>$</span> <span>{currentPrice[0]}</span>
-          <span> - </span>
-          <span>{currentPrice[1]}</span>
+          <Typography component="span">$</Typography>
+          <Typography component="span">{currentPrice[0]}</Typography>
+          <Typography component="span"> - </Typography>
+          <Typography component="span">{currentPrice[1]}</Typography>
         </Box>
         <Slider
           /* eslint-disable react/jsx-props-no-spreading */
