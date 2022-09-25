@@ -19,6 +19,7 @@ import Error from "../Error/Error";
 import CompleteOrder from "../CompleteOrder/CompleteOrder";
 import RegistrationForOrder from "../RegistrationForOrder/RegistrationForOrder";
 import PrivateRoute from "./PrivateRoute";
+import Account from "../../views/MyAccount/Account";
 
 const setPrivateElement = (element) => <PrivateRoute>{element}</PrivateRoute>;
 
@@ -38,7 +39,7 @@ const Routing = () => {
           path="user"
           element={
             <PrivateRoute>
-              <MyAccount />
+              <Account />
             </PrivateRoute>
           }
         />
