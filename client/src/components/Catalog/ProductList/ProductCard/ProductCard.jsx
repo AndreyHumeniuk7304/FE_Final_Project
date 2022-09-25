@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 
-const ProductCard = ({ image, name, price }) => {
+const ProductCard = ({ image, name, price, viewIsOne }) => {
   return (
     <Card
       sx={{
@@ -29,14 +29,20 @@ const ProductCard = ({ image, name, price }) => {
             gutterBottom
             variant="p"
             component="div"
-            sx={{ fontSize: "1.6vw" }}
+            sx={{ fontSize: viewIsOne ? "1.6vw" : "3vw" }}
           >
             {name}
           </Typography>
           <Typography
             variant="h5"
             color="black"
-            sx={{ fontSize: { desktop: "2vw", mobile: "1.8vw" } }}
+            sx={{
+              fontSize: {
+                desktop: viewIsOne ? "2vw" : "3vw",
+                mobile: viewIsOne ? "1.8vw" : "2.8vw",
+              },
+              marginTop: !viewIsOne && "7%",
+            }}
           >
             {price} $
           </Typography>
