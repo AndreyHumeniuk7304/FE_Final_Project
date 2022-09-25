@@ -2,6 +2,7 @@ import { Stack } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { FooterItem } from "./FooterStyledComponent";
 
 const Footer = () => {
   const [statusOpenFooter, setStatusOpenFooter] = useState(false);
@@ -58,42 +59,18 @@ const Footer = () => {
                 },
               }}
             >
-              <Box
-                sx={{
-                  fontFamily: "fontFamily",
-                  fontSize: { mobile: "10px", desktop: "18px" },
-                  marginBottom: { mobile: "10px", desktop: "19px" },
-                }}
-              >
-                <Link to="/Facebook">Frequently questions</Link>
-              </Box>
-              <Box
-                sx={{
-                  fontFamily: "fontFamily",
-                  fontSize: { mobile: "10px", desktop: "18px" },
-                  marginBottom: { mobile: "10px", desktop: "19px" },
-                }}
-              >
+              <FooterItem>
+                <Link to="/Facebook">FAQ</Link>
+              </FooterItem>
+              <FooterItem>
                 <Link to="contact">Contact</Link>
-              </Box>
-              <Box
-                sx={{
-                  fontFamily: "fontFamily",
-                  fontSize: { mobile: "10px", desktop: "18px" },
-                  marginBottom: { mobile: "10px", desktop: "19px" },
-                }}
-              >
+              </FooterItem>
+              <FooterItem>
                 <Link to="/Purchase"> How to Purchase</Link>
-              </Box>
-              <Box
-                sx={{
-                  fontFamily: "fontFamily",
-                  fontSize: { mobile: "10px", desktop: "18px" },
-                  marginBottom: { mobile: "10px", desktop: "19px" },
-                }}
-              >
+              </FooterItem>
+              <FooterItem>
                 <Link to="/Payment"> Payment</Link>
-              </Box>
+              </FooterItem>
             </Stack>
           </Box>
           <Box>
@@ -131,33 +108,15 @@ const Footer = () => {
                 },
               }}
             >
-              <Box
-                sx={{
-                  fontFamily: "fontFamily",
-                  fontSize: { mobile: "10px", desktop: "18px" },
-                  marginBottom: { mobile: "10px", desktop: "19px" },
-                }}
-              >
+              <FooterItem>
                 <Link to="/Facebook">Facebook</Link>
-              </Box>
-              <Box
-                sx={{
-                  fontFamily: "fontFamily",
-                  fontSize: { mobile: "10px", desktop: "18px" },
-                  marginBottom: { mobile: "10px", desktop: "19px" },
-                }}
-              >
+              </FooterItem>
+              <FooterItem>
                 <Link to="/Facebook">Instagram</Link>
-              </Box>
-              <Box
-                sx={{
-                  fontFamily: "fontFamily",
-                  fontSize: { mobile: "10px", desktop: "18px" },
-                  marginBottom: { mobile: "10px", desktop: "19px" },
-                }}
-              >
+              </FooterItem>
+              <FooterItem>
                 <Link to="/Facebook">Pinterest</Link>
-              </Box>
+              </FooterItem>
             </Stack>
           </Box>
           <Box>
@@ -204,24 +163,12 @@ const Footer = () => {
               >
                 <Link to="/History">History of the brand</Link>
               </Box>
-              <Box
-                sx={{
-                  fontFamily: "fontFamily",
-                  fontSize: { mobile: "10px", desktop: "18px" },
-                  marginBottom: { mobile: "10px", desktop: "19px" },
-                }}
-              >
+              <FooterItem>
                 <Link to="/Facebook">Policy</Link>
-              </Box>
-              <Box
-                sx={{
-                  fontFamily: "fontFamily",
-                  fontSize: { mobile: "10px", desktop: "18px" },
-                  marginBottom: { mobile: "10px", desktop: "19px" },
-                }}
-              >
+              </FooterItem>
+              <FooterItem>
                 <Link to="/Facebook">Work with us</Link>
-              </Box>
+              </FooterItem>
             </Stack>
           </Box>
         </Box>

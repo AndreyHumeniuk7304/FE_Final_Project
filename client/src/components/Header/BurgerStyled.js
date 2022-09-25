@@ -1,18 +1,18 @@
-import styled from "styled-components";
+import { styled } from "@mui/system";
 
-export const BurgerCategoryTitle = styled.h3`
-  fontfamily: Josefin Sans;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 14px;
-`;
+export const BurgerCategoryTitle = styled("h3")({
+  fontFamily: "Josefin Sans",
+  fontStyle: "normal",
+  fontWeight: "400",
+  fontSize: "14px",
+  lineHeight: "14px",
+});
 
-export const BurgerFooterItem = styled.p`
-  margin-bottom: 12px;
-  fontfamily: Open Sans;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 19px;
-`;
+export const BurgerFooterItem = styled("p")({
+  marginBottom: "12px",
+  fontfamily: "Open Sans",
+  fontStyle: "normal",
+  fontWeight: "400",
+  fontSize: "14px",
+  lineHeight: "19px",
+});
