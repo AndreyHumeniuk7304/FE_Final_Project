@@ -79,6 +79,20 @@ const Filter = () => {
     );
   };
 
+  const filterTitleList = (title) => (
+    <ListItem key={title} sx={filterTitleStyle}>
+      <CheckboxForm
+        title={title}
+        register={register}
+        arrOfCheckedItem={arrOfCheckedItem}
+        setArrOfCheckedItem={setArrOfCheckedItem}
+        itemCLicked={itemCLicked}
+        setIdemCliked={setItemCliked}
+        categories={categories}
+      />
+    </ListItem>
+  );
+
   const filterForm = (
     <form
       onSubmit={handleSubmit((data) => {
@@ -87,19 +101,11 @@ const Filter = () => {
       onChange={handleSubmit((values) => getLinkOnChange(values))}
     >
       <List>
-        {filterTitles.map((title) => (
-          <ListItem key={title} sx={filterTitleStyle}>
-            <CheckboxForm
-              title={title}
-              register={register}
-              arrOfCheckedItem={arrOfCheckedItem}
-              setArrOfCheckedItem={setArrOfCheckedItem}
-              itemCLicked={itemCLicked}
-              setIdemCliked={setItemCliked}
-              categories={categories}
-            />
-          </ListItem>
-        ))}
+        {filterTitles.map((title) =>
+          categories.length
+            ? title.toLowerCase() !== "categories" && filterTitleList(title)
+            : filterTitleList(title)
+        )}
         <ListItem sx={filterTitleStyle}>
           <MaterialSlider
             title={"currentPrice"}
