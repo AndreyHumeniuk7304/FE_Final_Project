@@ -56,7 +56,6 @@ const Filter = () => {
 
   const submitFilter = (values) => {
     categories ? (values = { ...values, categories: categories }) : values;
-    console.log(values);
     const link = setFilterLink(values, currentPrice);
     setSearch(link + "&perPage=10&startPage=1");
     setIsFilterUsing(true);
@@ -100,6 +99,15 @@ const Filter = () => {
     </ListItem>
   );
 
+  const filterTitleListLogic = (title) =>
+    categories.length
+      ? categories === "accessories"
+        ? title.toLowerCase() !== "mechanism" &&
+          title.toLowerCase() !== "categories" &&
+          filterTitleList(title)
+        : title.toLowerCase() !== "categories" && filterTitleList(title)
+      : filterTitleList(title);
+
   const filterForm = (
     <form
       onSubmit={handleSubmit((data) => {
@@ -108,15 +116,7 @@ const Filter = () => {
       onChange={handleSubmit((values) => getLinkOnChange(values))}
     >
       <List>
-        {filterTitles.map((title) =>
-          categories.length
-            ? categories === "accessories"
-              ? title.toLowerCase() !== "mechanism" &&
-                title.toLowerCase() !== "categories" &&
-                filterTitleList(title)
-              : title.toLowerCase() !== "categories" && filterTitleList(title)
-            : filterTitleList(title)
-        )}
+        {filterTitles.map((title) => filterTitleListLogic(title))}
         <ListItem sx={filterTitleStyle}>
           <MaterialSlider
             title={"currentPrice"}
