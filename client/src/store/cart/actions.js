@@ -6,6 +6,7 @@ import {
   updateCart,
   deleteCart as deleteCartAPI,
 } from "../../api/cart";
+import { SET_CART_LIST, IS_NOT_LOADED, SET_ERROR } from "./type";
 import getOneProduct from "../../api/getOneProduct";
 
 export const getCartItem = (isLogin) => async (dispatch) => {
@@ -13,19 +14,15 @@ export const getCartItem = (isLogin) => async (dispatch) => {
     try {
       const cart = await getCart();
       dispatch({
-        type: "SET_CART_LIST",
+        type: SET_CART_LIST,
         payload: cart ? cart.products : [],
       });
     } catch (err) {
-      console.log(err);
-      dispatch({
-        type: "SET_CART_LIST",
-        payload: [],
-      });
+      dispatch({ type: SET_ERROR });
     }
   } else {
     dispatch({
-      type: "SET_CART_LIST",
+      type: SET_CART_LIST,
       payload: localStorage.getItem("cart")
         ? JSON.parse(localStorage.getItem("cart"))
         : [],
@@ -38,15 +35,11 @@ export const decreaseProductQuantity = (id, isLogin) => async (dispatch) => {
     try {
       const newCart = await decreaseQuantity(id);
       dispatch({
-        type: "SET_CART_LIST",
+        type: SET_CART_LIST,
         payload: newCart.products ? newCart.products : [],
       });
     } catch (err) {
-      console.log(err);
-      dispatch({
-        type: "SET_CART_LIST",
-        payload: [],
-      });
+      dispatch({ type: SET_ERROR });
     }
   } else {
     const cart = JSON.parse(localStorage.getItem("cart")).map((item) => {
@@ -60,7 +53,7 @@ export const decreaseProductQuantity = (id, isLogin) => async (dispatch) => {
     localStorage.setItem("cart", JSON.stringify(cart));
 
     dispatch({
-      type: "SET_CART_LIST",
+      type: SET_CART_LIST,
       payload: cart,
     });
   }
@@ -71,15 +64,11 @@ export const increaseProductQuantity = (id, isLogin) => async (dispatch) => {
     try {
       const newCart = await addProductToCart(id);
       dispatch({
-        type: "SET_CART_LIST",
+        type: SET_CART_LIST,
         payload: newCart.products ? newCart.products : [],
       });
     } catch (err) {
-      console.log(err);
-      dispatch({
-        type: "SET_CART_LIST",
-        payload: [],
-      });
+      dispatch({ type: SET_ERROR });
     }
   } else {
     const cart = JSON.parse(localStorage.getItem("cart")).map((item) => {
@@ -95,7 +84,7 @@ export const increaseProductQuantity = (id, isLogin) => async (dispatch) => {
     localStorage.setItem("cart", JSON.stringify(cart));
 
     dispatch({
-      type: "SET_CART_LIST",
+      type: SET_CART_LIST,
       payload: cart,
     });
   }
@@ -106,15 +95,11 @@ export const deleteCartItem = (id, isLogin) => async (dispatch) => {
     try {
       const newCart = await deleteProduct(id);
       dispatch({
-        type: "SET_CART_LIST",
+        type: SET_CART_LIST,
         payload: newCart.products ? newCart.products : [],
       });
     } catch (err) {
-      console.log(err);
-      dispatch({
-        type: "SET_CART_LIST",
-        payload: [],
-      });
+      dispatch({ type: SET_ERROR });
     }
   } else {
     const cart = JSON.parse(localStorage.getItem("cart")).filter(
@@ -124,7 +109,7 @@ export const deleteCartItem = (id, isLogin) => async (dispatch) => {
     localStorage.setItem("cart", JSON.stringify(cart));
 
     dispatch({
-      type: "SET_CART_LIST",
+      type: SET_CART_LIST,
       payload: cart,
     });
   }
@@ -156,15 +141,11 @@ export const addToCart =
         }
         const newCart = await updateCart(localCart);
         dispatch({
-          type: "SET_CART_LIST",
+          type: SET_CART_LIST,
           payload: newCart.products,
         });
       } catch (err) {
-        console.log(err);
-        dispatch({
-          type: "SET_CART_LIST",
-          payload: [],
-        });
+        dispatch({ type: SET_ERROR });
       }
     } else {
       try {
@@ -190,15 +171,11 @@ export const addToCart =
           newCart = [cartItem];
         }
         dispatch({
-          type: "SET_CART_LIST",
+          type: SET_CART_LIST,
           payload: newCart,
         });
       } catch (err) {
-        console.log(err);
-        dispatch({
-          type: "SET_CART_LIST",
-          payload: [],
-        });
+        dispatch({ type: SET_ERROR });
       }
     }
   };
@@ -208,16 +185,16 @@ export const deleteCart = (isLogin) => async (dispatch) => {
     try {
       await deleteCartAPI();
       dispatch({
-        type: "SET_CART_LIST",
+        type: SET_CART_LIST,
         payload: [],
       });
     } catch (err) {
-      console.log(err);
+      dispatch({ type: SET_ERROR });
     }
   } else {
     localStorage.removeItem("cart");
     dispatch({
-      type: "SET_CART_LIST",
+      type: SET_CART_LIST,
       payload: [],
     });
   }
