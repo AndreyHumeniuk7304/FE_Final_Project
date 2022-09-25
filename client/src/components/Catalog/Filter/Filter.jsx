@@ -26,7 +26,7 @@ const Filter = () => {
   const [currentPrice, setCurrentPrice] = useState([]);
   const [isFilterUsing, setIsFilterUsing] = useState(false);
   const [search, setSearch] = useSearchParams();
-  const [categories, setCategories] = useState(getCategories(search));
+  const [categories, setCategories] = useState("");
   const [arrOfCheckedItem, setArrOfCheckedItem] = useState([]);
   const [itemCLicked, setItemCliked] = useState("");
   const dispatch = useDispatch();
@@ -47,7 +47,6 @@ const Filter = () => {
   }, [categorieProductList]);
 
   useEffect(() => {
-    setArrOfCheckedItem([]);
     getItemInFilter(search, setArrOfCheckedItem, categories);
   }, [categories]);
 
@@ -56,6 +55,8 @@ const Filter = () => {
   });
 
   const submitFilter = (values) => {
+    categories ? (values = { ...values, categories: categories }) : values;
+    console.log(values);
     const link = setFilterLink(values, currentPrice);
     setSearch(link + "&perPage=10&startPage=1");
     setIsFilterUsing(true);
@@ -71,7 +72,7 @@ const Filter = () => {
     );
     setCurrentPrice(getMinMaxPrice(categorieProductList));
     setIsFilterUsing(false);
-    setArrOfCheckedItem(!categories ? [] : [categories]);
+    setArrOfCheckedItem([!categories ? [] : [categories]]);
     setIsMobileFilterBtnShow(false);
     setItemCliked("");
   };
@@ -109,7 +110,11 @@ const Filter = () => {
       <List>
         {filterTitles.map((title) =>
           categories.length
-            ? title.toLowerCase() !== "categories" && filterTitleList(title)
+            ? categories === "accessories"
+              ? title.toLowerCase() !== "mechanism" &&
+                title.toLowerCase() !== "categories" &&
+                filterTitleList(title)
+              : title.toLowerCase() !== "categories" && filterTitleList(title)
             : filterTitleList(title)
         )}
         <ListItem sx={filterTitleStyle}>

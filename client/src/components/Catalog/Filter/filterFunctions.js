@@ -74,7 +74,6 @@ export const getItemInFilter = (search, setArrOfCheckedItem, categories) => {
   );
   arr = arr.filter((data) => data);
   arr = [...new Set(arr)];
-
   setArrOfCheckedItem(arr);
 };
 

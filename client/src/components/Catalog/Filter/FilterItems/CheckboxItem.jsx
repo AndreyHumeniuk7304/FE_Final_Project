@@ -17,11 +17,12 @@ const CheckboxItem = ({
   setArrOfCheckedItem,
   itemCLicked,
   setIdemCliked,
+  categories,
 }) => {
   const [isChecked, setIsChecked] = useState(false);
   useState(() => {
     setIsChecked(arrOfCheckedItem.includes(itemName.toLowerCase()));
-  }, []);
+  }, [categories]);
 
   const { productsQuntityOnChange, isLoading } = useSelector(
     (state) => state.catalog.filterOnChange
@@ -31,7 +32,6 @@ const CheckboxItem = ({
 
   const toggleChecked = (e) => {
     setIdemCliked(e.target.value);
-    setArrOfCheckedItem(!isChecked);
     !isChecked
       ? setArrOfCheckedItem([...arrOfCheckedItem, e.target.value.toLowerCase()])
       : setArrOfCheckedItem(
@@ -98,4 +98,5 @@ CheckboxItem.propTypes = {
   register: PropTypes.func,
   itemCLicked: PropTypes.string,
   setIdemCliked: PropTypes.func,
+  categories: PropTypes.string,
 };

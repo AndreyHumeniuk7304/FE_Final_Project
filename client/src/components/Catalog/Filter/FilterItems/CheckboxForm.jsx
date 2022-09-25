@@ -40,6 +40,7 @@ const CheckboxForm = ({
               setArrOfCheckedItem={setArrOfCheckedItem}
               itemCLicked={itemCLicked}
               setIdemCliked={setIdemCliked}
+              categories={categories}
             />
           </ListItem>
         ))}
