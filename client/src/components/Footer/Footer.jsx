@@ -28,26 +28,26 @@ const Footer = () => {
               }
             >
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="#!">
+                <Link className="list-item__link" to="/help/quastions">
                   <Box sx={{ fontFamily: "fontFamily" }}>
                     Frequently asked questions
                   </Box>
-                </a>
+                </Link>
               </li>
               <li className="footer__item__list-item">
-                <Link className="list-item__link" to="contact">
+                <Link className="list-item__link" to="/help/contact">
                   <Box sx={{ fontFamily: "fontFamily" }}>Contact</Box>
                 </Link>
               </li>
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="#!">
+                <Link className="list-item__link" to="/help/purchase">
                   <Box sx={{ fontFamily: "fontFamily" }}>How to Purchase</Box>
-                </a>
+                </Link>
               </li>
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="#!">
+                <Link className="list-item__link" to="/help/payment">
                   <Box sx={{ fontFamily: "fontFamily" }}>Payment</Box>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -67,17 +67,29 @@ const Footer = () => {
               }
             >
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="#!">
+                <a
+                  target="blank"
+                  className="list-item__link"
+                  href="https://www.facebook.com/"
+                >
                   <Box sx={{ fontFamily: "fontFamily" }}>Facebook</Box>
                 </a>
               </li>
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="#!">
+                <a
+                  target="blank"
+                  className="list-item__link"
+                  href="https://www.instagram.com/"
+                >
                   <Box sx={{ fontFamily: "fontFamily" }}>Instagram</Box>
                 </a>
               </li>
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="#!">
+                <a
+                  target="blank"
+                  className="list-item__link"
+                  href="https://www.pinterest.com/"
+                >
                   <Box sx={{ fontFamily: "fontFamily" }}>Pinterest</Box>
                 </a>
               </li>
@@ -99,21 +111,21 @@ const Footer = () => {
               }
             >
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="#!">
+                <Link className="list-item__link" to="/company/history">
                   <Box sx={{ fontFamily: "fontFamily" }}>
                     History of the brand
                   </Box>
-                </a>
+                </Link>
               </li>
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="#!">
+                <Link className="list-item__link" to="/company/policy">
                   <Box sx={{ fontFamily: "fontFamily" }}>Policy</Box>
-                </a>
+                </Link>
               </li>
               <li className="footer__item__list-item">
-                <a className="list-item__link" href="#!">
+                <Link className="list-item__link" to="/company/collaborations">
                   <Box sx={{ fontFamily: "fontFamily" }}>Work with Us </Box>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
