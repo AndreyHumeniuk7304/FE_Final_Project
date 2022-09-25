@@ -49,18 +49,28 @@ export const getCategories = (search) => {
     : [];
 };
 
-export const getItemInFilter = (search, setArrOfCheckedItem) => {
+export const getItemInFilter = (search, setArrOfCheckedItem, categories) => {
   let arr = [];
-  filterTitles.forEach(
-    (title) =>
-      (arr = [
-        ...arr,
-        ...search
-          .getAll(title)
-          .join()
-          .split(",")
-          .map((data) => data.toLowerCase()),
-      ])
+  arr = categories ? [categories] : [];
+  filterTitles.forEach((title) =>
+    categories.length
+      ? title.toLowerCase() !== "categories" &&
+        (arr = [
+          ...arr,
+          ...search
+            .getAll(title)
+            .join()
+            .split(",")
+            .map((data) => data.toLowerCase()),
+        ])
+      : (arr = [
+          ...arr,
+          ...search
+            .getAll(title)
+            .join()
+            .split(",")
+            .map((data) => data.toLowerCase()),
+        ])
   );
   arr = arr.filter((data) => data);
   arr = [...new Set(arr)];

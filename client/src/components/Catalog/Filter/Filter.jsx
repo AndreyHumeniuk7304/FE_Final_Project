@@ -42,9 +42,14 @@ const Filter = () => {
   useEffect(() => {
     location.state && setCategories(location.state.categories);
     setCurrentPrice(getMinMaxPrice(categorieProductList));
-    getItemInFilter(search, setArrOfCheckedItem);
+    getItemInFilter(search, setArrOfCheckedItem, categories);
     setDefaultPrice(getMinMaxPrice(categorieProductList));
   }, [categorieProductList]);
+
+  useEffect(() => {
+    setArrOfCheckedItem([]);
+    getItemInFilter(search, setArrOfCheckedItem, categories);
+  }, [categories]);
 
   const { register, handleSubmit, reset } = useForm({
     defaultValues: defaultFilterData,
@@ -66,12 +71,13 @@ const Filter = () => {
     );
     setCurrentPrice(getMinMaxPrice(categorieProductList));
     setIsFilterUsing(false);
-    setArrOfCheckedItem(!categories ? [] : categories);
+    setArrOfCheckedItem(!categories ? [] : [categories]);
     setIsMobileFilterBtnShow(false);
     setItemCliked("");
   };
 
   const getLinkOnChange = (values) => {
+    categories && (values = { ...values, categories: categories });
     dispatch(
       fetchAllProductsFilterPreloader(
         "/products/filter" + setFilterLink(values, currentPrice)
