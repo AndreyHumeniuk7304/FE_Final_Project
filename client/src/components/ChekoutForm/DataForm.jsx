@@ -1,4 +1,4 @@
-import { object, string, number } from "yup";
+import { object, string } from "yup";
 import valid from "card-validator";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -6,6 +6,7 @@ import { useEffect } from "react";
 const DataForm = (props) => {
   const paymentMethod = useSelector((state) => state.paymentMethod);
   const { setCheckoutInputNames } = props;
+  const isLogin = useSelector((state) => state.userAccount.isLogin);
 
   useEffect(() => {
     paymentMethod.name === "Cards" &&
@@ -40,6 +41,16 @@ const DataForm = (props) => {
           label: "Shipping method",
           formName: ["Nova Poshta", "UkrPoshta", "Meest"],
         },
+        !isLogin && {
+          inputName: "telephone",
+          formType: "input",
+          label: "Telephone",
+        },
+        {
+          inputName: "mail",
+          formType: "input",
+          label: "E-mail",
+        },
       ]);
 
     paymentMethod.name === "Mobile" &&
@@ -60,6 +71,16 @@ const DataForm = (props) => {
           formType: "droplist",
           label: "Shipping method",
           formName: ["Nova Poshta", "UkrPoshta", "Meest"],
+        },
+        !isLogin && {
+          inputName: "telephone",
+          formType: "input",
+          label: "Telephone",
+        },
+        {
+          inputName: "mail",
+          formType: "input",
+          label: "E-mail",
         },
       ]);
 
@@ -82,11 +103,24 @@ const DataForm = (props) => {
           label: "Shipping method",
           formName: ["Nova Poshta", "UkrPoshta", "Meest"],
         },
+        !isLogin && {
+          inputName: "telephone",
+          formType: "input",
+          label: "Telephone",
+        },
+        {
+          inputName: "mail",
+          formType: "input",
+          label: "E-mail",
+        },
       ]);
   }, [paymentMethod]);
 };
 
 export default DataForm;
+
+const phoneRegExp =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 export const checkoutSchema = object({
   cardNumber: string()
@@ -96,7 +130,9 @@ export const checkoutSchema = object({
       (value) => valid.number(value).isValid
     )
     .required("It's a required field"),
-  cardHolderName: string().required("It's a required field"),
+  cardHolderName: string()
+    .required("It's a required field")
+    .matches(/^[A-Za-z ]*$/, "Please enter valid name"),
   cardExpiryDate: string()
     .typeError("Not a valid expiration date. Example: MM/YY")
     .max(5, "Not a valid expiration date. Example: MM/YY")
@@ -151,12 +187,32 @@ export const checkoutSchema = object({
   cvv: string()
     .test("test-number", "Cvv is invalid", (value) => valid.cvv(value).isValid)
     .required("It's a required field"),
-  deliveryAdress: string().required("It's a required field"),
+  deliveryAdress: string()
+    .required("It's a required field")
+    .matches(/^([a-zA-z0-9/\\''(),-\s]{6,255})$/, "Adress must be a valid"),
   shippingMethod: string().required("It's a required field"),
+  mail: string()
+    .email("E-mail must be a valid")
+    .required("It's a required field"),
+  telephone: string()
+    .required("Telephone is required.")
+    .min(13, "Telephone is to short")
+    .max(13, "Telephone is to long")
+    .phone(),
 });
 
 export const checkoutSchemaMinimize = object({
   paymentMethod: string().required("It's a required field"),
-  deliveryAdress: string().required("It's a required field"),
+  deliveryAdress: string()
+    .required("It's a required field")
+    .matches(/^([a-zA-z0-9/\\''(),-\s]{2,255})$/, "Adress must be a valid"),
   shippingMethod: string().required("It's a required field"),
+  mail: string()
+    .email("E-mail must be a valid")
+    .required("It's a required field"),
+  telephone: string()
+    .required("Telephone is required.")
+    .min(13, "Telephone is to short")
+    .max(13, "Telephone is to long")
+    .phone(),
 });

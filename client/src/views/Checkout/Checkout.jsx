@@ -64,6 +64,8 @@ const Checkout = () => {
       cvv: "",
       deliveryAdress: "",
       shippingMethod: "Nova Poshta",
+      telephone: "",
+      mail: "",
     },
   });
 
