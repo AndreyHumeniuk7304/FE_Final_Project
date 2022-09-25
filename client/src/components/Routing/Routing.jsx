@@ -15,7 +15,7 @@ import Wishlist from "../Cabinet/Wishlist/Wishlist";
 import Address from "../Cabinet/Address/Address";
 import Checkout from "../../views/Checkout/Checkout";
 import UpdateProduct from "../UpdateProduct";
-import Error from "../Error/Error";
+import Error from "../../views/Error/Error";
 import CompleteOrder from "../CompleteOrder/CompleteOrder";
 import RegistrationForOrder from "../RegistrationForOrder/RegistrationForOrder";
 import PrivateRoute from "./PrivateRoute";

@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import { Box } from "@mui/system";
 import {
   Card,
   CardActionArea,
@@ -8,15 +7,13 @@ import {
   Typography,
 } from "@mui/material";
 
-const ProductCard = ({ image, name, price, viewIsOne }) => {
+const ProductCard = ({ image, name, price }) => {
   return (
     <Card
       sx={{
         display: "flex",
         width: "100%",
         height: "100%",
-        marginTop: "8%",
-        marginBottom: "8%",
       }}
     >
       <CardActionArea>
@@ -28,10 +25,19 @@ const ProductCard = ({ image, name, price, viewIsOne }) => {
           alt={name}
         />
         <CardContent>
-          <Typography gutterBottom variant="p" component="div">
+          <Typography
+            gutterBottom
+            variant="p"
+            component="div"
+            sx={{ fontSize: "1.6vw" }}
+          >
             {name}
           </Typography>
-          <Typography variant="h5" color="black">
+          <Typography
+            variant="h5"
+            color="black"
+            sx={{ fontSize: { desktop: "2vw", mobile: "1.8vw" } }}
+          >
             {price} $
           </Typography>
         </CardContent>

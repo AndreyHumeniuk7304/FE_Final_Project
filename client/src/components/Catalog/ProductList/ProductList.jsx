@@ -1,88 +1,98 @@
 import { useSelector } from "react-redux";
 import ProductCard from "./ProductCard/ProductCard";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
-  Button,
-  ButtonGroup,
   Typography,
   CircularProgress,
+  Button,
+  ButtonGroup,
 } from "@mui/material";
 import { useState } from "react";
 import { Box } from "@mui/system";
 import Paginations from "./Pagination/Pagination";
-import Sort from "../Filter/Sort/Sort";
 
-const ProductList = () => {
+const ProductList = ({ isToggleShow }) => {
   const { categorieProductList, isLoading, hasError, productsQuntity } =
     useSelector((state) => state.catalog);
   const [isOneCartView, setIsOneCartView] = useState(true);
 
+  const isToggleShows = (value) => {
+    if (value !== false) return true;
+  };
+
   return (
     <Box sx={{ width: "100%" }}>
+      {!hasError &&
+        !isLoading &&
+        productsQuntity > 0 &&
+        isToggleShows(isToggleShow) && (
+          <Box
+            sx={{
+              display: "flex",
+              marginTop: "2%",
+              alignItems: "center",
+              float: "right",
+              marginRight: "2%",
+              marginBottom: "1%",
+            }}
+          >
+            <Box
+              sx={{
+                marginRight: "5%",
+                display: { mobile: "none", desktop: "flex" },
+              }}
+            >
+              Switcher:
+            </Box>
+            <ButtonGroup
+              variant="outlined"
+              aria-label="outlined button group"
+              sx={{
+                display: { mobile: "flex", desktop: "flex" },
+                marginTop: { mobile: "-130%", desktop: "0%" },
+              }}
+            >
+              <Button
+                type="submit"
+                onClick={() => {
+                  setIsOneCartView(false);
+                }}
+                sx={{
+                  padding: 0.2,
+                  color: !isOneCartView && "rgb(197, 190, 190)",
+                  fontWeight: !isOneCartView && "bold",
+                }}
+              >
+                One
+              </Button>
+              <Button
+                type="submit"
+                onClick={() => {
+                  setIsOneCartView(true);
+                }}
+                sx={{
+                  padding: 0.2,
+                  color: isOneCartView && "rgb(197, 190, 190)",
+                  fontWeight: isOneCartView && "bold",
+                }}
+              >
+                Two
+              </Button>
+            </ButtonGroup>
+          </Box>
+        )}
       <Box
         style={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "flex-start",
+          alignItems: "stretch",
           flexWrap: "wrap",
           width: "100%",
           position: "relative",
           gap: "4%",
         }}
       >
-        {!hasError && !isLoading && productsQuntity > 0 && (
-          <Box
-            sx={{
-              width: "10%",
-              display: "flex",
-              margin: 1,
-              position: "absolute",
-              top: "0%",
-              left: "0%",
-            }}
-          >
-            <ButtonGroup
-              variant="outlined"
-              aria-label="outlined button group"
-              orientation="vertical"
-            >
-              <Box
-                type="submit"
-                onClick={() => {
-                  setIsOneCartView(false);
-                }}
-                sx={{
-                  pd: "18% 0%",
-                  minWidth: "10%",
-                  backgroundColor: !isOneCartView && "rgb(197, 190, 190)",
-                }}
-              >
-                <Box
-                  component="img"
-                  alt="one card view"
-                  src="../images/square.png"
-                />
-              </Box>
-              <Box
-                type="submit"
-                onClick={() => {
-                  setIsOneCartView(true);
-                }}
-                sx={{
-                  pd: "18% 0%",
-                  minWidth: "10%",
-                  backgroundColor: isOneCartView && "rgb(197, 190, 190)",
-                }}
-              >
-                <Box
-                  component="img"
-                  alt="two cards view"
-                  src="../images/squares.png"
-                />
-              </Box>
-            </ButtonGroup>
-          </Box>
-        )}
         {!hasError && !isLoading && categorieProductList.length === 0 && (
           <Box
             sx={{
@@ -126,7 +136,12 @@ const ProductList = () => {
             return (
               <Link
                 to={`/product/${card.itemNo}`}
-                style={{ width: isOneCartView ? "43%" : "70%" }}
+                style={{
+                  width: isOneCartView ? "43%" : "70%",
+                  marginTop: "2%",
+                  marginBottom: "3%",
+                  borderRadius: "10px",
+                }}
                 key={card._id}
               >
                 <ProductCard
@@ -146,7 +161,7 @@ const ProductList = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            paddingTop: "1%",
+            marginTop: "3%",
             pb: 3,
           }}
         >
@@ -155,6 +170,10 @@ const ProductList = () => {
       </Box>
     </Box>
   );
+};
+
+ProductList.propTypes = {
+  isToggleShow: PropTypes.bool,
 };
 
 export default ProductList;
