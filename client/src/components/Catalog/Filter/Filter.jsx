@@ -1,4 +1,4 @@
-import { Box, Button, Stack } from "@mui/material";
+import { Box, Button, List, ListItem, Stack } from "@mui/material";
 import CheckboxForm from "./FilterItems/CheckboxForm";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -7,21 +7,25 @@ import FilterMobileHeader from "./FilterMobileHeader";
 import {
   getMinMaxPrice,
   setFilterLink,
-  getCategories,
   getItemInFilter,
 } from "./filterFunctions";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProductsFilterPreloader } from "../../../store/catalog/actions";
 import CheckedFilterItem from "./checkedFilterItem";
-import { filterTitles } from "./data";
+import { defaultFilterData, filterTitles } from "./data";
 import SortProduct from "./Sort/Sort";
 
+const filterTitleStyle = {
+  flexDirection: "column",
+  alignItems: "start",
+  pl: 0,
+};
 const Filter = () => {
-  const [currentPrice, setCurrentPrice] = useState([100, 1000]);
+  const [currentPrice, setCurrentPrice] = useState([]);
   const [isFilterUsing, setIsFilterUsing] = useState(false);
   const [search, setSearch] = useSearchParams();
-  const [categories, setCategories] = useState(getCategories(search));
+  const [categories, setCategories] = useState("");
   const [arrOfCheckedItem, setArrOfCheckedItem] = useState([]);
   const [itemCLicked, setItemCliked] = useState("");
   const dispatch = useDispatch();
@@ -37,25 +41,20 @@ const Filter = () => {
   useEffect(() => {
     location.state && setCategories(location.state.categories);
     setCurrentPrice(getMinMaxPrice(categorieProductList));
-    getItemInFilter(search, setArrOfCheckedItem);
+    getItemInFilter(search, setArrOfCheckedItem, categories);
+    setDefaultPrice(getMinMaxPrice(categorieProductList));
   }, [categorieProductList]);
 
   useEffect(() => {
-    setDefaultPrice(getMinMaxPrice(categorieProductList));
+    getItemInFilter(search, setArrOfCheckedItem, categories);
   }, [categories]);
 
   const { register, handleSubmit, reset } = useForm({
-    defaultValues: {
-      categories: [],
-      brand: [],
-      mechanism: [],
-      material: [],
-      color: [],
-      currentPrice: defaultPrice,
-    },
+    defaultValues: defaultFilterData,
   });
 
   const submitFilter = (values) => {
+    categories ? (values = { ...values, categories: categories }) : values;
     const link = setFilterLink(values, currentPrice);
     setSearch(link + "&perPage=10&startPage=1");
     setIsFilterUsing(true);
@@ -71,18 +70,42 @@ const Filter = () => {
     );
     setCurrentPrice(getMinMaxPrice(categorieProductList));
     setIsFilterUsing(false);
-    setArrOfCheckedItem([]);
+    setArrOfCheckedItem([!categories ? [] : [categories]]);
     setIsMobileFilterBtnShow(false);
     setItemCliked("");
   };
 
   const getLinkOnChange = (values) => {
+    categories && (values = { ...values, categories: categories });
     dispatch(
       fetchAllProductsFilterPreloader(
         "/products/filter" + setFilterLink(values, currentPrice)
       )
     );
   };
+
+  const filterTitleList = (title) => (
+    <ListItem key={title} sx={filterTitleStyle}>
+      <CheckboxForm
+        title={title}
+        register={register}
+        arrOfCheckedItem={arrOfCheckedItem}
+        setArrOfCheckedItem={setArrOfCheckedItem}
+        itemCLicked={itemCLicked}
+        setIdemCliked={setItemCliked}
+        categories={categories}
+      />
+    </ListItem>
+  );
+
+  const filterTitleListLogic = (title) =>
+    categories.length
+      ? categories === "accessories"
+        ? title.toLowerCase() !== "mechanism" &&
+          title.toLowerCase() !== "categories" &&
+          filterTitleList(title)
+        : title.toLowerCase() !== "categories" && filterTitleList(title)
+      : filterTitleList(title);
 
   const filterForm = (
     <form
@@ -91,21 +114,9 @@ const Filter = () => {
       })}
       onChange={handleSubmit((values) => getLinkOnChange(values))}
     >
-      <Box textAlign="start" component="ul">
-        {filterTitles.map((title) => (
-          <Box key={title} component="li">
-            <CheckboxForm
-              title={title}
-              register={register}
-              arrOfCheckedItem={arrOfCheckedItem}
-              setArrOfCheckedItem={setArrOfCheckedItem}
-              itemCLicked={itemCLicked}
-              setIdemCliked={setItemCliked}
-              categories={categories}
-            />
-          </Box>
-        ))}
-        <Box component="li">
+      <List>
+        {filterTitles.map((title) => filterTitleListLogic(title))}
+        <ListItem sx={filterTitleStyle}>
           <MaterialSlider
             title={"currentPrice"}
             name="currentPrice"
@@ -114,8 +125,8 @@ const Filter = () => {
             currentPrice={currentPrice}
             setCurrentPrice={setCurrentPrice}
           />
-        </Box>
-      </Box>
+        </ListItem>
+      </List>
 
       <Stack direction="row" justifyContent="space-evenly">
         <Button sx={{ color: nightMode ? "#fff" : "#000" }} type="submit">
@@ -142,8 +153,14 @@ const Filter = () => {
 
       <Stack>
         <CheckedFilterItem arrOfCheckedItem={arrOfCheckedItem} />
-        <SortProduct />
-        <Box display={{ mobile: "none", desktop: "block" }} id="filter">
+        <SortProduct categories={categories} />
+        <Box
+          display={{
+            mobile: isMobileFilterBtnShow ? "block" : "none",
+            desktop: "block",
+          }}
+          id="filter"
+        >
           {filterForm}
         </Box>
       </Stack>

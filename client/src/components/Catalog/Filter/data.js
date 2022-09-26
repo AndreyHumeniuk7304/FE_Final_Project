@@ -24,3 +24,12 @@ export const filterTitles = [
   "material",
   "color",
 ];
+
+export const defaultFilterData = {
+  categories: [],
+  brand: [],
+  mechanism: [],
+  material: [],
+  color: [],
+  currentPrice: [],
+};
