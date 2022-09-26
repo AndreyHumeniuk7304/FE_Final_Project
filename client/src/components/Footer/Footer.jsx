@@ -108,13 +108,19 @@ const Footer = () => {
               }}
             >
               <FooterItem>
-                <Link to="https://www.facebook.com/">Facebook</Link>
+                <a target="blank" href="https://www.facebook.com/">
+                  Facebook
+                </a>
               </FooterItem>
               <FooterItem>
-                <Link to="https://www.instagram.com/">Instagram</Link>
+                <a target="blank" href="https://www.instagram.com/">
+                  Instagram
+                </a>
               </FooterItem>
               <FooterItem>
-                <Link to="https://www.pinterest.com/">Pinterest</Link>
+                <a target="blank" href="https://www.pinterest.com/">
+                  Pinterest
+                </a>
               </FooterItem>
             </Stack>
           </Box>
