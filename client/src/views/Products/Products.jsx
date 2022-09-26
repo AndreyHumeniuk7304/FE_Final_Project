@@ -11,7 +11,8 @@ const Products = ({ isFilterShow = true, isToggleShow }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   useEffect(() => {
-    dispatch(fetchCategoriesProducts(`products/filter${location.search}`));
+    isFilterShow &&
+      dispatch(fetchCategoriesProducts(`products/filter${location.search}`));
   }, [location.search]);
 
   return (
