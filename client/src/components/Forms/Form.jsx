@@ -55,7 +55,6 @@ const Form = ({
               name={inputName}
               arr={formName}
               register={register}
-              camelizeDecode={camelizeDecode}
               handleChange={handleChange}
               control={control}
               label={label}
