@@ -1,7 +1,7 @@
-import { Stack } from "@mui/material";
-import { Box, Container } from "@mui/system";
+import { Stack, Box, Container } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { FooterItem } from "./FooterStyledComponent";
 
 const Footer = () => {
   const [statusOpenFooter, setStatusOpenFooter] = useState(false);
@@ -45,7 +45,7 @@ const Footer = () => {
               >
                 <Box
                   component={"img"}
-                  src="images/arrow-drop-down.svg"
+                  src="../images/arrow-drop-down.svg"
                   alt="drop-down"
                 ></Box>
               </Box>
@@ -58,42 +58,18 @@ const Footer = () => {
                 },
               }}
             >
-              <Box
-                sx={{
-                  fontFamily: "fontFamily",
-                  fontSize: { mobile: "10px", desktop: "18px" },
-                  marginBottom: { mobile: "10px", desktop: "19px" },
-                }}
-              >
-                <Link to="/Facebook">Frequently questions</Link>
-              </Box>
-              <Box
-                sx={{
-                  fontFamily: "fontFamily",
-                  fontSize: { mobile: "10px", desktop: "18px" },
-                  marginBottom: { mobile: "10px", desktop: "19px" },
-                }}
-              >
-                <Link to="contact">Contact</Link>
-              </Box>
-              <Box
-                sx={{
-                  fontFamily: "fontFamily",
-                  fontSize: { mobile: "10px", desktop: "18px" },
-                  marginBottom: { mobile: "10px", desktop: "19px" },
-                }}
-              >
-                <Link to="/Purchase"> How to Purchase</Link>
-              </Box>
-              <Box
-                sx={{
-                  fontFamily: "fontFamily",
-                  fontSize: { mobile: "10px", desktop: "18px" },
-                  marginBottom: { mobile: "10px", desktop: "19px" },
-                }}
-              >
-                <Link to="/Payment"> Payment</Link>
-              </Box>
+              <FooterItem>
+                <Link to="/help/quastions">FAQ</Link>
+              </FooterItem>
+              <FooterItem>
+                <Link to="/help/contact">Contact</Link>
+              </FooterItem>
+              <FooterItem>
+                <Link to="/help/purchase"> How to Purchase</Link>
+              </FooterItem>
+              <FooterItem>
+                <Link to="/help/payment"> Payment</Link>
+              </FooterItem>
             </Stack>
           </Box>
           <Box>
@@ -118,7 +94,7 @@ const Footer = () => {
               >
                 <Box
                   component={"img"}
-                  src="images/arrow-drop-down.svg"
+                  src="../images/arrow-drop-down.svg"
                   alt="drop-down"
                 ></Box>
               </Box>
@@ -131,33 +107,15 @@ const Footer = () => {
                 },
               }}
             >
-              <Box
-                sx={{
-                  fontFamily: "fontFamily",
-                  fontSize: { mobile: "10px", desktop: "18px" },
-                  marginBottom: { mobile: "10px", desktop: "19px" },
-                }}
-              >
-                <Link to="/Facebook">Facebook</Link>
-              </Box>
-              <Box
-                sx={{
-                  fontFamily: "fontFamily",
-                  fontSize: { mobile: "10px", desktop: "18px" },
-                  marginBottom: { mobile: "10px", desktop: "19px" },
-                }}
-              >
-                <Link to="/Facebook">Instagram</Link>
-              </Box>
-              <Box
-                sx={{
-                  fontFamily: "fontFamily",
-                  fontSize: { mobile: "10px", desktop: "18px" },
-                  marginBottom: { mobile: "10px", desktop: "19px" },
-                }}
-              >
-                <Link to="/Facebook">Pinterest</Link>
-              </Box>
+              <FooterItem>
+                <Link to="https://www.facebook.com/">Facebook</Link>
+              </FooterItem>
+              <FooterItem>
+                <Link to="https://www.instagram.com/">Instagram</Link>
+              </FooterItem>
+              <FooterItem>
+                <Link to="https://www.pinterest.com/">Pinterest</Link>
+              </FooterItem>
             </Stack>
           </Box>
           <Box>
@@ -182,7 +140,7 @@ const Footer = () => {
               >
                 <Box
                   component={"img"}
-                  src="images/arrow-drop-down.svg"
+                  src="../images/arrow-drop-down.svg"
                   alt="drop-down"
                 ></Box>
               </Box>
@@ -202,26 +160,14 @@ const Footer = () => {
                   marginBottom: { mobile: "10px", desktop: "19px" },
                 }}
               >
-                <Link to="/History">History of the brand</Link>
+                <Link to="/company/history">History of the brand</Link>
               </Box>
-              <Box
-                sx={{
-                  fontFamily: "fontFamily",
-                  fontSize: { mobile: "10px", desktop: "18px" },
-                  marginBottom: { mobile: "10px", desktop: "19px" },
-                }}
-              >
-                <Link to="/Facebook">Policy</Link>
-              </Box>
-              <Box
-                sx={{
-                  fontFamily: "fontFamily",
-                  fontSize: { mobile: "10px", desktop: "18px" },
-                  marginBottom: { mobile: "10px", desktop: "19px" },
-                }}
-              >
-                <Link to="/Facebook">Work with us</Link>
-              </Box>
+              <FooterItem>
+                <Link to="/company/policy">Policy</Link>
+              </FooterItem>
+              <FooterItem>
+                <Link to="/company/collaborations">Work with us</Link>
+              </FooterItem>
             </Stack>
           </Box>
         </Box>
