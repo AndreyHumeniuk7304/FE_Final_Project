@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import Catalog from "../../components/Catalog/Catalog";
 import { fetchCategoriesProducts } from "../../store/catalog/actions";
 import { useSelector } from "react-redux";
+import Products from "../Products/Products";
+import { Box } from "@mui/material";
 
 const Search = () => {
   const searchWord = useSelector((state) => state.catalog.searchWord);
@@ -27,13 +28,13 @@ const Search = () => {
   }, [search.toString(), searchWord]);
 
   return (
-    <div>
-      <Catalog
+    <Box>
+      <Products
         categories={"ladies,mens,accessories"}
         setSearch={setSearch}
         search={search}
       />
-    </div>
+    </Box>
   );
 };
 
