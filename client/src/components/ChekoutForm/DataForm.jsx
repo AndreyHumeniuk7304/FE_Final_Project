@@ -9,7 +9,7 @@ const DataForm = (props) => {
   const isLogin = useSelector((state) => state.userAccount.isLogin);
 
   useEffect(() => {
-    paymentMethod.name === "Cards" &&
+    if (paymentMethod.name === "Cards" && !isLogin) {
       setCheckoutInputNames([
         {
           inputName: "paymentMethod",
@@ -41,7 +41,7 @@ const DataForm = (props) => {
           label: "Shipping method",
           formName: ["Nova Poshta", "UkrPoshta", "Meest"],
         },
-        !isLogin && {
+        {
           inputName: "telephone",
           formType: "input",
           label: "Telephone",
@@ -52,8 +52,42 @@ const DataForm = (props) => {
           label: "E-mail",
         },
       ]);
+    } else if (paymentMethod.name === "Cards" && isLogin) {
+      setCheckoutInputNames([
+        {
+          inputName: "paymentMethod",
+          formType: "droplist",
+          formName: ["Cards", "Mobile", "Cash"],
+          label: "Payment Method",
+        },
+        { inputName: "cardNumber", formType: "input", label: "Card Number" },
+        {
+          inputName: "cardHolderName",
+          formType: "input",
+          label: "Card Holder Name",
+          className: "entry__checkbox",
+        },
+        {
+          inputName: "cardExpiryDate",
+          formType: "inputSM",
+          label: "Card Expiry Date",
+        },
+        { inputName: "cvv", formType: "inputSM", label: "CVC/CVV/CID" },
+        {
+          inputName: "deliveryAdress",
+          formType: "input",
+          label: "Delivery adress",
+        },
+        {
+          inputName: "shippingMethod",
+          formType: "droplist",
+          label: "Shipping method",
+          formName: ["Nova Poshta", "UkrPoshta", "Meest"],
+        },
+      ]);
+    }
 
-    paymentMethod.name === "Mobile" &&
+    if (paymentMethod.name === "Mobile" && !isLogin) {
       setCheckoutInputNames([
         {
           inputName: "paymentMethod",
@@ -72,7 +106,7 @@ const DataForm = (props) => {
           label: "Shipping method",
           formName: ["Nova Poshta", "UkrPoshta", "Meest"],
         },
-        !isLogin && {
+        {
           inputName: "telephone",
           formType: "input",
           label: "Telephone",
@@ -83,8 +117,29 @@ const DataForm = (props) => {
           label: "E-mail",
         },
       ]);
+    } else if (paymentMethod.name === "Mobile" && isLogin) {
+      setCheckoutInputNames([
+        {
+          inputName: "paymentMethod",
+          formType: "droplist",
+          formName: ["Mobile", "Cards", "Cash"],
+          label: "Payment Method",
+        },
+        {
+          inputName: "deliveryAdress",
+          formType: "input",
+          label: "Delivery adress",
+        },
+        {
+          inputName: "shippingMethod",
+          formType: "droplist",
+          label: "Shipping method",
+          formName: ["Nova Poshta", "UkrPoshta", "Meest"],
+        },
+      ]);
+    }
 
-    paymentMethod.name === "Cash" &&
+    if (paymentMethod.name === "Cash" && !isLogin) {
       setCheckoutInputNames([
         {
           inputName: "paymentMethod",
@@ -103,7 +158,7 @@ const DataForm = (props) => {
           label: "Shipping method",
           formName: ["Nova Poshta", "UkrPoshta", "Meest"],
         },
-        !isLogin && {
+        {
           inputName: "telephone",
           formType: "input",
           label: "Telephone",
@@ -114,13 +169,31 @@ const DataForm = (props) => {
           label: "E-mail",
         },
       ]);
+    } else if (paymentMethod.name === "Cash" && isLogin) {
+      setCheckoutInputNames([
+        {
+          inputName: "paymentMethod",
+          formType: "droplist",
+          formName: ["Cash", "Mobile", "Cards"],
+          label: "Payment Method",
+        },
+        {
+          inputName: "deliveryAdress",
+          formType: "input",
+          label: "Delivery adress",
+        },
+        {
+          inputName: "shippingMethod",
+          formType: "droplist",
+          label: "Shipping method",
+          formName: ["Nova Poshta", "UkrPoshta", "Meest"],
+        },
+      ]);
+    }
   }, [paymentMethod]);
 };
 
 export default DataForm;
-
-const phoneRegExp =
-  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 export const checkoutSchema = object({
   cardNumber: string()
