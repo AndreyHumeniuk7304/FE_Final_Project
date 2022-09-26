@@ -153,7 +153,7 @@ const Filter = () => {
 
       <Stack>
         <CheckedFilterItem arrOfCheckedItem={arrOfCheckedItem} />
-        <SortProduct />
+        <SortProduct categories={categories} />
         <Box
           display={{
             mobile: isMobileFilterBtnShow ? "block" : "none",
