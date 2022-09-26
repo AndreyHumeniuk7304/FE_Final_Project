@@ -1,5 +1,4 @@
-import { Stack } from "@mui/material";
-import { Box, Container } from "@mui/system";
+import { Stack, Box, Container } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FooterItem } from "./FooterStyledComponent";
