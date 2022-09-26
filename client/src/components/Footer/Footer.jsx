@@ -60,16 +60,16 @@ const Footer = () => {
               }}
             >
               <FooterItem>
-                <Link to="/Facebook">FAQ</Link>
+                <Link to="/help/quastions">FAQ</Link>
               </FooterItem>
               <FooterItem>
-                <Link to="contact">Contact</Link>
+                <Link to="/help/contact">Contact</Link>
               </FooterItem>
               <FooterItem>
-                <Link to="/Purchase"> How to Purchase</Link>
+                <Link to="/help/purchase"> How to Purchase</Link>
               </FooterItem>
               <FooterItem>
-                <Link to="/Payment"> Payment</Link>
+                <Link to="/help/payment"> Payment</Link>
               </FooterItem>
             </Stack>
           </Box>
@@ -109,13 +109,13 @@ const Footer = () => {
               }}
             >
               <FooterItem>
-                <Link to="/Facebook">Facebook</Link>
+                <Link to="https://www.facebook.com/">Facebook</Link>
               </FooterItem>
               <FooterItem>
-                <Link to="/Facebook">Instagram</Link>
+                <Link to="https://www.instagram.com/">Instagram</Link>
               </FooterItem>
               <FooterItem>
-                <Link to="/Facebook">Pinterest</Link>
+                <Link to="https://www.pinterest.com/">Pinterest</Link>
               </FooterItem>
             </Stack>
           </Box>
@@ -161,13 +161,13 @@ const Footer = () => {
                   marginBottom: { mobile: "10px", desktop: "19px" },
                 }}
               >
-                <Link to="/History">History of the brand</Link>
+                <Link to="/company/history">History of the brand</Link>
               </Box>
               <FooterItem>
-                <Link to="/Facebook">Policy</Link>
+                <Link to="/company/policy">Policy</Link>
               </FooterItem>
               <FooterItem>
-                <Link to="/Facebook">Work with us</Link>
+                <Link to="/company/collaborations">Work with us</Link>
               </FooterItem>
             </Stack>
           </Box>

@@ -18,12 +18,12 @@ const App = () => {
   const wrapperClass = classNames(
     "full-wrapper",
     {
-      "dark-mode":
-        JSON.parse(localStorage.getItem("nightMode")) === true ||
-        JSON.parse(localStorage.getItem("nightMode")) === null,
+      "dark-mode": JSON.parse(localStorage.getItem("nightMode")) === true,
     },
     {
-      "light-mode": JSON.parse(localStorage.getItem("nightMode")) === false,
+      "light-mode":
+        JSON.parse(localStorage.getItem("nightMode")) === false ||
+        JSON.parse(localStorage.getItem("nightMode")) === null,
     }
   );
 

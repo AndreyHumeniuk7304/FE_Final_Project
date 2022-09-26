@@ -28,7 +28,12 @@ export const customerInputNames = [
   { inputName: "lastName", formType: "input", label: "First name" },
   // { inputName: "email", formType: "input" },
   { inputName: "telephone", formType: "input", label: "Phone number" },
-  { inputName: "gender", formName: ["Male", "Female"], formType: "droplist" },
+  {
+    inputName: "gender",
+    formName: ["Male", "Female"],
+    formType: "droplist",
+    label: "Gender",
+  },
   { inputName: "birthday", formType: "date", label: "Birthday" },
   // { inputName: "password", formType: "password" },
   // { inputName: "confirmPassword", formType: "password" },

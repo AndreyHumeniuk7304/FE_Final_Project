@@ -1,6 +1,6 @@
 import { SWITCH_MODE } from "./type.js";
 
-const nightMode = true;
+const nightMode = false;
 
 const nightModeReducer = (state = nightMode, action) => {
   switch (action.type) {

@@ -19,7 +19,7 @@ const Wishlist = () => {
 
   return (
     <>
-      <Links /> <Catalog isFilterShow={false} />
+      <Links /> <Catalog isFilterShow={false} isToggleShow={false} />
     </>
   );
 };

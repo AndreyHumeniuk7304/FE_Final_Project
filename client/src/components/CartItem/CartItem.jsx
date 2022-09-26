@@ -126,7 +126,7 @@ const CartItem = (props) => {
               >
                 <IconButton
                   onClick={handleDecrease}
-                  sx={{ padding: "5px" }}
+                  sx={{ padding: 1 }}
                   color={"secondary"}
                 >
                   <Remove fontSize="small" />
@@ -134,7 +134,7 @@ const CartItem = (props) => {
                 {cartQuantity}
                 <IconButton
                   onClick={handleIncrease}
-                  sx={{ padding: "5px" }}
+                  sx={{ padding: 1 }}
                   color={"secondary"}
                 >
                   <Add fontSize="small" />
