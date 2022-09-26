@@ -1,4 +1,4 @@
-import { object, string, number } from "yup";
+import { object, string } from "yup";
 import valid from "card-validator";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -6,9 +6,53 @@ import { useEffect } from "react";
 const DataForm = (props) => {
   const paymentMethod = useSelector((state) => state.paymentMethod);
   const { setCheckoutInputNames } = props;
+  const isLogin = useSelector((state) => state.userAccount.isLogin);
 
   useEffect(() => {
-    paymentMethod.name === "Cards" &&
+    if (paymentMethod.name === "Cards" && !isLogin) {
+      setCheckoutInputNames([
+        {
+          inputName: "paymentMethod",
+          formType: "droplist",
+          formName: ["Cards", "Mobile", "Cash"],
+          label: "Payment Method",
+        },
+        { inputName: "cardNumber", formType: "input", label: "Card Number" },
+        {
+          inputName: "cardHolderName",
+          formType: "input",
+          label: "Card Holder Name",
+          className: "entry__checkbox",
+        },
+        {
+          inputName: "cardExpiryDate",
+          formType: "inputSM",
+          label: "Card Expiry Date",
+        },
+        { inputName: "cvv", formType: "inputSM", label: "CVC/CVV/CID" },
+        {
+          inputName: "deliveryAdress",
+          formType: "input",
+          label: "Delivery adress",
+        },
+        {
+          inputName: "shippingMethod",
+          formType: "droplist",
+          label: "Shipping method",
+          formName: ["Nova Poshta", "UkrPoshta", "Meest"],
+        },
+        {
+          inputName: "telephone",
+          formType: "input",
+          label: "Telephone",
+        },
+        {
+          inputName: "mail",
+          formType: "input",
+          label: "E-mail",
+        },
+      ]);
+    } else if (paymentMethod.name === "Cards" && isLogin) {
       setCheckoutInputNames([
         {
           inputName: "paymentMethod",
@@ -41,8 +85,39 @@ const DataForm = (props) => {
           formName: ["Nova Poshta", "UkrPoshta", "Meest"],
         },
       ]);
+    }
 
-    paymentMethod.name === "Mobile" &&
+    if (paymentMethod.name === "Mobile" && !isLogin) {
+      setCheckoutInputNames([
+        {
+          inputName: "paymentMethod",
+          formType: "droplist",
+          formName: ["Mobile", "Cards", "Cash"],
+          label: "Payment Method",
+        },
+        {
+          inputName: "deliveryAdress",
+          formType: "input",
+          label: "Delivery adress",
+        },
+        {
+          inputName: "shippingMethod",
+          formType: "droplist",
+          label: "Shipping method",
+          formName: ["Nova Poshta", "UkrPoshta", "Meest"],
+        },
+        {
+          inputName: "telephone",
+          formType: "input",
+          label: "Telephone",
+        },
+        {
+          inputName: "mail",
+          formType: "input",
+          label: "E-mail",
+        },
+      ]);
+    } else if (paymentMethod.name === "Mobile" && isLogin) {
       setCheckoutInputNames([
         {
           inputName: "paymentMethod",
@@ -62,8 +137,39 @@ const DataForm = (props) => {
           formName: ["Nova Poshta", "UkrPoshta", "Meest"],
         },
       ]);
+    }
 
-    paymentMethod.name === "Cash" &&
+    if (paymentMethod.name === "Cash" && !isLogin) {
+      setCheckoutInputNames([
+        {
+          inputName: "paymentMethod",
+          formType: "droplist",
+          formName: ["Cash", "Mobile", "Cards"],
+          label: "Payment Method",
+        },
+        {
+          inputName: "deliveryAdress",
+          formType: "input",
+          label: "Delivery adress",
+        },
+        {
+          inputName: "shippingMethod",
+          formType: "droplist",
+          label: "Shipping method",
+          formName: ["Nova Poshta", "UkrPoshta", "Meest"],
+        },
+        {
+          inputName: "telephone",
+          formType: "input",
+          label: "Telephone",
+        },
+        {
+          inputName: "mail",
+          formType: "input",
+          label: "E-mail",
+        },
+      ]);
+    } else if (paymentMethod.name === "Cash" && isLogin) {
       setCheckoutInputNames([
         {
           inputName: "paymentMethod",
@@ -83,6 +189,7 @@ const DataForm = (props) => {
           formName: ["Nova Poshta", "UkrPoshta", "Meest"],
         },
       ]);
+    }
   }, [paymentMethod]);
 };
 
@@ -96,7 +203,9 @@ export const checkoutSchema = object({
       (value) => valid.number(value).isValid
     )
     .required("It's a required field"),
-  cardHolderName: string().required("It's a required field"),
+  cardHolderName: string()
+    .required("It's a required field")
+    .matches(/^[A-Za-z ]*$/, "Please enter valid name"),
   cardExpiryDate: string()
     .typeError("Not a valid expiration date. Example: MM/YY")
     .max(5, "Not a valid expiration date. Example: MM/YY")
@@ -151,12 +260,32 @@ export const checkoutSchema = object({
   cvv: string()
     .test("test-number", "Cvv is invalid", (value) => valid.cvv(value).isValid)
     .required("It's a required field"),
-  deliveryAdress: string().required("It's a required field"),
+  deliveryAdress: string()
+    .required("It's a required field")
+    .matches(/^([a-zA-z0-9/\\''(),-\s]{6,255})$/, "Adress must be a valid"),
   shippingMethod: string().required("It's a required field"),
+  mail: string()
+    .email("E-mail must be a valid")
+    .required("It's a required field"),
+  telephone: string()
+    .required("Telephone is required.")
+    .min(13, "Telephone is to short")
+    .max(13, "Telephone is to long")
+    .phone(),
 });
 
 export const checkoutSchemaMinimize = object({
   paymentMethod: string().required("It's a required field"),
-  deliveryAdress: string().required("It's a required field"),
+  deliveryAdress: string()
+    .required("It's a required field")
+    .matches(/^([a-zA-z0-9/\\''(),-\s]{2,255})$/, "Adress must be a valid"),
   shippingMethod: string().required("It's a required field"),
+  mail: string()
+    .email("E-mail must be a valid")
+    .required("It's a required field"),
+  telephone: string()
+    .required("Telephone is required.")
+    .min(13, "Telephone is to short")
+    .max(13, "Telephone is to long")
+    .phone(),
 });
