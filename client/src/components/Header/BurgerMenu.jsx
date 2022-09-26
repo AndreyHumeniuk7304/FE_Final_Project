@@ -237,7 +237,7 @@ const BurgerMenu = ({ closeBurger }) => {
                 <Box
                   sx={{ height: "24px", width: "24px" }}
                   component={"img"}
-                  src="./images/facebok-logo.png"
+                  src="../images/facebok-logo.png"
                   alt="FB"
                 />
               </Link>
@@ -245,7 +245,7 @@ const BurgerMenu = ({ closeBurger }) => {
                 <Box
                   sx={{ height: "24px", width: "24px" }}
                   component={"img"}
-                  src="./images/inst-logo.png"
+                  src="../images/inst-logo.png"
                   alt="Instagram"
                 />
               </Link>
@@ -253,7 +253,7 @@ const BurgerMenu = ({ closeBurger }) => {
                 <Box
                   sx={{ height: "24px", width: "24px" }}
                   component={"img"}
-                  src="./images/pint-logo.png"
+                  src="../images/pint-logo.png"
                   alt="Pinterest"
                 />
               </Link>
