@@ -6,12 +6,6 @@ const FilterMobileHeader = ({
   isMobileFilterBtnShow,
   setIsMobileFilterBtnShow,
 }) => {
-  const toggleFilterInMobilte = (e, bool, display) => {
-    setIsMobileFilterBtnShow(bool);
-
-    document.getElementById("filter").style.display = display;
-  };
-
   return (
     <Stack
       direction="row"
@@ -19,11 +13,11 @@ const FilterMobileHeader = ({
       alignItems="center"
       justifyContent="space-evenly"
     >
-      <Typography onClick={(e) => toggleFilterInMobilte(e, true, "block")}>
+      <Typography onClick={() => setIsMobileFilterBtnShow(true)}>
         Filter
       </Typography>
       {isMobileFilterBtnShow && (
-        <IconButton onClick={(e) => toggleFilterInMobilte(e, false, "none")}>
+        <IconButton onClick={() => setIsMobileFilterBtnShow(false)}>
           <Close />
         </IconButton>
       )}

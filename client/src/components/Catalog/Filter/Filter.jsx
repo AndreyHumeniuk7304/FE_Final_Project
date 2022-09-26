@@ -7,7 +7,6 @@ import FilterMobileHeader from "./FilterMobileHeader";
 import {
   getMinMaxPrice,
   setFilterLink,
-  getCategories,
   getItemInFilter,
 } from "./filterFunctions";
 import { useLocation, useSearchParams } from "react-router-dom";
@@ -155,7 +154,13 @@ const Filter = () => {
       <Stack>
         <CheckedFilterItem arrOfCheckedItem={arrOfCheckedItem} />
         <SortProduct />
-        <Box display={{ mobile: "none", desktop: "block" }} id="filter">
+        <Box
+          display={{
+            mobile: isMobileFilterBtnShow ? "block" : "none",
+            desktop: "block",
+          }}
+          id="filter"
+        >
           {filterForm}
         </Box>
       </Stack>
