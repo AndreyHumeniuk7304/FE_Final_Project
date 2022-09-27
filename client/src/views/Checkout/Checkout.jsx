@@ -7,8 +7,10 @@ import { useForm } from "react-hook-form";
 import Form from "../../components/Forms/Form";
 import { useState, useEffect } from "react";
 import DataForm, {
-  checkoutSchema,
-  checkoutSchemaMinimize,
+  checkoutSchemaIsLogin,
+  checkoutSchemaMinimizeIsLogin,
+  checkoutSchemaWithoutLogin,
+  checkoutSchemaMinimizeWithoutLogin,
 } from "../../components/ChekoutForm/DataForm";
 import { getPaymentMethod } from "../../api/paymentMethod";
 import { paymentMethodAction } from "../../store/paymentMethod/action";
@@ -53,9 +55,13 @@ const Checkout = () => {
     formState: { errors },
   } = useForm({
     resolver:
-      paymentMethod.name === "Cards"
-        ? yupResolver(checkoutSchema)
-        : yupResolver(checkoutSchemaMinimize),
+      paymentMethod.name === "Cards" && isLogin
+        ? yupResolver(checkoutSchemaIsLogin)
+        : paymentMethod.name === "Cards" && !isLogin
+        ? yupResolver(checkoutSchemaWithoutLogin)
+        : isLogin
+        ? yupResolver(checkoutSchemaMinimizeIsLogin)
+        : yupResolver(checkoutSchemaMinimizeWithoutLogin),
     defaultValues: {
       paymentMethod: "Cards",
       cardNumber: "",
