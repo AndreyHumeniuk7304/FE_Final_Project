@@ -195,7 +195,78 @@ const DataForm = (props) => {
 
 export default DataForm;
 
-export const checkoutSchema = object({
+export const checkoutSchemaIsLogin = object({
+  cardNumber: string()
+    .test(
+      "test-number",
+      "Card number is invalid",
+      (value) => valid.number(value).isValid
+    )
+    .required("It's a required field"),
+  cardHolderName: string()
+    .required("It's a required field")
+    .matches(/^[A-Za-z ]*$/, "Please enter valid name"),
+  cardExpiryDate: string()
+    .typeError("Not a valid expiration date. Example: MM/YY")
+    .max(5, "Not a valid expiration date. Example: MM/YY")
+    .matches(
+      /([0-9]{2})\/([0-9]{2})/,
+      "Not a valid expiration date. Example: MM/YY"
+    )
+    .test(
+      "test-credit-card-expiration-date",
+      "Invalid Expiration Date has past",
+      (expirationDate) => {
+        if (!expirationDate) {
+          return false;
+        }
+
+        const today = new Date();
+        const monthToday = today.getMonth() + 1;
+        const yearToday = today.getFullYear().toString().substr(-2);
+
+        const [expMonth, expYear] = expirationDate.split("/");
+
+        if (Number(expYear) < Number(yearToday)) {
+          return false;
+        } else if (
+          Number(expMonth) < monthToday &&
+          Number(expYear) <= Number(yearToday)
+        ) {
+          return false;
+        }
+
+        return true;
+      }
+    )
+    .test(
+      "test-credit-card-expiration-date",
+      "Invalid Expiration Month",
+      (expirationDate) => {
+        if (!expirationDate) {
+          return false;
+        }
+
+        const [expMonth] = expirationDate.split("/");
+
+        if (Number(expMonth) > 12) {
+          return false;
+        }
+
+        return true;
+      }
+    )
+    .required("Expiration date is required"),
+  cvv: string()
+    .test("test-number", "Cvv is invalid", (value) => valid.cvv(value).isValid)
+    .required("It's a required field"),
+  deliveryAdress: string()
+    .required("It's a required field")
+    .matches(/^([a-zA-z0-9/\\''(),-\s]{6,255})$/, "Adress must be a valid"),
+  shippingMethod: string().required("It's a required field"),
+});
+
+export const checkoutSchemaWithoutLogin = object({
   cardNumber: string()
     .test(
       "test-number",
@@ -274,7 +345,15 @@ export const checkoutSchema = object({
     .phone(),
 });
 
-export const checkoutSchemaMinimize = object({
+export const checkoutSchemaMinimizeIsLogin = object({
+  paymentMethod: string().required("It's a required field"),
+  deliveryAdress: string()
+    .required("It's a required field")
+    .matches(/^([a-zA-z0-9/\\''(),-\s]{2,255})$/, "Adress must be a valid"),
+  shippingMethod: string().required("It's a required field"),
+});
+
+export const checkoutSchemaMinimizeWithoutLogin = object({
   paymentMethod: string().required("It's a required field"),
   deliveryAdress: string()
     .required("It's a required field")
