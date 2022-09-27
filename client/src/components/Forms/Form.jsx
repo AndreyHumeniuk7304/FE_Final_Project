@@ -36,7 +36,7 @@ const Form = ({
   const nightMode = useSelector((state) => state.nightMode);
   createTheme({
     root: {
-      color: !nightMode ? "#000" : "#fff",
+      color: !nightMode ? "#686868" : "#fff",
       background: "inherit",
     },
   });
@@ -48,8 +48,8 @@ const Form = ({
           <Stack
             direction="row"
             justifyContent="space-between"
-            alignItems="center"
             pt={2}
+            alignItems="flex-end"
           >
             <CustomDropList
               name={inputName}

@@ -6,6 +6,7 @@ import SearchModal from "../SearchModal/SearchModal";
 import PropTypes from "prop-types";
 import theme from "../../theme";
 import { Box } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const SearchInput = ({ isExpandInput, setIsExpandInput }) => {
   const [valueInput, setValueInput] = useState("");
@@ -64,7 +65,11 @@ const SearchInput = ({ isExpandInput, setIsExpandInput }) => {
         style={{ display: !isExpandInput ? "block" : "none" }}
       >
         <TextField
-          sx={{ input: { color: "#fff" } }}
+          sx={{
+            input: { color: "#fff" },
+            borderBottom: `1px solid white`,
+          }}
+          InputProps={{ disableUnderline: true }}
           id="standard-basic"
           inputRef={input}
           label="Search"
