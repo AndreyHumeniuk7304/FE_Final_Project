@@ -1,60 +1,106 @@
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Grid, Box, Typography, Link } from "@mui/material";
 
 const Links = () => {
   const customer = useSelector((state) => state.userAccount.customer);
 
   return (
-    <div className="links">
-      <div className="links-container">
-        <div className="links__welcome">
-          <h3 className="links__welcome--title bold">
-            Welcome{" "}
-            <span className="links__welcome--name">
-              {customer.firstName} {customer.lastName}
-            </span>
-          </h3>
-        </div>
-
-        <div className="links__link-list">
-          <Link
-            className={`links__style ${
-              location.pathname === "/my-account/profile" ? "active" : null
-            }`}
-            to="/my-account/profile"
+    <>
+      <Box sx={{ margin: "40px 0 30px" }}>
+        <Typography mt={2} variant="h4">
+          Welcome
+          <Typography
+            component="span"
+            variant="h4
+            "
           >
-            <p className="links__text">My profile</p>
-          </Link>
-
+            {" "}
+            {customer?.firstName} {customer?.lastName}
+          </Typography>
+        </Typography>
+      </Box>
+      <Grid container spacing={4} justifyContent="space-around">
+        <Grid item xs="auto">
           <Link
-            className={`links__style ${
-              location.pathname === "/my-account/wishlist" ? "active" : null
-            }`}
-            to="/my-account/wishlist"
+            href="/my-account/profile"
+            style={{
+              textDecoration: "none",
+              borderBottom:
+                location.pathname === "/my-account/profile" && "solid 1px #000",
+            }}
           >
-            <p className="links__text">My wishlist</p>
+            <Typography
+              variant="span"
+              style={{
+                color: location.pathname === "/my-account/profile" && "#000",
+              }}
+            >
+              My profile
+            </Typography>
           </Link>
-
+        </Grid>
+        <Grid item xs={6}>
           <Link
-            className={`links__style ${
-              location.pathname === "/my-account/history" ? "active" : null
-            }`}
-            to="/my-account/history"
+            style={{
+              textDecoration: "none",
+              borderBottom:
+                location.pathname === "/my-account/wishlist" &&
+                "solid 1px #000",
+            }}
+            href="/my-account/wishlist"
           >
-            <p className="links__text">Purchase history</p>
+            <Typography
+              variant="span"
+              style={{
+                color: location.pathname === "/my-account/wishlist" && "#000",
+              }}
+            >
+              My wishlist
+            </Typography>
           </Link>
-
+        </Grid>
+        <Grid item xs>
           <Link
-            className={`links__style ${
-              location.pathname === "/my-account/address-book" ? "active" : null
-            }`}
-            to="/my-account/address-book"
+            style={{
+              textDecoration: "none",
+              borderBottom:
+                location.pathname === "/my-account/history" && "solid 1px #000",
+            }}
+            href="/my-account/history"
           >
-            <p className="links__text">Address book</p>
+            <Typography
+              variant="span"
+              style={{
+                color: location.pathname === "/my-account/history" && "#000",
+              }}
+            >
+              Purchase history
+            </Typography>
           </Link>
-        </div>
-      </div>
-    </div>
+        </Grid>
+        <Grid item xs>
+          <Link
+            style={{
+              textDecoration: "none",
+              borderBottom:
+                location.pathname === "/my-account/address-book" &&
+                "solid 1px #000",
+            }}
+            href="/my-account/address-book"
+          >
+            <Typography
+              variant="span"
+              style={{
+                color:
+                  location.pathname === "/my-account/address-book" && "#000",
+              }}
+            >
+              Address book
+            </Typography>
+          </Link>
+        </Grid>
+      </Grid>
+    </>
   );
 };
 export default Links;

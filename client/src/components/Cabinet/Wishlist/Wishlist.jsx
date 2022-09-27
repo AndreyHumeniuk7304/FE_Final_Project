@@ -1,8 +1,8 @@
 import Links from "../Links/Links";
-import Catalog from "../../Catalog/Catalog";
 import { useEffect } from "react";
 import { loadedCategorieProducts } from "../../../store/catalog/actions";
 import { useDispatch, useSelector } from "react-redux";
+import Products from "../../../views/Products/Products";
 
 const Wishlist = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const Wishlist = () => {
 
   return (
     <>
-      <Links /> <Catalog isFilterShow={false} />
+      <Links /> <Products isFilterShow={false} isToggleShow={false} />
     </>
   );
 };

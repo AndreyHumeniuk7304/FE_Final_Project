@@ -13,6 +13,7 @@ const Account = () => {
   const isAdmin = useSelector((state) => state.userAccount.customer.isAdmin);
   const isLogin = useSelector((state) => state.userAccount.isLogin);
   const customer = useSelector((state) => state.userAccount.customer);
+  const nightMode = useSelector((state) => state.nightMode);
 
   const nav = useNavigate();
 
@@ -130,7 +131,7 @@ const Account = () => {
                       display: "flex",
                       justifyContent: "flex-start",
                       alignItems: "center",
-                      backgroundColor: "primary.dark",
+                      backgroundColor: nightMode ? "#000" : "#fff",
                       width: "100%",
                       padding: "25px",
                     }}
@@ -139,8 +140,16 @@ const Account = () => {
                       <PersonIcon sx={{ fontSize: 55 }} />
                     </Box>
                     <Box>
-                      <Typography variant="h4">My profile</Typography>
-                      <Typography variant="span">
+                      <Typography
+                        variant="h4"
+                        style={{ color: nightMode ? "#fff" : "#000" }}
+                      >
+                        My profile
+                      </Typography>
+                      <Typography
+                        variant="span"
+                        style={{ color: nightMode ? "#fff" : "#000" }}
+                      >
                         {" "}
                         Show and update your personal information
                       </Typography>
@@ -154,7 +163,7 @@ const Account = () => {
                       display: "flex",
                       justifyContent: "flex-start",
                       alignItems: "center",
-                      backgroundColor: "primary.dark",
+                      backgroundColor: nightMode ? "#000" : "#fff",
                       width: "100%",
                       padding: "25px",
                     }}
@@ -178,7 +187,7 @@ const Account = () => {
                       display: "flex",
                       justifyContent: "flex-start",
                       alignItems: "center",
-                      backgroundColor: "primary.dark",
+                      backgroundColor: nightMode ? "#000" : "#fff",
                       width: "100%",
                       padding: "25px",
                     }}
@@ -201,7 +210,7 @@ const Account = () => {
                       display: "flex",
                       justifyContent: "flex-start",
                       alignItems: "center",
-                      backgroundColor: "primary.dark",
+                      backgroundColor: nightMode ? "#000" : "#fff",
                       width: "100%",
                       padding: "25px",
                     }}
@@ -218,6 +227,9 @@ const Account = () => {
                   </Box>
                 </Link>
               </Box>
+            </Box>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <Logout />
             </Box>
           </ThemeProvider>
         )}

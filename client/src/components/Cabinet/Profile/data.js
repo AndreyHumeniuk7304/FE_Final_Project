@@ -35,8 +35,12 @@ export const customerInputNames = [
     label: "Gender",
   },
   { inputName: "birthday", formType: "date", label: "Birthday" },
-  // { inputName: "password", formType: "password" },
-  // { inputName: "confirmPassword", formType: "password" },
+  { inputName: "password", formType: "password", label: "password" },
+  {
+    inputName: "confirmPassword",
+    formType: "password",
+    label: "confirmPassword",
+  },
 ];
 
 export const customerSchema = yup.object({

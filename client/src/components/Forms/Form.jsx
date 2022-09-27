@@ -11,7 +11,7 @@ import {
 
 import CustomErrorMessage from "../Forms/CustomErrorMessage";
 import CustomDropList from "../Forms/CustomDropList";
-import CustomPaymantInput from "./CustomPaymantInput";
+import CastomInputSM from "./CastomInputSM";
 import CastomMultiInput from "./CastomMultiInput";
 import { Controller } from "react-hook-form";
 import CastomInput from "./CastomInput";
@@ -55,7 +55,6 @@ const Form = ({
               name={inputName}
               arr={formName}
               register={register}
-              camelizeDecode={camelizeDecode}
               handleChange={handleChange}
               control={control}
               label={label}
@@ -64,20 +63,20 @@ const Form = ({
           </Stack>
         );
       }
-      case "expiryDate": {
+      case "inputSM": {
         return (
           <Stack>
-            {label && <InputLabel>Enter the {label}:</InputLabel>}
-            <CustomPaymantInput
-              register={register}
-              name={camelizeDecode(inputName)}
-              formName={inputName}
-              formType={formType}
-              label={label}
-            />
-            <CustomErrorMessage
-              err={errors[inputName]?.message || errors[inputName]}
-            />
+            <InputLabel sx={{ "& .MuiButtonBase-root": { color: "white" } }}>
+              <CastomInputSM
+                inputName={inputName}
+                control={control}
+                label={label}
+                formType={formType}
+              />
+              <CustomErrorMessage
+                err={errors[inputName]?.message || errors[inputName]}
+              />
+            </InputLabel>
           </Stack>
         );
       }

@@ -1,105 +1,105 @@
-body.light .profile__button {
-  background-color: #686868;
-}
-body.light .form_container{
-  background-color: white
-}
+// body.light .profile__button {
+//   background-color: #686868;
+// }
+// body.light .form_container{
+//   background-color: white
+// }
 
-body.dark .form_container {
-  background-color: #071a2f;
-}
- .form_container{
-  // margin: 50px;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  flex-basis: 25vw;
-  padding: 15px;
-  font-size: 20px;
-  position: relative;
- }
-.profile {
-  min-width: 320px;
-  max-width: 1295px;
-  margin: 0 auto;
+// body.dark .form_container {
+//   background-color: #071a2f;
+// }
+//  .form_container{
+//   // margin: 50px;
+//   border-radius: 12px;
+//   display: flex;
+//   justify-content: center;
+//   flex-direction: column;
+//   flex-basis: 25vw;
+//   padding: 15px;
+//   font-size: 20px;
+//   position: relative;
+//  }
+// .profile {
+//   min-width: 320px;
+//   max-width: 1295px;
+//   margin: 0 auto;
 
-  display: flex;
-  flex-direction: column;
-  // align-items: center;
-  &__container {
-    display: flex;
-    justify-content: center;
-    max-width: 1295px;
+//   display: flex;
+//   flex-direction: column;
+//   // align-items: center;
+//   &__container {
+//     display: flex;
+//     justify-content: center;
+//     max-width: 1295px;
     
-  }
-  &__input {
-    display: flex;
-    flex-direction: column;
-    border: none;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.3);
-    outline: none;
-    width: 310px;
-    background-color: inherit;
-  }
-  &__input:hover {
-    border-bottom: 1px solid rgba(128, 128, 128, 1);
-  }
-  &__form {
-    margin: 0 0 0 20px;
-  }
-  &__label {
-    display: block;
-    padding: 20px 0 10px 0;
-  }
-  &__checkbox-container {
-    display: flex;
-    margin-top: 16px;
-    justify-content: flex-end;
-  }
-  &__checkbox-input {
-    width: 16px;
-    height: 16px;
-    margin-right: 20px;
-  }
-  &__checkbox-label {
-    font-size: 12px;
-    margin-right: 67px;
-  }
-  &__birthday {
-    // margin-bottom: 78px;
-  }
-  &__button {
-    width: 270px;
-    height: 57px;
-    background-color: black;
-    color: white;
-    font-size: 24px;
-    margin: 15px 28px 20px 18px;
-    border: 0px;
-  }
-}
+//   }
+//   &__input {
+//     display: flex;
+//     flex-direction: column;
+//     border: none;
+//     border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+//     outline: none;
+//     width: 310px;
+//     background-color: inherit;
+//   }
+//   &__input:hover {
+//     border-bottom: 1px solid rgba(128, 128, 128, 1);
+//   }
+//   &__form {
+//     margin: 0 0 0 20px;
+//   }
+//   &__label {
+//     display: block;
+//     padding: 20px 0 10px 0;
+//   }
+//   &__checkbox-container {
+//     display: flex;
+//     margin-top: 16px;
+//     justify-content: flex-end;
+//   }
+//   &__checkbox-input {
+//     width: 16px;
+//     height: 16px;
+//     margin-right: 20px;
+//   }
+//   &__checkbox-label {
+//     font-size: 12px;
+//     margin-right: 67px;
+//   }
+//   &__birthday {
+//     // margin-bottom: 78px;
+//   }
+//   &__button {
+//     width: 270px;
+//     height: 57px;
+//     background-color: black;
+//     color: white;
+//     font-size: 24px;
+//     margin: 15px 28px 20px 18px;
+//     border: 0px;
+//   }
+// }
 
-@media screen and (min-width: 720px) {
-}
-@media screen and (min-width: 1023px) {
-  .profile {
-    &__container {
-      margin: 50px 0 50px 0;
-    }
-    &__label {
-      margin-bottom: 15px;
-    }
-    &__input {
-      margin-bottom: 25px;
-      width: 520px;
-    }
-    &__checkbox-container {
-      margin-bottom: 25px;
-      justify-content: left;
-    }
-    &__button {
-      margin: 15px 133px 20px 133px;
-    }
-  }
-}
+// @media screen and (min-width: 720px) {
+// }
+// @media screen and (min-width: 1023px) {
+//   .profile {
+//     &__container {
+//       margin: 50px 0 50px 0;
+//     }
+//     &__label {
+//       margin-bottom: 15px;
+//     }
+//     &__input {
+//       margin-bottom: 25px;
+//       width: 520px;
+//     }
+//     &__checkbox-container {
+//       margin-bottom: 25px;
+//       justify-content: left;
+//     }
+//     &__button {
+//       margin: 15px 133px 20px 133px;
+//     }
+//   }
+// }

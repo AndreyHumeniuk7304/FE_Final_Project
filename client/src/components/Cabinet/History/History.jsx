@@ -38,7 +38,7 @@ const History = () => {
             <Grid
               item
               style={{
-                border: "2px solid green",
+                borderBottom: "2px solid green",
                 borderRadius: "5px",
                 padding: 10,
                 margin: 10,
@@ -73,8 +73,11 @@ const History = () => {
                         />
                       </Link>
                     </Grid>
-                    <Grid item style={{ display: "inline-block" }}>
-                      {product.product.name}
+                    <Grid
+                      item
+                      style={{ display: "inline-block", maxWidth: "250px" }}
+                    >
+                      <Typography> {product.product.name} </Typography>
                     </Grid>
                     <Grid item style={{ display: "inline-block" }}>
                       Quantity: {product.cartQuantity}

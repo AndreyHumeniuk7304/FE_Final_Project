@@ -9,6 +9,7 @@ import {
 import { setUserData as setCurrentCustomer } from "../../../store/userAccount/actions";
 import updatedCustomer from "../../../api/updatedCustomer";
 import { Typography, Container, Grid, Box } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 const AdresModal = () => {
   const currentCustomer = useSelector((state) => state.cabinet.currentCustomer);
@@ -78,10 +79,47 @@ const AdresModal = () => {
 
   return (
     <>
-      <Box>
-        <Typography>Add Address</Typography>
+      <Box style={{ maxWidth: "360px", margin: "auto" }}>
+        <Grid
+          container
+          justifyContent="space-between"
+          spacing={2}
+          style={{
+            marginTop: "45px",
+            marginLeft: "0",
+            maxWidth: "360px",
+          }}
+        >
+          <Typography>Add Address</Typography>
+          <CloseIcon
+            style={{ cursor: "pointer" }}
+            onClick={
+              openDelivery && open ? cloceModalDelivery : cloceModalBilling
+            }
+          />
+        </Grid>
+        {openDelivery ? (
+          <Form
+            actionWithForm={addDeliveryAddress}
+            formArr={customerInputNames}
+            register={register}
+            handleSubmit={handleSubmit}
+            errors={errors}
+            btnName={"Add Address"}
+            control={control}
+          />
+        ) : (
+          <Form
+            actionWithForm={addDeliveryAddress}
+            formArr={customerInputNames}
+            register={register}
+            handleSubmit={handleSubmit}
+            errors={errors}
+            btnName={"Add Address"}
+            control={control}
+          />
+        )}
       </Box>
-
       {/* <div className="modal-container">
         <div className="modal_content">
           <p>Add Address</p>
