@@ -24,20 +24,23 @@ const Profile = () => {
       gender: customer?.gender,
       birthday: customer?.birthday,
       password: "",
-      confirmPassword: "",
+      newPassword: "",
       isAdmin: false,
     },
   });
 
   const updatedCurrentCustomer = (values) => {
+    if (values.password !== "" && values.newPassword !== "") {
+      changePasswords({
+        password: values.password,
+        newPassword: values.newPassword,
+      });
+    }
     updatedCustomer(values)
       .then((newCustomerData) => {
         dispatch(getUserData());
       })
-      .catch((err) => {
-        console.log(err);
-      });
-    changePasswords(values);
+      .catch((err) => {});
   };
   return (
     <>

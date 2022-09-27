@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Logout from "../../components/Cabinet/Logout/Logout";
-import { Grid, Box, Typography } from "@mui/material";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { Grid, Box, Typography, Link } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import BusinessIcon from "@mui/icons-material/Business";
+import AddIcon from "@mui/icons-material/Add";
+import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 
 const Account = () => {
   const isAdmin = useSelector((state) => state.userAccount.customer.isAdmin);
@@ -21,219 +22,186 @@ const Account = () => {
     !isLogin ? nav("/my-account/entry") : nav("/my-account/user");
   }, [isLogin]);
 
-  const theme = createTheme({
-    palette: {
-      primary: {
-        light: "#FFFFFF",
-        main: "#847A7A",
-        dark: "#000000",
-      },
-      breakpoints: {
-        values: {
-          mobile: 0,
-          tablet: 720,
-          desktop: 1024,
-          lgDesktop: 1280,
-        },
-        keys: ["mobile", "desktop"],
-      },
-      secondary: {
-        light: "#E2DFDF",
-        main: "#C4C4C4",
-        dark: "#595959",
-      },
+  let linkStyle = {
+    width: { mobile: "90%", tablet: "40%", desktop: "49%" },
+    display: " flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    margin: "10px",
+    textDecoration: "none",
+  };
+  let boxContainer = {
+    m: 1,
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    backgroundColor: nightMode ? "#000" : "#fff",
+    width: "100%",
+    padding: { mobile: "0", desktop: "15px" },
+    minWidth: { desktop: "405px" },
+  };
+  let iconStyle = { fontSize: { desktop: 55 }, marginLeft: "10px" };
+  let mainTextStyle = {
+    color: nightMode ? "#fff" : "#000",
+    fontSize: {
+      mobile: "1.3rem",
+      desktop: "1.8rem",
     },
-    typography: {
-      h4: {
-        fontSize: "18px",
-        "@media (min-width:600px)": {
-          fontSize: "26px",
-        },
-      },
-      span: {
-        fontSize: "12px",
-        "@media (min-width:600px)": {
-          fontSize: "16px",
-        },
-      },
+    padding: "5px",
+  };
+  let secondaryTextStyle = {
+    display: {
+      mobile: "none",
+      desktop: "inline",
+      color: nightMode ? "#fff" : "#000",
     },
-  });
+    fontSize: {
+      desktop: "0.8rem",
+    },
+    padding: "10px",
+  };
+  let boxTextContainer = { display: "flex", flexDirection: "column" };
 
   return (
     <>
-      <Box></Box>
-      <div className="my-account">
-        {isAdmin ? (
-          <div className="my-account__container width">
-            <div className="my-account__welcome">
-              <h3 className="my-account__welcome--title">Welcome Admin</h3>
-            </div>
-            <div className="my-account__block">
-              <Link className="link-container" to="/my-account/create-product">
-                <div className=" my-account__profile my-account__section">
-                  <div className="icon-container">
-                    <img src="../images/create-product.png" alt="create card" />
-                  </div>
-                  <div>
-                    <h4 className="my-account__section--title">
-                      Create product
-                    </h4>
-                    <span className="my-account__section--text">
+      {isAdmin ? (
+        <>
+          <Box sx={{ maxWidth: "1000px", margin: "auto" }}>
+            <Box sx={{ marginTop: "25px" }}>
+              <Typography
+                sx={{ fontSize: { mobile: "1.3rem", desktop: "2rem" } }}
+              >
+                Welcome Admin
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
+              }}
+            >
+              <Link sx={linkStyle} href="/my-account/create-product">
+                <Box sx={boxContainer}>
+                  <Box>
+                    <AddIcon sx={iconStyle} />
+                  </Box>
+                  <Box sx={boxTextContainer}>
+                    <Typography sx={mainTextStyle}>Create product</Typography>
+                    <Typography sx={secondaryTextStyle}>
                       You can create a new product
-                    </span>
-                  </div>
-                </div>
+                    </Typography>
+                  </Box>
+                </Box>
               </Link>
               <Link
-                className="link-container"
-                to="/my-account/update-product/filter?perPage=10&startPage=1"
+                sx={linkStyle}
+                href="/my-account/update-product/filter?perPage=10&startPage=1"
               >
-                <div className=" my-account__history my-account__section">
-                  <div className="icon-container">
-                    <img src="../images/update-product.png" alt="update card" />
-                  </div>
-                  <div>
-                    <h4 className="my-account__section--title">
-                      Update product
-                    </h4>
-                    <span className="my-account__section--text">
+                <Box sx={boxContainer}>
+                  <Box>
+                    <ChangeCircleIcon sx={iconStyle} />
+                  </Box>
+                  <Box sx={boxTextContainer}>
+                    <Typography sx={mainTextStyle}>Update product</Typography>
+                    <Typography sx={secondaryTextStyle}>
                       You can change product information
-                    </span>
-                  </div>
-                </div>
+                    </Typography>
+                  </Box>
+                </Box>
               </Link>
               <Logout />
-            </div>
-          </div>
-        ) : (
-          <ThemeProvider theme={theme}>
-            <Box>
-              <Box sx={{ margin: "40px 0 30px" }}>
-                <Typography mt={2} variant="h3">
-                  Welcome
-                  <Typography component="span" variant="h3">
-                    {" "}
-                    {customer?.firstName} {customer?.lastName}
-                  </Typography>
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  justifyContent: "center",
-                }}
+            </Box>
+          </Box>
+        </>
+      ) : (
+        <>
+          <Box>
+            <Box sx={{ margin: "40px 0 30px" }}>
+              <Typography
+                sx={{ fontSize: { mobile: "1.3rem", desktop: "2rem" } }}
               >
-                <Link className="link-container" to="/my-account/profile">
-                  <Box
-                    sx={{
-                      m: 2,
-                      display: "flex",
-                      justifyContent: "flex-start",
-                      alignItems: "center",
-                      backgroundColor: nightMode ? "#000" : "#fff",
-                      width: "100%",
-                      padding: "25px",
-                    }}
-                  >
-                    <Box sx={{ marginRight: "15px" }}>
-                      <PersonIcon sx={{ fontSize: 55 }} />
-                    </Box>
-                    <Box>
-                      <Typography
-                        variant="h4"
-                        style={{ color: nightMode ? "#fff" : "#000" }}
-                      >
-                        My profile
-                      </Typography>
-                      <Typography
-                        variant="span"
-                        style={{ color: nightMode ? "#fff" : "#000" }}
-                      >
-                        {" "}
-                        Show and update your personal information
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Link>
-                <Link className="link-container" to="/my-account/history">
-                  <Box
-                    sx={{
-                      m: 2,
-                      display: "flex",
-                      justifyContent: "flex-start",
-                      alignItems: "center",
-                      backgroundColor: nightMode ? "#000" : "#fff",
-                      width: "100%",
-                      padding: "25px",
-                    }}
-                  >
-                    <Box sx={{ marginRight: "15px" }}>
-                      <ShoppingBasketIcon sx={{ fontSize: 55 }} />
-                    </Box>
-                    <Box>
-                      <Typography variant="h4">Purchase History</Typography>
-                      <Typography variant="span">
-                        {" "}
-                        Check the status of your purchase history and returns
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Link>
-                <Link className="link-container" to="/my-account/wishlist">
-                  <Box
-                    sx={{
-                      m: 2,
-                      display: "flex",
-                      justifyContent: "flex-start",
-                      alignItems: "center",
-                      backgroundColor: nightMode ? "#000" : "#fff",
-                      width: "100%",
-                      padding: "25px",
-                    }}
-                  >
-                    <Box sx={{ marginRight: "15px" }}>
-                      <FavoriteIcon sx={{ fontSize: 55 }} />
-                    </Box>
-                    <Box>
-                      <Typography variant="h4">Wishlist</Typography>
-                      <Typography variant="span">
-                        Manage your wishlist
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Link>
-                <Link className="link-container" to="/my-account/address-book">
-                  <Box
-                    sx={{
-                      m: 2,
-                      display: "flex",
-                      justifyContent: "flex-start",
-                      alignItems: "center",
-                      backgroundColor: nightMode ? "#000" : "#fff",
-                      width: "100%",
-                      padding: "25px",
-                    }}
-                  >
-                    <Box sx={{ marginRight: "15px" }}>
-                      <BusinessIcon sx={{ fontSize: 55 }} />
-                    </Box>
-                    <Box>
-                      <Typography variant="h4">Address book</Typography>
-                      <Typography variant="span">
-                        Save and manage your addresses
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Link>
-              </Box>
+                Welcome
+                <Typography
+                  component="span"
+                  sx={{ fontSize: { mobile: "1.3rem", desktop: "2rem" } }}
+                >
+                  {" "}
+                  {customer?.firstName} {customer?.lastName}
+                </Typography>
+              </Typography>
             </Box>
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <Logout />
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
+              }}
+            >
+              <Link sx={linkStyle} href="/my-account/profile">
+                <Box sx={boxContainer}>
+                  <Box sx={{ marginRight: "15px" }}>
+                    <PersonIcon sx={iconStyle} />
+                  </Box>
+                  <Box sx={boxTextContainer}>
+                    <Typography sx={mainTextStyle}>My profile</Typography>
+                    <Typography variant="span" sx={secondaryTextStyle}>
+                      {" "}
+                      Show and update your personal information
+                    </Typography>
+                  </Box>
+                </Box>
+              </Link>
+
+              <Link sx={linkStyle} href="/my-account/history">
+                <Box sx={boxContainer}>
+                  <Box sx={{ marginRight: "15px" }}>
+                    <ShoppingBasketIcon sx={iconStyle} />
+                  </Box>
+                  <Box sx={boxTextContainer}>
+                    <Typography sx={mainTextStyle}>Purchase History</Typography>
+                    <Typography variant="span" sx={secondaryTextStyle}>
+                      {" "}
+                      Check the status of your purchase history
+                    </Typography>
+                  </Box>
+                </Box>
+              </Link>
+
+              <Link sx={linkStyle} href="/my-account/wishlist">
+                <Box sx={boxContainer}>
+                  <Box sx={{ marginRight: "15px" }}>
+                    <FavoriteIcon sx={iconStyle} />
+                  </Box>
+                  <Box sx={boxTextContainer}>
+                    <Typography sx={mainTextStyle}>Wishlist</Typography>
+                    <Typography variant="span" sx={secondaryTextStyle}>
+                      Manage your wishlist
+                    </Typography>
+                  </Box>
+                </Box>
+              </Link>
+
+              <Link sx={linkStyle} href="/my-account/address-book">
+                <Box sx={boxContainer}>
+                  <Box sx={{ marginRight: "15px" }}>
+                    <BusinessIcon sx={iconStyle} />
+                  </Box>
+                  <Box sx={boxTextContainer}>
+                    <Typography sx={mainTextStyle}>Address book</Typography>
+                    <Typography variant="span" sx={secondaryTextStyle}>
+                      Save and manage your addresses
+                    </Typography>
+                  </Box>
+                </Box>
+              </Link>
             </Box>
-          </ThemeProvider>
-        )}
-      </div>
+          </Box>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Logout />
+          </Box>
+        </>
+      )}
     </>
   );
 };

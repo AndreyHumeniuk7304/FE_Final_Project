@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import Home from "../../views/Home/Home";
 import Products from "../../views/Products/Products";
 import Search from "../../views/Search/Search";
-import MyAccount from "../../views/MyAccount/MyAccount";
 import Entry from "../../views/Entry/Entry";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import Cart from "../../views/Cart";

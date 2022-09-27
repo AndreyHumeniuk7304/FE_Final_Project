@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Typography, Container, Grid } from "@mui/material";
+import { useEffect } from "react";
+import { Typography, Grid } from "@mui/material";
 import Links from "../Links/Links";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCustomerOrders } from "../../../store/cabinet/actions";

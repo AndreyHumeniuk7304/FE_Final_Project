@@ -1,5 +1,6 @@
 import axios from "../ulits/instance/instance";
-const changePasswords = (newPasswords) =>
-  axios.put("/customers/password", newPasswords);
+
+const changePasswords = (passwords) =>
+  axios.put("/customers/password", passwords);
 
 export default changePasswords;
