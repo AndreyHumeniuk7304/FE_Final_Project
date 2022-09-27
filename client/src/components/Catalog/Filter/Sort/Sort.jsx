@@ -6,25 +6,23 @@ import PropTypes from "prop-types";
 import Form from "../../../Forms/Form";
 import { Sort } from "@mui/icons-material";
 import { useEffect } from "react";
-import { useState } from "react";
 
 const SortProduct = ({ categories }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [sortparams, setSortParams] = useState("");
-  const { handleSubmit, control } = useForm({
+  const { handleSubmit, control, reset } = useForm({
     defaultValues: { sort: "Default" },
   });
 
   useEffect(() => {
-    navigate(setLink(sortparams));
+    reset();
   }, [categories]);
 
   const setLink = (queryParam) => {
     const indexStartSort = location.search.indexOf("sort");
     const index = location.search.indexOf("&perPage");
     const str = location.search.slice(0, indexStartSort - 1);
-    setSortParams(queryParam);
+
     return (
       str.slice(0, index) + `&sort=${queryParam}` + "&perPage=10&startPage=1"
     );
