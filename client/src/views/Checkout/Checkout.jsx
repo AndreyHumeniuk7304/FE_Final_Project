@@ -93,50 +93,24 @@ const Checkout = () => {
     const quantity = cartList.map((quantity) => {
       count += quantity.cartQuantity;
     });
-    console.log(_id);
-    // const userInformation = {
-    //   customerId: _id,
-    //   email: isLogin ? email : mail,
-    //   mobile: isLogin ? telephone : phoneNumber,
-    //   firstName: isLogin && firstName,
-    //   lastName: isLogin && lastName,
-    //   letterSubject: "Thank you for order! You are welcome!",
-    //   letterHtml: `<h1>Your order is placed.</h1>
-    //     <p>Delivery method is ${shippingMethod} to adress ${deliveryAdress}</p>
-    //     <p>Payment method is ${paymentMethod} </p>
-    //     <p>You bought ${count} items</p>
-    //     <p>All price: ${getTotalPrice()}</p>`,
-    // };
-
-    // const loginUserInformation = {
-    //   customerId: _id,
-    //   email: email,
-    //   mobile: telephone,
-    //   firstName: firstName,
-    //   lastName: lastName,
-    //   letterSubject: "Thank you for order! You are welcome!",
-    //   letterHtml: `<h1>Your order is placed.</h1>
-    //     <p>Delivery method is ${shippingMethod} to adress ${deliveryAdress}</p>
-    //     <p>Payment method is ${paymentMethod} </p>
-    //     <p>You bought ${count} items</p>
-    //     <p>All price: ${getTotalPrice()}</p>`,
-    // };
-    // const notLoginUserInformation = {
-    //   customerId: _id,
-    //   email: mail,
-    //   mobile: phoneNumber,
-    //   letterSubject: "Thank you for order! You are welcome!",
-    //   letterHtml: `<h1>Your order is placed.</h1>
-    //     <p>Delivery method is ${shippingMethod} to adress ${deliveryAdress}</p>
-    //     <p>Payment method is ${paymentMethod} </p>
-    //     <p>You bought ${count} items</p>
-    //     <p>All price: ${getTotalPrice()}</p>`,
-    // };
-    // const newOrder = Object.assign(userInformation, value);
-    // console.log(newOrder);
-    // addShippingAndDeliveryInformation(newOrder);
-    // dispatch(deleteCart(isLogin));
-    // navigate("/completed-order", { replace: true });
+    const userInformation = {
+      customerId: _id,
+      email: isLogin ? email : mail,
+      mobile: isLogin ? telephone : phoneNumber,
+      firstName: isLogin && firstName,
+      lastName: isLogin && lastName,
+      letterSubject: "Thank you for order! You are welcome!",
+      letterHtml: `<h1>Your order is placed.</h1>
+        <p>Delivery method is ${shippingMethod} to adress ${deliveryAdress}</p>
+        <p>Payment method is ${paymentMethod} </p>
+        <p>You bought ${count} items</p>
+        <p>All price: ${getTotalPrice()}</p>`,
+    };
+    const newOrder = Object.assign(userInformation, value);
+    console.log(newOrder);
+    addShippingAndDeliveryInformation(newOrder);
+    dispatch(deleteCart(isLogin));
+    navigate("/completed-order", { replace: true });
   };
 
   const handleChangeForm = (e) => {
