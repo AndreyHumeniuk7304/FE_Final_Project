@@ -23,6 +23,8 @@ const CastomInput = ({ inputName, control, label, formType }) => {
           onChange={onChange}
           value={value}
           label={label}
+          InputProps={{ disableUnderline: true }}
+          sx={{ borderBottom: `1px solid ${!nightMode ? "#686868" : "#fff"}` }}
         />
       )}
     />
@@ -39,11 +41,13 @@ const CastomInput = ({ inputName, control, label, formType }) => {
           variant="standard"
           type={showPassword ? "text" : "password"}
           sx={{
+            borderBottom: `1px solid ${!nightMode ? "#686868" : "#fff"}`,
             "& .MuiSvgIcon-root": {
-              fill: !nightMode ? "#000" : "#fff",
+              fill: !nightMode ? "#686868" : "#fff",
             },
           }}
           InputProps={{
+            disableUnderline: true,
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton

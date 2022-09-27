@@ -28,15 +28,10 @@ const Form = ({
   fieldArray,
   control,
 }) => {
-  const camelizeDecode = (str) => {
-    const result = str.replace(/([A-Z])/g, " $1");
-    return result.charAt(0).toUpperCase() + result.slice(1);
-  };
-
   const nightMode = useSelector((state) => state.nightMode);
   createTheme({
     root: {
-      color: !nightMode ? "#000" : "#fff",
+      color: !nightMode ? "#686868" : "#fff",
       background: "inherit",
     },
   });
@@ -48,8 +43,8 @@ const Form = ({
           <Stack
             direction="row"
             justifyContent="space-between"
-            alignItems="center"
             pt={2}
+            alignItems="flex-end"
           >
             <CustomDropList
               name={inputName}

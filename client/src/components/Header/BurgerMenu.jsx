@@ -82,22 +82,22 @@ const BurgerMenu = ({ closeBurger }) => {
             </Box>
             <Stack sx={{ marginBottom: "40px" }}>
               <BurgerFooterItem>
-                <Link onClick={closeBurger} to="/Frequently asked questions">
+                <Link onClick={closeBurger} to="/help/quastions">
                   Frequently asked questions
                 </Link>
               </BurgerFooterItem>
               <BurgerFooterItem>
-                <Link onClick={closeBurger} to="/contact">
+                <Link onClick={closeBurger} to="/help/contact">
                   Contact
                 </Link>
               </BurgerFooterItem>
               <BurgerFooterItem>
-                <Link onClick={closeBurger} to="/purchase">
+                <Link onClick={closeBurger} to="/help/purchase">
                   How to purchase
                 </Link>
               </BurgerFooterItem>
               <BurgerFooterItem>
-                <Link onClick={closeBurger} to="/payment">
+                <Link onClick={closeBurger} to="/help/payment">
                   Payment
                 </Link>
               </BurgerFooterItem>
@@ -117,17 +117,17 @@ const BurgerMenu = ({ closeBurger }) => {
             </Box>
             <Stack sx={{ marginBottom: "40px" }}>
               <BurgerFooterItem>
-                <Link onClick={closeBurger} to="./History of the brande">
+                <Link onClick={closeBurger} to="/company/history">
                   History of the brande
                 </Link>
               </BurgerFooterItem>
               <BurgerFooterItem>
-                <Link onClick={closeBurger} to="./Policy">
+                <Link onClick={closeBurger} to="/company/policy">
                   Policy
                 </Link>
               </BurgerFooterItem>
               <BurgerFooterItem>
-                <Link onClick={closeBurger} to="./Work with Us">
+                <Link onClick={closeBurger} to="/company/collaborations">
                   Work with Us
                 </Link>
               </BurgerFooterItem>
@@ -142,30 +142,42 @@ const BurgerMenu = ({ closeBurger }) => {
                 paddingBottom: "60px",
               }}
             >
-              <Link onClick={closeBurger} to="/Facebook">
+              <a
+                target="blank"
+                onClick={closeBurger}
+                href="https://www.facebook.com/"
+              >
                 <Box
                   sx={{ height: "24px", width: "24px" }}
                   component={"img"}
                   src="../images/facebok-logo.png"
                   alt="FB"
                 />
-              </Link>
-              <Link onClick={closeBurger} to="/Instagram">
+              </a>
+              <a
+                target="blank"
+                onClick={closeBurger}
+                href="https://www.instagram.com/"
+              >
                 <Box
                   sx={{ height: "24px", width: "24px" }}
                   component={"img"}
                   src="../images/inst-logo.png"
                   alt="Instagram"
                 />
-              </Link>
-              <Link onClick={closeBurger} to="/Pinterst">
+              </a>
+              <a
+                target="blank"
+                onClick={closeBurger}
+                href="https://www.pinterest.com/"
+              >
                 <Box
                   sx={{ height: "24px", width: "24px" }}
                   component={"img"}
                   src="../images/pint-logo.png"
                   alt="Pinterest"
                 />
-              </Link>
+              </a>
             </Stack>
           </Box>
         </Box>

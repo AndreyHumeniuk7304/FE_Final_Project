@@ -19,10 +19,7 @@ export default function CustomDropList({
         <InputLabel
           sx={{
             width: "fit-content",
-            borderBottom: "1px solid",
-            borderColor: !nightMode ? "#686868" : "#000",
-            pb: 1,
-            pr: 4,
+            borderBottom: `1px solid ${!nightMode ? "#686868" : "#fff"}`,
           }}
         >
           {label}
@@ -33,17 +30,22 @@ export default function CustomDropList({
         name={name}
         render={({ field: { value, name, onChange } }) => (
           <Select
+            disableUnderline
             variant="standard"
             onChange={(e) => {
               handleChange && handleChange(e);
               onChange(e);
             }}
-            MenuProps={{ disableScrollLock: true }}
+            MenuProps={{ disableScrollLock: true, disableUnderline: true }}
             value={value}
             sx={{
+              textAlign: "center",
+              "& .MuiSvgIcon-root": { color: !nightMode ? "#686868" : "#fff" },
+
               flexGrow: "1",
+              borderBottom: `1px solid ${!nightMode ? "#686868" : "#fff"}`,
               "& .MuiSelect-select": {
-                color: !nightMode ? "#000" : "#fff",
+                color: !nightMode ? "#686868" : "#fff",
               },
             }}
             /* eslint-disable react/jsx-props-no-spreading */
