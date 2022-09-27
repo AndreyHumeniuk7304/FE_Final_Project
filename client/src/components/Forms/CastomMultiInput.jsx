@@ -1,8 +1,10 @@
 import { Button, TextField } from "@mui/material";
 import PropTypes from "prop-types";
 import { Controller } from "react-hook-form";
+import { useSelector } from "react-redux";
 
 const CastomMultiInput = ({ inputName, index, fieldArray, control }) => {
+  const nightMode = useSelector((state) => state.nightMode);
   return (
     <>
       <Controller
@@ -10,11 +12,13 @@ const CastomMultiInput = ({ inputName, index, fieldArray, control }) => {
         control={control}
         render={({ field: { onChange, value } }) => (
           <TextField
+            InputProps={{ disableUnderline: true }}
             variant="standard"
             onChange={onChange}
             value={value}
             label={`Past url image #${index + 1}`}
             sx={{
+              borderBottom: `1px solid ${!nightMode ? "#686868" : "#fff"}`,
               flex: "1",
             }}
           />

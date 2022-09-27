@@ -14,5 +14,5 @@ export const FooterItem = (props) => (
 );
 
 FooterItem.propTypes = {
-  children: PropTypes.text,
+  children: PropTypes.object,
 };
