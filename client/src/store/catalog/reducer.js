@@ -12,7 +12,6 @@ const initialState = {
   searchWord: "",
   isLoading: false,
   hasError: false,
-  isFilterOpenMobile: false,
   productsQuntity: 0,
   filterOnChange: { isLoading: false, productsQuntityOnChange: null },
 };
