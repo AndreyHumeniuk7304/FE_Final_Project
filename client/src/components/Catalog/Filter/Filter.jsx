@@ -15,12 +15,8 @@ import { fetchAllProductsFilterPreloader } from "../../../store/catalog/actions"
 import CheckedFilterItem from "./checkedFilterItem";
 import { defaultFilterData, filterTitles } from "./data";
 import SortProduct from "./Sort/Sort";
+import { createTheme } from "@mui/material/styles";
 
-const filterTitleStyle = {
-  flexDirection: "column",
-  alignItems: "start",
-  pl: 0,
-};
 const Filter = () => {
   const [currentPrice, setCurrentPrice] = useState([]);
   const [isFilterUsing, setIsFilterUsing] = useState(false);
@@ -35,8 +31,16 @@ const Filter = () => {
   );
   const [defaultPrice, setDefaultPrice] = useState([0, 1000]);
   const location = useLocation();
-
   const nightMode = useSelector((state) => state.nightMode);
+  const theme = createTheme({
+    title: { flexDirection: "column", alignItems: "start", pl: 0 },
+    root: { color: nightMode ? "#fff" : "#000" },
+    icon: {
+      "& .MuiSvgIcon-root": {
+        fill: !nightMode ? "#686868" : "#fff",
+      },
+    },
+  });
 
   useEffect(() => {
     location.state && setCategories(location.state.categories);
@@ -85,7 +89,7 @@ const Filter = () => {
   };
 
   const filterTitleList = (title) => (
-    <ListItem key={title} sx={filterTitleStyle}>
+    <ListItem key={title} sx={theme.title}>
       <CheckboxForm
         title={title}
         register={register}
@@ -116,7 +120,7 @@ const Filter = () => {
     >
       <List>
         {filterTitles.map((title) => filterTitleListLogic(title))}
-        <ListItem sx={filterTitleStyle}>
+        <ListItem sx={theme.title}>
           <MaterialSlider
             title={"currentPrice"}
             name="currentPrice"
@@ -129,14 +133,14 @@ const Filter = () => {
       </List>
 
       <Stack direction="row" justifyContent="space-evenly">
-        <Button sx={{ color: nightMode ? "#fff" : "#000" }} type="submit">
+        <Button sx={theme.root} type="submit">
           Apply
         </Button>
         <Button
           type="button"
           onClick={resetFilter}
           disabled={!isFilterUsing}
-          sx={{ color: nightMode ? "#fff" : "#000" }}
+          sx={theme.root}
         >
           Reset
         </Button>
@@ -149,6 +153,7 @@ const Filter = () => {
       <FilterMobileHeader
         isMobileFilterBtnShow={isMobileFilterBtnShow}
         setIsMobileFilterBtnShow={setIsMobileFilterBtnShow}
+        theme={theme}
       />
 
       <Stack>

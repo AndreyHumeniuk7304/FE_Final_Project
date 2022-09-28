@@ -1,10 +1,8 @@
 import { Button, TextField } from "@mui/material";
 import PropTypes from "prop-types";
 import { Controller } from "react-hook-form";
-import { useSelector } from "react-redux";
 
-const CastomMultiInput = ({ inputName, index, fieldArray, control }) => {
-  const nightMode = useSelector((state) => state.nightMode);
+const CastomMultiInput = ({ inputName, index, fieldArray, control, theme }) => {
   return (
     <>
       <Controller
@@ -18,7 +16,7 @@ const CastomMultiInput = ({ inputName, index, fieldArray, control }) => {
             value={value}
             label={`Past url image #${index + 1}`}
             sx={{
-              borderBottom: `1px solid ${!nightMode ? "#686868" : "#fff"}`,
+              ...theme.input,
               flex: "1",
             }}
           />
@@ -26,19 +24,13 @@ const CastomMultiInput = ({ inputName, index, fieldArray, control }) => {
       />
 
       {index ? (
-        <Button
-          sx={{ backgroundColor: "#686868", color: "#fff", width: 60 }}
-          onClick={() => fieldArray.remove(index)}
-        >
+        <Button sx={theme.btn} onClick={() => fieldArray.remove(index)}>
           DEL
         </Button>
       ) : (
         ""
       )}
-      <Button
-        sx={{ backgroundColor: "#686868", color: "#fff", width: 60 }}
-        onClick={() => fieldArray.append([" "])}
-      >
+      <Button sx={theme.btn} onClick={() => fieldArray.append([" "])}>
         ADD
       </Button>
     </>
@@ -53,4 +45,5 @@ CastomMultiInput.propTypes = {
   fieldArray: PropTypes.object,
   register: PropTypes.func,
   control: PropTypes.object,
+  theme: PropTypes.object,
 };
