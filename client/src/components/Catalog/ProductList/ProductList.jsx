@@ -40,7 +40,7 @@ const ProductList = ({ isToggleShow }) => {
             <Box
               sx={{
                 marginRight: "5%",
-                display: { mobile: "none", desktop: "flex" },
+                marginTop: { mobile: "-18%", desktop: "0%" },
               }}
             >
               Switcher:
@@ -49,8 +49,7 @@ const ProductList = ({ isToggleShow }) => {
               variant="outlined"
               aria-label="outlined button group"
               sx={{
-                display: { mobile: "flex", desktop: "flex" },
-                marginTop: { mobile: "-130%", desktop: "0%" },
+                marginTop: { mobile: "-18%", desktop: "0%" },
               }}
             >
               <Button
