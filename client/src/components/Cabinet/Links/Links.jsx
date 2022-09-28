@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
-import { Grid, Box, Typography, Link } from "@mui/material";
+import { Grid, Box, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Links = () => {
   const customer = useSelector((state) => state.userAccount.customer);
@@ -22,7 +23,7 @@ const Links = () => {
       <Grid container spacing={4} justifyContent="space-around">
         <Grid item xs="auto">
           <Link
-            href="/my-account/profile"
+            to="/my-account/profile"
             style={{
               textDecoration: "none",
               borderBottom:
@@ -47,7 +48,7 @@ const Links = () => {
                 location.pathname === "/my-account/wishlist" &&
                 "solid 1px #000",
             }}
-            href="/my-account/wishlist"
+            to="/my-account/wishlist"
           >
             <Typography
               variant="span"
@@ -66,7 +67,7 @@ const Links = () => {
               borderBottom:
                 location.pathname === "/my-account/history" && "solid 1px #000",
             }}
-            href="/my-account/history"
+            to="/my-account/history"
           >
             <Typography
               variant="span"
@@ -86,7 +87,7 @@ const Links = () => {
                 location.pathname === "/my-account/address-book" &&
                 "solid 1px #000",
             }}
-            href="/my-account/address-book"
+            to="/my-account/address-book"
           >
             <Typography
               variant="span"

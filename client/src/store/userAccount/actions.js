@@ -17,7 +17,7 @@ const getUserData = () => async (dispatch) => {
     const userData = await getCustomerData();
     dispatch({ type: "SET_USER_DATA", payload: userData });
   } catch (err) {
-    console.log(err);
+    dispatch({ type: "GET_USERDATA_ERROR", payload: err });
   }
 };
 
@@ -42,7 +42,6 @@ const fetchUser = (userData, isAutoLog) => {
             );
       })
       .catch((error) => {
-        console.log(error);
         dispatch(setError(error.response.data));
       });
   };

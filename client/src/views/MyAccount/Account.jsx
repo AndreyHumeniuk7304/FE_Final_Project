@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logout from "../../components/Cabinet/Logout/Logout";
-import { Grid, Box, Typography, Link } from "@mui/material";
+import { Grid, Box, Typography } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -81,7 +81,7 @@ const Account = () => {
                 justifyContent: "center",
               }}
             >
-              <Link sx={linkStyle} href="/my-account/create-product">
+              <Link sx={linkStyle} to="/my-account/create-product">
                 <Box sx={boxContainer}>
                   <Box>
                     <AddIcon sx={iconStyle} />
@@ -96,7 +96,7 @@ const Account = () => {
               </Link>
               <Link
                 sx={linkStyle}
-                href="/my-account/update-product/filter?perPage=10&startPage=1"
+                to="/my-account/update-product/filter?perPage=10&startPage=1"
               >
                 <Box sx={boxContainer}>
                   <Box>
@@ -138,63 +138,70 @@ const Account = () => {
                 justifyContent: "center",
               }}
             >
-              <Link sx={linkStyle} href="/my-account/profile">
-                <Box sx={boxContainer}>
-                  <Box sx={{ marginRight: "15px" }}>
-                    <PersonIcon sx={iconStyle} />
+              <Box sx={linkStyle}>
+                <Link style={{ width: "93%" }} to="/my-account/profile">
+                  <Box sx={boxContainer}>
+                    <Box sx={{ marginRight: "15px" }}>
+                      <PersonIcon sx={iconStyle} />
+                    </Box>
+                    <Box sx={boxTextContainer}>
+                      <Typography sx={mainTextStyle}>My profile</Typography>
+                      <Typography variant="span" sx={secondaryTextStyle}>
+                        {" "}
+                        Show and update your personal information
+                      </Typography>
+                    </Box>
                   </Box>
-                  <Box sx={boxTextContainer}>
-                    <Typography sx={mainTextStyle}>My profile</Typography>
-                    <Typography variant="span" sx={secondaryTextStyle}>
-                      {" "}
-                      Show and update your personal information
-                    </Typography>
+                </Link>
+              </Box>
+              <Box sx={linkStyle}>
+                <Link style={{ width: "93%" }} to="/my-account/history">
+                  <Box sx={boxContainer}>
+                    <Box sx={{ marginRight: "15px" }}>
+                      <ShoppingBasketIcon sx={iconStyle} />
+                    </Box>
+                    <Box sx={boxTextContainer}>
+                      <Typography sx={mainTextStyle}>
+                        Purchase History
+                      </Typography>
+                      <Typography variant="span" sx={secondaryTextStyle}>
+                        {" "}
+                        Check the status of your purchase history
+                      </Typography>
+                    </Box>
                   </Box>
-                </Box>
-              </Link>
-
-              <Link sx={linkStyle} href="/my-account/history">
-                <Box sx={boxContainer}>
-                  <Box sx={{ marginRight: "15px" }}>
-                    <ShoppingBasketIcon sx={iconStyle} />
+                </Link>
+              </Box>
+              <Box sx={linkStyle}>
+                <Link style={{ width: "93%" }} to="/my-account/wishlist">
+                  <Box sx={boxContainer}>
+                    <Box sx={{ marginRight: "15px" }}>
+                      <FavoriteIcon sx={iconStyle} />
+                    </Box>
+                    <Box sx={boxTextContainer}>
+                      <Typography sx={mainTextStyle}>Wishlist</Typography>
+                      <Typography variant="span" sx={secondaryTextStyle}>
+                        Manage your wishlist
+                      </Typography>
+                    </Box>
                   </Box>
-                  <Box sx={boxTextContainer}>
-                    <Typography sx={mainTextStyle}>Purchase History</Typography>
-                    <Typography variant="span" sx={secondaryTextStyle}>
-                      {" "}
-                      Check the status of your purchase history
-                    </Typography>
+                </Link>
+              </Box>
+              <Box sx={linkStyle}>
+                <Link style={{ width: "93%" }} to="/my-account/address-book">
+                  <Box sx={boxContainer}>
+                    <Box sx={{ marginRight: "15px" }}>
+                      <BusinessIcon sx={iconStyle} />
+                    </Box>
+                    <Box sx={boxTextContainer}>
+                      <Typography sx={mainTextStyle}>Address book</Typography>
+                      <Typography variant="span" sx={secondaryTextStyle}>
+                        Save and manage your addresses
+                      </Typography>
+                    </Box>
                   </Box>
-                </Box>
-              </Link>
-
-              <Link sx={linkStyle} href="/my-account/wishlist">
-                <Box sx={boxContainer}>
-                  <Box sx={{ marginRight: "15px" }}>
-                    <FavoriteIcon sx={iconStyle} />
-                  </Box>
-                  <Box sx={boxTextContainer}>
-                    <Typography sx={mainTextStyle}>Wishlist</Typography>
-                    <Typography variant="span" sx={secondaryTextStyle}>
-                      Manage your wishlist
-                    </Typography>
-                  </Box>
-                </Box>
-              </Link>
-
-              <Link sx={linkStyle} href="/my-account/address-book">
-                <Box sx={boxContainer}>
-                  <Box sx={{ marginRight: "15px" }}>
-                    <BusinessIcon sx={iconStyle} />
-                  </Box>
-                  <Box sx={boxTextContainer}>
-                    <Typography sx={mainTextStyle}>Address book</Typography>
-                    <Typography variant="span" sx={secondaryTextStyle}>
-                      Save and manage your addresses
-                    </Typography>
-                  </Box>
-                </Box>
-              </Link>
+                </Link>
+              </Box>
             </Box>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
