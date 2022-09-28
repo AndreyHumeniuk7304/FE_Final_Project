@@ -36,7 +36,6 @@ const Account = () => {
     justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: nightMode ? "#000" : "#fff",
-    width: "100%",
     padding: { mobile: "0", desktop: "15px" },
     minWidth: { desktop: "405px" },
   };
@@ -75,41 +74,67 @@ const Account = () => {
               </Typography>
             </Box>
             <Box
-              sx={{
+              style={{
                 display: "flex",
                 flexWrap: "wrap",
-                justifyContent: "center",
+
+                flexDirection: "column",
+                alignItems: "center",
               }}
             >
-              <Link sx={linkStyle} to="/my-account/create-product">
-                <Box sx={boxContainer}>
-                  <Box>
-                    <AddIcon sx={iconStyle} />
-                  </Box>
-                  <Box sx={boxTextContainer}>
-                    <Typography sx={mainTextStyle}>Create product</Typography>
-                    <Typography sx={secondaryTextStyle}>
-                      You can create a new product
-                    </Typography>
-                  </Box>
-                </Box>
-              </Link>
-              <Link
-                sx={linkStyle}
-                to="/my-account/update-product/filter?perPage=10&startPage=1"
+              <Box
+                sx={{
+                  display: " flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  margin: "10px",
+                  textDecoration: "none",
+                }}
               >
-                <Box sx={boxContainer}>
-                  <Box>
-                    <ChangeCircleIcon sx={iconStyle} />
+                <Link
+                  style={{ minWidth: "249px" }}
+                  to="/my-account/create-product"
+                >
+                  <Box sx={boxContainer}>
+                    <Box>
+                      <AddIcon sx={iconStyle} />
+                    </Box>
+                    <Box sx={boxTextContainer}>
+                      <Typography sx={mainTextStyle}>Create product</Typography>
+                      <Typography sx={secondaryTextStyle}>
+                        You can create a new product
+                      </Typography>
+                    </Box>
                   </Box>
-                  <Box sx={boxTextContainer}>
-                    <Typography sx={mainTextStyle}>Update product</Typography>
-                    <Typography sx={secondaryTextStyle}>
-                      You can change product information
-                    </Typography>
+                </Link>
+              </Box>
+              <Box
+                sx={{
+                  display: " flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  margin: "10px",
+                  textDecoration: "none",
+                  p: 0,
+                }}
+              >
+                <Link
+                  style={{ minWidth: "249px" }}
+                  to="/my-account/update-product/filter?perPage=10&startPage=1"
+                >
+                  <Box sx={boxContainer}>
+                    <Box>
+                      <ChangeCircleIcon sx={iconStyle} />
+                    </Box>
+                    <Box sx={boxTextContainer}>
+                      <Typography sx={mainTextStyle}>Update product</Typography>
+                      <Typography sx={secondaryTextStyle}>
+                        You can change product information
+                      </Typography>
+                    </Box>
                   </Box>
-                </Box>
-              </Link>
+                </Link>
+              </Box>
               <Logout />
             </Box>
           </Box>
