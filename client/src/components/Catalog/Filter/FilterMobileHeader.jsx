@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { IconButton, Stack, Typography } from "@mui/material";
+import { Button, IconButton, Stack } from "@mui/material";
 import { Close } from "@mui/icons-material";
 
 const FilterMobileHeader = ({
@@ -15,9 +15,9 @@ const FilterMobileHeader = ({
       justifyContent="space-evenly"
       sx={theme.icon}
     >
-      <Typography onClick={() => setIsMobileFilterBtnShow(true)}>
+      <Button onClick={() => setIsMobileFilterBtnShow(true)} sx={theme.root}>
         Filter
-      </Typography>
+      </Button>
       {isMobileFilterBtnShow && (
         <IconButton onClick={() => setIsMobileFilterBtnShow(false)}>
           <Close />
