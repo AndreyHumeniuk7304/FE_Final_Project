@@ -1,14 +1,6 @@
 import PropTypes from "prop-types";
-import {
-  Box,
-  Button,
-  Checkbox,
-  createTheme,
-  InputLabel,
-  List,
-  Stack,
-} from "@mui/material";
-
+import { Box, Button, Checkbox, InputLabel, List, Stack } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 import CustomErrorMessage from "../Forms/CustomErrorMessage";
 import CustomDropList from "../Forms/CustomDropList";
 import CastomInputSM from "./CastomInputSM";
@@ -29,11 +21,19 @@ const Form = ({
   control,
 }) => {
   const nightMode = useSelector((state) => state.nightMode);
-  createTheme({
+  const theme = createTheme({
     root: {
       color: !nightMode ? "#686868" : "#fff",
       background: "inherit",
+      "& .MuiSvgIcon-root": {
+        fill: !nightMode ? "#686868" : "#fff",
+      },
+      "& .MuiButtonBase-root": {
+        color: nightMode ? "#fff" : "#686868",
+      },
     },
+    input: { borderBottom: `1px solid ${!nightMode ? "#686868" : "#fff"}` },
+    btn: { background: "#686868", height: 50, color: "#fff" },
   });
 
   const renderFormType = ({ inputName, formType, formName, label }) => {
@@ -53,6 +53,7 @@ const Form = ({
               handleChange={handleChange}
               control={control}
               label={label}
+              theme={theme}
             />
             <CustomErrorMessage err={errors[inputName]?.message} />
           </Stack>
@@ -78,13 +79,7 @@ const Form = ({
       case "checkbox": {
         return (
           <Stack>
-            <InputLabel
-              sx={{
-                "& .MuiButtonBase-root": {
-                  color: nightMode ? "#fff" : "#686868",
-                },
-              }}
-            >
+            <InputLabel sx={theme.root}>
               <Controller
                 name={inputName}
                 label={label}
@@ -120,6 +115,7 @@ const Form = ({
                       fieldArray={fieldArray}
                       register={register}
                       control={control}
+                      theme={theme}
                     />
                     <CustomErrorMessage err={err ? err[index]?.message : ""} />
                   </Stack>
@@ -138,6 +134,7 @@ const Form = ({
               control={control}
               label={label}
               formType={formType}
+              theme={theme}
             />
             <CustomErrorMessage
               err={errors[inputName]?.message || errors[inputName]}
@@ -169,10 +166,7 @@ const Form = ({
         <CustomErrorMessage err={errors.message} />
 
         {btnName && (
-          <Button
-            type="submit"
-            sx={{ background: "#686868", height: 50, color: "#fff" }}
-          >
+          <Button type="submit" sx={theme.btn}>
             {btnName}
           </Button>
         )}

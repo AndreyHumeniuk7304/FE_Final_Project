@@ -16,18 +16,30 @@ const CompleteOrder = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        flexDirection: "column",
+        marginTop: "-15%",
       }}
-      className="complete-order-container"
     >
-      <Typography className="complete-order-container__thanks">
+      <Typography
+        sx={{
+          fontSize: { mobile: "2.5vw", desktop: "3vw" },
+        }}
+      >
         Thanks for your order! You are welcome!
       </Typography>
-      <Typography className="complete-order-container__placed">
+      <Typography
+        sx={{
+          fontSize: { mobile: "2.5vw", desktop: "3vw" },
+        }}
+      >
         Your order is placed!
       </Typography>
       <Button
         onClick={goToHomePage}
-        className="complete-order-container__home-button"
+        sx={{
+          marginTop: "5%",
+          fontSize: "1.5vw",
+        }}
       >
         Go to home page
       </Button>

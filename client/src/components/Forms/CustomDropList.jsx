@@ -1,7 +1,6 @@
 import { InputLabel, MenuItem, Select } from "@mui/material";
 import PropTypes from "prop-types";
 import { Controller } from "react-hook-form";
-import { useSelector } from "react-redux";
 import { camelizeDecode } from "./functions";
 
 export default function CustomDropList({
@@ -10,18 +9,12 @@ export default function CustomDropList({
   handleChange,
   control,
   label,
+  theme,
 }) {
-  const nightMode = useSelector((state) => state.nightMode);
-
   return (
     <>
       {label && (
-        <InputLabel
-          sx={{
-            width: "fit-content",
-            borderBottom: `1px solid ${!nightMode ? "#686868" : "#fff"}`,
-          }}
-        >
+        <InputLabel width="fit-content" sx={theme.input}>
           {label}
         </InputLabel>
       )}
@@ -40,13 +33,9 @@ export default function CustomDropList({
             value={value}
             sx={{
               textAlign: "center",
-              "& .MuiSvgIcon-root": { color: !nightMode ? "#686868" : "#fff" },
-
               flexGrow: "1",
-              borderBottom: `1px solid ${!nightMode ? "#686868" : "#fff"}`,
-              "& .MuiSelect-select": {
-                color: !nightMode ? "#686868" : "#fff",
-              },
+              ...theme.root,
+              ...theme.input,
             }}
             /* eslint-disable react/jsx-props-no-spreading */
 
@@ -73,4 +62,5 @@ CustomDropList.propTypes = {
   arr: PropTypes.array,
   handleChange: PropTypes.func,
   control: PropTypes.object,
+  theme: PropTypes.object,
 };
