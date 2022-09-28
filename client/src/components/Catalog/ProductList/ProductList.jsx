@@ -49,7 +49,6 @@ const ProductList = ({ isToggleShow }) => {
               variant="outlined"
               aria-label="outlined button group"
               sx={{
-                display: { mobile: "flex", desktop: "flex" },
                 marginTop: { mobile: "-18%", desktop: "0%" },
               }}
             >
