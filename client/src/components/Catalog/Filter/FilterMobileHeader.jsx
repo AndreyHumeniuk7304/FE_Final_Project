@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { IconButton, Stack, Typography } from "@mui/material";
+import { createTheme, IconButton, Stack, Typography } from "@mui/material";
 import { Close } from "@mui/icons-material";
 
 const FilterMobileHeader = ({

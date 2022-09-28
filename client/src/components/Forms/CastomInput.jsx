@@ -3,13 +3,11 @@ import { Controller } from "react-hook-form";
 import PropTypes from "prop-types";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 
-const CastomInput = ({ inputName, control, label, formType }) => {
+const CastomInput = ({ inputName, control, label, formType, theme }) => {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
-  const nightMode = useSelector((state) => state.nightMode);
 
   return formType.toLowerCase() !== "password" ? (
     <Controller
@@ -24,7 +22,7 @@ const CastomInput = ({ inputName, control, label, formType }) => {
           value={value}
           label={label}
           InputProps={{ disableUnderline: true }}
-          sx={{ borderBottom: `1px solid ${!nightMode ? "#686868" : "#fff"}` }}
+          sx={theme.input}
         />
       )}
     />
@@ -40,12 +38,7 @@ const CastomInput = ({ inputName, control, label, formType }) => {
           label={label}
           variant="standard"
           type={showPassword ? "text" : "password"}
-          sx={{
-            borderBottom: `1px solid ${!nightMode ? "#686868" : "#fff"}`,
-            "& .MuiSvgIcon-root": {
-              fill: !nightMode ? "#686868" : "#fff",
-            },
-          }}
+          sx={{ ...theme.root, ...theme.input }}
           InputProps={{
             disableUnderline: true,
             endAdornment: (
@@ -72,4 +65,5 @@ CastomInput.propTypes = {
   inputName: PropTypes.string,
   label: PropTypes.string,
   formType: PropTypes.string,
+  theme: PropTypes.object,
 };
