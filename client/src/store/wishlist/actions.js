@@ -11,9 +11,7 @@ export const addToWishlist = (id) => async (dispatch) => {
       type: "SET_WISHLIST",
       payload: wishlist ? wishlist.products : [],
     });
-  } catch (err) {
-    console.log(err);
-  }
+  } catch (err) {}
 };
 
 export const deleteWishlistItem = (id) => async (dispatch) => {
@@ -23,9 +21,7 @@ export const deleteWishlistItem = (id) => async (dispatch) => {
       type: "SET_WISHLIST",
       payload: newWishlist ? newWishlist.products : [],
     });
-  } catch (err) {
-    console.log(err);
-  }
+  } catch (err) {}
 };
 
 export const getWishlistItem = () => async (dispatch) => {
@@ -35,7 +31,5 @@ export const getWishlistItem = () => async (dispatch) => {
       type: "SET_WISHLIST",
       payload: wishlistItem ? wishlistItem.products : [],
     });
-  } catch (err) {
-    console.log(err);
-  }
+  } catch (err) {}
 };
