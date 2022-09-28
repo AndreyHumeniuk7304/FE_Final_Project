@@ -15,11 +15,7 @@ import { fetchAllProductsFilterPreloader } from "../../../store/catalog/actions"
 import CheckedFilterItem from "./checkedFilterItem";
 import { defaultFilterData, filterTitles } from "./data";
 import SortProduct from "./Sort/Sort";
-
-const theme = createTheme({
-  title: { flexDirection: "column", alignItems: "start", pl: 0 },
-  root: { color: nightMode ? "#fff" : "#000" },
-});
+import { createTheme } from "@mui/material/styles";
 
 const Filter = () => {
   const [currentPrice, setCurrentPrice] = useState([]);
@@ -35,6 +31,16 @@ const Filter = () => {
   );
   const [defaultPrice, setDefaultPrice] = useState([0, 1000]);
   const location = useLocation();
+  const nightMode = useSelector((state) => state.nightMode);
+  const theme = createTheme({
+    title: { flexDirection: "column", alignItems: "start", pl: 0 },
+    root: { color: nightMode ? "#fff" : "#000" },
+    icon: {
+      "& .MuiSvgIcon-root": {
+        fill: !nightMode ? "#686868" : "#fff",
+      },
+    },
+  });
 
   useEffect(() => {
     location.state && setCategories(location.state.categories);
@@ -147,6 +153,7 @@ const Filter = () => {
       <FilterMobileHeader
         isMobileFilterBtnShow={isMobileFilterBtnShow}
         setIsMobileFilterBtnShow={setIsMobileFilterBtnShow}
+        theme={theme}
       />
 
       <Stack>

@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
-import { createTheme, IconButton, Stack, Typography } from "@mui/material";
+import { IconButton, Stack, Typography } from "@mui/material";
 import { Close } from "@mui/icons-material";
 
 const FilterMobileHeader = ({
   isMobileFilterBtnShow,
   setIsMobileFilterBtnShow,
+  theme,
 }) => {
   return (
     <Stack
@@ -12,6 +13,7 @@ const FilterMobileHeader = ({
       display={{ mobile: "flex", desktop: "none" }}
       alignItems="center"
       justifyContent="space-evenly"
+      sx={theme.icon}
     >
       <Typography onClick={() => setIsMobileFilterBtnShow(true)}>
         Filter
@@ -30,4 +32,5 @@ export default FilterMobileHeader;
 FilterMobileHeader.propTypes = {
   isMobileFilterBtnShow: PropTypes.bool,
   setIsMobileFilterBtnShow: PropTypes.func,
+  theme: PropTypes.object,
 };
