@@ -11,7 +11,6 @@ import { getWishlistItem } from "./store/wishlist/actions";
 import { Container } from "@mui/system";
 import { switchThemeAction } from "./store/switchTheme/action";
 import classNames from "classnames";
-import jwt_decode from "jwt-decode";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -19,12 +18,12 @@ const App = () => {
   const wrapperClass = classNames(
     "full-wrapper",
     {
-      "dark-mode":
-        JSON.parse(localStorage.getItem("nightMode")) === true ||
-        JSON.parse(localStorage.getItem("nightMode")) === null,
+      "dark-mode": JSON.parse(localStorage.getItem("nightMode")) === true,
     },
     {
-      "light-mode": JSON.parse(localStorage.getItem("nightMode")) === false,
+      "light-mode":
+        JSON.parse(localStorage.getItem("nightMode")) === false ||
+        JSON.parse(localStorage.getItem("nightMode")) === null,
     }
   );
 

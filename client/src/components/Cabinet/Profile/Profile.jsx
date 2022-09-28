@@ -5,6 +5,7 @@ import Form from "../../Forms/Form";
 import { customerInputNames } from "./data";
 import updatedCustomer from "../../../api/updatedCustomer";
 import { getUserData } from "../../../store/userAccount/actions";
+import changePasswords from "../../../api/changePasswords";
 
 const Profile = () => {
   const customer = useSelector((state) => state.userAccount.customer);
@@ -13,6 +14,7 @@ const Profile = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -21,36 +23,37 @@ const Profile = () => {
       telephone: customer?.telephone,
       gender: customer?.gender,
       birthday: customer?.birthday,
+      password: "",
+      newPassword: "",
       isAdmin: false,
     },
   });
 
   const updatedCurrentCustomer = (values) => {
+    if (values.password !== "" && values.newPassword !== "") {
+      changePasswords({
+        password: values.password,
+        newPassword: values.newPassword,
+      });
+    }
     updatedCustomer(values)
       .then((newCustomerData) => {
         dispatch(getUserData());
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
   return (
     <>
-      <div className="profile">
-        <Links />
-        <div className="profile__container">
-          <div className="form_container">
-            <Form
-              actionWithForm={updatedCurrentCustomer}
-              formArr={customerInputNames}
-              register={register}
-              handleSubmit={handleSubmit}
-              errors={errors}
-              btnName={"SAVE"}
-            />
-          </div>
-        </div>
-      </div>
+      <Links />
+      <Form
+        actionWithForm={updatedCurrentCustomer}
+        formArr={customerInputNames}
+        register={register}
+        handleSubmit={handleSubmit}
+        errors={errors}
+        btnName={"SAVE"}
+        control={control}
+      />
     </>
   );
 };

@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router";
 import Form from "../../Forms/Form";
 import { loginInputNames, loginSchema } from "./data";
 import { useEffect } from "react";
+import { Typography } from "@mui/material";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors = error && error },
   } = useForm({
     resolver: yupResolver(loginSchema),
@@ -40,7 +42,9 @@ const Login = () => {
 
   return (
     <>
-      <p className="entry__text">Please enter your account details to log in</p>
+      <Typography pt={6}>
+        Please enter your account details to log in
+      </Typography>
       <Form
         actionWithForm={setValidation}
         formArr={loginInputNames}
@@ -48,6 +52,7 @@ const Login = () => {
         handleSubmit={handleSubmit}
         errors={Object.keys(errors).length ? errors : error}
         btnName={"LOG IN"}
+        control={control}
       />
     </>
   );

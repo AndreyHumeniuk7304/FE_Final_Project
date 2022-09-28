@@ -1,3 +1,5 @@
+import { filterTitles } from "./data";
+
 export const getFilterItem = (caregory, productList) => {
   let newList = productList.map(
     (listItem) => listItem[caregory] && listItem[caregory].trim()
@@ -47,28 +49,41 @@ export const getCategories = (search) => {
     : [];
 };
 
-export const getItemInFilter = (search, setIsItemChecked) => {
+export const getItemInFilter = (search, setArrOfCheckedItem, categories) => {
   let arr = [];
-  filterTitles.forEach(
-    (title) =>
-      (arr = [
-        ...arr,
-        ...search
-          .getAll(title)
-          .join()
-          .split(",")
-          .map((data) => data.toLowerCase()),
-      ])
+  arr = categories ? [categories] : [];
+  filterTitles.forEach((title) =>
+    categories.length
+      ? title.toLowerCase() !== "categories" &&
+        (arr = [
+          ...arr,
+          ...search
+            .getAll(title)
+            .join()
+            .split(",")
+            .map((data) => data.toLowerCase()),
+        ])
+      : (arr = [
+          ...arr,
+          ...search
+            .getAll(title)
+            .join()
+            .split(",")
+            .map((data) => data.toLowerCase()),
+        ])
   );
   arr = arr.filter((data) => data);
   arr = [...new Set(arr)];
-  setIsItemChecked(arr);
+  setArrOfCheckedItem(arr);
 };
 
-export const filterTitles = [
-  "categories",
-  "brand",
-  "mechanism",
-  "material",
-  "color",
-];
+export const getDefaulteValues = (categorieProductList, categories) => {
+  return {
+    categories: categories.length ? categories : [],
+    brand: [],
+    mechanism: [],
+    material: [],
+    color: [],
+    currentPrice: getMinMaxPrice(categorieProductList),
+  };
+};

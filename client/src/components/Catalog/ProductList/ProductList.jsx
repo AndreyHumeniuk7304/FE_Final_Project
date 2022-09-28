@@ -1,70 +1,97 @@
 import { useSelector } from "react-redux";
 import ProductCard from "./ProductCard/ProductCard";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
-  Button,
-  ButtonGroup,
   Typography,
   CircularProgress,
+  Button,
+  ButtonGroup,
 } from "@mui/material";
 import { useState } from "react";
 import { Box } from "@mui/system";
 import Paginations from "./Pagination/Pagination";
 
-const ProductList = () => {
+const ProductList = ({ isToggleShow }) => {
   const { categorieProductList, isLoading, hasError, productsQuntity } =
     useSelector((state) => state.catalog);
   const [isOneCartView, setIsOneCartView] = useState(true);
 
+  const isToggleShows = (value) => {
+    if (value !== false) return true;
+  };
+
   return (
-    <div className="list-width">
-      <div className="productlist-wrapper">
-        {!hasError && !isLoading && productsQuntity > 0 && (
+    <Box sx={{ width: "100%" }}>
+      {!hasError &&
+        !isLoading &&
+        productsQuntity > 0 &&
+        isToggleShows(isToggleShow) && (
           <Box
             sx={{
               display: "flex",
-              margin: 1,
+              marginTop: "2%",
+              alignItems: "center",
+              float: "right",
+              marginRight: "2%",
+              marginBottom: "1%",
             }}
-            className="productlist-wrapper__view"
           >
+            <Box
+              sx={{
+                marginRight: "5%",
+                marginTop: { mobile: "-18%", desktop: "0%" },
+              }}
+            >
+              Switcher:
+            </Box>
             <ButtonGroup
               variant="outlined"
               aria-label="outlined button group"
-              orientation="vertical"
+              sx={{
+                marginTop: { mobile: "-18%", desktop: "0%" },
+              }}
             >
               <Button
                 type="submit"
                 onClick={() => {
                   setIsOneCartView(false);
                 }}
-                className={
-                  !isOneCartView ? "active-button view-btn" : "view-btn"
-                }
+                sx={{
+                  padding: 0.2,
+                  color: !isOneCartView && "rgb(197, 190, 190)",
+                  fontWeight: !isOneCartView && "bold",
+                }}
               >
-                <img
-                  className="productlist-wrapper__img"
-                  src="../images/square.png"
-                  alt="one card view"
-                />
+                One
               </Button>
               <Button
                 type="submit"
                 onClick={() => {
                   setIsOneCartView(true);
                 }}
-                className={
-                  isOneCartView ? "active-button view-btn" : "view-btn"
-                }
+                sx={{
+                  padding: 0.2,
+                  color: isOneCartView && "rgb(197, 190, 190)",
+                  fontWeight: isOneCartView && "bold",
+                }}
               >
-                <img
-                  className="productlist-wrapper__img"
-                  src="../images/squares.png"
-                  alt="two cards view"
-                />
+                Two
               </Button>
             </ButtonGroup>
           </Box>
         )}
+      <Box
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "stretch",
+          flexWrap: "wrap",
+          width: "100%",
+          position: "relative",
+          gap: "4%",
+        }}
+      >
         {!hasError && !isLoading && categorieProductList.length === 0 && (
           <Box
             sx={{
@@ -107,12 +134,13 @@ const ProductList = () => {
           categorieProductList.map((card) => {
             return (
               <Link
-                to={card.productUrl}
-                className={
-                  isOneCartView
-                    ? "productlist-wrapper__card-two"
-                    : "productlist-wrapper__card-one"
-                }
+                to={`/product/${card.itemNo}`}
+                style={{
+                  width: isOneCartView ? "43%" : "70%",
+                  marginTop: "2%",
+                  marginBottom: "3%",
+                  borderRadius: "10px",
+                }}
                 key={card._id}
               >
                 <ProductCard
@@ -125,14 +153,26 @@ const ProductList = () => {
             );
           })
         )}
-      </div>
-      <div className="productlist-wrapper__pagination">
-        <Box sx={{ pb: 3 }}>
+      </Box>
+      <Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "3%",
+            pb: 3,
+          }}
+        >
           {productsQuntity > 10 && !isLoading && <Paginations />}
         </Box>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
+};
+
+ProductList.propTypes = {
+  isToggleShow: PropTypes.bool,
 };
 
 export default ProductList;

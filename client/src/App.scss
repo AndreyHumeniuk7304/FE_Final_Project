@@ -2,15 +2,13 @@
 @import "./ulits/styles/reset";
 @import "./ulits/styles/variables";
 @import "./components/index.scss";
-@import "./components/ClockSlider/ClockSlider.scss";
-@import "./components/HomeNovelties/HomeNovelties.scss";
-@import "./components/HomeWatches/HomeWatches.scss";
-@import "./components/Header/Header.scss";
-@import "./components/SearchInput/SearchInput.scss";
-@import "./components/SearchModal/SearchModal.scss";
 
 html {
   height: 100%;
+}
+
+input {
+  font-family: "Montserrat", sans-serif !important;
 }
 
 body {
@@ -49,5 +47,5 @@ body {
 @media screen and (min-width: 1023px) {
   .main {
     padding-top: 75px;
-      }
+  }
 }

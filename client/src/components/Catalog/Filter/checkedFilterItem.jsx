@@ -1,30 +1,41 @@
+import { List, ListItem } from "@mui/material";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { memo } from "react";
 
-export const CheckedFilterItem = ({ isItemChecked }) => {
-  const nightMode = useSelector((state) => state.nightMode);
+const CheckedFilterItem = ({ arrOfCheckedItem }) => {
   return (
-    <div>
-      <ul
-        className="filter__checked"
-        style={{
-          color: nightMode ? "#fff" : "#000",
-        }}
-      >
-        {isItemChecked.map((data) => (
-          <ol
-            className="checked__item"
+    <List
+      sx={{
+        display: "flex",
+        justifyContent: { mobile: "space-around", desktop: "start" },
+        flexWrap: "wrap",
+      }}
+    >
+      {arrOfCheckedItem.map((data) =>
+        !data.length ? null : (
+          <ListItem
             key={Math.random()}
-            style={{ border: nightMode ? "1px solid #fff" : "1px solid #000" }}
+            alignItems="center"
+            sx={{
+              borderColor: "primary.main",
+              border: 1,
+              borderRadius: "16px",
+              pt: 0.4,
+              pb: 0.4,
+              m: 0.5,
+              width: "fit-content",
+            }}
           >
             {data}
-          </ol>
-        ))}
-      </ul>
-    </div>
+          </ListItem>
+        )
+      )}
+    </List>
   );
 };
 
+export default memo(CheckedFilterItem);
+
 CheckedFilterItem.propTypes = {
-  isItemChecked: PropTypes.array,
+  arrOfCheckedItem: PropTypes.array,
 };

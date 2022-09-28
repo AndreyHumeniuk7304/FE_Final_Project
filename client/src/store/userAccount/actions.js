@@ -17,7 +17,7 @@ const getUserData = () => async (dispatch) => {
     const userData = await getCustomerData();
     dispatch({ type: "SET_USER_DATA", payload: userData });
   } catch (err) {
-    console.log(err);
+    dispatch({ type: "GET_USERDATA_ERROR", payload: err });
   }
 };
 
@@ -42,10 +42,15 @@ const fetchUser = (userData, isAutoLog) => {
             );
       })
       .catch((error) => {
-        console.log(error);
         dispatch(setError(error.response.data));
       });
   };
+};
+
+export const logout = () => {
+  localStorage.removeItem("login");
+  sessionStorage.removeItem("login");
+  return { type: "LOGOUT" };
 };
 
 export { fetchUser, setError, getIsLogin, setToken, getUserData, setUserData };

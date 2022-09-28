@@ -1,5 +1,7 @@
-const filterCategoriesItem = {
-  categories: ["mens", "ladies", "accessories"],
+export const filterCategoriesItem = {
+  categories: ["Mens", "Ladies", "Accessories"],
+
+  mechanism: ["Mechanics", "Quartz"],
   brand: [
     "Certina",
     "Casio",
@@ -9,24 +11,25 @@ const filterCategoriesItem = {
     "Gucci",
     "Frederique",
     "Morellato",
-    "hirsch",
+    "Hirsch",
   ],
-
-  mechanism: ["Mechanics", "Quartz"],
-
+  color: ["Blue", "Grey", "Black", "Green", "Brown", "Gold", "White", "Red"],
   material: ["Steel", "Nylon", "Polymer", "Leather"],
-
-  color: [
-    "steel",
-    "blue",
-    "grey",
-    "black",
-    "green",
-    "brown",
-    "gold",
-    "white",
-    "red",
-  ],
 };
 
-export { filterCategoriesItem };
+export const filterTitles = [
+  "categories",
+  "brand",
+  "mechanism",
+  "material",
+  "color",
+];
+
+export const defaultFilterData = {
+  categories: [],
+  brand: [],
+  mechanism: [],
+  material: [],
+  color: [],
+  currentPrice: [],
+};

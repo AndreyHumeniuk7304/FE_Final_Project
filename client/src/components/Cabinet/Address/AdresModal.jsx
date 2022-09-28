@@ -8,6 +8,8 @@ import {
 } from "../../../store/cabinet/actions";
 import { setUserData as setCurrentCustomer } from "../../../store/userAccount/actions";
 import updatedCustomer from "../../../api/updatedCustomer";
+import { Typography, Grid, Box } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 const AdresModal = () => {
   const currentCustomer = useSelector((state) => state.cabinet.currentCustomer);
@@ -15,12 +17,10 @@ const AdresModal = () => {
   const openDelivery = useSelector((state) => state.cabinet.showModalDelivery);
   const openBilling = useSelector((state) => state.cabinet.showModalBilling);
   const dispatch = useDispatch();
-  const reopen = () => {
-    dispatch(showModal(open));
-  };
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -39,9 +39,7 @@ const AdresModal = () => {
       .then((newUpdateCustomer) => {
         dispatch(setCurrentCustomer(newUpdateCustomer.data));
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   const addDeliveryAddress = (values) => {
@@ -67,45 +65,56 @@ const AdresModal = () => {
   };
 
   const customerInputNames = [
-    { inputName: "Street", formType: "input" },
-    { inputName: "City", formType: "input" },
-    { inputName: "House", formType: "input" },
-    { inputName: "Flat", formType: "input" },
-    { inputName: "Postal code", formType: "input" },
+    { inputName: "Street", formType: "input", label: "Street" },
+    { inputName: "City", formType: "input", label: "City" },
+    { inputName: "House", formType: "input", label: "House" },
+    { inputName: "Flat", formType: "input", label: "Flat" },
+    { inputName: "Postal code", formType: "input", label: "Postal code" },
   ];
 
   return (
     <>
-      <div className="modal-container">
-        <div className="modal_content">
-          <p>Add Address</p>
-          <span
-            className="modal_content__close-btn"
+      <Box style={{ maxWidth: "360px", margin: "auto" }}>
+        <Grid
+          container
+          justifyContent="space-between"
+          spacing={2}
+          style={{
+            marginTop: "45px",
+            marginLeft: "0",
+            maxWidth: "360px",
+          }}
+        >
+          <Typography>Add Address</Typography>
+          <CloseIcon
+            style={{ cursor: "pointer" }}
             onClick={
               openDelivery && open ? cloceModalDelivery : cloceModalBilling
             }
-          ></span>
-          {openDelivery ? (
-            <Form
-              actionWithForm={addDeliveryAddress}
-              formArr={customerInputNames}
-              register={register}
-              handleSubmit={handleSubmit}
-              errors={errors}
-              btnName={"Add Address"}
-            />
-          ) : (
-            <Form
-              actionWithForm={addDeliveryAddress}
-              formArr={customerInputNames}
-              register={register}
-              handleSubmit={handleSubmit}
-              errors={errors}
-              btnName={"Add Address"}
-            />
-          )}
-        </div>
-      </div>
+          />
+        </Grid>
+        {openDelivery ? (
+          <Form
+            actionWithForm={addDeliveryAddress}
+            formArr={customerInputNames}
+            register={register}
+            handleSubmit={handleSubmit}
+            errors={errors}
+            btnName={"Add Address"}
+            control={control}
+          />
+        ) : (
+          <Form
+            actionWithForm={addDeliveryAddress}
+            formArr={customerInputNames}
+            register={register}
+            handleSubmit={handleSubmit}
+            errors={errors}
+            btnName={"Add Address"}
+            control={control}
+          />
+        )}
+      </Box>
     </>
   );
 };

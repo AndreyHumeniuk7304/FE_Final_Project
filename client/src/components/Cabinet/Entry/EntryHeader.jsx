@@ -1,17 +1,25 @@
 import PropTypes from "prop-types";
-import classNames from "classnames";
+import { Typography } from "@mui/material";
 
 const EntryHeader = ({ activeTitle, setActiveTitle, title }) => {
-  const titleClass = classNames("header__item", {
-    "header__item--underline": activeTitle === title.toLowerCase(),
-  });
-
   const getTitleName = (e) => setActiveTitle(e.target.id);
 
   return (
-    <h6 className={titleClass} id={title.toLowerCase()} onClick={getTitleName}>
+    <Typography
+      p={0.5}
+      fontWeight="bold"
+      textTransform="uppercase"
+      component="h6"
+      sx={{
+        cursor: "pointer",
+        borderBottom:
+          activeTitle === title.toLowerCase() ? "1px solid" : "none",
+      }}
+      id={title.toLowerCase()}
+      onClick={getTitleName}
+    >
       {title}
-    </h6>
+    </Typography>
   );
 };
 

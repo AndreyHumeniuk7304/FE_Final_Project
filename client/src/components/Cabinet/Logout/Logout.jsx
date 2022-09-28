@@ -1,4 +1,4 @@
-import { getIsLogin, setToken } from "../../../store/userAccount/actions";
+import { logout } from "../../../store/userAccount/actions";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
@@ -6,10 +6,7 @@ const Logout = () => {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const getLogout = () => {
-    localStorage.removeItem("login");
-    sessionStorage.removeItem("login");
-    dispatch(getIsLogin(false));
-    dispatch(setToken(""));
+    dispatch(logout());
     nav("/my-account/entry");
   };
   return (

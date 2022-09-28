@@ -1,10 +1,13 @@
 import PropTypes from "prop-types";
-import { Button } from "@mui/material";
-import CustomInput from "../Forms/CastomInput";
+import { Box, Button, Checkbox, InputLabel, List, Stack } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 import CustomErrorMessage from "../Forms/CustomErrorMessage";
 import CustomDropList from "../Forms/CustomDropList";
-import CustomPaymantInput from "./CustomPaymantInput";
+import CastomInputSM from "./CastomInputSM";
 import CastomMultiInput from "./CastomMultiInput";
+import { Controller } from "react-hook-form";
+import CastomInput from "./CastomInput";
+import { useSelector } from "react-redux";
 
 const Form = ({
   actionWithForm,
@@ -15,126 +18,159 @@ const Form = ({
   errors,
   btnName,
   fieldArray,
+  control,
 }) => {
-  const camelizeDecode = (str) => {
-    const result = str.replace(/([A-Z])/g, " $1");
-    return result.charAt(0).toUpperCase() + result.slice(1);
-  };
+  const nightMode = useSelector((state) => state.nightMode);
+  const theme = createTheme({
+    root: {
+      color: !nightMode ? "#686868" : "#fff",
+      background: "inherit",
+      "& .MuiSvgIcon-root": {
+        fill: !nightMode ? "#686868" : "#fff",
+      },
+      "& .MuiButtonBase-root": {
+        color: nightMode ? "#fff" : "#686868",
+      },
+    },
+    input: { borderBottom: `1px solid ${!nightMode ? "#686868" : "#fff"}` },
+    btn: { background: "#686868", height: 50, color: "#fff" },
+  });
 
-  const renderFormType = ({
-    inputName,
-    formType,
-    formName,
-    label,
-    className,
-  }) => {
+  const renderFormType = ({ inputName, formType, formName, label }) => {
     switch (formType) {
       case "droplist": {
         return (
-          <>
-            {label && <label className="form__label">Select {label}:</label>}
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            pt={2}
+            alignItems="flex-end"
+          >
             <CustomDropList
               name={inputName}
               arr={formName}
               register={register}
-              camelizeDecode={camelizeDecode}
+              handleChange={handleChange}
+              control={control}
+              label={label}
+              theme={theme}
             />
             <CustomErrorMessage err={errors[inputName]?.message} />
-          </>
+          </Stack>
         );
       }
-      case "expiryDate": {
+      case "inputSM": {
         return (
-          <>
-            {label && <label className="form__label">Enter the {label}:</label>}
-            <CustomPaymantInput
-              register={register}
-              name={camelizeDecode(inputName)}
-              formName={inputName}
-              formType={formType}
-              label={label}
-            />
-            <CustomErrorMessage
-              err={errors[inputName]?.message || errors[inputName]}
-            />
-          </>
+          <Stack>
+            <InputLabel sx={{ "& .MuiButtonBase-root": { color: "white" } }}>
+              <CastomInputSM
+                inputName={inputName}
+                control={control}
+                label={label}
+                formType={formType}
+              />
+              <CustomErrorMessage
+                err={errors[inputName]?.message || errors[inputName]}
+              />
+            </InputLabel>
+          </Stack>
         );
       }
       case "checkbox": {
         return (
-          <>
-            <label className={className ? className : "form__label"}>
-              <CustomInput
-                register={register}
-                formName={inputName}
-                formType={"checkbox"}
+          <Stack>
+            <InputLabel sx={theme.root}>
+              <Controller
+                name={inputName}
                 label={label}
+                control={control}
+                /* eslint-disable react/jsx-props-no-spreading */
+                render={({ field }) => <Checkbox {...field} />}
               />
               {label}
-            </label>
-          </>
+            </InputLabel>
+          </Stack>
         );
       }
 
       case "multiInput": {
         return (
-          <ul>
-            {fieldArray.fields.map((item, index) => {
-              const err = errors[inputName];
-
-              return (
-                <li key={item.id} className="form__multi-input">
-                  <CastomMultiInput
-                    inputName={inputName}
-                    index={index}
-                    fieldArray={fieldArray}
-                    register={register}
-                  />
-                  <CustomErrorMessage err={err ? err[index]?.message : ""} />
-                </li>
-              );
-            })}
-          </ul>
+          <Stack>
+            <List>
+              {fieldArray.fields.map((item, index) => {
+                const err = errors[inputName];
+                return (
+                  <Stack
+                    component="li"
+                    key={item.id}
+                    pt={1}
+                    pb={1}
+                    direction="row"
+                    justifyContent="space-between"
+                    spacing={4}
+                  >
+                    <CastomMultiInput
+                      inputName={inputName}
+                      index={index}
+                      fieldArray={fieldArray}
+                      register={register}
+                      control={control}
+                      theme={theme}
+                    />
+                    <CustomErrorMessage err={err ? err[index]?.message : ""} />
+                  </Stack>
+                );
+              })}
+            </List>
+          </Stack>
         );
       }
 
       default:
-        errors.isEmpty && console.log(errors);
         return (
-          <>
-            {label && <label className="form__label">Enter the {label}:</label>}
-            <CustomInput
-              register={register}
-              name={camelizeDecode(inputName)}
-              formName={inputName}
-              formType={formType}
+          <Stack>
+            <CastomInput
+              inputName={inputName}
+              control={control}
               label={label}
+              formType={formType}
+              theme={theme}
             />
             <CustomErrorMessage
               err={errors[inputName]?.message || errors[inputName]}
             />
-          </>
+          </Stack>
         );
     }
   };
-  // console.log(errors);
+
   return (
     <form
       onSubmit={handleSubmit((values) => actionWithForm(values))}
       onChange={handleChange}
-      className="form"
     >
-      <ul className="form__box">
-        {formArr.map((formData) => (
-          <li className={"form__item"} key={formData.inputName}>
-            {renderFormType(formData)}
-          </li>
-        ))}
-      </ul>
-      <CustomErrorMessage err={errors.message} />
-      <div className="form__btn">
-        <Button type="submit">{btnName}</Button>
-      </div>
+      <Stack
+        pt={5}
+        pb={5}
+        maxWidth={500}
+        minwidth={{ mobile: 320, desktop: 320 }}
+        m="auto"
+      >
+        <List>
+          {formArr.map((formData) => (
+            <Box key={formData.inputName} component="li" pt={1} pb={1}>
+              {renderFormType(formData)}
+            </Box>
+          ))}
+        </List>
+        <CustomErrorMessage err={errors.message} />
+
+        {btnName && (
+          <Button type="submit" sx={theme.btn}>
+            {btnName}
+          </Button>
+        )}
+      </Stack>
     </form>
   );
 };
@@ -148,6 +184,7 @@ Form.propTypes = {
   errors: PropTypes.object,
   btnName: PropTypes.string,
   fieldArray: PropTypes.object,
+  control: PropTypes.object,
 };
 
 export default Form;

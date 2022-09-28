@@ -1,38 +1,29 @@
-import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
+import { Button, IconButton, Stack } from "@mui/material";
+import { Close } from "@mui/icons-material";
 
 const FilterMobileHeader = ({
   isMobileFilterBtnShow,
   setIsMobileFilterBtnShow,
+  theme,
 }) => {
-  const nightMode = useSelector((state) => state.nightMode);
-
   return (
-    <div className="filter__mob-title">
-      <p
-        onClick={(e) => {
-          setIsMobileFilterBtnShow(true);
-          document
-            .getElementById("filter")
-            .classList.add("filter__form--active");
-        }}
-      >
+    <Stack
+      direction="row"
+      display={{ mobile: "flex", desktop: "none" }}
+      alignItems="center"
+      justifyContent="space-evenly"
+      sx={theme.icon}
+    >
+      <Button onClick={() => setIsMobileFilterBtnShow(true)} sx={theme.root}>
         Filter
-      </p>
+      </Button>
       {isMobileFilterBtnShow && (
-        <button
-          style={{ color: nightMode ? "white" : "black" }}
-          onClick={() => {
-            setIsMobileFilterBtnShow(false);
-            document
-              .getElementById("filter")
-              .classList.remove("filter__form--active");
-          }}
-        >
-          X
-        </button>
+        <IconButton onClick={() => setIsMobileFilterBtnShow(false)}>
+          <Close />
+        </IconButton>
       )}
-    </div>
+    </Stack>
   );
 };
 
@@ -41,4 +32,5 @@ export default FilterMobileHeader;
 FilterMobileHeader.propTypes = {
   isMobileFilterBtnShow: PropTypes.bool,
   setIsMobileFilterBtnShow: PropTypes.func,
+  theme: PropTypes.object,
 };

@@ -1,31 +1,39 @@
+import { Button, TextField } from "@mui/material";
 import PropTypes from "prop-types";
-const CastomMultiInput = ({ inputName, index, fieldArray, register }) => {
+import { Controller } from "react-hook-form";
+
+const CastomMultiInput = ({ inputName, index, fieldArray, control, theme }) => {
   return (
-    <div className="form__input-add">
-      <input
-        /* eslint-disable-next-line react/jsx-props-no-spreading */
-        {...register(`${inputName}.${index}`)}
-        type="text"
-        className={"form__input"}
+    <>
+      <Controller
+        name={`${inputName}.${index}`}
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <TextField
+            InputProps={{ disableUnderline: true }}
+            variant="standard"
+            onChange={onChange}
+            value={value}
+            label={`Past url image #${index + 1}`}
+            sx={{
+              ...theme.input,
+              flex: "1",
+            }}
+          />
+        )}
       />
-      <button
-        style={{ marginRight: 20 }}
-        type="btn"
-        onClick={(e) => {
-          e.preventDefault();
-          fieldArray.append([" "]);
-        }}
-      >
-        ADD
-      </button>
+
       {index ? (
-        <button type="btn" onClick={() => fieldArray.remove(index)}>
+        <Button sx={theme.btn} onClick={() => fieldArray.remove(index)}>
           DEL
-        </button>
+        </Button>
       ) : (
         ""
       )}
-    </div>
+      <Button sx={theme.btn} onClick={() => fieldArray.append([" "])}>
+        ADD
+      </Button>
+    </>
   );
 };
 
@@ -36,4 +44,6 @@ CastomMultiInput.propTypes = {
   index: PropTypes.number,
   fieldArray: PropTypes.object,
   register: PropTypes.func,
+  control: PropTypes.object,
+  theme: PropTypes.object,
 };

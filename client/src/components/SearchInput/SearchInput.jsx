@@ -4,6 +4,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 import SearchModal from "../SearchModal/SearchModal";
 import PropTypes from "prop-types";
+import theme from "../../theme";
+import { Box } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const SearchInput = ({ isExpandInput, setIsExpandInput }) => {
   const [valueInput, setValueInput] = useState("");
@@ -31,32 +34,42 @@ const SearchInput = ({ isExpandInput, setIsExpandInput }) => {
   };
 
   return (
-    <div className="header__account-input">
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        margin: "0 10px 0 10px",
+        [theme.breakpoints.down("tablet")]: {
+          margin: "0 25px 0 0",
+        },
+      }}
+    >
       <SearchIcon
         ref={searchIcon}
-        id="searchicon"
         onClick={() => {
           input.current.focus();
           window.screen.width < 720 && setIsExpandInput(false);
         }}
-        className="searchIcon"
+        sx={{ cursor: "pointer" }}
       />
-      <form
+      <Box
         sx={{
-          "& > :not(style)": {
-            maxWidth: "15ch",
-            height: "56px",
-            fontSize: "10px",
+          width: "150px",
+          height: "56px",
+          fontSize: "10px",
+          [theme.breakpoints.down("tablet")]: {
+            display: "none",
           },
         }}
-        noValidate
-        autoComplete="off"
-        id="search-form"
-        className="header__account-form"
         onSubmit={(e) => e.preventDefault()}
         style={{ display: !isExpandInput ? "block" : "none" }}
       >
         <TextField
+          sx={{
+            input: { color: "#fff" },
+            borderBottom: `1px solid white`,
+          }}
+          InputProps={{ disableUnderline: true }}
           id="standard-basic"
           inputRef={input}
           label="Search"
@@ -65,9 +78,16 @@ const SearchInput = ({ isExpandInput, setIsExpandInput }) => {
           onChange={(e) => {
             setValueInput(e.target.value);
           }}
-          InputLabelProps={{ className: "textField__label" }}
+          InputLabelProps={{
+            style: {
+              color: "#fff",
+              paddingLeft: "5px",
+              fontFamily: "Montserrat, sans-serif",
+            },
+          }}
         />
-      </form>
+      </Box>
+
       {valueInput != "" && (
         <SearchModal
           value={valueInput}
@@ -76,7 +96,7 @@ const SearchInput = ({ isExpandInput, setIsExpandInput }) => {
           clearInput={clearInput}
         />
       )}
-    </div>
+    </Box>
   );
 };
 
