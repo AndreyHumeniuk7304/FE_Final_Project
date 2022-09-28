@@ -92,29 +92,62 @@ const Checkout = () => {
       shippingMethod,
       paymentMethod,
       deliveryAdress,
-      mail,
       telephone: phoneNumber,
+      cardExpiryDate,
+      cardHolderName,
+      cardNumber,
+      cvv,
+      mail,
     } = value;
+
     let count = 0;
-    const quantity = cartList.map((quantity) => {
+    cartList.forEach((quantity) => {
       count += quantity.cartQuantity;
     });
-    const userInformation = {
+
+    const loginUserInformation = {
       customerId: _id,
-      email: isLogin ? email : mail,
-      mobile: isLogin ? telephone : phoneNumber,
-      firstName: isLogin && firstName,
-      lastName: isLogin && lastName,
+      email: email,
+      mobile: telephone,
+      firstName: firstName,
+      lastName: lastName,
       letterSubject: "Thank you for order! You are welcome!",
       letterHtml: `<h1>Your order is placed.</h1>
         <p>Delivery method is ${shippingMethod} to adress ${deliveryAdress}</p>
         <p>Payment method is ${paymentMethod} </p>
         <p>You bought ${count} items</p>
         <p>All price: ${getTotalPrice()}</p>`,
+      shippingMethod: shippingMethod,
+      paymentMethod: paymentMethod,
+      deliveryAdress: deliveryAdress,
+      cardExpiryDate: cardExpiryDate,
+      cardHolderName: cardHolderName,
+      cardNumber: cardNumber,
+      cvv: cvv,
     };
-    const newOrder = Object.assign(userInformation, value);
-    console.log(newOrder);
-    addShippingAndDeliveryInformation(newOrder);
+
+    const notLoginUserInformation = {
+      email: mail,
+      mobile: phoneNumber,
+      products: cartList,
+      letterSubject: "Thank you for order! You are welcome!",
+      letterHtml: `<h1>Your order is placed.</h1>
+        <p>Delivery method is ${shippingMethod} to adress ${deliveryAdress}</p>
+        <p>Payment method is ${paymentMethod} </p>
+        <p>You bought ${count} items</p>
+        <p>All price: ${getTotalPrice()}</p>`,
+      shippingMethod: shippingMethod,
+      paymentMethod: paymentMethod,
+      deliveryAdress: deliveryAdress,
+      cardExpiryDate: cardExpiryDate,
+      cardHolderName: cardHolderName,
+      cardNumber: cardNumber,
+      cvv: cvv,
+    };
+
+    addShippingAndDeliveryInformation(
+      isLogin ? loginUserInformation : notLoginUserInformation
+    );
     dispatch(deleteCart(isLogin));
     navigate("/completed-order", { replace: true });
   };

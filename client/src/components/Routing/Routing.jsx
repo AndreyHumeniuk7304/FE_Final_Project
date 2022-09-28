@@ -16,8 +16,6 @@ import Address from "../Cabinet/Address/Address";
 import Checkout from "../../views/Checkout/Checkout";
 import UpdateProduct from "../UpdateProduct";
 import Error from "../../views/Error/Error";
-import CompleteOrder from "../CompleteOrder/CompleteOrder";
-import RegistrationForOrder from "../RegistrationForOrder/RegistrationForOrder";
 import PrivateRoute from "./PrivateRoute";
 import HistoryOfBrand from "../Footer/Company/History";
 import PolicyWebSite from "../Footer/Company/Policy";
@@ -25,6 +23,7 @@ import Collaborations from "../Footer/Company/Collaborations";
 import Payment from "../Footer/Help/Payment";
 import QuickQuestions from "../Footer/Help/QuickQuestions";
 import HowToPurchase from "../Footer/Help/HowToPurchase";
+import CompleteOrder from "../../views/CompleteOrder/CompleteOrder";
 
 const setPrivateElement = (element) => <PrivateRoute>{element}</PrivateRoute>;
 
@@ -72,7 +71,6 @@ const Routing = () => {
 
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/completed-order" element={<CompleteOrder />} />
-      <Route path="/registration-order" element={<RegistrationForOrder />} />
       <Route path="*" element={<Error />} />
       <Route path="company">
         <Route path="history" element={<HistoryOfBrand />} />
