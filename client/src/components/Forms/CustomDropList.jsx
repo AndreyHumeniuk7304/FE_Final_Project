@@ -36,7 +36,7 @@ export default function CustomDropList({
               handleChange && handleChange(e);
               onChange(e);
             }}
-            MenuProps={{ disableScrollLock: true, disableUnderline: true }}
+            MenuProps={{ disableScrollLock: true }}
             value={value}
             sx={{
               textAlign: "center",
