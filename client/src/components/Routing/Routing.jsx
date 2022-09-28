@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import Home from "../../views/Home/Home";
 import Products from "../../views/Products/Products";
 import Search from "../../views/Search/Search";
-import MyAccount from "../../views/MyAccount/MyAccount";
 import Entry from "../../views/Entry/Entry";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import Cart from "../../views/Cart";
@@ -24,6 +23,7 @@ import Payment from "../Footer/Help/Payment";
 import QuickQuestions from "../Footer/Help/QuickQuestions";
 import HowToPurchase from "../Footer/Help/HowToPurchase";
 import CompleteOrder from "../../views/CompleteOrder/CompleteOrder";
+import Account from "../../views/MyAccount/Account";
 
 const setPrivateElement = (element) => <PrivateRoute>{element}</PrivateRoute>;
 
@@ -43,7 +43,7 @@ const Routing = () => {
           path="user"
           element={
             <PrivateRoute>
-              <MyAccount />
+              <Account />
             </PrivateRoute>
           }
         />

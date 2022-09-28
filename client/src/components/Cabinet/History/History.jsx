@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Typography, Container, Grid } from "@mui/material";
+import { useEffect } from "react";
+import { Typography, Grid } from "@mui/material";
 import Links from "../Links/Links";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCustomerOrders } from "../../../store/cabinet/actions";
@@ -21,10 +21,9 @@ const History = () => {
       </div>
     );
   }
-  // console.log(orders);
 
   return (
-    <div className="profile">
+    <>
       <Links />
       <Grid
         style={{ maxWidth: 1000, margin: "30px auto" }}
@@ -39,7 +38,7 @@ const History = () => {
             <Grid
               item
               style={{
-                border: "2px solid green",
+                borderBottom: "2px solid green",
                 borderRadius: "5px",
                 padding: 10,
                 margin: 10,
@@ -47,14 +46,14 @@ const History = () => {
               }}
               key={index}
             >
-              <Typography style={{ paddingBottom: 15 }} variant="h6">
+              <Typography style={{ paddingBottom: "8px" }} variant="h6">
                 OrderNo: {order?.orderNo}
               </Typography>
               {order.products.reverse().map((product, key) => (
-                <Typography key={key} style={{ paddingLeft: 10 }}>
+                <Typography key={key}>
                   <Grid
                     alignItems="center"
-                    justifyContent="space-around"
+                    justifyContent="space-between"
                     direction="row"
                     style={{
                       paddingBottom: 15,
@@ -66,16 +65,19 @@ const History = () => {
                     <Grid item>
                       <Link to={`/product/${product.product?.itemNo}`}>
                         <img
-                          style={{ float: "left", paddingRight: 10 }}
+                          style={{ float: "left" }}
                           align="top"
-                          width={70}
+                          width={200}
                           src={product.product?.imageUrls[0]}
                           alt="/"
                         />
                       </Link>
                     </Grid>
-                    <Grid item style={{ display: "inline-block" }}>
-                      {product.product.name.slice(0, 35)}...
+                    <Grid
+                      item
+                      style={{ display: "inline-block", maxWidth: "250px" }}
+                    >
+                      <Typography> {product.product.name} </Typography>
                     </Grid>
                     <Grid item style={{ display: "inline-block" }}>
                       Quantity: {product.cartQuantity}
@@ -86,26 +88,22 @@ const History = () => {
                   </Grid>
                 </Typography>
               ))}
-              <Typography style={{ padding: "10px 20px" }} variant="h6">
+              <Typography variant="h6">
                 <Grid
                   container
                   alignItems="center"
                   justifyContent="space-between"
                   direction="row"
                 >
-                  <Grid item style={{ display: "inline-block" }}>
-                    {order?.status}
-                  </Grid>
-                  <Grid item style={{ display: "inline-block" }}>
-                    Total: {order?.totalSum}$
-                  </Grid>
+                  <Grid item>{order?.status}</Grid>
+                  <Grid item>Total: {order?.totalSum}$</Grid>
                 </Grid>
               </Typography>
             </Grid>
           ))
         )}
       </Grid>
-    </div>
+    </>
   );
 };
 export default History;

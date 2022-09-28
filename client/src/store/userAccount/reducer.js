@@ -3,6 +3,7 @@ const initialState = {
   error: {},
   customer: {},
   token: "",
+  userDataEror: {},
 };
 
 const userAccountReducer = (state = initialState, action) => {
@@ -30,6 +31,12 @@ const userAccountReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload,
+      };
+    }
+    case "GET_USERDATA_ERROR": {
+      return {
+        ...state,
+        userDataEror: action.payload,
       };
     }
     case "LOGOUT": {
